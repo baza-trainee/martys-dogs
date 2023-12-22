@@ -1,0 +1,158 @@
+@import '../../scss/_mixins';
+@import '../../scss/variables';
+
+.intro {
+	overflow: hidden;
+	max-height: 0;
+	transition: max-height 0.5s ease;
+}
+
+.card {
+	position: relative;
+	width: 415px;
+	height: 508px;
+	border-radius: 30px;
+	&:hover {
+		.intro {
+			max-height: 350px;
+			@media screen and (max-width: 768px) {
+				max-height: 240px;
+			}
+		}
+	}
+	@media screen and (max-width: 1920px) {
+		width: 400px;
+	}
+	@media screen and (max-width: 1440px) {
+		width: 347px;
+	}
+	@media screen and (max-width: 1280px) {
+		width: 342px;
+	}
+	@media screen and (max-width: 768px) {
+		width: 260px;
+		height: 380px;
+	}
+	.image {
+		border-radius: 30px;
+	}
+}
+
+.friend {
+	position: absolute;
+	top: 40px;
+	left: 0;
+	color: white;
+	background: #05b460;
+	padding: 4px 12px;
+	border-radius: 0px 16px 16px 0px;
+}
+
+.about {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 16px;
+}
+
+.vaccine {
+	color: white;
+	background: #05b460;
+	padding: 4px 12px;
+	border-radius: 16px;
+	display: flex;
+	gap: 8px;
+	@media screen and (max-width: 1440px) {
+		display: none;
+	}
+}
+
+.small {
+	color: white;
+	background: #05b460;
+	padding: 4px 12px;
+	border-radius: 16px;
+	gap: 8px;
+	display: none;
+	@media screen and (max-width: 1440px) {
+		display: flex;
+	}
+}
+
+.size {
+	color: #005c80;
+	background: #b6e1f2;
+	padding: 4px 12px;
+	border-radius: 16px;
+	display: flex;
+	gap: 8px;
+}
+
+.overlay {
+	position: absolute;
+	bottom: 24px;
+	left: 24px;
+	padding: 16px;
+	background: white;
+	border-radius: 18px;
+	width: 367px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	text-align: start;
+	@media screen and (max-width: 1920px) {
+		width: 352px;
+	}
+	@media screen and (max-width: 1440px) {
+		width: 299px;
+	}
+	@media screen and (max-width: 1280px) {
+		width: 294px;
+	}
+	@media screen and (max-width: 768px) {
+		width: 228px;
+		bottom: 16px;
+		left: 16px;
+	}
+}
+
+.title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.gender {
+	color: #005c80;
+}
+
+.donate {
+	color: #009cd9;
+	padding: 12px 24px;
+	text-decoration: none;
+	border: 1px solid #009cd9;
+	border-radius: 30px;
+	display: flex;
+	gap: 16px;
+	justify-content: center;
+	align-items: center;
+	transition:
+		color 0.3s ease,
+		border-color 0.3s ease;
+	svg:first-child {
+		transform: translateY(5px);
+	}
+
+	svg:last-child {
+		transform: translateY(-5px);
+	}
+
+	&:hover {
+		color: #005c80;
+		border: 1px solid #005c80;
+		svg {
+			fill: #005c80;
+			transition: fill 0.3s ease;
+		}
+	}
+}

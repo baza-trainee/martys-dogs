@@ -1,15 +1,95 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&display=swap');
+@import './mixins.scss';
 
 *,
 ::after,
 ::before {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Nunito', sans-serif;
-    scroll-behavior: smooth;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Nunito', sans-serif;
+	scroll-behavior: smooth;
 }
 
 html {
-    font-size: 100%;
+	font-size: 100%;
+}
+
+h1 {
+	font-size: clamp(3rem, 6vw, 4rem);
+}
+
+h2 {
+	font-size: clamp(2rem, 4vw, 2.5rem);
+}
+
+h3 {
+	font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+h4 {
+	font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+}
+
+h5 {
+	font-size: clamp(1rem, 2vw, 1.2rem);
+}
+
+.swiper {
+	width: 100%;
+	height: 100%;
+}
+
+.swiper-slide {
+	display: flex !important;
+	justify-content: center;
+	align-items: center;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.swiper-pagination {
+	display: none;
+	margin: 40px auto;
+	gap: 20px;
+	justify-content: center;
+	@include small_desktop {
+		display: flex;
+	}
+}
+
+.swiper-pagination-bullet {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 16px;
+	color: #000;
+	opacity: 1;
+	background-color: #f7f7f7;
+	cursor: pointer;
+}
+
+.swiper-pagination-bullet-active {
+	color: #fff;
+	background: #009cd9;
+}
+
+.swiper-wrapper {
+	margin: auto;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+	color: #009cd9 !important;
+	@media screen and (max-width: 768px) {
+		display: none !important;
+	}
 }
