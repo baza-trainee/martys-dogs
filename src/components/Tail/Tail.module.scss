@@ -58,18 +58,16 @@
 
 .overlay {
 	position: absolute;
-	bottom: 24px;
-	left: 24px;
+	bottom: 20px;
+	left: 20px;
 	padding: 16px;
 	background: white;
 	border-radius: 18px;
-	width: 367px;
-}
-
-.description {
-	display: flex;
+	width: 375px;
+    display: flex;
 	flex-direction: column;
 	gap: 8px;
+    text-align: start;
 }
 
 .title {
@@ -96,11 +94,11 @@
 		color 0.3s ease,
 		border-color 0.3s ease;
     svg:first-child {
-        transform: translateY(5px); /* Поднимаем первую иконку */
+        transform: translateY(5px);
     }
     
     svg:last-child {
-        transform: translateY(-5px); /* Опускаем вторую иконку */
+        transform: translateY(-5px);
     }
 
 	&:hover {

@@ -28,7 +28,6 @@ const Tail: React.FC<TailProps> = ({
 				<p className={styles.friend}>Готовий стати твоїм другом</p>
 			)}
 			<div className={styles.overlay}>
-				<div className={styles.description}>
 					<div className={styles.title}>
 						<h4 className={styles.name}>{name}</h4>
 						<p className={styles.gender}>
@@ -63,9 +62,7 @@ const Tail: React.FC<TailProps> = ({
 							<FaPaw />
 						</div>
 					</a>
-					<div className='sos'></div>
 				</div>
-			</div>
 		</div>
 	);
 };

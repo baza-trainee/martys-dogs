@@ -33,3 +33,57 @@ h4 {
 h5 {
 	font-size: clamp(1rem, 2vw, 1.2rem);
 }
+
+.swiper {
+	width: 100%;
+	height: 100%;
+}
+
+.swiper-slide {
+	text-align: center;
+	font-size: 18px;
+	background: #fff;
+
+	/* Center slide text vertically */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+    margin-bottom: 100px;
+}
+
+.swiper-pagination {
+    margin: 40px auto;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+.swiper {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.swiper-pagination-bullet {
+	width: 40px;
+	height: 40px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	font-size: 16px;
+	color: #000;
+    opacity: 1;
+    background-color: #F7F7F7;
+    cursor: pointer;
+}
+
+.swiper-pagination-bullet-active {
+	color: #fff;
+	background: #009CD9;
+}
