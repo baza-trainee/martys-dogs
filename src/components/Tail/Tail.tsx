@@ -1,3 +1,7 @@
+import { FaCheck, FaDownLeftAndUpRightToCenter, FaPaw } from 'react-icons/fa6';
+
+import styles from './Tail.module.scss';
+
 interface TailProps {
 	img: string;
 	ready: boolean;
@@ -8,28 +12,42 @@ interface TailProps {
 	size: string;
 }
 
-const Tail: React.FC<TailProps> = ({ img, ready, name, age, gender, description, size }) => {
+const Tail: React.FC<TailProps> = ({
+	img,
+	ready,
+	name,
+	age,
+	gender,
+	description,
+	size,
+}) => {
 	return (
-		<div className='card'>
-			<img src={img} alt='dog' />
-			<div className='overlay'>
-				{ready && (
-					<span className='friend'>Готовий стати твоїм другом</span>
-				)}
-				<div className='description'>
-					<div className='title'>
-						<h3 className='name'>{name}</h3>
-						<p>
+		<div className={styles.card}>
+			<img src={img} alt='dog' className={styles.image} />
+			{ready && (
+				<p className={styles.friend}>Готовий стати твоїм другом</p>
+			)}
+			<div className={styles.overlay}>
+				<div className={styles.description}>
+					<div className={styles.title}>
+						<h4 className={styles.name}>{name}</h4>
+						<p className={styles.gender}>
 							{gender}, {age}
 						</p>
 					</div>
-					<div>
-						<div>
-							<span className='vaccine'>
+					<div className={styles.intro}>
+						<div className={styles.about}>
+							<p className={styles.vaccine}>
 								Вакцинація/обробка від паразитів
-							</span>
-							<span className='vaccine'>Стерилізація</span>
-							<span className='size'>{size}</span>
+								<FaCheck size={20} />
+							</p>
+							<p className={styles.vaccine}>
+								Стерилізація <FaCheck size={20} />
+							</p>
+							<p className={styles.size}>
+								{size}
+								<FaDownLeftAndUpRightToCenter size={20} />
+							</p>
 						</div>
 						<p>{description}</p>
 					</div>
@@ -37,8 +55,15 @@ const Tail: React.FC<TailProps> = ({ img, ready, name, age, gender, description,
 						href='https://www.monobank.com.ua/'
 						target='_blank'
 						rel='noopener noreferrer'
-						className='donate'
-					></a>
+						className={styles.donate}
+					>
+						Допомогти
+						<div>
+							<FaPaw />
+							<FaPaw />
+						</div>
+					</a>
+					<div className='sos'></div>
 				</div>
 			</div>
 		</div>
