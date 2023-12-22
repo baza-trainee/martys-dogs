@@ -2,17 +2,31 @@
 	max-width: 1920px;
 	margin: auto;
 	padding: 100px;
+	@media screen and (max-width: 1280px) {
+		padding: 80px 32px;
+	}
+	@media screen and (max-width: 768px) {
+		padding: 20px 40px;
+	}
 }
 
 .title {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	margin-bottom: 40px;
+	@media screen and (max-width: 768px) {
+		flex-direction: column;
+		text-align: center;
+		gap: 16px;
+	}
 }
 
 .link {
 	padding: 12px 24px;
 	display: flex;
+	min-width: 262px;
+	max-height: 48px;
 	justify-content: center;
 	align-items: center;
 	border-radius: 30px;
@@ -21,8 +35,10 @@
 	text-decoration: none;
 	gap: 8px;
 	transition: background 0.3s ease;
-
 	&:hover {
 		background: #005c80;
+	}
+	@media screen and (max-width: 768px) {
+		width: 100%;
 	}
 }

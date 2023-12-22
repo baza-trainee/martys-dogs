@@ -16,13 +16,17 @@ interface Pagination {
 }
 
 const breakpoints = {
-	1440: {
+	1920: {
 		slidesPerView: 4,
 		slidesPerGroup: 4,
 	},
-	768: {
+	1280: {
 		slidesPerView: 3,
 		slidesPerGroup: 3,
+	},
+	768: {
+		slidesPerView: 2,
+		slidesPerGroup: 2,
 	},
 	320: {
 		slidesPerView: 1,
@@ -49,6 +53,8 @@ const Tails: React.FC = () => {
 				breakpoints={breakpoints}
 				spaceBetween={20}
 				loop={false}
+				speed={1000}
+				effect={'fade'}
 				pagination={pagination}
 				navigation={true}
 				modules={[Pagination, Navigation]}
