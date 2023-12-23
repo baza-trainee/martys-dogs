@@ -1,0 +1,59 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.section {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	// left  right need to  be deleted ,  must be in layout??
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: $color-gray-0;
+
+	@include tablet {
+		padding-top: 80px;
+		padding-bottom: 52px;
+		// left  right need to  be deleted ,  must be in layout??
+		padding-left: 32px;
+		padding-right: 32px;
+	}
+
+	@include small-desktop {
+		padding-top: 100px;
+		padding-bottom: 100px;
+
+		// left  right need to  be deleted ,  must be in layout??
+		padding-left: 100px;
+		padding-right: 100px;
+	}
+}
+
+.title {
+	margin-bottom: 24px;
+	font-size: 32px;
+	font-weight: 800;
+	line-height: 1.2;
+	color: $color-gray-100;
+
+	@include tablet {
+		margin-bottom: 40px;
+	}
+
+	@include small-desktop {
+		font-size: 42px;
+	}
+}
+
+.news {
+	@include tablet {
+		display: grid;
+		grid-template: 1fr / repeat(2, 1fr);
+		column-gap: 20px;
+		row-gap: 32px;
+	}
+
+	@include small-desktop {
+		display: grid;
+		grid-template: 1fr / repeat(4, 1fr);
+		column-gap: 20px;
+	}
+}
