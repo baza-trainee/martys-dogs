@@ -1,5 +1,8 @@
 import img1 from './assets/card-1.webp';
 import img2 from './assets/card-2.webp';
+import photo1 from './assets/photo-1.webp';
+import photo2 from './assets/photo-2.webp';
+import photo3 from './assets/photo-3.webp';
 
 export const tails = [
 	{
@@ -221,5 +224,88 @@ export const tails = [
 		description:
 			'Рекс потрапив до нас у дуже поганому стані: знесилений, лисий та весь у ранах. Ми довго боролися за життя цього красеня і все вийшло. Тепер Рекс справжній хвостатий захисник, а ще дуже розумний. Наші діти обожнюють цього пухнастого друга і мріють щоб Рекс опинився у чудесному домі поруч з люблячими господарями.',
 		size: 'Великий',
+	},
+];
+
+export const photos = [
+	{
+		id: '1',
+		img: photo1,
+	},
+	{
+		id: '2',
+		img: photo2,
+	},
+	{
+		id: '3',
+		img: photo3,
+	},
+	{
+		id: '4',
+		img: photo1,
+	},
+	{
+		id: '5',
+		img: photo2,
+	},
+	{
+		id: '6',
+		img: photo3,
+	},
+	{
+		id: '7',
+		img: photo1,
+	},
+	{
+		id: '8',
+		img: photo2,
+	},
+	{
+		id: '9',
+		img: photo3,
+	},
+	{
+		id: '10',
+		img: photo1,
+	},
+	{
+		id: '11',
+		img: photo2,
+	},
+	{
+		id: '12',
+		img: photo3,
+	},
+	{
+		id: '13',
+		img: photo1,
+	},
+	{
+		id: '14',
+		img: photo2,
+	},
+	{
+		id: '15',
+		img: photo3,
+	},
+	{
+		id: '16',
+		img: photo1,
+	},
+	{
+		id: '17',
+		img: photo2,
+	},
+	{
+		id: '18',
+		img: photo3,
+	},
+	{
+		id: '19',
+		img: photo1,
+	},
+	{
+		id: '20',
+		img: photo2,
 	},
 ];
