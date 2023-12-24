@@ -1,0 +1,102 @@
+.contacts {
+	padding: 100px;
+	@media screen and (max-width: 768px) {
+		padding: 40px 32px;
+	}
+}
+
+.title {
+	margin-bottom: 40px;
+	color: #005c80;
+	font-weight: 900;
+}
+
+.container {
+	display: flex;
+	gap: 20px;
+	@media screen and (max-width: 1280px) {
+		flex-direction: column;
+	}
+}
+
+.links {
+	flex: 1 1 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
+
+.addresses {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	margin-right: 100px;
+	@media screen and (max-width: 1440px) {
+		margin-right: 0;
+	}
+}
+
+.icon {
+	color: #005c80;
+	padding: 8px;
+	background-color: #b6e1f2;
+	border-radius: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.city {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+}
+
+.black {
+	font-weight: 800;
+	color: #000;
+	font-size: 1.5rem;
+	@media screen and (max-width: 768px) {
+		font-size: 1.25rem;
+	}
+}
+
+.text {
+	font-weight: 800;
+	text-decoration: none;
+	color: #000;
+	transition: color 0.3s ease;
+	&:hover {
+		color: #005c80;
+	}
+}
+
+.big {
+	color: #005c80;
+}
+
+.small {
+	font-size: 0.875rem;
+	margin-top: -10px;
+}
+
+.socials {
+	display: flex;
+	justify-content: space-between;
+	@media screen and (max-width: 768px) {
+		flex-direction: column;
+		gap: 16px;
+	}
+}
+
+.map {
+	height: 440px;
+	width: 100%;
+}
+
+a {
+	font-size: 1.5rem;
+	@media screen and (max-width: 768px) {
+		font-size: 1.25rem;
+	}
+}
