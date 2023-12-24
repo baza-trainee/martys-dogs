@@ -9,7 +9,7 @@ interface NewsItemProps {
 }
 
 const NewsItem: React.FC<NewsItemProps> = ({ img, title, text, date }) => {
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 
 	return (
 		<li className={styles.item}>

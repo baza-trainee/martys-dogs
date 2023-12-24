@@ -4,7 +4,7 @@ import styles from './News.module.scss';
 import { news } from './data';
 
 const News: React.FC = () => {
-	const { t, i18n } = useTranslation();
+	const { t } = useTranslation();
 
 	return (
 		<section className={styles.section}>
