@@ -1,15 +1,18 @@
+import { useTranslation } from 'react-i18next';
 import NewsItem from './NewsItem';
 import styles from './News.module.scss';
+import { news } from './data';
 
 const News: React.FC = () => {
+	const { t, i18n } = useTranslation();
+
 	return (
 		<section className={styles.section}>
-			<h2 className={styles.title}>Новини притулку</h2>
+			<h2 className={styles.title}>{t('news.title')}</h2>
 			<ul className={styles.news}>
-				<NewsItem />
-				<NewsItem />
-				<NewsItem />
-				<NewsItem />
+				{news.map((item) => (
+					<NewsItem key={item.id} {...item} />
+				))}
 			</ul>
 		</section>
 	);
