@@ -1,7 +1,11 @@
 {
-    "title": "Welcome to react using react-i18next",
-    "description": {
-        "part1": "To get started, edit <1>src/pages/About.tsx</1> and save to reload.",
-        "part2": "Switch language between english and ukrainian using buttons above."
-    }
+	"title": "Welcome to react using react-i18next",
+	"description": {
+		"part1": "To get started, edit <1>src/pages/About.tsx</1> and save to reload.",
+		"part2": "Switch language between english and ukrainian using buttons above."
+	},
+	"news": {
+		"title": "Shelter news",
+		"button": "Read more"
+	}
 }
