@@ -9,7 +9,7 @@ export interface ChangeLanguageParams {
 
 export type ChangeLanguageFunction = (params: ChangeLanguageParams) => void;
 
-const Landing: React.FC = () => {
+const Header: React.FC = () => {
 	const { t, i18n } = useTranslation();
 
 	const changeLanguage: ChangeLanguageFunction = ({ lng }) => {
@@ -44,4 +44,4 @@ const Landing: React.FC = () => {
 	);
 };
 
-export default Landing;
+export default Header;
