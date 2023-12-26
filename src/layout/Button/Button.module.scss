@@ -1,0 +1,43 @@
+@use 'src/scss/variables' as *;
+@use 'src/scss/mixins' as *;
+
+.button {
+  border-radius: 30px;
+  border-style: none;
+  transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+}
+
+.button:hover {
+  transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+}
+
+
+.button.primary {
+  display: inline-flex;
+  height: 48px;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  background: $color-accent;
+  color: $color-gray-10;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22.4px;
+
+  &:hover {
+    background: $color-main-blue-dark;
+  }
+
+  &:focus {
+    border: 1px solid $color-main-blue-dark;
+  }
+
+  &:active {
+    background: $color-gray-100;
+  }
+
+  &:disabled {
+    background: $color-gray-20;
+  }
+}
