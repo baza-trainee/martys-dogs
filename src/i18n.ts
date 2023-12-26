@@ -3,6 +3,8 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
+const translationPath = '/locales/{{lng}}/translation.json';
+
 i18n
 	// load translation using http -> see /public/locales
 	// learn more: https://github.com/i18next/i18next-http-backend
@@ -17,6 +19,10 @@ i18n
 	.init({
 		fallbackLng: 'en',
 		debug: true,
+		supportedLngs: ['ua', 'en'],
+		backend: {
+      loadPath: translationPath,
+    },
 	});
 
 export default i18n;

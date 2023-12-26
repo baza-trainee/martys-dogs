@@ -7,5 +7,20 @@
 	"news": {
 		"title": "Shelter news",
 		"button": "Read more"
+	},
+	"header": {
+		"nav_about": "About the shelter",
+		"nav_pets": "Our tails",
+		"nav_contact": "Contacts",
+		"lng_ua": "UA",
+		"lng_en": "EN"
+	},
+	"footer": {
+		"confid": "Privacy Policy",
+		"rules": "Terms of use of the site",
+		"reports": "Reporting",
+		"contact": "Contacts",
+		"callDis": "Free from all numbers in Ukraine",
+		"copyright": "Development of Baza Trainee Ukraine 2023 © All rights reserved"
 	}
 }
