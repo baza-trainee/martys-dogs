@@ -1,16 +1,17 @@
+import React, { useEffect, useState } from 'react';
 
-import React, { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player/youtube';
-import { useTranslation } from 'react-i18next';
-import playButtonImg from '../../assets/videoImg/Play.svg';
-import pawsImg from '../../assets/videoImg/VectorPaws.svg';
-import smallMobilePoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 393px.webp';
-import tabletPoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 768px.webp';
-import laptopPoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 1280px.webp';
-import desktopPoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 1440.webp';
-import largeScreenPoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 1920px.webp';
 import defaultImg from '../../assets/videoImg/woman-posing-with-her-dog-smiling 1920px.webp';
+import desktopPoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 1440.webp';
+import laptopPoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 1280px.webp';
+import largeScreenPoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 1920px.webp';
+import pawsImg from '../../assets/videoImg/VectorPaws.svg';
+import playButtonImg from '../../assets/videoImg/Play.svg';
+import smallMobilePoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 393px.webp';
 import styles from './Video.module.scss';
+import tabletPoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 768px.webp';
+
+// import { useTranslation } from 'react-i18next';
 
 export interface Poster {
 	srcSet: string;
@@ -30,7 +31,7 @@ export const VideoHomePage: React.FC<VideoProps> = ({
 	title,
 	descriptionKeys,
 }) => {
-	const { t } = useTranslation();
+	// const { t } = useTranslation();
 
 	const [showControls, setShowControls] = useState(false);
 	const [selectedPoster, setSelectedPoster] = useState<string>('');
