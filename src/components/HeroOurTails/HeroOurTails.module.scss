@@ -1,0 +1,120 @@
+.tails {
+	display: flex;
+	justify-content: center;
+	background-color: #b6e1f2;
+    overflow: hidden;
+    gap: 250px;
+    @media screen and (max-width: 1920px) {
+        justify-content: space-between;
+        gap: 0;
+	}
+	@media screen and (max-width: 768px) {
+		flex-direction: column;
+		gap: 88px;
+	}
+}
+
+.content {
+	padding-left: 100px;
+	padding-top: 211px;
+	padding-bottom: 211px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	gap: 10px;
+    @media screen and (max-width: 1440px) {
+        padding-top: 161px;
+        padding-bottom: 161px;
+	}
+	@media screen and (max-width: 1280px) {
+		padding-left: 32px;
+	}
+	@media screen and (max-width: 768px) {
+		padding-left: 20px;
+		padding-top: 40px;
+		padding-right: 30px;
+        padding-bottom: 0;
+	}
+}
+
+.text {
+	font-weight: 500;
+	color: #005c80;
+	max-width: 664px;
+    min-width: 350px;
+	@media screen and (max-width: 768px) {
+		font-size: 14px;
+	}
+}
+
+.dog {
+	position: relative;
+	max-width: 900px;
+	display: flex;
+	flex-direction: column;
+	@media screen and (max-width: 1920px) {
+		max-width: 800px;
+	}
+    @media screen and (max-width: 1440px) {
+		max-width: 700px;
+	}
+    @media screen and (max-width: 1280px) {
+		max-width: 600px;
+        margin-right: -150px;
+	}
+    @media screen and (max-width: 768px) {
+		max-width: 800px;
+        margin-right: 0;
+	}
+}
+
+.quote {
+	position: absolute;
+	top: 112px;
+	left: -112px;
+	padding: 32px;
+	background-color: #ffffff;
+	color: #4d9fbf;
+	font-weight: 800;
+	max-width: 380px;
+	border-radius: 24px 24px 0px 24px;
+	@media screen and (max-width: 1920px) {
+		top: 83px;
+		left: -162px;
+	}
+	@media screen and (max-width: 1440px) {
+		top: 47px;
+		left: -107px;
+		max-width: 320px;
+	}
+	@media screen and (max-width: 1280px) {
+		top: 37px;
+		left: -101px;
+		padding: 24px;
+		max-width: 300px;
+	}
+	@media screen and (max-width: 768px) {
+		top: -72px;
+		left: 15px;
+		max-width: 260px;
+	}
+}
+
+.image {
+	width: 100%;
+	object-fit: cover;
+	display: block;
+	margin-top: auto;
+
+}
+
+.arrow {
+	position: absolute;
+	bottom: 0;
+	right: -23px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 24px 0 0 24px;
+	border-color: transparent transparent transparent #fff;
+}
