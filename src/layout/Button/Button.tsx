@@ -3,12 +3,11 @@ import * as React from 'react';
 
 
 interface IButtonProps {
-	name?: string;
-	btnClasses?: string;
-	onClick?: () => void;
+	name: string;
+	btnClasses: string;
+	onClick: () => void;
 	type?: 'button' | 'submit' | 'reset';
 	disabled?: boolean;
-	styleBtn?: React.CSSProperties;
 	children?: React.ReactNode;
 }
 
@@ -18,7 +17,6 @@ const Button: React.FC<IButtonProps> = ({
 											onClick,
 											type,
 											disabled,
-											styleBtn,
 											children,
 										}) => {
 
@@ -28,7 +26,6 @@ const Button: React.FC<IButtonProps> = ({
 			disabled={disabled}
 			type={type}
 			onClick={onClick}
-			style={styleBtn}
 		>
 			{name}
 			{children}
