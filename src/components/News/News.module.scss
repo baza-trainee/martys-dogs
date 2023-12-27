@@ -2,28 +2,18 @@
 @import '../../scss/mixins';
 
 .section {
-	padding-top: 40px;
-	padding-bottom: 40px;
-	// left  right need to  be deleted ,  must be in layout??
-	padding-left: 20px;
-	padding-right: 20px;
+	padding: 40px 20px;
 	background-color: $color-gray-0;
 
 	@include tablet {
 		padding-top: 80px;
 		padding-bottom: 52px;
-		// left  right need to  be deleted ,  must be in layout??
 		padding-left: 32px;
 		padding-right: 32px;
 	}
 
 	@include small-desktop {
-		padding-top: 100px;
-		padding-bottom: 100px;
-
-		// left  right need to  be deleted ,  must be in layout??
-		padding-left: 100px;
-		padding-right: 100px;
+		padding: 100px;
 	}
 }
 
@@ -44,9 +34,10 @@
 }
 
 .news {
+	display: grid;
+	justify-items: center;
 	@include tablet {
-		display: grid;
-		grid-template: 1fr / repeat(2, 1fr);
+		grid-template: 1fr 1fr / repeat(2, 1fr);
 		column-gap: 20px;
 		row-gap: 32px;
 	}

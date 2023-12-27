@@ -1,7 +1,7 @@
-import photo1 from '../../assets/newsphoto/1.webp';
-import photo2 from '../../assets/newsphoto/2.webp';
-import photo3 from '../../assets/newsphoto/3.webp';
-import photo4 from '../../assets/newsphoto/4.webp';
+import photo1 from '../../assets/newsphoto/1.2.webp';
+import photo2 from '../../assets/newsphoto/2.2.webp';
+import photo3 from '../../assets/newsphoto/3.2.webp';
+import photo4 from '../../assets/newsphoto/4.2.webp';
 
 export const news = [
 	{
