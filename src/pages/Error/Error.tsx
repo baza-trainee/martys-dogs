@@ -1,6 +1,6 @@
 import ErrorBlock from '../../components/ErrorBlock/ErrorBlock';
-import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
+import Footer from '../../layout/Footer/Footer';
+import Header from '../../layout/Header/Header';
 import Support from '../../components/Support/Support';
 
 const Error = () => {

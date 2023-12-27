@@ -19,7 +19,7 @@ Our dedicated development team is working tirelessly to create a convenient and 
 - [Viktor Filippov](https://github.com/jackal7819)
 - [Anton Zuban](https://github.com/slepec2018)
 - [Yevheniia Dolzhykova](https://github.com/djucy)
-- [Svitlana](https://github.com/tsvetanat)
+- [Svitlana Tertychna](https://github.com/tsvetanat)
 - [Hanna Horbova](https://github.com/varenyk-lover)
 - [Marharyta Boichenko](https://github.com/MarharytaBoichenko)
 

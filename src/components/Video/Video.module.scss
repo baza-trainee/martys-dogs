@@ -1,0 +1,230 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+$videoContainerPadding1280: 100px;
+$videoContainerPadding768: 80px 32px;
+$videoContainerPadding393: 40px 20px;
+
+$videoContainerSize393: 393px;
+$videoContainerSize768: 745px;
+$videoContainerSize1280: 1280px;
+$videoContainerSize1440: 1440px;
+$videoContainerSize1920: 1920px;
+
+$playButtonSize393: 55px;
+$playButtonSize1280: 130px;
+
+$pawImgSize393: 73px;
+$pawImgSize768: 116px;
+$pawImgSize1280: 120px;
+$pawImgSize1920: 180px;
+
+$videoInfoTitleSize393: 28px;
+$videoInfoTitleSize1280: 42px;
+
+.videoOverlay {
+	background-color: $color-main-bg;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	place-items: center;
+	overflow: hidden;
+
+	.videoContainer {
+		box-sizing: border-box;
+		max-width: $videoContainerSize393;
+		padding: $videoContainerPadding393;
+		margin: 0;
+		background-color: $color-main-bg;
+		position: relative;
+
+		@include tablet {
+			width: $videoContainerSize768;
+			max-width: none;
+		}
+
+		@include small_desktop {
+			width: $videoContainerSize1280;
+			padding: $videoContainerPadding1280;
+		}
+
+		@include large_desktop {
+			width: $videoContainerSize1440;
+		}
+
+		@include full_desktop {
+			width: $videoContainerSize1920;
+		}
+
+		.videoPlayer {
+			margin: 0 0 24px 0;
+
+			@include tablet {
+				float: left;
+				margin: 0 21px 0 0;
+			}
+
+			@include full_desktop {
+				margin: 0 48px 0 0;
+			}
+
+			.videoWrapper {
+				position: relative;
+
+				.posterOverlay {
+					position: relative;
+					cursor: pointer;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+
+					.playButtonImg {
+						position: absolute;
+						width: $playButtonSize393;
+						height: $playButtonSize393;
+						top: 50%;
+						left: 50%;
+						transform: translate(-50%, -50%);
+						transition: all 0.3s ease-in-out;
+
+						@include small_desktop {
+							width: $playButtonSize1280;
+							height: $playButtonSize1280;
+						}
+					}
+
+					.posterImage {
+						max-width: 100%;
+						height: auto;
+
+						@include tablet {
+							max-width: none;
+							height: auto;
+						}
+
+						@include full_desktop {
+							border-radius: 30px;
+						}
+					}
+				}
+			}
+
+			.videoElementOverlay {
+
+				.fakePosterImage {
+					max-width: 100%;
+					height: auto;
+
+					@include full_desktop {
+						border-radius: 30px;
+					}
+				}
+
+				.videoElement {
+					position: absolute;
+					z-index: 1;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+				}
+
+				.showControls {
+					display: block;
+				}
+			}
+		}
+	}
+
+	.videoTitle {
+		font-size: $videoInfoTitleSize393;
+		margin: 0 0 16px 0;
+		line-height: 120%;
+
+		@include tablet {
+			margin: 24px 0 32px 0;
+		}
+
+		@include small_desktop {
+			margin: 0 0 32px 0;
+			font-size: $videoInfoTitleSize1280;
+		}
+
+		@include large_desktop {
+			padding-right: 100px;
+		}
+
+		@include full_desktop {
+			padding-right: 250px;
+		}
+	}
+
+	.videoDescription {
+		word-wrap: break-word;
+		line-height: 140%;
+		margin-bottom: 16px;
+
+		@include full_desktop {
+			margin-right: 146px;
+		}
+
+		&.descriptionParagraphOne {
+			margin-bottom: 24px;
+			font-weight: 700;
+
+			@include tablet {
+				margin-bottom: 48px;
+				font-size: 14px;
+			}
+
+			@include small_desktop {
+				margin-bottom: 24px;
+				font-size: 16px;
+			}
+			@include small_desktop {
+				margin-bottom: 16px;
+			}
+		}
+
+		&.descriptionParagraphTwo,
+		&.descriptionParagraphThree {
+			
+			@include tablet {
+				width: 70%;
+			}
+
+			@include small_desktop {
+				width: auto;
+			}
+		}
+	}
+
+	.pawImage {
+		float: right;
+		width: $pawImgSize393;
+		height: $pawImgSize393;
+		position: absolute;
+		bottom: 10px;
+		right: 20px;
+		opacity: 0.5;
+
+		@include tablet {
+			width: $pawImgSize768;
+			height: $pawImgSize768;
+			bottom: 100px;
+			right: 32px;
+			opacity: 1;
+		}
+
+		@include small_desktop {
+			position: unset;
+			width: $pawImgSize1280;
+			height: $pawImgSize1280;
+		}
+
+		@include full_desktop {
+			width: $pawImgSize1920;
+			height: $pawImgSize1920;
+		}
+	}
+}
