@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
-
 import ReactPlayer from 'react-player/youtube';
+import pawsImg from '../../assets/videoImg/VectorPaws.svg';
+import playButtonImg from '../../assets/videoImg/Play.svg';
 import defaultImg from '../../assets/videoImg/woman-posing-with-her-dog-smiling 1920px.webp';
+import smallMobilePoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 393px.webp';
+import tabletPoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 768px.webp';
 import desktopPoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 1440.webp';
 import laptopPoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 1280px.webp';
 import largeScreenPoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 1920px.webp';
-import pawsImg from '../../assets/videoImg/VectorPaws.svg';
-import playButtonImg from '../../assets/videoImg/Play.svg';
-import smallMobilePoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 393px.webp';
 import styles from './Video.module.scss';
-import tabletPoster from '../../assets/videoImg/woman-posing-with-her-dog-smiling 768px.webp';
 
 // import { useTranslation } from 'react-i18next';
 
@@ -76,12 +75,14 @@ export const VideoHomePage: React.FC<VideoProps> = ({
 										src={playButtonImg}
 										alt='Play Button'
 										className={styles.playButtonImg}
+										loading="lazy"
 									/>
 								</div>
 								<img
 									src={selectedPoster}
 									alt='Default Poster'
 									className={styles.posterImage}
+									loading="lazy"
 								/>
 							</div>
 						)}
@@ -91,6 +92,7 @@ export const VideoHomePage: React.FC<VideoProps> = ({
 									src={selectedPoster}
 									alt='Default Fake Poster'
 									className={styles.fakePosterImage}
+									loading="lazy"
 								/>
 								<ReactPlayer
 									url={`https://www.youtube.com/watch?v=${videoSrc}`}
@@ -176,9 +178,9 @@ const Video: React.FC = () => {
 	};
 
 	return (
-		<div>
+		<section>
 			<VideoHomePage {...customVideoProps} />
-		</div>
+		</section>
 	);
 };
 

@@ -6,7 +6,7 @@ $videoContainerPadding768: 80px 32px;
 $videoContainerPadding393: 40px 20px;
 
 $videoContainerSize393: 393px;
-$videoContainerSize768: 745px;
+$videoContainerSize768: 768px;
 $videoContainerSize1280: 1280px;
 $videoContainerSize1440: 1440px;
 $videoContainerSize1920: 1920px;
@@ -23,24 +23,26 @@ $videoInfoTitleSize393: 28px;
 $videoInfoTitleSize1280: 42px;
 
 .videoOverlay {
-	background-color: $color-main-bg;
-	margin: 0;
-	padding: 0;
 	display: grid;
 	place-items: center;
+	margin: 0;
+	padding: 0;
 	overflow: hidden;
+	background-color: $color-main-bg;
 
 	.videoContainer {
 		box-sizing: border-box;
+		position: relative;
 		max-width: $videoContainerSize393;
 		padding: $videoContainerPadding393;
 		margin: 0;
 		background-color: $color-main-bg;
-		position: relative;
+		color: $color-gray-100;
 
 		@include tablet {
 			width: $videoContainerSize768;
 			max-width: none;
+			padding: $videoContainerPadding768;
 		}
 
 		@include small_desktop {
@@ -61,7 +63,7 @@ $videoInfoTitleSize1280: 42px;
 
 			@include tablet {
 				float: left;
-				margin: 0 21px 0 0;
+				margin: 0 20px 0 0;
 			}
 
 			@include full_desktop {
@@ -99,7 +101,7 @@ $videoInfoTitleSize1280: 42px;
 
 						@include tablet {
 							max-width: none;
-							height: auto;
+							height: max-content;
 						}
 
 						@include full_desktop {
@@ -110,12 +112,12 @@ $videoInfoTitleSize1280: 42px;
 			}
 
 			.videoElementOverlay {
-
 				.fakePosterImage {
 					max-width: 100%;
 					height: auto;
 
 					@include full_desktop {
+						max-width: none;
 						border-radius: 30px;
 					}
 				}
@@ -137,16 +139,17 @@ $videoInfoTitleSize1280: 42px;
 	}
 
 	.videoTitle {
-		font-size: $videoInfoTitleSize393;
-		margin: 0 0 16px 0;
+		margin-bottom: 16px;
 		line-height: 120%;
+		font-size: $videoInfoTitleSize393;
 
 		@include tablet {
 			margin: 24px 0 32px 0;
 		}
 
 		@include small_desktop {
-			margin: 0 0 32px 0;
+			margin-top: 0;
+			margin-bottom: 32px;
 			font-size: $videoInfoTitleSize1280;
 		}
 
@@ -160,9 +163,9 @@ $videoInfoTitleSize1280: 42px;
 	}
 
 	.videoDescription {
+		margin-bottom: 16px;
 		word-wrap: break-word;
 		line-height: 140%;
-		margin-bottom: 16px;
 
 		@include full_desktop {
 			margin-right: 146px;
@@ -170,27 +173,23 @@ $videoInfoTitleSize1280: 42px;
 
 		&.descriptionParagraphOne {
 			margin-bottom: 24px;
+			font-size: 14px;
 			font-weight: 700;
 
 			@include tablet {
 				margin-bottom: 48px;
-				font-size: 14px;
 			}
 
 			@include small_desktop {
 				margin-bottom: 24px;
 				font-size: 16px;
 			}
-			@include small_desktop {
-				margin-bottom: 16px;
-			}
 		}
 
 		&.descriptionParagraphTwo,
 		&.descriptionParagraphThree {
-			
 			@include tablet {
-				width: 70%;
+				width: 75%;
 			}
 
 			@include small_desktop {
@@ -200,10 +199,10 @@ $videoInfoTitleSize1280: 42px;
 	}
 
 	.pawImage {
+		position: absolute;
 		float: right;
 		width: $pawImgSize393;
 		height: $pawImgSize393;
-		position: absolute;
 		bottom: 10px;
 		right: 20px;
 		opacity: 0.5;
@@ -211,7 +210,7 @@ $videoInfoTitleSize1280: 42px;
 		@include tablet {
 			width: $pawImgSize768;
 			height: $pawImgSize768;
-			bottom: 100px;
+			bottom: 120px;
 			right: 32px;
 			opacity: 1;
 		}
