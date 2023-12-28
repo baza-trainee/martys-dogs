@@ -1,0 +1,210 @@
+@use '/src/scss/variables' as *;
+@use '/src/scss/mixins' as *;
+
+
+.hero {
+  margin: auto;
+  width: 393px;
+  height: 640px;
+  background-color: $color-main-blue-light;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  padding: 40px 0 0 20px;
+  gap: 24px;
+  align-self: stretch;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  @include tablet {
+    width: 768px;
+    height: 374px;
+    padding: 0 0 0 32px;
+    flex-wrap: nowrap;
+    gap: 20px;
+
+  }
+
+  @include small_desktop {
+    width: 1280px;
+    height: 557px;
+    padding: 0 0 0 100px;
+    gap: 0;
+  }
+  @include large_desktop {
+    width: 1440px;
+    height: 660px;
+  }
+
+  @include full_desktop {
+    display: flex;
+    width: 1920px;
+    height: 760px;
+    padding: 0 0 0 100px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+
+}
+
+.leftBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 353px;
+
+  @include tablet {
+    gap: 32px;
+    width: 342px;
+  }
+
+  @include small_desktop {
+    gap: 48px;
+    width: 622px;
+  }
+  @include large_desktop {
+    width: 657px;
+  }
+
+  @include full_desktop {
+    width: 664px;
+  }
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+
+  @include small_desktop {
+    gap: 24px;
+  }
+
+
+  h1 {
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 120%;
+
+
+    @include tablet {
+
+    }
+
+    @include small_desktop {
+      font-size: 68px;
+      //width: 610px;
+    }
+
+    @include large_desktop {
+
+    }
+
+    @include full_desktop {
+      font-size: 68px;
+
+    }
+  }
+
+  p {
+    color: $color-main-blue-dark;
+    font-style: normal;
+    line-height: 140%;
+    font-size: 14px;
+    font-weight: 700;
+
+    @include tablet {
+      font-size: 16px;
+    }
+
+    @include small_desktop {
+      font-size: 16px;
+      font-weight: 500;
+      //width: 600px;
+    }
+    @include large_desktop {
+
+    }
+
+    @include full_desktop {
+
+
+    }
+  }
+}
+
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 353px;
+
+  @include tablet {
+    width: 261px;
+  }
+
+
+  @include large_desktop {
+
+  }
+
+  @include full_desktop {
+    width: 445px;
+  }
+
+
+  svg:first-child {
+    transform: translateY(5px);
+    height: 11px;
+    width: 11px;
+    /*  @include tablet {
+        transform: translateY(7px);
+      }*/
+  }
+
+  svg:last-child {
+    transform: translateY(-5px);
+    height: 11px;
+    width: 11px;
+    /*   @include tablet {
+         transform: translateY(-6px) translateX(-3px);
+       }*/
+  }
+
+}
+
+.rightBlock {
+  width: 374px;
+  height: 374px;
+  min-width: 353px;
+  background: url('../../assets/hero-home.webp') -252.826px -54.483px / 198.607% 118.541% no-repeat;
+
+
+
+  @include small_desktop {
+    width: 558px;
+    height: 557px;
+    background: url('../../assets/hero-home.webp') -390.826px  -124.483px  / 198.607% 128.541% no-repeat;
+
+  }
+  @include large_desktop {
+    width: 710px;
+    height: 660px;
+    background: url('../../assets/hero-home.webp') -430.826px   -134.483px / 175.607% 128.541% no-repeat;
+  }
+
+  @include full_desktop {
+    width: 1178px;
+    height: 762px;
+    background: url('../../assets/hero-home.webp') -702.826px -194.483px / 168.607% 159.541% no-repeat;
+
+
+  }
+
+
+}
