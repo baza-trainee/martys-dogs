@@ -1,0 +1,34 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.section{
+  background-color: $color-main-bg;
+  padding:40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include tablet{
+    padding:80px 32px;
+  }
+
+     @include small_desktop{
+      padding:100px;
+     }
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  gap:24px;
+
+  @include tablet{
+    margin-top: 40px;
+  }
+
+  @include small_desktop{
+    flex-direction: row;
+  }
+  
+}

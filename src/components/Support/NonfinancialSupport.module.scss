@@ -1,0 +1,94 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.container{
+  padding: 20px;
+  border-radius:30px;
+  background-color: $color-gray-0;
+
+  @include small_desktop {
+      min-width: 50%;
+      padding: 40px;
+    }
+}
+
+.address__container{
+margin-top: 32px;
+}
+.title {
+      text-align: left;
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.4;
+      
+      color: $color-gray-100;
+
+      @include small_desktop{
+font-size: 24px;
+      }
+}
+
+.title__blue{
+  text-align: left;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.4;
+  
+  color:$color-main-blue-mid;
+
+    @include small_desktop {
+        font-size: 24px;
+      }
+}
+
+.description {
+  text-align: left;
+  font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+
+    color:$color-gray-100;
+
+    @include small_desktop{
+      font-size: 16px;
+    }
+
+}
+
+.caption{
+  text-align: left;
+  font-size: 14px;
+    font-weight: 700;
+    line-height: 1.4;
+
+    color: $color-gray-100;
+
+    @include small_desktop {
+        font-size: 16px;
+      }
+}
+
+.address__box{
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 8px;
+
+  gap:16px;
+}
+
+.address__position__row{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.address__item__position{
+  display: flex;
+  align-items: center;
+  gap:8px;
+}
+.image {
+color:$color-gray-100;
+
+}
