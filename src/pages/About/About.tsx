@@ -1,7 +1,8 @@
 // import { Trans } from 'react-i18next';
 
-import Photos from "../../components/Photos/Photos";
-import Support from "../../components/Support/Support";
+import HeroAbout from '../../components/HeroAbout/HeroAbout';
+import Photos from '../../components/Photos/Photos';
+import Support from '../../components/Support/Support';
 
 const About = () => {
 	return (
@@ -9,8 +10,9 @@ const About = () => {
 		// 	To get started, edit <code>src/pages/About.tsx</code> and save to reload.
 		// </Trans>
 		<main>
-			<Photos/>
-			<Support/>
+			<HeroAbout />
+			<Photos />
+			<Support />
 		</main>
 	);
 };

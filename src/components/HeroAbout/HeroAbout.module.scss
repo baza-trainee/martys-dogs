@@ -1,0 +1,231 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+//  move  img  and ul  in  common  styles file
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+.hero {
+	width: 100%;
+	padding: 80px 0px 0px 20px;
+	position: relative;
+	background: $color-main-blue-light;
+
+	@include tablet {
+		display: flex;
+		padding: 100px 0px 0px 32px;
+	}
+
+	@include small-desktop {
+		padding: 0px 0px 0px 100px;
+	}
+}
+
+.hero_wrapper {
+	@include small-desktop {
+		padding: 187px 0px;
+		max-width: 756px;
+	}
+
+	@include large-desktop {
+		max-width: 770px;
+	}
+
+	@include full-desktop {
+		margin-right: 40px;
+		padding: 225px 0px;
+		max-width: 1066px;
+	}
+}
+
+.title {
+	margin-bottom: 8px;
+	color: $color-gray-100;
+	font-size: 36px;
+	font-weight: 900;
+	line-height: 1.2;
+
+	@include small-desktop {
+		font-size: 68px;
+	}
+}
+
+.text {
+	color: $color-main-blue-dark;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.4;
+
+	@include small-desktop {
+		font-size: 16px;
+	}
+}
+
+.name {
+	width: 362px;
+	height: 42px;
+	margin-bottom: 40px;
+	background-image: url('../../assets/hero_about/name393.webp');
+	background-size: cover;
+
+	@include full-desktop {
+		width: 400px;
+		height: 47px;
+	}
+}
+
+.photo {
+	width: 100%;
+	height: 402px;
+	background-image: url('../../assets/hero_about/393.webp');
+	background-size: contain;
+	background-position: bottom 0px right 0px;
+	background-repeat: no-repeat;
+
+	@include small-desktop {
+		position: absolute;
+		bottom: 0px;
+		right: 0px;
+		width: 505px;
+		height: 754px;
+		background-image: url('../../assets/hero_about/1280.webp');
+	}
+
+	@include large-desktop {
+		width: 570px;
+		height: 754px;
+		background-image: url('../../assets/hero_about/1440.webp');
+	}
+
+	@include full-desktop {
+		width: 714px;
+		height: 754px;
+		background-image: url('../../assets/hero_about/1920.webp');
+	}
+}
+
+.info {
+	padding: 40px 20px;
+	gap: 40px;
+	align-self: stretch;
+	background-color: $color-main-bg;
+
+	@include tablet {
+		display: flex;
+		padding: 40px 32px;
+		gap: 20px;
+		position: relative;
+	}
+
+	@include small-desktop {
+		display: flex;
+		padding: 100px;
+		gap: 20px;
+	}
+
+	@include full-desktop {
+		display: flex;
+		justify-content: space-between;
+	}
+}
+
+.info_wrapper {
+	@include tablet {
+		max-width: 484px;
+	}
+
+	@include small-desktop {
+		max-width: 660px;
+	}
+
+	@include large-desktop {
+		max-width: 720px;
+	}
+
+	@include full-desktop {
+		max-width: 850px;
+	}
+}
+
+.goal {
+	margin-bottom: 24px;
+	color: $color-gray-100;
+	font-size: 28px;
+	font-weight: 800;
+	line-height: 1.2;
+
+	@include small-desktop {
+		font-size: 42px;
+	}
+}
+
+.goal_text {
+	color: $color-gray-100;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.4;
+	margin-bottom: 32px;
+
+	@include tablet {
+		margin-bottom: 64px;
+	}
+
+	@include small-desktop {
+		font-size: 16px;
+	}
+}
+
+.logo {
+	margin-top: 40px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 200px;
+	height: 172px;
+	background-image: url('../../assets/hero_about/logo393.webp');
+	background-repeat: no-repeat;
+	background-size: contain;
+
+	@include tablet {
+		position: absolute;
+		right: 32px;
+		margin: 0;
+		width: 200px;
+		height: 452px;
+		background-position-x: center;
+		background-position-y: center;
+	}
+
+	@include small-desktop {
+		position: absolute;
+		right: 100px;
+		width: 400px;
+		height: 620px;
+		background-image: url('../../assets/hero_about/logo1280.webp');
+	}
+
+	@include large-desktop {
+		width: 500px;
+		height: 498px;
+		background-image: url('../../assets/hero_about/logo1440.webp');
+	}
+
+	@include full-desktop {
+		width: 500px;
+		height: 476px;
+	}
+}
+
+.button {
+	@include tablet {
+		width: 296px;
+	}
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+	background-image: url('../../assets/hero_about/paws.svg');
+}

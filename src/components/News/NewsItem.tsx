@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import styles from './NewsItem.module.scss';
+import Button from '../../layout/Button/Button';
+
 interface NewsItemProps {
 	id: string;
 	title: string;
@@ -21,10 +23,12 @@ const NewsItem: React.FC<NewsItemProps> = ({ img, title, text, date }) => {
 				<p className={styles.date}>{date}</p>
 				<p className={styles.text}>{text}</p>
 			</div>
-			{/* буде  окремий  компонент КНОПКА? */}
-			<button className={styles.button} type='button'>
-				{t('news.button')}
-			</button>
+			<Button
+				type={'button'}
+				name={t('news.button')}
+				btnClasses={'primary'}
+				onClick={() => console.log('to modal')}
+			/>
 		</li>
 	);
 };
