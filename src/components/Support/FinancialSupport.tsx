@@ -1,5 +1,14 @@
 import { FaPaw } from "react-icons/fa6";
-import style from './FinancialSupport.module.scss'
+
+import style from './FinancialSupport.module.scss';
+import {
+  whitePuppyMobile1x,
+  whitePuppyMobile2x,
+  whitePuppyTablet1x,
+  whitePuppyTablet2x,
+  whitePuppyDesktop1x,
+  whitePuppyDesktop2x, 
+} from '../../assets/support';
 
 const FinancialSupport = () => {
   return (
@@ -26,25 +35,25 @@ const FinancialSupport = () => {
       <div className={style.image_box}>
         <picture>
           <source
-            srcSet="/src/assets/support/cute-white-little-puppy-desktop-1x.webp 1280w, /src/assets/support/cute-white-little-puppy-desktop-2x.webp 2560w"
+            srcSet={`${whitePuppyDesktop1x} 1280w, ${whitePuppyDesktop2x} 2560w`}
             media='(min-width:1280px)'
             sizes='(min-width:1280px) 200px'
             type="image/webp"
           />
           <source
-            srcSet="/src/assets/support/cute-white-little-puppy-tablet-1x.webp 768w, /src/assets/support/cute-white-little-puppy-tablet-2x.webp  1536w"
+            srcSet={`${whitePuppyTablet1x} 768w, ${whitePuppyTablet2x}  1536w`}
             media='(min-width:768px)'
             sizes='(min-width:768px) 200px'
             type="image/webp"
           />
           <source
-            srcSet="/src/assets/support/cute-white-little-puppy-mobile-1x.webp 393w, /src/assets/support/cute-white-little-puppy-mobile-2x.webp 786w"
+            srcSet={`${whitePuppyMobile1x} 393w, ${whitePuppyMobile2x} 786w`}
             media='(min-width:393px)'
             sizes='(min-width:393px) 353px'
             type="image/webp"
           />
           <img
-            src='/src/assets/support/cute-white-little-puppy-mobile-1x.webp'
+            src={`${whitePuppyMobile1x}`}
             alt='Cute white little puppy '
             loading='lazy'
             className={style.image }

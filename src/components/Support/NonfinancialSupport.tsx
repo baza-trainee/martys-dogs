@@ -1,6 +1,11 @@
 import { BiMap } from "react-icons/bi";
 import { BiUser } from "react-icons/bi";
 
+import {
+  novaPost,
+  ukrPost
+} from '../../assets/support';
+
 import style from './NonfinancialSupport.module.scss';
 
 const NonfinancialSupport = () => {
@@ -35,7 +40,7 @@ const NonfinancialSupport = () => {
                 <dd className={style.description}>відділення №1</dd>
                 <dd className={style.description}>вул. Руська, 248-О</dd>
               </div>
-              <img src='/src/assets/support/nova-post.svg' alt='Логотип Нової пошти'/>
+              <img src={`${novaPost}`} alt='Логотип Нової пошти'/>
             </div>
             
             <div  className={style.address__position__row}>
@@ -44,7 +49,7 @@ const NonfinancialSupport = () => {
                 <dd className={style.description}>відділення №58008</dd>
                 <dd className={style.description}>вул. Гагаріна Юрія, 36-А</dd>
               </div>
-              <img src='/src/assets/support/ukr-post.svg' alt='Логотип Укр пошти'/>
+              <img src={`${ukrPost}`} alt='Логотип Укр пошти'/>
             </div>
             
           </dl>
