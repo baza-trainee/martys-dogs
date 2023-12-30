@@ -1,0 +1,81 @@
+@use 'src/scss/variables' as *;
+@use 'src/scss/mixins' as *;
+
+.button {
+  border-radius: 30px;
+  display: inline-flex;
+  height: 48px;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 22.4px;
+  border-style: none;
+  transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+  width: 100%;
+
+  &:hover {
+    transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+  }
+
+  &:disabled {
+    color: $color-gray-60;
+
+    svg {
+      fill: $color-gray-60;
+    }
+  }
+}
+
+
+.primary {
+  background: $color-accent;
+  color: $color-gray-10;
+
+  &:hover {
+    background: $color-main-blue-dark;
+  }
+
+  &:focus {
+    border: 1px solid $color-main-blue-dark;
+  }
+
+  //pressed
+  &:active {
+    background: $color-gray-100;
+  }
+
+  &:disabled {
+    background: $color-gray-20;
+  }
+
+}
+
+.secondary {
+  border-radius: 30px;
+  border: 1px solid $color-accent;
+  color: $color-accent;
+  background: $color-gray-0;
+
+  &:hover {
+    border-color: $color-main-blue-dark;
+    color: $color-main-blue-dark;
+  }
+
+  &:focus {
+    border-color: $color-main-blue-dark;
+  }
+
+  //pressed
+  &:active {
+    border-color: $color-gray-100;
+    color: $color-gray-100;
+  }
+
+  &:disabled {
+    border-color: $color-gray-60;
+  }
+}
