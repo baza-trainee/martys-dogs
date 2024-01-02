@@ -5,7 +5,9 @@ import styles from './ErrorBlock.module.scss';
 const ErrorBlock: React.FC = () => {
 	return (
 		<section className={styles.error}>
-			<h1 className={styles.title}>404</h1>
+			<h1 className={styles.title} data-testid='test-title'>
+				404
+			</h1>
 			<p className={styles.subtitle}>
 				Ой, здається, ця сторінка загубилася, як цуценя, що шукає свій
 				дім.
