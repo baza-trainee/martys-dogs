@@ -1,6 +1,6 @@
 import ReactPlayer from 'react-player/youtube';
 // import { pictureThumbnailMobile1x, pictureThumbnailMobile2x, pictureThumbnailTablet1x, pictureThumbnailTablet2x } from '../../assets/videoAboutShelter';
-import playButtonImg from '../../assets/videoImg/Play.svg';
+import playButtonImg from '../../assets/video_main/Play.svg';
 import style from './VideoAboutShelter.module.scss'
 
 
