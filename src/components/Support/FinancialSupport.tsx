@@ -1,5 +1,6 @@
 import { FaPaw } from "react-icons/fa6";
 
+import Button from "../../layout/Button/Button";
 import style from './FinancialSupport.module.scss';
 import {
   whitePuppyMobile1x,
@@ -22,15 +23,19 @@ const FinancialSupport = () => {
           Під час здійснення донату ви маєте можливість вказати, кому саме ви бажаєте допомогти, назвавши ім'я собаки. Ваша щедрість робить світ кращим для них.
           </p>
           </div>
-        <a
-          className={style.link}
-         target='_blank'>
-          Допомогти фінансово
-          <div>
+        <Button
+          btnClasses='primary'
+          type='button'
+          name='Допомогти фінансово'
+          onClick={() => { console.log('I am the Button from Support section') }}
+        children={ <div className={style.icon}>
             <FaPaw />
             <FaPaw/>
-        </div>
-        </a>
+        </div>}
+        >
+          
+         
+        </Button>
       </div>
       <div className={style.image_box}>
         <picture>
