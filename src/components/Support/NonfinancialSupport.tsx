@@ -22,11 +22,11 @@ const NonfinancialSupport = () => {
             
             <div className={style.address__position__row}>
               <div className={style.address__item__position}>
-                <dt><BiMap width={24} /></dt>
+                <dt><BiMap className={style.icon}  /></dt>
                 <dd className={style.caption}>м. Чернівці</dd>
               </div>
               <div className={style.address__item__position}>
-                <dt> <BiUser width={24} className={style.image} /></dt>
+                <dt> <BiUser className={style.icon} /></dt>
                 <div>
                   <dd  className={style.caption}>Марта Левченко</dd>
                   <dd  className={style.description}>+380 50 243 6971</dd>
@@ -40,7 +40,7 @@ const NonfinancialSupport = () => {
                 <dd className={style.description}>відділення №1</dd>
                 <dd className={style.description}>вул. Руська, 248-О</dd>
               </div>
-              <img src={`${novaPost}`} alt='Логотип Нової пошти'/>
+              <img src={`${novaPost}`} alt='Логотип Нової пошти'  className={style.image } />
             </div>
             
             <div  className={style.address__position__row}>
@@ -49,7 +49,7 @@ const NonfinancialSupport = () => {
                 <dd className={style.description}>відділення №58008</dd>
                 <dd className={style.description}>вул. Гагаріна Юрія, 36-А</dd>
               </div>
-              <img src={`${ukrPost}`} alt='Логотип Укр пошти'/>
+              <img src={`${ukrPost}`} alt='Логотип Укр пошти' className={style.image } />
             </div>
             
           </dl>

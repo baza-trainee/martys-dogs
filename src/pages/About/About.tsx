@@ -3,6 +3,7 @@
 import HeroAbout from '../../components/HeroAbout/HeroAbout';
 import Photos from '../../components/Photos/Photos';
 import Support from '../../components/Support/Support';
+import VideoAboutShelter from '../../components/VideoAboutShelter/VideoAboutShelter';
 
 const About = () => {
 	return (
@@ -11,6 +12,7 @@ const About = () => {
 		// </Trans>
 		<main>
 			<HeroAbout />
+			<VideoAboutShelter/>
 			<Photos />
 			<Support />
 		</main>
