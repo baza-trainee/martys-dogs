@@ -1,27 +1,42 @@
-import { useTranslation } from 'react-i18next';
-import styles from './NewsItem.module.scss';
 import Button from '../../layout/Button/Button';
+import styles from './NewsItem.module.scss';
+import { useTranslation } from 'react-i18next';
 
-interface NewsItemProps {
-	id: string;
+export interface NewsItemProps {
+	id: number;
 	title: string;
-	img: string;
-	date: string;
-	text: string;
+	post_at: string;
+	update_at: string;
+	sub_text: string;
+	Text: string;
+	photo: {
+		id: string;
+		name: string;
+		url: string;
+		category: string;
+	};
 }
 
-const NewsItem: React.FC<NewsItemProps> = ({ img, title, text, date }) => {
+const NewsItem: React.FC<NewsItemProps> = ({
+	// id,
+	title,
+	post_at,
+	// update_at,
+	// sub_text,
+	Text,
+	photo,
+}) => {
 	const { t } = useTranslation();
 
 	return (
 		<li className={styles.item}>
 			<div className={styles.thumb}>
-				<img src={img} alt='' className={styles.photo} />
+				<img src={photo.url} alt='photo' className={styles.photo} />
 			</div>
 			<div className={styles.info}>
 				<h3 className={styles.title}>{title}</h3>
-				<p className={styles.date}>{date}</p>
-				<p className={styles.text}>{text}</p>
+				<p className={styles.date}>{post_at}</p>
+				<p className={styles.text}>{Text}</p>
 			</div>
 			<Button
 				type={'button'}

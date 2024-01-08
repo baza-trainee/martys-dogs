@@ -16,6 +16,7 @@
   border-style: none;
   transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
   width: 100%;
+  cursor: pointer;
 
   &:hover {
     transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;

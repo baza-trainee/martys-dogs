@@ -25,7 +25,7 @@
 .link {
 	padding: 12px 24px;
 	display: flex;
-	min-width: 330px;
+	min-width: 290px;
 	max-height: 48px;
 	justify-content: center;
 	align-items: center;
@@ -34,6 +34,7 @@
 	background: #009cd9;
 	text-decoration: none;
 	gap: 8px;
+	font-size: 20px;
 	transition: background 0.3s ease;
 	&:hover {
 		background: #005c80;
@@ -41,4 +42,31 @@
 	@media screen and (max-width: 768px) {
 		width: 100%;
 	}
+}
+
+@keyframes spinner {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.loading {
+	width: 6rem;
+	height: 6rem;
+	border: 5px solid #009cd9;
+	border-radius: 50%;
+	border-top-color: #fff;
+	animation: spinner 0.6s linear infinite;
+	margin: 6rem auto;
+}
+
+.container {
+	background-color: #ebf5fb;
+	padding: 6rem;
+}
+
+.alert {
+	text-align: center;
+	font-size: 32px;
+	color: #005c80;
 }
