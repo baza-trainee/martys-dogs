@@ -3,12 +3,13 @@ import 'swiper/css/navigation';
 
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import Tail, { TailProps } from '../Tail/Tail';
 
 import { FaAngleRight } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
-import Tail from '../Tail/Tail';
+import { fetchTails } from '../../services/fetchData';
 import styles from './Tails.module.scss';
-import { tails } from '../../data';
+import { useQuery } from '@tanstack/react-query';
 
 interface Pagination {
 	clickable: boolean;
@@ -35,12 +36,40 @@ const breakpoints = {
 };
 
 const Tails: React.FC = () => {
+	const {
+		data: tails,
+		isPending,
+		isError,
+		error,
+	} = useQuery({
+		queryKey: ['tails'],
+		queryFn: fetchTails,
+		refetchInterval: 600000,
+	});
+
+	if (isPending) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.loading}></div>
+			</div>
+		);
+	}
+
+	if (isError) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.alert}>{error.message}</div>
+			</div>
+		);
+	}
+
 	const pagination: Pagination = {
 		clickable: true,
 		renderBullet: (index, className) => {
 			return '<span class="' + className + '">' + (index + 1) + '</span>';
 		},
 	};
+
 	return (
 		<section className={styles.tails}>
 			<div className={styles.title}>
@@ -59,7 +88,7 @@ const Tails: React.FC = () => {
 				navigation={true}
 				modules={[Pagination, Navigation]}
 			>
-				{tails.map((tail) => (
+				{tails?.map((tail: TailProps) => (
 					<SwiperSlide key={tail.id}>
 						<Tail {...tail} />
 					</SwiperSlide>
