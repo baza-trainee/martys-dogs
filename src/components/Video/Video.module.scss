@@ -6,9 +6,9 @@ $videoContainerPadding768: 80px 32px;
 $videoContainerPadding393: 40px 20px;
 
 $videoContainerSize393: 393px;
-$videoContainerSize768: 768px;
-$videoContainerSize1280: 1280px;
-$videoContainerSize1440: 1440px;
+//$videoContainerSize768: 768px;
+//$videoContainerSize1280: 1280px;
+//$videoContainerSize1440: 1440px;
 $videoContainerSize1920: 1920px;
 
 $playButtonSize393: 55px;
@@ -22,7 +22,7 @@ $pawImgSize1920: 180px;
 $videoInfoTitleSize393: 28px;
 $videoInfoTitleSize1280: 42px;
 
-.videoOverlay {
+.videoContainerWrapper {
 	display: grid;
 	place-items: center;
 	margin: 0;
@@ -40,18 +40,19 @@ $videoInfoTitleSize1280: 42px;
 		color: $color-gray-100;
 
 		@include tablet {
-			width: $videoContainerSize768;
+			//width: $videoContainerSize768;
+			width: auto;
 			max-width: none;
 			padding: $videoContainerPadding768;
 		}
 
 		@include small_desktop {
-			width: $videoContainerSize1280;
+			//width: $videoContainerSize1280;
 			padding: $videoContainerPadding1280;
 		}
 
 		@include large_desktop {
-			width: $videoContainerSize1440;
+			//width: $videoContainerSize1440;
 		}
 
 		@include full_desktop {

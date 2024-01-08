@@ -3,6 +3,7 @@
 import HeroAbout from '../../components/HeroAbout/HeroAbout';
 import Photos from '../../components/Photos/Photos';
 import Support from '../../components/Support/Support';
+import Partners from '../../components/Partners/Partners';
 import VideoAboutShelter from '../../components/VideoAboutShelter/VideoAboutShelter';
 
 const About = () => {
@@ -12,7 +13,8 @@ const About = () => {
 		// </Trans>
 		<main>
 			<HeroAbout />
-			<VideoAboutShelter/>
+			<VideoAboutShelter />
+			<Partners/>
 			<Photos />
 			<Support />
 		</main>
