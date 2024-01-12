@@ -9,11 +9,13 @@ import AdminNumbers from './pages/AdminNumbers/AdminNumbers';
 import AdminPartners from './pages/AdminPartners/AdminPartners';
 import AdminPhotos from './pages/AdminPhotos/AdminPhotos';
 import Admins from './pages/Admins/Admins';
+import { AuthProvider } from './context/AuthContext';
 import Contacts from './pages/Contacts/Contacts';
 import Error from './pages/Error/Error';
 import HomeLayout from './layout/HomeLayout/HomeLayout';
 import Landing from './pages/Landing/Landing';
 import Login from './pages/Login/Login';
+import { ModalProvider } from './context/ModalContext';
 import OurTails from './pages/OurTails/OurTails';
 import Register from './pages/Register/Register';
 
@@ -91,9 +93,13 @@ const router = createBrowserRouter([
 
 const App = () => {
 	return (
-		<QueryClientProvider client={queryClient}>
-			<RouterProvider router={router} />
-		</QueryClientProvider>
+		<AuthProvider>
+			<ModalProvider>
+				<QueryClientProvider client={queryClient}>
+					<RouterProvider router={router} />
+				</QueryClientProvider>
+			</ModalProvider>
+		</AuthProvider>
 	);
 };
 
