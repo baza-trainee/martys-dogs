@@ -1,6 +1,5 @@
 import Button from '../../layout/Button/Button';
 import { FaPaw } from 'react-icons/fa6';
-
 import styles from './Hero.module.scss';
 
 const Hero = () => {
@@ -9,7 +8,10 @@ const Hero = () => {
 			<div className={styles.leftBlock}>
 				<div className={styles.textBlock}>
 					<h1>Разом ми можемо більше</h1>
-					<p>Допоможіть нам надати тепло та догляд нашим собакам. Ваш внесок рятує життя!</p>
+					<p>
+						Допоможіть нам надати тепло та догляд нашим собакам. Ваш
+						внесок рятує життя!
+					</p>
 				</div>
 
 				<div className={styles.btnWrapper}>
@@ -26,13 +28,10 @@ const Hero = () => {
 						}
 					/>
 				</div>
-
 			</div>
 
 			<div className={styles.rightBlock}></div>
-
 		</div>
-
 	);
 };
 export default Hero;
