@@ -106,59 +106,23 @@ img {
 	background-size: cover;
 	background-repeat: no-repeat;
 
-	@media (min-device-pixel-ratio: 2),
-		(min-resolution: 192dpi),
-		(min-resolution: 2dppx) {
-		.photo {
-			background-image: url('../../assets/hero_about/393_2x.webp');
-		}
-	}
-
 	@include tablet {
 		height: 476px;
 		background-image: url('../../assets/hero_about/768_1x.webp');
-		@media (min-device-pixel-ratio: 2),
-			(min-resolution: 192dpi),
-			(min-resolution: 2dppx) {
-			.photo {
-				background-image: url('../../assets/hero_about/768_1x.webp');
-			}
-		}
 	}
 
 	@include small-desktop {
 		width: 50%;
 		height: 700px;
 		background-image: url('../../assets/hero_about/1280_1x.webp');
-		@media (min-device-pixel-ratio: 2),
-			(min-resolution: 192dpi),
-			(min-resolution: 2dppx) {
-			.photo {
-				background-image: url('../../assets/hero_about/1280_2x.webp');
-			}
-		}
 	}
 
 	@include large-desktop {
 		background-image: url('../../assets/hero_about/1440_1x.webp');
-		@media (min-device-pixel-ratio: 2),
-			(min-resolution: 192dpi),
-			(min-resolution: 2dppx) {
-			.photo {
-				background-image: url('../../assets/hero_about/1440_2x.webp');
-			}
-		}
 	}
 
 	@include full-desktop {
 		background-image: url('../../assets/hero_about/1920_1x.webp');
-		@media (min-device-pixel-ratio: 2),
-			(min-resolution: 192dpi),
-			(min-resolution: 2dppx) {
-			.photo {
-				background-image: url('../../assets/hero_about/1920_2x.webp');
-			}
-		}
 	}
 }
 
@@ -219,17 +183,11 @@ img {
 		display: block;
 		width: 414px;
 		height: 521px;
-		background-image: url('../../assets/hero_about/logo1280_2x.webp');
-		@media (min-device-pixel-ratio: 2),
-			(min-resolution: 192dpi),
-			(min-resolution: 2dppx) {
-			.logo {
-				background-image: url('../../assets/hero_about/logo1280_2x.webp');
-			}
-		}
+		background-image: url('../../assets/hero_about/logo1280_1x.webp');
 		background-repeat: no-repeat;
 		background-position-x: center;
 		background-position-y: center;
+		background-size: contain;
 	}
 
 	@include large-desktop {
@@ -238,6 +196,30 @@ img {
 
 	@include full-desktop {
 		height: 378px;
+	}
+}
+
+@media (min-device-pixel-ratio: 2),
+	(min-resolution: 192dpi),
+	(min-resolution: 2dppx) {
+	.logo {
+		background-image: url('../../assets/hero_about/logo1280_2x.webp');
+	}
+	.photo {
+		background-image: url('../../assets/hero_about/393_2x.webp');
+
+		@include tablet {
+			background-image: url('../../assets/hero_about/768_2x.webp');
+		}
+		@include small-desktop {
+			background-image: url('../../assets/hero_about/1280_2x.webp');
+		}
+		@include large-desktop {
+			background-image: url('../../assets/hero_about/1440_2x.webp');
+		}
+		@include full-desktop {
+			background-image: url('../../assets/hero_about/1920_2x.webp');
+		}
 	}
 }
 
