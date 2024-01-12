@@ -1,14 +1,17 @@
-import { Form, Link, useNavigate } from 'react-router-dom';
+import { Form, Link } from 'react-router-dom';
 
 import FormInput from '../../components/FormInput/FormInput';
 import SubmitBtn from '../../components/SubmitBtn/SubmitBtn';
+import styles from './Login.module.scss';
 
-const Login = () => {
-	const navigate = useNavigate();
+// import { useNavigate } from 'react-router-dom';
+
+const Login: React.FC = () => {
+	// const navigate = useNavigate();
 
 	const guestLogin = async () => {
-        console.log('login');
-    };
+		console.log('login');
+	};
 
 	// const guestLogin = async () => {
 	// 	try {
@@ -26,31 +29,22 @@ const Login = () => {
 	// };
 
 	return (
-		<main className='grid h-screen place-items-center'>
-			<Form
-				method='POST'
-				className='p-8 shadow shadow-primary card w-96 bg-base-100 gap-y-4'
-			>
-				<h4 className='text-3xl font-bold text-center'>Login</h4>
-				<FormInput type='email' label='email' name='identifier' />
-				<FormInput type='password' label='password' name='password' />
-				<div className='mt-4'>
-					<SubmitBtn text='login' />
+		<main className={styles.login}>
+			<Form method='POST' className={styles.form}>
+				<h4>Вхід</h4>
+				<FormInput
+					type='email'
+					label='Електронна пошта'
+					name='identifier'
+				/>
+				<FormInput type='password' label='Пароль' name='password' />
+				<div className={styles.container} onClick={guestLogin}>
+					<SubmitBtn text='Увійти' />
 				</div>
-				<button
-					type='button'
-					className='uppercase duration-300 btn btn-block btn-secondary'
-					onClick={guestLogin}
-				>
-					guest user
-				</button>
-				<p className='text-center'>
-					Not a member yet?
-					<Link
-						to='/register'
-						className='ml-2 capitalize link link-hover link-primary'
-					>
-						register
+				<p className={styles.text}>
+					Ще не є адміном?
+					<Link to='/register' className={styles.link}>
+						Реєстрація
 					</Link>
 				</p>
 			</Form>

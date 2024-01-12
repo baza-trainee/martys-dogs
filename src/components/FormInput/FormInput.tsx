@@ -1,15 +1,18 @@
-const FormInput = ({ label, name, type, defaultValue, size }) => {
+import styles from './FormInput.module.scss';
+
+interface FormInputProps {
+	label: string;
+	name: string;
+	type: string;
+}
+
+const FormInput: React.FC<FormInputProps> = ({ label, name, type }) => {
 	return (
-		<div className='form-control'>
-			<label className='label'>
-				<span className='capitalize label-text'>{label}</span>
+		<div className={styles.form}>
+			<label className={styles.label}>
+				<span className={styles.text}>{label}</span>
 			</label>
-			<input
-				type={type}
-				name={name}
-				defaultValue={defaultValue}
-				className={`input input-bordered ${size}`}
-			/>
+			<input type={type} name={name} className={styles.input} />
 		</div>
 	);
 };

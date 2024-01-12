@@ -2,30 +2,33 @@ import { Form, Link } from 'react-router-dom';
 
 import FormInput from '../../components/FormInput/FormInput';
 import SubmitBtn from '../../components/SubmitBtn/SubmitBtn';
+import styles from './Register.module.scss';
 
-const Register = () => {
+const Register: React.FC = () => {
 	return (
-		<section className='grid h-screen place-items-center'>
+		<main className={styles.login}>
 			<Form
 				method='POST'
-				className='p-8 shadow card bg-base-100 gap-y-4 shadow-primary w-96'>
-				<h4 className='text-3xl font-bold text-center'>Register</h4>
-				<FormInput type='text' label='username' name='username' />
-				<FormInput type='email' label='email' name='email' />
-				<FormInput type='password' label='password' name='password' />
-				<div className='mt-4'>
-					<SubmitBtn text='register' />
+				className={styles.form}
+			>
+				<h4 className='text-3xl font-bold text-center'>Реєстрація</h4>
+				<FormInput type='text' label="Ім'я" name='username' />
+				<FormInput type='email' label='Електронна пошта' name='email' />
+				<FormInput type='password' label='Пароль' name='password' />
+				<div className={styles.container}>
+					<SubmitBtn text='Реєстрація' />
 				</div>
-				<p className='text-center'>
-					Already member?
+				<p className={styles.text}>
+					Вже адміністратор?
 					<Link
 						to='/login'
-						className='ml-2 capitalize link link-hover link-primary'>
-						login
+						className={styles.link}
+					>
+						Вхід
 					</Link>
 				</p>
 			</Form>
-		</section>
+		</main>
 	);
 };
 
