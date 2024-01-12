@@ -8,6 +8,7 @@ import { useEffect } from 'react';
 import { scrollOnTop, scrollToSection } from '../../services/scrollTo';
 
 const Landing = () => {
+
 	const location = useLocation();
 
 	useEffect(() => {
