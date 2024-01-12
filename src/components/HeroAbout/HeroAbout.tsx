@@ -1,6 +1,7 @@
+import Button from '../../layout/Button/Button';
 import { Link } from 'react-router-dom';
 import styles from './HeroAbout.module.scss';
-import Button from '../../layout/Button/Button';
+
 const HeroAbout = () => {
 	return (
 		<>

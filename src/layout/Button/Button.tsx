@@ -1,6 +1,6 @@
-import styles from './Button.module.scss';
 import * as React from 'react';
 
+import styles from './Button.module.scss';
 
 interface IButtonProps {
 	name: string;
@@ -12,17 +12,18 @@ interface IButtonProps {
 }
 
 const Button: React.FC<IButtonProps> = ({
-											name,
-											btnClasses,
-											onClick,
-											type,
-											disabled,
-											children,
-										}) => {
-
+	name,
+	btnClasses,
+	onClick,
+	type,
+	disabled,
+	children,
+}) => {
 	return (
 		<button
-			className={[styles.button, btnClasses && styles[btnClasses]].join(' ')}
+			className={[styles.button, btnClasses && styles[btnClasses]].join(
+				' ',
+			)}
 			disabled={disabled}
 			type={type}
 			onClick={onClick}

@@ -1,0 +1,87 @@
+.sidebar {
+    min-width: 25rem;
+    min-height: 100vh;
+	background: #EBF5FB;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    transition: all 0.3s ease-in-out;
+    margin-left: -20rem;
+    padding-bottom: 2rem;
+}
+.show {
+    margin-left: 0;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+}
+
+.header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+    background-color: #B6E1F2;
+}
+
+.container {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.bars {
+    position: absolute;
+    right: 2rem;
+    top: 0;
+    background-color: transparent;
+    font-size: 1.5rem;
+    &:hover {
+        cursor: pointer;
+        color: #009CD9;
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    padding-left: 2rem;
+}
+
+.links a {
+	display: flex;
+	align-items: center;
+	font-size: 1.5rem;
+    font-weight: 600;
+	text-transform: capitalize;
+	padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    color: black;
+    transition: all 0.3s ease-in-out;
+    & svg {
+        margin-right: 1rem;
+    }
+    &:hover {
+        padding-left: 3rem;
+        color: #009cd9;
+        text-decoration: underline;
+        text-underline-offset: 0.25rem;
+    }
+}
+
+.button {
+	padding: 0.75rem 2rem;
+	display: flex;
+	max-height: 3rem;
+	justify-content: left;
+	align-items: center;
+	color: #fff;
+	background: #009cd9;
+	text-decoration: none;
+	gap: 0.5rem;
+	font-size: 1.25rem;
+	transition: background 0.3s ease;
+	&:hover {
+		background: #005c80;
+	}
+}

@@ -1,0 +1,16 @@
+.button {
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #009CD9;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    font-weight: 600;
+
+    &:hover {
+        background-color: #005C80;
+    }
+}
