@@ -4,7 +4,7 @@ export const scrollToSection = (id: string) => {
 	const headerHeight = headerElement?.offsetHeight;
 
 	if (section && headerHeight) {
-		const scrollPosition = section.getBoundingClientRect().top + window.scrollY - headerHeight;
+		const scrollPosition = section.getBoundingClientRect().top + window.scrollY;
 		window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
 	}
 };
