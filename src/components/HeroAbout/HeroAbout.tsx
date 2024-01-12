@@ -19,6 +19,7 @@ const HeroAbout = () => {
 				<div className={styles.photo}></div>
 			</section>
 			<section className={styles.info}>
+				<div className={styles.logo}></div>
 				<div className={styles.info_wrapper}>
 					<h2 className={styles.goal}>
 						Наша мета - створити комфортне та безпечне середовище
@@ -50,7 +51,6 @@ const HeroAbout = () => {
 						</Link>
 					</div>
 				</div>
-				<div className={styles.logo}></div>
 			</section>
 		</>
 	);
