@@ -1,53 +1,75 @@
-import { Form, Link } from 'react-router-dom';
+import { ChangeEvent, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 import FormInput from '../../components/FormInput/FormInput';
-import SubmitBtn from '../../components/SubmitBtn/SubmitBtn';
+import { loginUser } from '../../services/fetchData';
 import styles from './Login.module.scss';
 
-// import { useNavigate } from 'react-router-dom';
-
 const Login: React.FC = () => {
-	// const navigate = useNavigate();
-
-	const guestLogin = async () => {
-		console.log('login');
+	const navigate = useNavigate();
+	const [email, setEmail] = useState('adminUser1@gmail.com');
+	const [password, setPassword] = useState('adminUser11!');
+	const [token, setToken] = useState<string | null>(null);
+	const login = (newToken: string) => {
+		setToken(newToken);
 	};
 
-	// const guestLogin = async () => {
-	// 	try {
-	// 		const response = await customFetch.post('/auth/local', {
-	// 			identifier: 'test@test.com',
-	// 			password: 'secret',
-	// 		});
-	// 		dispatch(loginUser(response.data));
-	// 		toast.success('Welcome, Guest');
-	// 		navigate('/');
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 		toast.error('Guest login error. Please try again');
-	// 	}
-	// };
+	const handleLogin = async () => {
+		try {
+			const { message, token_accsess } = await loginUser(email, password);
+
+			if (token_accsess) {
+				login(token_accsess);
+				console.log(message);
+				navigate('/admin');
+			} else {
+				console.error('The access token was not received');
+			}
+		} catch (error) {
+			console.error('Login Error:', error);
+		}
+	};
+
+	const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
+		setEmail(e.target.value);
+	};
+
+	const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+		setPassword(e.target.value);
+	};
+
+	console.log(token);
 
 	return (
 		<main className={styles.login}>
-			<Form method='POST' className={styles.form}>
+			<form className={styles.form}>
 				<h4>Вхід</h4>
 				<FormInput
-					type='email'
 					label='Електронна пошта'
-					name='identifier'
+					id='email'
+					value={email}
+					onChange={handleChangeEmail}
 				/>
-				<FormInput type='password' label='Пароль' name='password' />
-				<div className={styles.container} onClick={guestLogin}>
-					<SubmitBtn text='Увійти' />
-				</div>
+				<FormInput
+					label='Пароль'
+					id='password'
+					value={password}
+					onChange={handleChangePassword}
+				/>
+				<button
+					className={styles.button}
+					onClick={handleLogin}
+					type='button'
+				>
+					Увійти
+				</button>
 				<p className={styles.text}>
 					Ще не є адміном?
 					<Link to='/register' className={styles.link}>
 						Реєстрація
 					</Link>
 				</p>
-			</Form>
+			</form>
 		</main>
 	);
 };

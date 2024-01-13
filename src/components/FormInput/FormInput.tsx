@@ -2,17 +2,29 @@ import styles from './FormInput.module.scss';
 
 interface FormInputProps {
 	label: string;
-	name: string;
-	type: string;
+	id: string;
+	value: string;
+	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FormInput: React.FC<FormInputProps> = ({ label, name, type }) => {
+const FormInput: React.FC<FormInputProps> = ({
+	label,
+	id,
+	value,
+	onChange
+}) => {
 	return (
 		<div className={styles.form}>
-			<label className={styles.label}>
+			<label htmlFor={id} className={styles.label}>
 				<span className={styles.text}>{label}</span>
 			</label>
-			<input type={type} name={name} className={styles.input} />
+			<input
+				type={id}
+				id={id}
+				value={value}
+				onChange={onChange}
+				className={styles.input}
+			/>
 		</div>
 	);
 };
