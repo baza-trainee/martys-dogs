@@ -8,11 +8,10 @@
 	width: 100%;
 	height: 100%;
 	background: $color-gray-0;
+	z-index: 100;
 }
 
 .modal {
-	width: 353px;
-	height: 382px;
 	border-radius: 32px;
 	background: $color-main-blue-light;
 	position: absolute;
@@ -25,17 +24,7 @@
 	// transition: 0.5s;
 
 	@include tablet {
-		width: 600px;
-		height: 400px;
 		padding: 0px;
-	}
-	@include small-desktop {
-		width: 800px;
-		height: 500px;
-	}
-	@include large-desktop {
-		width: 1000px;
-		height: 600px;
 	}
 }
 
@@ -44,80 +33,13 @@
 	pointer-events: all;
 }
 
-.wrapper {
-	@include tablet {
-		display: flex;
-		flex-direction: row;
-		width: 100%;
-		height: 100%;
-	}
-}
-
-.thumb {
-	display: none;
-	@include tablet {
-		display: block;
-		width: 200px;
-		height: 400px;
-		background-image: url('../../assets/modal/768_1x.webp');
-		background-size: cover;
-	}
-	@include small-desktop {
-		width: 360px;
-		height: 500px;
-		background-image: url('../../assets//modal/1280_1x.webp');
-	}
-	@include large-desktop {
-		width: 360px;
-		height: 600px;
-		background-image: url('../../assets/modal/1440_1x.webp');
-	}
-	@include full_desktop {
-		background-image: url('../../assets//modal/1920_1x.webp');
-	}
-}
-
-@media (min-device-pixel-ratio: 2),
-	(min-resolution: 192dpi),
-	(min-resolution: 2dppx) {
-	.thumb {
-		@include tablet {
-			background-image: url('../../assets/modal/768_2x.webp');
-		}
-		@include small-desktop {
-			background-image: url('../../assets/modal/1280_2x.webp');
-		}
-		@include large-desktop {
-			background-image: url('../../assets/modal/1440_2x.webp');
-		}
-		@include full-desktop {
-			background-image: url('../../assets/modal/1920_2x.webp');
-		}
-	}
-}
-
-.text {
-	display: flex;
-	flex-direction: column;
-	padding: 24px;
-	@include tablet {
-		width: 400px;
-	}
-	@include small-desktop {
-		width: 440px;
-		padding: 32px;
-	}
-	@include large-desktop {
-		width: 640px;
-	}
-}
-
 .close {
 	width: 48px;
 	height: 48px;
 	padding: 12px;
-	margin-bottom: 8px;
-	align-self: flex-end;
+	position: absolute;
+	top: 24px;
+	right: 24px;
 	border-radius: 30px;
 	border: transparent;
 	color: $color-main-blue-mid;
@@ -126,60 +48,4 @@
 		color: $color-accent;
 		background: $color-main-bg;
 	}
-	@include small-desktop {
-		margin-bottom: 32px;
-	}
-	@include large-desktop {
-		margin-bottom: 64px;
-	}
-}
-
-.title {
-	margin-bottom: 16px;
-	font-weight: 800;
-	line-height: 1.2;
-	@include small-desktop {
-		margin-bottom: 32px;
-	}
-}
-
-.info {
-	margin-bottom: 16px;
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 1.4;
-	color: $color-main-blue-dark;
-	@include small-desktop {
-		font-size: 16px;
-	}
-	@include large-desktop {
-		margin-bottom: 16px;
-	}
-}
-
-.gratitude {
-	font-size: 14px;
-	font-weight: 700;
-	line-height: 1.4;
-	color: $color-gray-100;
-	margin-bottom: 24px;
-	@include small-desktop {
-		margin-bottom: 32px;
-	}
-	@include large-desktop {
-		margin-bottom: 40px;
-	}
-}
-
-.button {
-	width: 305px;
-	align-items: center;
-
-	@include tablet {
-		width: 334px;
-	}
-}
-
-.icon {
-	padding: 0;
 }

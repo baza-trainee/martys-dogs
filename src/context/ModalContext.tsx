@@ -10,10 +10,21 @@ interface ModalProviderProps {
 	children: ReactNode;
 }
 
-export const ModalContext = createContext<ModalContextType | undefined>(undefined);
+const initialModalContext = {
+	isModalOpen: false,
+	openModal: () => {},
+	closeModal: () => {},
+};
+
+// export const ModalContext = createContext<ModalContextType | undefined>(
+// 	undefined,
+// );
+
+export const ModalContext =
+	createContext<ModalContextType>(initialModalContext);
 
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
 	const openModal = () => {
 		setIsModalOpen(true);
 	};
