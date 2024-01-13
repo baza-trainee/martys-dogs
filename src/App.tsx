@@ -7,7 +7,6 @@ import Error from './pages/Error/Error';
 import HomeLayout from './layout/HomeLayout/HomeLayout';
 import Landing from './pages/Landing/Landing';
 import OurTails from './pages/OurTails/OurTails';
-import AppContextProvider from './components/AppContext/AppContext';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -45,11 +44,9 @@ const router = createBrowserRouter([
 
 const App = () => {
 	return (
-		<AppContextProvider>
-			<QueryClientProvider client={queryClient}>
-				<RouterProvider router={router} />
-			</QueryClientProvider>
-		</AppContextProvider>
+		<QueryClientProvider client={queryClient}>
+			<RouterProvider router={router} />
+		</QueryClientProvider>
 	);
 };
 
