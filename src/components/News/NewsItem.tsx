@@ -42,7 +42,7 @@ const NewsItem: React.FC<NewsItemProps> = ({
 				type={'button'}
 				name={t('news.button')}
 				btnClasses={'primary'}
-				onClick={() => console.log('to modal')}
+				onClick={() => console.log('to news')}
 			/>
 		</li>
 	);

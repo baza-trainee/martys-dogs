@@ -9,6 +9,7 @@
 	height: 100%;
 	background: $color-gray-0;
 }
+
 .modal {
 	width: 353px;
 	height: 382px;
@@ -20,6 +21,8 @@
 	transform: translate(-50%, -50%);
 	z-index: 999;
 	overflow: hidden;
+	pointer-events: none;
+	// transition: 0.5s;
 
 	@include tablet {
 		width: 600px;
@@ -34,6 +37,11 @@
 		width: 1000px;
 		height: 600px;
 	}
+}
+
+.active {
+	composes: modal;
+	pointer-events: all;
 }
 
 .wrapper {
@@ -51,21 +59,40 @@
 		display: block;
 		width: 200px;
 		height: 400px;
-		background-image: url('../../assets/donat/768_2x.webp');
+		background-image: url('../../assets/modal/768_1x.webp');
 		background-size: cover;
 	}
 	@include small-desktop {
 		width: 360px;
 		height: 500px;
-		background-image: url('../../assets/donat/1280_2x.webp');
+		background-image: url('../../assets//modal/1280_1x.webp');
 	}
 	@include large-desktop {
 		width: 360px;
 		height: 600px;
-		background-image: url('../../assets/donat/1400_2x.webp');
+		background-image: url('../../assets/modal/1440_1x.webp');
 	}
 	@include full_desktop {
-		background-image: url('../../assets/donat/1920_2x.webp');
+		background-image: url('../../assets//modal/1920_1x.webp');
+	}
+}
+
+@media (min-device-pixel-ratio: 2),
+	(min-resolution: 192dpi),
+	(min-resolution: 2dppx) {
+	.thumb {
+		@include tablet {
+			background-image: url('../../assets/modal/768_2x.webp');
+		}
+		@include small-desktop {
+			background-image: url('../../assets/modal/1280_2x.webp');
+		}
+		@include large-desktop {
+			background-image: url('../../assets/modal/1440_2x.webp');
+		}
+		@include full-desktop {
+			background-image: url('../../assets/modal/1920_2x.webp');
+		}
 	}
 }
 
@@ -144,24 +171,15 @@
 	}
 }
 
-.return {
-	display: flex;
-	justify-content: center;
+.button {
+	width: 305px;
 	align-items: center;
-	font-size: 20px;
-	text-decoration: none;
-	width: 100%;
-	height: 48px;
-	padding: 13px 24px;
-	border-radius: 30px;
-	border: transparent;
-	background: $color-accent;
-	color: $color-gray-0;
-	transition: background 0.3s ease;
-	&:hover {
-		background: $color-main-blue-dark;
-	}
-	@include large-desktop {
+
+	@include tablet {
 		width: 334px;
 	}
+}
+
+.icon {
+	padding: 0;
 }

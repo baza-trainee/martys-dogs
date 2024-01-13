@@ -20,6 +20,7 @@ const HeroAbout = () => {
 				<div className={styles.photo}></div>
 			</section>
 			<section className={styles.info}>
+				<div className={styles.logo}></div>
 				<div className={styles.info_wrapper}>
 					<h2 className={styles.goal}>
 						Наша мета - створити комфортне та безпечне середовище
@@ -44,14 +45,13 @@ const HeroAbout = () => {
 							<Button
 								name={'Подивитись всіх хвостиків'}
 								btnClasses={'primary'}
-								onClick={() => console.log('click')}
+								onClick={() => console.log('to tail')}
 								type={'button'}
 								children={<div className={styles.icon}></div>}
 							/>
 						</Link>
 					</div>
 				</div>
-				<div className={styles.logo}></div>
 			</section>
 		</>
 	);
