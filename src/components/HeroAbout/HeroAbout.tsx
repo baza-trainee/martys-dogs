@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './HeroAbout.module.scss';
 import Button from '../../layout/Button/Button';
+
 const HeroAbout = () => {
 	return (
 		<>
@@ -44,7 +45,7 @@ const HeroAbout = () => {
 							<Button
 								name={'Подивитись всіх хвостиків'}
 								btnClasses={'primary'}
-								onClick={() => console.log('click')}
+								onClick={() => console.log('to tail')}
 								type={'button'}
 								children={<div className={styles.icon}></div>}
 							/>

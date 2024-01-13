@@ -9,9 +9,9 @@ const Landing = () => {
 		<main>
 			<Hero />
 			<Video />
-			<Tails />
+			{/* <Tails /> */}
 			<Support />
-			<News />
+			{/* <News /> */}
 		</main>
 	);
 };

@@ -1,14 +1,16 @@
 import { FaAngleRight, FaXmark } from 'react-icons/fa6';
 import { createPortal } from 'react-dom';
-import { useEffect } from 'react';
+import { useEffect, Dispatch, SetStateAction } from 'react';
 import styles from './Modal.module.scss';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import Button from '../../layout/Button/Button';
 
 const modalElement = document.getElementById('modal-root') as Element;
 
 interface ModalProps {
 	// children: React.ReactNode;
 	isModal: boolean;
+	setIsModal: Dispatch<SetStateAction<boolean>>;
 }
 interface KeyboardEvent {
 	code: string;
@@ -23,16 +25,24 @@ interface KeyboardEvent {
 // 	),
 // modalElement,)};
 
-const Modal: React.FC<ModalProps> = ({ isModal }) => {
+const Modal: React.FC<ModalProps> = ({ isModal, setIsModal }) => {
+	const navigate = useNavigate();
+	const returnToHome = () => {
+		console.log(isModal);
+		console.log('click');
+		setIsModal(false);
+		navigate('/');
+	};
+
 	const handleBackdrop = (event: React.MouseEvent<HTMLElement>) => {
 		if (event.target === event.currentTarget) {
-			// setIsModal(false);
+			setIsModal(false);
 		}
 	};
 
 	const handleEscape = (event: KeyboardEvent) => {
 		if (event.code === 'Escape') {
-			// setIsModal(false);
+			setIsModal(false);
 		}
 	};
 
@@ -46,16 +56,16 @@ const Modal: React.FC<ModalProps> = ({ isModal }) => {
 	}, [isModal]);
 
 	return createPortal(
-		!isModal && (
+		isModal && (
 			<div className={styles.backdrop} onClick={handleBackdrop}>
-				<div className={styles.modal}>
+				<div className={isModal ? styles.active : styles.modal}>
 					<div className={styles.wrapper}>
 						<div className={styles.thumb}></div>
 						<div className={styles.text}>
 							<button
 								type='button'
 								className={styles.close}
-								// onClick={() => setIsModal(false)}
+								onClick={() => setIsModal(false)}
 							>
 								<FaXmark size='lg' />
 							</button>
@@ -69,10 +79,15 @@ const Modal: React.FC<ModalProps> = ({ isModal }) => {
 							<p className={styles.gratitude}>
 								Щиро дякуємо від усіх наших хвостатих друзів!
 							</p>
-							<Link to='/' className={styles.return}>
-								Повернутися на головну
-								<FaAngleRight />
-							</Link>
+							<div className={styles.button}>
+								<Button
+									name={'Повернутися на головну'}
+									btnClasses={'primary'}
+									onClick={returnToHome}
+									type={'button'}
+									children={<FaAngleRight />}
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
