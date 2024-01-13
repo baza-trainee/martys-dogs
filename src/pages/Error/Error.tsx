@@ -4,6 +4,7 @@ import Header from '../../layout/Header/Header';
 import Support from '../../components/Support/Support';
 
 const Error = () => {
+
 	return (
 		<>
 			<Header />
