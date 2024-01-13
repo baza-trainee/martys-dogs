@@ -14,7 +14,6 @@ export const ModalContext = createContext<ModalContextType | undefined>(undefine
 
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
 	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
 	const openModal = () => {
 		setIsModalOpen(true);
 	};

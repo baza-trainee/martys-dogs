@@ -21,10 +21,6 @@
 			text-align: center;
 		}
 
-		.container {
-			margin-top: 1.25rem;
-		}
-
 		.button {
 			text-transform: uppercase;
 			transition: background-color 0.3s;
@@ -61,4 +57,50 @@
 			}
 		}
 	}
+}
+
+.form {
+	margin-bottom: 1rem;
+}
+
+.label {
+	display: block;
+	font-size: 1rem;
+	margin-bottom: 0.25rem;
+}
+
+.text {
+	text-transform: capitalize;
+}
+
+.input {
+	width: 100%;
+	padding: 0.5rem;
+	font-size: 1rem;
+	border: 2px solid #ccc;
+	border-radius: 0.25rem;
+	transition: border-color 0.3s ease-in-out;
+
+	&:focus {
+		border-color: #4a90e2;
+		outline: none;
+	}
+}
+
+.button {
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+    width: 100%;
+    padding: 1rem;
+    background-color: #009CD9;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    margin-top: 1.25rem;
+
+    &:hover {
+        background-color: #005C80;
+    }
 }
