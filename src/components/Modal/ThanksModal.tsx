@@ -1,11 +1,13 @@
 import { FaAngleRight } from 'react-icons/fa6';
-import styles from './ThankthModal.module.scss';
+import styles from './ThanksModal.module.scss';
 import Button from '../../layout/Button/Button';
 // import { Link } from 'react-router-dom';
 import { useModalContext } from '../../context/useGlobalContext';
 import { useNavigate } from 'react-router-dom';
 
-const ThankthModal: React.FC = () => {
+const ThanksModal: React.FC = () => {
+	// const modalContext = useModalContext();
+	// const closeModal = modalContext?.closeModal || (() => {});
 	const { closeModal } = useModalContext();
 	const navigate = useNavigate();
 	const returnToHome = () => {
@@ -42,4 +44,4 @@ const ThankthModal: React.FC = () => {
 	);
 };
 
-export default ThankthModal;
+export default ThanksModal;

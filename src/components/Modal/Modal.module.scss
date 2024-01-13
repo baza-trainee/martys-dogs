@@ -12,8 +12,6 @@
 }
 
 .modal {
-	width: 353px;
-	height: 382px;
 	border-radius: 32px;
 	background: $color-main-blue-light;
 	position: absolute;
@@ -26,17 +24,7 @@
 	// transition: 0.5s;
 
 	@include tablet {
-		width: 600px;
-		height: 400px;
 		padding: 0px;
-	}
-	@include small-desktop {
-		width: 800px;
-		height: 500px;
-	}
-	@include large-desktop {
-		width: 1000px;
-		height: 600px;
 	}
 }
 

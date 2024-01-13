@@ -8,6 +8,10 @@ import { Outlet } from 'react-router-dom';
 import { useModalContext } from '../../context/useGlobalContext';
 
 const HomeLayout = () => {
+	// const modalContext = useModalContext();
+	// const isModalOpen = modalContext?.isModalOpen || false;
+	// const openModal = modalContext?.openModal || (() => {});
+	// const closeModal = modalContext?.closeModal || (() => {});
 	const { isModalOpen, openModal, closeModal } = useModalContext();
 	console.log(isModalOpen);
 	return (
