@@ -1,15 +1,15 @@
-import { FaPaw } from 'react-icons/fa6';
-
-import Button from '../../layout/Button/Button';
-import style from './FinancialSupport.module.scss';
 import {
+	whitePuppyDesktop1x,
+	whitePuppyDesktop2x,
 	whitePuppyMobile1x,
 	whitePuppyMobile2x,
 	whitePuppyTablet1x,
 	whitePuppyTablet2x,
-	whitePuppyDesktop1x,
-	whitePuppyDesktop2x,
 } from '../../assets/support';
+
+import Button from '../../layout/Button/Button';
+import { FaPaw } from 'react-icons/fa6';
+import style from './FinancialSupport.module.scss';
 
 const FinancialSupport = () => {
 	return (
