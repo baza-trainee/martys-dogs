@@ -1,20 +1,21 @@
 @use '/src/scss/variables' as *;
 @use '/src/scss/mixins' as *;
 
-
 .hero {
-  margin: auto;
-  width: 393px;
-  height: 640px;
   background-color: $color-main-blue-light;
+}
+
+.heroContainer {
+  background-color: transparent;
   display: flex;
-  align-items: center;
-  align-content: center;
-  padding: 40px 0 0 20px;
-  gap: 24px;
+  height: 1151px;
+  padding-top: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
   align-self: stretch;
-  flex-wrap: wrap;
-  justify-content: space-between;
+
 
   @include tablet {
     width: 768px;
@@ -48,12 +49,13 @@
 
 }
 
-.leftBlock {
+.textBlock {
   display: flex;
+  padding: 0 20px;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
-  width: 353px;
+  gap: 24px;
+  align-self: stretch;
 
   @include tablet {
     gap: 32px;
@@ -73,7 +75,7 @@
   }
 }
 
-.textBlock {
+.headingContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -85,7 +87,7 @@
 
 
   h1 {
-    font-size: 36px;
+    font-size: 32px;
     font-style: normal;
     font-weight: 900;
     line-height: 120%;
@@ -110,12 +112,22 @@
     }
   }
 
+
+}
+
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
+
   p {
-    color: $color-main-blue-dark;
-    font-style: normal;
-    line-height: 140%;
+    color: $color-gray-100;
     font-size: 14px;
+    font-style: normal;
     font-weight: 700;
+    line-height: 19.6px;
 
     @include tablet {
       font-size: 16px;
@@ -135,10 +147,60 @@
 
     }
   }
+
+  .list {
+    display: flex;
+    padding: 8px 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+
+
+    .listItem {
+      display: flex;
+      width: 200px;
+      align-items: center;
+      gap: 8px;
+
+      .listBubble {
+        border-radius: 30px;
+        background: $color-main-bg;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg:first-child {
+          transform: translateY(5px);
+          height: 14px;
+          width: 14px;
+          fill: $color-accent;
+        }
+
+        svg:last-child {
+          transform: translateY(-5px);
+          height: 14px;
+          width: 14px;
+          fill: $color-accent;
+        }
+      }
+
+      span {
+        color: $color-main-blue-dark;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 19.6px;
+      }
+    }
+
+  }
 }
 
-
-.btnWrapper {
+.btnContainer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,31 +221,26 @@
 
 
   svg:first-child {
-    transform: translateY(5px);
-    height: 11px;
-    width: 11px;
-    /*  @include tablet {
-        transform: translateY(7px);
-      }*/
+    transform: translateY(2px);
+    height: 14px;
+    width: 14px;
   }
 
   svg:last-child {
     transform: translateY(-5px);
-    height: 11px;
-    width: 11px;
-    /*   @include tablet {
-         transform: translateY(-6px) translateX(-3px);
-       }*/
+    height: 14px;
+    width: 14px;
   }
 
 }
 
-.rightBlock {
-  width: 374px;
-  height: 374px;
-  min-width: 353px;
-  background: url('../../assets/hero-home.webp') -252.826px -54.483px / 198.607% 118.541% no-repeat;
-
+.imageBlock {
+  width: 393px;
+  height: 427px;
+  background-image: url('../../assets/hero-home.webp')  ;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  background-size: cover;
 
 
   @include small_desktop {
