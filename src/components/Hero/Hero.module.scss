@@ -67,7 +67,8 @@
   }
 
   @include large_desktop {
-    //width: 657px;
+    width: 715px;
+    margin: 79px 0;
   }
 
   @include full_desktop {
@@ -279,7 +280,7 @@
   }
 
   @include large_desktop {
-
+    width: 605px;
   }
 
   @include full_desktop {
