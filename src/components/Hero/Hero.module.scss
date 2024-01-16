@@ -21,25 +21,25 @@
   }
 
   @include small_desktop {
-    width: 1280px;
-    height: 557px;
     padding: 0 0 0 100px;
-    gap: 0;
+    gap: 20px;
+    flex-direction: row;
+    align-items: center;
+    //height: 850px;
   }
   @include large_desktop {
-    width: 1440px;
-    height: 660px;
+    //width: 1440px;
+    //height: 660px;
   }
 
   @include full_desktop {
-    display: flex;
-    width: 1920px;
-    height: 760px;
-    padding: 0 0 0 100px;
-    justify-content: space-between;
-    align-items: center;
+    //display: flex;
+    //width: 1920px;
+    //height: 760px;
+    //padding: 0 0 0 100px;
+    //justify-content: space-between;
+    //align-items: center;
   }
-
 
 }
 
@@ -58,15 +58,20 @@
   }
 
   @include small_desktop {
+    padding: 0;
     gap: 48px;
-    width: 622px;
+    width: 650px;
+    margin: 43px 0;
+    justify-content: space-between;
+    align-items: flex-start;
   }
+
   @include large_desktop {
-    width: 657px;
+    //width: 657px;
   }
 
   @include full_desktop {
-    width: 664px;
+    //width: 664px;
   }
 }
 
@@ -89,8 +94,8 @@
 
 
     @include small_desktop {
-      font-size: 68px;
-      //width: 610px;
+      font-size: 56px;
+      line-height: 67.2px;
     }
 
     @include large_desktop {
@@ -98,7 +103,7 @@
     }
 
     @include full_desktop {
-      font-size: 68px;
+      //font-size: 68px;
 
     }
   }
@@ -127,9 +132,8 @@
 
 
     @include small_desktop {
-      font-size: 16px;
-      font-weight: 500;
-      //width: 600px;
+      font-size: 20px;
+      line-height: 28px;
     }
     @include large_desktop {
 
@@ -158,6 +162,16 @@
       .list > div {
         flex: 50%;
       }
+    }
+
+    @include small_desktop {
+
+      /*     flex-wrap: wrap;
+           flex-direction: row;
+           justify-content: space-between;
+           .list > div {
+             flex: 50%;
+           }*/
     }
 
     .listItem {
@@ -213,13 +227,17 @@
     width: 100%;
   }
 
+  @include small_desktop {
+    width: 293px;
+    margin: 0;
+  }
 
   @include large_desktop {
 
   }
 
   @include full_desktop {
-    width: 445px;
+    //width: 445px;
   }
 
 
@@ -227,12 +245,20 @@
     transform: translateY(2px);
     height: 14px;
     width: 14px;
+    @include small_desktop {
+      height: 11px;
+      width: 11px;
+    }
   }
 
   svg:last-child {
     transform: translateY(-5px);
     height: 14px;
     width: 14px;
+    @include small_desktop {
+      height: 11px;
+      width: 11px;
+    }
   }
 
 }
@@ -247,9 +273,11 @@
   }
 
   @include small_desktop {
-
-
+    width: 510px;
+    height: 850px;
+    background-position: 40%;
   }
+
   @include large_desktop {
 
   }
