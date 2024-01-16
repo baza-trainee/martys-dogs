@@ -1,6 +1,7 @@
 import Button from '../../layout/Button/Button';
 import { FaPaw } from 'react-icons/fa6';
 import styles from './Hero.module.scss';
+import { scrollToSection } from '../../services/scrollTo';
 
 const Hero = () => {
 	return (
@@ -63,7 +64,7 @@ const Hero = () => {
 							name={'Підтримати хвостиків'}
 							onClick={() => {
 								console.log('click');
-								// scrollToSection('ourTails');
+								scrollToSection('ourTails');
 							}
 
 							}
