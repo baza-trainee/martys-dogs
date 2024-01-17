@@ -71,7 +71,7 @@ const Tails: React.FC = () => {
 	};
 
 	return (
-		<section className={styles.tails}>
+		<section id='ourTails' className={styles.tails}>
 			<div className={styles.title}>
 				<h2>Познайомся з нашими хвостиками</h2>
 				<Link to='tails' className={styles.link}>

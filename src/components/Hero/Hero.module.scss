@@ -1,79 +1,69 @@
 @use '/src/scss/variables' as *;
 @use '/src/scss/mixins' as *;
 
-
 .hero {
-  margin: auto;
-  width: 393px;
-  height: 640px;
   background-color: $color-main-blue-light;
+}
+
+.heroContainer {
+  background-color: transparent;
   display: flex;
-  align-items: center;
-  align-content: center;
-  padding: 40px 0 0 20px;
-  gap: 24px;
+  padding-top: 40px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
   align-self: stretch;
-  flex-wrap: wrap;
-  justify-content: space-between;
 
   @include tablet {
-    width: 768px;
-    height: 374px;
-    padding: 0 0 0 32px;
-    flex-wrap: nowrap;
-    gap: 20px;
-
+    align-items: center;
+    padding-top: 80px;
   }
 
   @include small_desktop {
-    width: 1280px;
-    height: 557px;
     padding: 0 0 0 100px;
-    gap: 0;
-  }
-  @include large_desktop {
-    width: 1440px;
-    height: 660px;
-  }
-
-  @include full_desktop {
-    display: flex;
-    width: 1920px;
-    height: 760px;
-    padding: 0 0 0 100px;
-    justify-content: space-between;
+    gap: 20px;
+    flex-direction: row;
     align-items: center;
   }
 
-
-}
-
-.leftBlock {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  width: 353px;
-
-  @include tablet {
-    gap: 32px;
-    width: 342px;
-  }
-
-  @include small_desktop {
-    gap: 48px;
-    width: 622px;
-  }
-  @include large_desktop {
-    width: 657px;
-  }
-
-  @include full_desktop {
-    width: 664px;
-  }
 }
 
 .textBlock {
+  display: flex;
+  padding: 0 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+
+  @include tablet {
+    padding: 0 32px;
+    align-items: center;
+    gap: 48px;
+  }
+
+  @include small_desktop {
+    padding: 0;
+    gap: 48px;
+    width: 650px;
+    margin: 43px 0;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  @include large_desktop {
+    width: 715px;
+    margin: 79px 0;
+  }
+
+  @include full_desktop {
+    width: 850px;
+    margin: 129.5px 0;
+  }
+}
+
+.headingContainer {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -85,126 +75,174 @@
 
 
   h1 {
-    font-size: 36px;
+    font-size: 32px;
     font-style: normal;
     font-weight: 900;
-    line-height: 120%;
-
-
-    @include tablet {
-
-    }
+    line-height: 38.4px;
 
     @include small_desktop {
-      font-size: 68px;
-      //width: 610px;
+      font-size: 56px;
+      line-height: 67.2px;
     }
+  }
 
-    @include large_desktop {
 
-    }
+}
 
-    @include full_desktop {
-      font-size: 68px;
+.contentContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  align-self: stretch;
 
-    }
+  @include tablet {
+    gap: 32px;
   }
 
   p {
-    color: $color-main-blue-dark;
-    font-style: normal;
-    line-height: 140%;
+    color: $color-gray-100;
     font-size: 14px;
+    font-style: normal;
     font-weight: 700;
-
-    @include tablet {
-      font-size: 16px;
-    }
+    line-height: 19.6px;
 
     @include small_desktop {
-      font-size: 16px;
-      font-weight: 500;
-      //width: 600px;
+      font-size: 20px;
+      line-height: 28px;
     }
-    @include large_desktop {
 
+  }
+
+  .list {
+    display: flex;
+    padding: 8px 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    align-self: stretch;
+
+    @include tablet {
+      padding: 8px 80px;
+      flex-wrap: wrap;
+      flex-direction: row;
+      justify-content: space-between;
+      .list > div {
+        flex: 50%;
+      }
     }
+
 
     @include full_desktop {
-
-
+      padding: 0;
     }
+
+
+    .listItem {
+      display: flex;
+      width: 200px;
+      align-items: center;
+      gap: 8px;
+
+      .listBubble {
+        border-radius: 30px;
+        background: $color-main-bg;
+        min-width: 40px;
+        min-height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        svg:first-child {
+          transform: translateY(5px);
+          height: 14px;
+          width: 14px;
+          fill: $color-accent;
+        }
+
+        svg:last-child {
+          transform: translateY(-5px);
+          height: 14px;
+          width: 14px;
+          fill: $color-accent;
+        }
+      }
+
+      span {
+        color: $color-main-blue-dark;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 19.6px;
+
+        @include small_desktop {
+          font-size: 20px;
+          line-height: 28px;
+        }
+      }
+    }
+
   }
 }
 
-
-.btnWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.btnContainer {
+  margin: auto;
   width: 353px;
 
   @include tablet {
-    width: 261px;
+    width: 100%;
   }
 
-
-  @include large_desktop {
-
-  }
-
-  @include full_desktop {
-    width: 445px;
+  @include small_desktop {
+    width: 293px;
+    margin: 0;
   }
 
 
   svg:first-child {
-    transform: translateY(5px);
-    height: 11px;
-    width: 11px;
-    /*  @include tablet {
-        transform: translateY(7px);
-      }*/
+    transform: translateY(2px);
+    height: 14px;
+    width: 14px;
+    @include small_desktop {
+      height: 11px;
+      width: 11px;
+    }
   }
 
   svg:last-child {
     transform: translateY(-5px);
-    height: 11px;
-    width: 11px;
-    /*   @include tablet {
-         transform: translateY(-6px) translateX(-3px);
-       }*/
+    height: 14px;
+    width: 14px;
+    @include small_desktop {
+      height: 11px;
+      width: 11px;
+    }
   }
 
 }
 
-.rightBlock {
-  width: 374px;
-  height: 374px;
-  min-width: 353px;
-  background: url('../../assets/hero-home.webp') -252.826px -54.483px / 198.607% 118.541% no-repeat;
+.imageBlock {
+  width: 100%;
+  height: 427px;
+  background: url('../../assets/hero-home.webp') no-repeat 50% / cover lightgray;
 
-
+  @include tablet {
+    height: 591px;
+  }
 
   @include small_desktop {
-    width: 558px;
-    height: 557px;
-    background: url('../../assets/hero-home.webp') -390.826px  -124.483px  / 198.607% 128.541% no-repeat;
-
+    width: 510px;
+    height: 850px;
+    background-position: 40%;
   }
+
   @include large_desktop {
-    width: 710px;
-    height: 660px;
-    background: url('../../assets/hero-home.webp') -430.826px   -134.483px / 175.607% 128.541% no-repeat;
+    width: 605px;
   }
 
   @include full_desktop {
-    width: 1178px;
-    height: 762px;
-    background: url('../../assets/hero-home.webp') -702.826px -194.483px / 168.607% 159.541% no-repeat;
-
-
+    width: 950px;
   }
-
 
 }
