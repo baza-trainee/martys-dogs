@@ -1,13 +1,18 @@
 import NewsItem, { NewsItemProps } from './NewsItem';
 
+import { LandingData } from '../../pages/Landing/Landing';
+import { UseQueryResult } from '@tanstack/react-query';
 import styles from './News.module.scss';
 import { useTranslation } from 'react-i18next';
 
 // import { news } from './data';
 
 
+interface NewsProps {
+	data: UseQueryResult<LandingData, Error>;
+}
 
-const News: React.FC = ({ data }) => {
+const News: React.FC<NewsProps> = ({ data }) => {
 	const { t } = useTranslation();
 
 	const { data: news, isPending, isError, error } = data;

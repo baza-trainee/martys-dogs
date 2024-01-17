@@ -6,7 +6,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Tail, { TailProps } from '../Tail/Tail';
 
 import { FaAngleRight } from 'react-icons/fa6';
+import { LandingData } from '../../pages/Landing/Landing';
 import { Link } from 'react-router-dom';
+import { UseQueryResult } from '@tanstack/react-query';
 import styles from './Tails.module.scss';
 
 interface Pagination {
@@ -33,7 +35,11 @@ const breakpoints = {
 	},
 };
 
-const Tails: React.FC = ({ data }) => {
+interface TailsProps {
+	data: UseQueryResult<LandingData, Error>;
+}
+
+const Tails: React.FC<TailsProps> = ({ data }) => {
 	const { data: tails, isPending, isError, error } = data;
 
 	if (isPending) {

@@ -12,9 +12,44 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
+interface Photo {
+	id: string;
+	name: string;
+	url: string;
+	category: string;
+}
+
+interface NewsItem {
+	id: number;
+	title: string;
+	post_at: string;
+	update_at: string;
+	sub_text: string;
+	url: string;
+	photo: Photo;
+}
+
+interface DogCard {
+	id: number;
+	name: string;
+	ready_for_adoption: boolean;
+	gender: string;
+	age: string;
+	sterilization: boolean;
+	vaccination_parasite_treatment: boolean;
+	size: string;
+	description: string;
+	photo: Photo;
+}
+
+export interface LandingData {
+	news_data: NewsItem[];
+	dog_cards: DogCard[];
+}
+
 const Landing = () => {
 	const location = useLocation();
-	const data = useQuery({
+	const data = useQuery<LandingData>({
 		queryKey: ['tails'],
 		queryFn: fetchHome,
 		refetchInterval: 600000,
@@ -35,7 +70,7 @@ const Landing = () => {
 			<Tails data={data} />
 			<Partners />
 			<Support />
-			<News data={data}/>
+			<News data={data} />
 		</main>
 	);
 };

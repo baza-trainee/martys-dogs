@@ -1,9 +1,15 @@
+import { LandingData } from '../../pages/Landing/Landing';
+import { UseQueryResult } from '@tanstack/react-query';
 import styles from './Catalog.module.scss';
 
-const Catalog = ({ data }) => {
+interface TailsProps {
+	data: UseQueryResult<LandingData, Error>;
+}
+
+const Catalog: React.FC<TailsProps> = ({ data }) => {
 	const { data: tails, isPending, isError, error } = data;
 
-	console.log(tails.dog_cards);
+	console.log(tails?.dog_cards);
 	
 	if (isPending) {
 		return (
