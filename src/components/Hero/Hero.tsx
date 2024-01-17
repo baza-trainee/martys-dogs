@@ -62,11 +62,7 @@ const Hero = () => {
 							btnClasses={'primary'}
 							type={'button'}
 							name={'Підтримати хвостиків'}
-							onClick={() => {
-								console.log('Button will scroll to section Tails when data will come back from server');
-								scrollToSection('support');
-							}
-							}
+							onClick={() => scrollToSection('support')}
 							children={
 								<div>
 									<FaPaw />
