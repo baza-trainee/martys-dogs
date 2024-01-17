@@ -1,0 +1,277 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+$videoContainerPadding1280: 100px;
+$videoContainerPadding768: 80px 32px;
+$videoContainerPadding393: 40px 20px;
+
+$playButtonSize: 100px;
+
+$pawImgSize393: 120px;
+$pawImgSize768: 80px;
+$pawImgSize1280: 120px;
+$pawImgSize1440: 100px;
+$pawImgSize1920: 120px;
+
+$videoInfoTitleSize393: 28px;
+$videoInfoTitleSize1280: 42px;
+
+.videoContainerWrapper {
+	display: grid;
+	place-items: center;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	&.main {
+		background-color: $color-gray-0;
+	}
+
+	&.therapy {
+		background-color: $color-main-bg;
+	}
+
+	.videoContainer {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
+		box-sizing: border-box;
+		position: relative;
+
+		padding: $videoContainerPadding393;
+		color: $color-gray-100;
+
+		@include tablet {
+			padding: $videoContainerPadding768;
+			gap: 48px;
+		}
+
+		@include small_desktop {
+			padding: $videoContainerPadding1280;
+			width: 1280px;
+		}
+
+		@include large_desktop {
+			flex-direction: row;
+			width: auto;
+		}
+
+		@include full_desktop {
+			width: 1920px;
+		}
+
+		&.main {
+			background-color: $color-gray-0;
+			@include tablet {
+				flex-direction: column-reverse;
+			}
+			@include small_desktop {
+				flex-direction: column;
+			}
+			@include large_desktop {
+				flex-direction: row;
+			}
+		}
+
+		&.therapy {
+			background-color: $color-main-bg;
+		}
+
+		.videoPlayer {
+			position: relative;
+
+			@include large_desktop {
+				align-self: auto;
+			}
+
+			@include full_desktop {
+				align-self: center;
+			}
+
+			@keyframes rotation {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
+
+			.posterOverlay {
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				&.disappear {
+					opacity: 0;
+				}
+
+				.playButtonImage {
+					position: absolute;
+					width: $playButtonSize;
+					height: $playButtonSize;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					transition: all 0.3s ease-in-out;
+					cursor: pointer;
+				}
+
+				.posterImage {
+					max-width: 100%;
+					height: auto;
+
+					@include large_desktop {
+						max-width: none;
+					}
+				}
+			}
+
+			.videoElement {
+				position: absolute;
+				z-index: 1;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: auto;
+			}
+
+			.showControls {
+				display: block;
+			}
+		}
+	}
+
+	.textContainer {
+		@include tablet {
+			position: relative;
+			margin-bottom: 24px;
+		}
+
+		@include small_desktop {
+			position: unset;
+			margin-bottom: 0;
+			
+		}
+
+		.videoTitle {
+			margin-bottom: 16px;
+			line-height: 120%;
+			font-size: $videoInfoTitleSize393;
+
+			@include tablet {
+				margin: 24px 0 32px 0;
+			}
+
+			@include small_desktop {
+				margin-top: 0;
+				margin-bottom: 32px;
+				font-size: $videoInfoTitleSize1280;
+			}
+
+			@include large_desktop {
+				padding-right: 100px;
+			}
+
+			@include full_desktop {
+				padding-right: 200px;
+			}
+		}
+
+		.videoDescription {
+			margin-bottom: 16px;
+			word-wrap: break-word;
+			line-height: 140%;
+
+			@include small_desktop {
+				font-size: 20px;
+			}
+
+			&:first-of-type {
+				margin-bottom: 24px;
+				font-size: 14px;
+				font-weight: 700;
+
+				@include tablet {
+					margin-bottom: 48px;
+				}
+
+				@include small_desktop {
+					margin-bottom: 24px;
+					font-size: 20px;
+				}
+			}
+
+			&:not(:first-of-type) {
+				@include tablet {
+					margin-bottom: 0;
+				}
+				@include small_desktop {
+					margin-bottom: 16px;
+				}
+			}
+
+			&:last-of-type {
+				margin-bottom: 32px;
+				@include tablet {
+					margin-bottom: 0;
+				}
+				
+				&.main {
+					@include small_desktop {
+						margin-bottom: 32px;
+					}
+				}
+			}
+		}
+
+		.pawImage {
+			width: $pawImgSize393;
+			height: $pawImgSize393;
+
+			@include tablet {
+				width: $pawImgSize768;
+				height: $pawImgSize768;
+			}
+
+			@include small_desktop {
+				width: $pawImgSize1280;
+				height: $pawImgSize1280;
+			}
+
+			@include full_desktop {
+				width: $pawImgSize1920;
+				height: $pawImgSize1920;
+			}
+
+			&.main {
+				float: right;
+
+				@include tablet {
+					position: absolute;
+					right: 5%;
+					bottom: -22%;
+				}
+				@include small_desktop {
+					position: unset;
+				}
+			}
+			&.therapy {
+				@include tablet {
+					display: none;
+				}
+
+				@include large_desktop {
+					display: block;
+					position: absolute;
+					right: 45%;
+					bottom: 1%;
+				}
+
+				@include full_desktop {
+					right: 50%;
+				}
+			}
+		}
+	}
+}

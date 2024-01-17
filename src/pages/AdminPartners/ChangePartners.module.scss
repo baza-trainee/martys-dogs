@@ -1,0 +1,50 @@
+.container {
+    max-width: 600px;
+    
+    padding: 20px;
+  }
+  
+  .inputRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  
+    .inputContainer {
+      flex: 1;
+      margin-right: 10px;
+
+      .uploadLabel {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    
+        .uploadIcon {
+          margin-right: 8px;
+        }
+       
+      }
+      input[type="file"] {
+        display: none; 
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+  
+      input {
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+      }
+    }
+  }
+  
+  .buttonRow {
+    display: flex;
+    gap: 24px;
+  
+    button {
+      padding: 10px;
+      cursor: pointer;
+    }
+  }
