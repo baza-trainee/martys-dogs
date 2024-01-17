@@ -19,14 +19,6 @@ interface KeyboardEvent {
 }
 
 const Modal: React.FC<ModalProps> = ({ isModal, closeModal, children }) => {
-	// const navigate = useNavigate();
-	// const returnToHome = () => {
-	// 	console.log(isModal);
-	// 	console.log('click');
-	// 	closeModal();
-	// 	navigate('/');
-	// };
-
 	const handleBackdrop = (event: React.MouseEvent<HTMLElement>) => {
 		if (event.target === event.currentTarget) {
 			closeModal();
