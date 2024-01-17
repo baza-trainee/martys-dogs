@@ -1,11 +1,18 @@
 import Catalog from '../../components/Catalog/Catalog';
 import HeroOurTails from '../../components/HeroOurTails/HeroOurTails';
-import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { fetchHome } from '../../services/fetchData';
 import { scrollOnTop } from '../../services/scrollTo';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 
 const OurTails = () => {
 	const location = useLocation();
+	const data = useQuery({
+		queryKey: ['tails'],
+		queryFn: fetchHome,
+		refetchInterval: 600000,
+	});
 
 	useEffect(() => {
 		location.pathname === '/tails' ? scrollOnTop() : null;
@@ -14,7 +21,7 @@ const OurTails = () => {
 	return (
 		<>
 			<HeroOurTails />
-			<Catalog />
+			<Catalog data={data} />
 		</>
 	);
 };

@@ -1,28 +1,18 @@
 import NewsItem, { NewsItemProps } from './NewsItem';
 
-import { fetchNews } from '../../services/fetchData';
 import styles from './News.module.scss';
-import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 
 // import { news } from './data';
 
 
 
-
-const News: React.FC = () => {
+const News: React.FC = ({ data }) => {
 	const { t } = useTranslation();
+
+	const { data: news, isPending, isError, error } = data;
 	
-	const {
-		data: news,
-		isPending,
-		isError,
-		error,
-	} = useQuery({
-		queryKey: ['news'],
-		queryFn: fetchNews,
-		refetchInterval: 600000,
-	});
+	console.log(news?.news_data);
 
 	if (isPending) {
 		return (
@@ -44,7 +34,7 @@ const News: React.FC = () => {
 		<section className={styles.section}>
 			<h2 className={styles.title}>{t('news.title')}</h2>
 			<ul className={styles.news}>
-				{news.map((item: NewsItemProps) => (
+				{news?.news_data?.map((item: NewsItemProps) => (
 					<NewsItem key={item.id} {...item} />
 				))}
 			</ul>

@@ -7,9 +7,7 @@ import Tail, { TailProps } from '../Tail/Tail';
 
 import { FaAngleRight } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
-import { fetchTails } from '../../services/fetchData';
 import styles from './Tails.module.scss';
-import { useQuery } from '@tanstack/react-query';
 
 interface Pagination {
 	clickable: boolean;
@@ -35,17 +33,8 @@ const breakpoints = {
 	},
 };
 
-const Tails: React.FC = () => {
-	const {
-		data: tails,
-		isPending,
-		isError,
-		error,
-	} = useQuery({
-		queryKey: ['tails'],
-		queryFn: fetchTails,
-		refetchInterval: 600000,
-	});
+const Tails: React.FC = ({ data }) => {
+	const { data: tails, isPending, isError, error } = data;
 
 	if (isPending) {
 		return (
@@ -88,7 +77,7 @@ const Tails: React.FC = () => {
 				navigation={true}
 				modules={[Pagination, Navigation]}
 			>
-				{tails?.map((tail: TailProps) => (
+				{tails?.dog_cards?.map((tail: TailProps) => (
 					<SwiperSlide key={tail.id}>
 						<Tail {...tail} />
 					</SwiperSlide>
