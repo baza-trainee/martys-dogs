@@ -8,7 +8,8 @@ export interface NewsItemProps {
 	post_at: string;
 	update_at: string;
 	sub_text: string;
-	Text: string;
+	url: string;
+	// Text: string;
 	photo: {
 		id: string;
 		name: string;
@@ -23,8 +24,9 @@ const NewsItem: React.FC<NewsItemProps> = ({
 	post_at,
 	// update_at,
 	// sub_text,
-	Text,
+	// Text,
 	photo,
+	url
 }) => {
 	const { t } = useTranslation();
 
@@ -36,7 +38,7 @@ const NewsItem: React.FC<NewsItemProps> = ({
 			<div className={styles.info}>
 				<h3 className={styles.title}>{title}</h3>
 				<p className={styles.date}>{post_at}</p>
-				<p className={styles.text}>{Text}</p>
+				<p className={styles.text}>{url}</p>
 			</div>
 			<Button
 				type={'button'}

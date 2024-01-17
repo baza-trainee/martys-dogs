@@ -1,19 +1,16 @@
-import { fetchTails } from '../../services/fetchData';
+import { LandingData } from '../../pages/Landing/Landing';
+import { UseQueryResult } from '@tanstack/react-query';
 import styles from './Catalog.module.scss';
-import { useQuery } from '@tanstack/react-query';
 
-const Catalog = () => {
-	const {
-		data: tails,
-		isPending,
-		isError,
-		error,
-	} = useQuery({
-		queryKey: ['tails'],
-		queryFn: fetchTails,
-		refetchInterval: 600000,
-	});
+interface TailsProps {
+	data: UseQueryResult<LandingData, Error>;
+}
 
+const Catalog: React.FC<TailsProps> = ({ data }) => {
+	const { data: tails, isPending, isError, error } = data;
+
+	console.log(tails?.dog_cards);
+	
 	if (isPending) {
 		return (
 			<div className={styles.container}>
@@ -29,8 +26,6 @@ const Catalog = () => {
 			</div>
 		);
 	}
-
-	console.log(tails);
 
 	return (
 		<div>

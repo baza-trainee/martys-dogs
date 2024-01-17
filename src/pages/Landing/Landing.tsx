@@ -1,17 +1,59 @@
+import { scrollOnTop, scrollToSection } from '../../services/scrollTo';
+
+import CanisTherapy from '../../components/VideoHomePage/canisTherapy/CanisTherapy';
 import Hero from '../../components/Hero/Hero';
+import MainVideo from '../../components/VideoHomePage/mainVideo/MainVideo';
 import News from '../../components/News/News';
+import Partners from '../../components/Partners/Partners';
 import Support from '../../components/Support/Support';
 import Tails from '../../components/Tails/Tails';
-import Partners from '../../components/Partners/Partners';
-import { useLocation } from 'react-router-dom';
+import { fetchHome } from '../../services/fetchData';
 import { useEffect } from 'react';
-import { scrollOnTop, scrollToSection } from '../../services/scrollTo';
-import MainVideo from '../../components/VideoHomePage/mainVideo/MainVideo';
-import CanisTherapy from '../../components/VideoHomePage/canisTherapy/CanisTherapy';
+import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+
+interface Photo {
+	id: string;
+	name: string;
+	url: string;
+	category: string;
+}
+
+interface NewsItem {
+	id: number;
+	title: string;
+	post_at: string;
+	update_at: string;
+	sub_text: string;
+	url: string;
+	photo: Photo;
+}
+
+interface DogCard {
+	id: number;
+	name: string;
+	ready_for_adoption: boolean;
+	gender: string;
+	age: string;
+	sterilization: boolean;
+	vaccination_parasite_treatment: boolean;
+	size: string;
+	description: string;
+	photo: Photo;
+}
+
+export interface LandingData {
+	news_data: NewsItem[];
+	dog_cards: DogCard[];
+}
 
 const Landing = () => {
-
 	const location = useLocation();
+	const data = useQuery<LandingData>({
+		queryKey: ['tails'],
+		queryFn: fetchHome,
+		refetchInterval: 600000,
+	});
 
 	useEffect(() => {
 		//If we click go to section  - scroll to the section
@@ -22,13 +64,13 @@ const Landing = () => {
 
 	return (
 		<main>
-			<Hero/>
-			<MainVideo/>
-			<CanisTherapy/>
-			<Tails />
-			<Partners/>
+			<Hero />
+			<MainVideo />
+			<CanisTherapy />
+			<Tails data={data} />
+			<Partners />
 			<Support />
-			<News />
+			<News data={data} />
 		</main>
 	);
 };
