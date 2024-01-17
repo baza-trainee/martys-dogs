@@ -64,7 +64,7 @@ const Hero = () => {
 							name={'Підтримати хвостиків'}
 							onClick={() => {
 								console.log('Button will scroll to section Tails when data will come back from server');
-								scrollToSection('ourTails');
+								scrollToSection('support');
 							}
 							}
 							children={
