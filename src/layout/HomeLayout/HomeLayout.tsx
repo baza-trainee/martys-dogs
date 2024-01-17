@@ -1,5 +1,5 @@
 import Modal from '../../components/Modal/Modal';
-import ThanksModal from '../../components/Modal/ThanksModal';
+// import ThanksModal from '../../components/Modal/ThanksModal';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import { Outlet } from 'react-router-dom';
