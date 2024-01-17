@@ -25,6 +25,7 @@ const About = () => {
 			<VideoAboutShelter />
 			<Partners/>
 			<Photos />
+			<Partners/>
 			<Support />
 		</main>
 	);

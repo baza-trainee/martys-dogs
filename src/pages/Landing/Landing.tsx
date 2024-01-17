@@ -2,10 +2,12 @@ import Hero from '../../components/Hero/Hero';
 import News from '../../components/News/News';
 import Support from '../../components/Support/Support';
 import Tails from '../../components/Tails/Tails';
-import Video from '../../components/Video/Video';
+import Partners from '../../components/Partners/Partners';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { scrollOnTop, scrollToSection } from '../../services/scrollTo';
+import MainVideo from '../../components/VideoHomePage/mainVideo/MainVideo';
+import CanisTherapy from '../../components/VideoHomePage/canisTherapy/CanisTherapy';
 
 const Landing = () => {
 
@@ -20,9 +22,11 @@ const Landing = () => {
 
 	return (
 		<main>
-			<Hero />
-			<Video />
+			<Hero/>
+			<MainVideo/>
+			<CanisTherapy/>
 			<Tails />
+			<Partners/>
 			<Support />
 			<News />
 		</main>
