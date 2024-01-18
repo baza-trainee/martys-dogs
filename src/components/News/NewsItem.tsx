@@ -9,7 +9,6 @@ export interface NewsItemProps {
 	update_at: string;
 	sub_text: string;
 	url: string;
-	// Text: string;
 	photo: {
 		id: string;
 		name: string;
@@ -23,12 +22,33 @@ const NewsItem: React.FC<NewsItemProps> = ({
 	title,
 	post_at,
 	// update_at,
-	// sub_text,
-	// Text,
+	sub_text,
 	photo,
-	url
+	url,
 }) => {
 	const { t } = useTranslation();
+	const months: { [key: string]: string } = {
+		січень: 'січня',
+		лютий: 'лютого',
+		березень: 'березня',
+		квітень: 'квітня',
+		травень: 'травня',
+		червень: 'червня',
+		липень: 'липня',
+		серпень: 'серпня',
+		вересень: 'вересня',
+		жовтень: 'жовтня',
+		листопад: 'листопада',
+		грудень: 'грудня',
+	};
+
+	const getDateName = (data: string) => {
+		const date = new Date(data);
+		const monthFromDate = date.toLocaleString('uk-UA', { month: 'long' });
+		const changedMonth = months[monthFromDate];
+		const stringDate = `${date.getDate()} ${changedMonth} ${date.getFullYear()}`;
+		return stringDate;
+	};
 
 	return (
 		<li className={styles.item}>
@@ -37,15 +57,17 @@ const NewsItem: React.FC<NewsItemProps> = ({
 			</div>
 			<div className={styles.info}>
 				<h3 className={styles.title}>{title}</h3>
-				<p className={styles.date}>{post_at}</p>
-				<p className={styles.text}>{url}</p>
+				<p className={styles.date}>{getDateName(post_at)}</p>
+				<p className={styles.text}>{sub_text}</p>
 			</div>
-			<Button
-				type={'button'}
-				name={t('news.button')}
-				btnClasses={'primary'}
-				onClick={() => console.log('to news')}
-			/>
+			<a href={url} target='blank' rel='noopener noreferrer'>
+				<Button
+					type={'button'}
+					name={t('news.button')}
+					btnClasses={'primary'}
+					onClick={() => console.log('to news')}
+				/>
+			</a>
 		</li>
 	);
 };

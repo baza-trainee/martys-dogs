@@ -111,6 +111,10 @@
 .return {
 	width: 305px;
 	align-items: center;
+	& > button {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
 
 	@include tablet {
 		width: 334px;
@@ -121,7 +125,12 @@
 	padding: 0;
 }
 
-// .arrow {
-// 	width: 19px;
-// 	height: 19px;
-// }
+.arrow {
+	width: 24px;
+	height: 24px;
+}
+
+.cv {
+	padding-left: 16px;
+	padding-right: 16px;
+}

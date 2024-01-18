@@ -28,8 +28,7 @@ const ThanksModal: React.FC = () => {
 				<p className={styles.gratitude}>
 					Щиро дякуємо від усіх наших хвостатих друзів!
 				</p>
-				<div className={styles.button}>
-					{/* <Link to='/'> */}
+				<div className={styles.return}>
 					<Button
 						name={'Повернутися на головну'}
 						btnClasses={'primary'}
@@ -37,7 +36,6 @@ const ThanksModal: React.FC = () => {
 						type={'button'}
 						children={<FaAngleRight />}
 					/>
-					{/* </Link> */}
 				</div>
 			</div>
 		</div>
