@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 
-const OurTails = () => {
+const OurTails: React.FC = () => {
 	const location = useLocation();
 	const data = useQuery({
 		queryKey: ['tails'],

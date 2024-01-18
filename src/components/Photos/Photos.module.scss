@@ -8,9 +8,16 @@
 	@media screen and (max-width: 768px) {
 		padding: 20px 40px;
 	}
-}
 
-.title {
-    text-align: start;
-    margin-bottom: 40px;
+	.image {
+		width:550px;
+		height: 550px;
+		object-fit: cover;
+		border-radius: 30px;
+	}
+
+	.title {
+		text-align: start;
+		margin-bottom: 40px;
+	}
 }

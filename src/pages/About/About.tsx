@@ -1,31 +1,50 @@
-// import { Trans } from 'react-i18next';
-
 import HeroAbout from '../../components/HeroAbout/HeroAbout';
 import Photos from '../../components/Photos/Photos';
+import Statistics from '../../components/Statistics/Statistics';
 import Support from '../../components/Support/Support';
-import Partners from '../../components/Partners/Partners';
 import VideoAboutShelter from '../../components/VideoAboutShelter/VideoAboutShelter';
-import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { fetchAbout } from '../../services/fetchData';
 import { scrollOnTop } from '../../services/scrollTo';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+
+interface Image {
+	id: string;
+	name: string;
+	url: string;
+	category: string;
+}
+
+export interface AboutData {
+	quantity_of_animals: number;
+	quantity_of_employees: number;
+	quantity_of_succeeds_adoptions: number;
+	images: Image[];
+}
+
+export interface FetchAboutResult {
+	about_data: AboutData[];
+}
 
 const About = () => {
 	const location = useLocation();
+	const data = useQuery({
+		queryKey: ['about'],
+		queryFn: fetchAbout,
+		refetchInterval: 600000,
+	});
 
 	useEffect(() => {
 		location.pathname === '/about' ? scrollOnTop() : null;
 	}, [location]);
 
 	return (
-		// <Trans i18nKey='description.part1'>
-		// 	To get started, edit <code>src/pages/About.tsx</code> and save to reload.
-		// </Trans>
 		<main>
 			<HeroAbout />
 			<VideoAboutShelter />
-			<Partners/>
-			<Photos />
-			<Partners/>
+			<Statistics/>
+			<Photos data={data} />
 			<Support />
 		</main>
 	);
