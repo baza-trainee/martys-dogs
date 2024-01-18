@@ -12,19 +12,20 @@
 
 .imgBlock {
   display: none;
+  background: url('../../assets/modal/contact/contact.webp') no-repeat 50% / cover lightgray;
+
   @include tablet {
     display: block;
-    width: 200px;
-    height: 400px;
-    background: url('../../assets/modal/contact/contact.webp') no-repeat 50% / cover lightgray;
+    width: 248px;
+    height: 538px;
   }
   @include small-desktop {
-    width: 360px;
-    height: 532px;
+    width: 359px;
+    height: 657px;
   }
   @include large-desktop {
     width: 396px;
-    height: 705px;
+    min-height: 705px;
   }
 }
 
@@ -32,81 +33,74 @@
 .contentBlock {
   display: flex;
   flex-direction: column;
-  padding: 80px 24px 24px 24px;
+  margin: 32px;
+  width: 288px;
+  gap: 16px;
 
   @include tablet {
-    //width: 400px;
+    margin: 33px 32px 20px 32px;
+    width: 340px;
+
   }
 
   @include small-desktop {
-    //padding: 112px 32px 32px 32px;
-    //width: 542px;
+    margin: 40px 32px;
+    width: 402px;
+    justify-content: space-between;
+    gap: 20px;
   }
 
   @include large-desktop {
     flex-direction: column;
     align-items: flex-end;
-    gap: 40px;
-    padding: 80px 32px;
-    width: 640px;
+
+    margin: 80px 32px;
+    width: 540px;
   }
 }
 
 .textBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+
+
+
+  @include small-desktop {
+    gap: 16px;
+  }
+
 
   h2 {
-    margin-bottom: 16px;
-    font-weight: 800;
-    line-height: 1.4;
     font-size: 20px;
+    font-weight: 800;
+    line-height: 28px;
+
+
     @include small-desktop {
-      margin-bottom: 24px;
+      font-size: 26px;
+      line-height: 31.2px;
     }
 
     @include large-desktop {
-      font-size: 26px;
-      font-weight: 800;
-      line-height: 31.2px;
+
     }
   }
 
   p {
-    margin-bottom: 16px;
     font-size: 14px;
-    font-weight: 700;
-    line-height: 1.4;
+    font-weight: 500;
+    line-height: 19.6px;
     color: $color-main-blue-dark;
+
+
     @include small-desktop {
       font-size: 20px;
+      line-height: 28px;
     }
-    @include large-desktop {
-      margin-bottom: 16px;
-      font-size: 20px;
-    }
+
+
   }
 }
-
-.gratitude {
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1.4;
-  color: $color-gray-100;
-  margin-bottom: 24px;
-  @include small-desktop {
-    margin-bottom: 32px;
-    font-size: 20px;
-  }
-  @include large-desktop {
-    margin-bottom: 40px;
-  }
-}
-
-
-.icon {
-  padding: 0;
-}
-
-// .arrow {
-// 	width: 19px;
-// 	height: 19px;
-// }
