@@ -13,6 +13,7 @@
 
 .container {
 	display: flex;
+	justify-content: space-between;
 	gap: 20px;
 	@media screen and (max-width: 1280px) {
 		flex-direction: column;
@@ -44,6 +45,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-size: 24px;
 }
 
 .city {
@@ -89,9 +91,10 @@
 	}
 }
 
-.map {
-	height: 440px;
-	width: 100%;
+.image {
+	height: 480px;
+	width: 880px;
+	object-fit: cover;
 }
 
 a {
@@ -99,4 +102,8 @@ a {
 	@media screen and (max-width: 768px) {
 		font-size: 1.25rem;
 	}
+}
+
+.images {
+	flex: 1 1 100%;
 }

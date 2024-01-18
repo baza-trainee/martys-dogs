@@ -25,5 +25,12 @@
 	},
 	"photos": {
 		"shelter": "Shelter in photos"
+	},
+	"contactsBlock": {
+		"contacts": "Contacts of the shelter “Tails”",
+		"city": "Chernivtsi city",
+		"phones": "Contact numbers:",
+		"free": "Free from all numbers within Ukraine",
+		"socials": "Our social media:"
 	}
 }
