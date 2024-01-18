@@ -38,12 +38,18 @@
 	height: 48px;
 	padding: 12px;
 	position: absolute;
-	top: 24px;
-	right: 24px;
+	top: 8px;
+	right: 8px;
 	border-radius: 30px;
 	border: transparent;
 	color: $color-main-blue-mid;
 	background: $color-gray-10;
+
+	@include tablet {
+		top: 24px;
+		right: 24px;
+
+	}
 	&:hover {
 		color: $color-accent;
 		background: $color-main-bg;
