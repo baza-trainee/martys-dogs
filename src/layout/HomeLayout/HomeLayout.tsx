@@ -21,30 +21,30 @@ const HomeLayout = () => {
 			<Header />
 			<Outlet />
 			<Footer />
-		{/*	<ContactModal
+	{/*		<Modal
 				isModal={isModalOpen}
 				openModal={openModal}
 				closeModal={closeModal}
 			>
-
-				<ContactModal />
-			</ContactModal>*/}
-
-		{/*	<ContactModal
+				<AdoptionModal />
+			</Modal>*/}
+{/*
+			<Modal
 				isModal={isModalOpen}
 				openModal={openModal}
 				closeModal={closeModal}
 			>
 				 <ThanksModal />
-			</ContactModal>*/}
+			</Modal>*/}
 
-			{/*<Modal
+
+			<Modal
 				isModal={isModalOpen}
 				openModal={openModal}
 				closeModal={closeModal}
 			>
 				<ContactModal />
-			</Modal>*/}
+			</Modal>
 		</>
 	);
 };
