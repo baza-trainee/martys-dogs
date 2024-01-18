@@ -22,7 +22,7 @@
 	@include small-desktop {
 		width: 360px;
 		height: 500px;
-		background-image: url('../../assets//modal/thanks/1280_1x.webp');
+		background-image: url('../../assets/modal/thanks/1280_1x.webp');
 	}
 	@include large-desktop {
 		width: 360px;
@@ -30,7 +30,7 @@
 		background-image: url('../../assets/modal/thanks/1440_1x.webp');
 	}
 	@include full_desktop {
-		background-image: url('../../assets//modal/thanks/1920_1x.webp');
+		background-image: url('../../assets/modal/thanks/1920_1x.webp');
 	}
 }
 

@@ -1,0 +1,45 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 40px;
+  @include large-desktop {
+
+  }
+}
+
+.inputsContainer {
+
+
+  @include large-desktop {
+    background-color: white;
+    height: 248px;
+    width: 100%;
+  }
+}
+
+.btnContainer {
+  width: 305px;
+  align-items: center;
+
+  @include tablet {
+    //width: 334px;
+  }
+
+  @include small-desktop {
+
+  }
+
+  @include large-desktop {
+    width: 100%;
+  }
+
+  @include full_desktop {
+
+  }
+
+}
