@@ -37,9 +37,9 @@
 	display: grid;
 	justify-items: center;
 	@include tablet {
-		grid-template: 1fr 1fr / repeat(2, 1fr);
+		grid-template: 1fr / repeat(2, 1fr);
 		column-gap: 20px;
-		row-gap: 32px;
+		// row-gap: 32px;
 	}
 
 	@include small-desktop {

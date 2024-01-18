@@ -31,15 +31,13 @@ const AdoptionModal: React.FC = () => {
 					відповісти на ваші питання.
 				</p>
 				<div className={styles.return}>
-					{/* <Link to='/'> */}
 					<Button
 						name={'Повернутися на головну'}
 						btnClasses={'primary'}
 						onClick={returnToHome}
 						type={'button'}
-						children={<FaAngleRight />}
+						children={<FaAngleRight className={styles.arrow} />}
 					/>
-					{/* </Link> */}
 				</div>
 			</div>
 		</div>
