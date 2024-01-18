@@ -28,8 +28,8 @@ const HomeLayout = () => {
 			>
 				<AdoptionModal />
 			</Modal>*/}
-{/*
-			<Modal
+
+		{/*	<Modal
 				isModal={isModalOpen}
 				openModal={openModal}
 				closeModal={closeModal}
@@ -38,13 +38,14 @@ const HomeLayout = () => {
 			</Modal>*/}
 
 
-			<Modal
+			{/*<Modal
 				isModal={isModalOpen}
 				openModal={openModal}
 				closeModal={closeModal}
 			>
 				<ContactModal />
-			</Modal>
+			</Modal>*/}
+
 		</>
 	);
 };
