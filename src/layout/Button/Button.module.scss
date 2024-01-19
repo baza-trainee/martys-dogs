@@ -80,3 +80,39 @@
     border-color: $color-gray-60;
   }
 }
+
+.filter {
+  width: auto;
+  background: $color-gray-0;
+  border: 1px solid $color-accent;
+  color: $color-accent;
+  padding: 12px 32px;
+  font-size: 24px;
+
+  @media screen and (max-width: 1280px) {
+		width: 100%;
+	}
+
+  &:hover {
+    border-color: $color-main-blue-dark;
+    color: $color-main-blue-dark;
+  }
+
+  &:focus {
+    border-color: $color-main-blue-dark;
+  }
+
+  &:active {
+    border-color: $color-gray-100;
+    color: $color-gray-100;
+  }
+
+  &:disabled {
+    border-color: $color-gray-60;
+    background: transparent;
+
+    &:hover {
+      color: $color-gray-60;
+    }
+  }
+}

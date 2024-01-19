@@ -1,9 +1,27 @@
 const HOME = 'https://matys-dogs2.onrender.com';
 const LOGIN = 'https://matys-dogs2.onrender.com/login';
+const CATALOG = 'https://matys-dogs2.onrender.com/catalog';
 
 export const fetchHome = async () => {
 	try {
 		const response = await fetch(HOME);
+
+		if (!response.ok) {
+			throw new Error('Data loading error');
+		}
+		
+		const data = await response.json();
+		return data;
+		
+	} catch (error) {
+		console.error('Error while loading data:', error);
+		throw error;
+	}
+};
+
+export const fetchCatalog = async () => {
+	try {
+		const response = await fetch(CATALOG);
 
 		if (!response.ok) {
 			throw new Error('Data loading error');
