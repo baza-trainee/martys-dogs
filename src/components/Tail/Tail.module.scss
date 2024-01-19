@@ -14,9 +14,9 @@
 	border-radius: 30px;
 	&:hover {
 		.intro {
-			max-height: 340px;
+			max-height: 300px;
 			@media screen and (max-width: 768px) {
-				max-height: 230px;
+				max-height: 210px;
 			}
 		}
 	}
@@ -80,12 +80,11 @@
 }
 
 .size {
-	color: #005c80;
-	background: #b6e1f2;
-	padding: 4px 12px;
+	color: #4d9fbf;
 	border-radius: 16px;
 	display: flex;
-	gap: 8px;
+	gap: 10px;
+	align-items: center;
 }
 
 .overlay {
@@ -123,41 +122,99 @@
 }
 
 .gender {
+	color: #4d9fbf;
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+
+.year {
 	color: #005c80;
+	font-weight: 500;
+}
+
+.dark {
+	color: #005c80;
+	font-weight: 500;
+	text-transform: capitalize;
+}
+
+.box {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: end;
+}
+
+.left {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	align-items: start;
 }
 
 .donate {
-	color: #009cd9;
+	background-color: #009cd9;
 	padding: 12px 24px;
 	text-decoration: none;
 	border: 1px solid #009cd9;
 	border-radius: 30px;
+	font-size: 20px;
+	color: #ffffff;
 	display: flex;
-	gap: 16px;
 	justify-content: center;
 	align-items: center;
-	transition:
-		color 0.3s ease,
-		border-color 0.3s ease;
-	svg:first-child {
-		transform: translateY(5px);
-	}
-
-	svg:last-child {
-		transform: translateY(-5px);
-	}
+	transition: all 0.3s ease-in-out;
+	min-width: 165px;
+	width: 100%;
+	flex: 1 1 100%;
 
 	&:hover {
-		color: #005c80;
-		border: 1px solid #005c80;
-		svg {
-			fill: #005c80;
-			transition: fill 0.3s ease;
-		}
+		color: #009cd9;
+		border: 1px solid #009cd9;
+		background-color: #ffffff;
+	}
+
+	@media screen and (max-width: 1440px) {
+		min-width: 120px;
 	}
 
 	@media screen and (max-width: 768px) {
-		gap: 2px;
+		font-size: 14px;
+		min-width: 80px;
+		padding: 4px 4px;
+	}
+}
+
+.adopt {
+	background-color: #ffffff;
+	padding: 12px 24px;
+	text-decoration: none;
+	border: 1px solid #009cd9;
+	border-radius: 30px;
+	font-size: 20px;
+	color: #009cd9;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: all 0.3s ease-in-out;
+	min-width: 165px;
+	flex: 1 1 100%;
+
+	&:hover {
+		color: #ffffff;
+		border: 1px solid #009cd9;
+		background-color: #009cd9;
+	}
+
+	@media screen and (max-width: 1440px) {
+		min-width: 120px;
+	}
+
+	@media screen and (max-width: 768px) {
+		font-size: 16px;
+		min-width: 80px;
+		padding: 4px 4px;
 	}
 }
 
@@ -166,4 +223,11 @@
 	width: 100%;
 	height: 100%;
 	object-fit: cover;
+}
+
+.container {
+	display: flex;
+	gap: 10px;
+	justify-content: space-between;
+	margin-top: 10px;
 }

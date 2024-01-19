@@ -23,6 +23,14 @@
 		"callDis": "Free from all numbers in Ukraine",
 		"copyright": "Development of Baza Trainee Ukraine 2023 © All rights reserved"
 	},
+	"tail": {
+		"ready": "Ready to be your friend",
+		"vaccine": "Parasite vaccination/treatment",
+		"small": "Vaccination",
+		"sterilization": "Sterilization",
+		"donate": "Donate",
+		"adopt": "Adopt"
+	},
 	"photos": {
 		"shelter": "Shelter in photos"
 	},
