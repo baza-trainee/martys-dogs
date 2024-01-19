@@ -16,18 +16,21 @@
 		display: block;
 		width: 200px;
 		height: 400px;
-		background-image: url('../../assets/modal/adoption/768_1x.webp');
+		background-image: url('../../assets/modal/thanks/768_1x.webp');
 		background-size: cover;
 	}
 	@include small-desktop {
 		width: 360px;
-		height: 532px;
-		background-image: url('../../assets//modal/adoption/1280_1x.webp');
+		height: 500px;
+		background-image: url('../../assets/modal/thanks/1280_1x.webp');
 	}
 	@include large-desktop {
 		width: 360px;
 		height: 600px;
-		background-image: url('../../assets/modal/adoption/1440_1x.webp');
+		background-image: url('../../assets/modal/thanks/1440_1x.webp');
+	}
+	@include full_desktop {
+		background-image: url('../../assets/modal/thanks/1920_1x.webp');
 	}
 }
 
@@ -36,13 +39,16 @@
 	(min-resolution: 2dppx) {
 	.thumb {
 		@include tablet {
-			background-image: url('../../assets/modal/adoption/768_2x.webp');
+			background-image: url('../../assets/modal/thanks/768_2x.webp');
 		}
 		@include small-desktop {
-			background-image: url('../../assets/modal/adoption/1280_2x.webp');
+			background-image: url('../../assets/modal/thanks/1280_2x.webp');
 		}
 		@include large-desktop {
-			background-image: url('../../assets/modal/adoption/1440_2x.webp');
+			background-image: url('../../assets/modal/thanks/1440_2x.webp');
+		}
+		@include full-desktop {
+			background-image: url('../../assets/modal/thanks/1920_2x.webp');
 		}
 	}
 }
@@ -56,7 +62,7 @@
 	}
 	@include small-desktop {
 		padding: 112px 32px 32px 32px;
-		width: 542px;
+		width: 440px;
 	}
 	@include large-desktop {
 		padding: 144px 32px 32px 32px;
@@ -67,13 +73,8 @@
 .title {
 	margin-bottom: 16px;
 	font-weight: 800;
-	line-height: 1.4;
-	font-size: 20px;
+	line-height: 1.2;
 	@include small-desktop {
-		margin-bottom: 24px;
-	}
-	@include large-desktop {
-		font-size: 26px;
 		margin-bottom: 32px;
 	}
 }
@@ -85,7 +86,7 @@
 	line-height: 1.4;
 	color: $color-main-blue-dark;
 	@include small-desktop {
-		font-size: 20px;
+		font-size: 16px;
 	}
 	@include large-desktop {
 		margin-bottom: 16px;
@@ -101,7 +102,6 @@
 	margin-bottom: 24px;
 	@include small-desktop {
 		margin-bottom: 32px;
-		font-size: 20px;
 	}
 	@include large-desktop {
 		margin-bottom: 40px;
@@ -123,14 +123,4 @@
 
 .icon {
 	padding: 0;
-}
-
-.arrow {
-	width: 24px;
-	height: 24px;
-}
-
-.cv {
-	padding-left: 16px;
-	padding-right: 16px;
 }

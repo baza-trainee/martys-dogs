@@ -5,7 +5,7 @@ import styles from './Button.module.scss';
 interface IButtonProps {
 	name: string;
 	btnClasses: string;
-	onClick: () => void;
+	onClick?: () => void;
 	type?: 'button' | 'submit' | 'reset';
 	disabled?: boolean;
 	children?: React.ReactNode;
