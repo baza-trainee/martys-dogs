@@ -47,10 +47,10 @@ export interface LandingData {
 	dog_cards: DogCard[];
 }
 
-const Landing = () => {
+const Landing: React.FC = () => {
 	const location = useLocation();
 	const data = useQuery<LandingData>({
-		queryKey: ['tails'],
+		queryKey: ['landing'],
 		queryFn: fetchHome,
 		refetchInterval: 600000,
 	});

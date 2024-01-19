@@ -16,13 +16,37 @@
 		"lng_en": "EN"
 	},
 	"footer": {
-		"confid": "Privacy Policy",
+		"policy": "Privacy Policy",
 		"rules": "Terms of use of the site",
 		"reports": "Reporting",
 		"contact": "Contacts",
 		"callDis": "Free from all numbers in Ukraine",
 		"copyright": "Development of Baza Trainee Ukraine 2023 © All rights reserved"
 	},
+	"tail": {
+		"ready": "Ready to be your friend",
+		"vaccine": "Parasite vaccination/treatment",
+		"small": "Vaccination",
+		"sterilization": "Sterilization",
+		"donate": "Donate",
+		"adopt": "Adopt"
+	},
+	"photos": {
+		"shelter": "Shelter in photos"
+	},
+	"tailsHero": {
+		"title": "Our tails",
+		"text": "Meet our four-legged heroes: each of them is looking for a home and waiting for your help. Learn more about our pets, choose who you want to help, or open your heart to a new friend",
+		"tailA": "Sniff, sniff... You smell nice!",
+		"tailB": "Welcome to our furry family!"
+	},
+	"contactsBlock": {
+		"contacts": "Contacts of the shelter “Tails”",
+		"city": "Chernivtsi city",
+		"phones": "Contact numbers:",
+		"free": "Free from all numbers within Ukraine",
+		"socials": "Our social media:"
+  },
 	"catalog": {
 		"header_title": "Meet our tails",
 		"header_button": "Apply filters",

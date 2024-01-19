@@ -26,8 +26,8 @@ const links = [
 	},
 	{
 		id: 4,
-		url: '/admin/numbers',
-		text: 'Кількість',
+		url: '/admin/statistics',
+		text: 'Статистика',
 		icon: <Fa500Px />,
 	},
 	{

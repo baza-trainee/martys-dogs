@@ -1,21 +1,29 @@
-import Modal from '../ModalLayout/Modal';
-import ThanksModal from '../../components/ThanksModal/ThanksModal';
+// import AdoptionModal from '../../components/Modal/AdoptionModal';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import { Outlet } from 'react-router-dom';
+
+// import Modal from '../../components/Modal/Modal';
+
+// import { useModalContext } from '../../context/useGlobalContext';
+
+// import ThanksModal from '../../components/Modal/ThanksModal';
+
+
+
 // import { useContext } from 'react';
 // import { ModalContext } from '../../context/ModalContext';
-import { useModalContext } from '../../context/useGlobalContext';
-import AdoptionModal from '../../components/AdoptionModal/AdoptionModal';
-import ContactModal from '../../components/ContactModal/ContactModal';
+// import { useModalContext } from '../../context/useGlobalContext';
+// import AdoptionModal from '../../components/AdoptionModal/AdoptionModal';
+// import ContactModal from '../../components/ContactModal/ContactModal';
 
 const HomeLayout = () => {
 	// const modalContext = useModalContext();
 	// const isModalOpen = modalContext?.isModalOpen || false;
 	// const openModal = modalContext?.openModal || (() => {});
 	// const closeModal = modalContext?.closeModal || (() => {});
-	const { isModalOpen, openModal, closeModal } = useModalContext();
-	console.log(isModalOpen);
+	// const { isModalOpen, openModal, closeModal } = useModalContext();
+	// console.log(isModalOpen);
 	return (
 		<>
 			<Header />
@@ -26,8 +34,9 @@ const HomeLayout = () => {
 				openModal={openModal}
 				closeModal={closeModal}
 			>
+				<ThanksModal />
 				<AdoptionModal />
-			</Modal>*/}
+			</Modal> */}
 
 		{/*	<Modal
 				isModal={isModalOpen}
@@ -45,7 +54,6 @@ const HomeLayout = () => {
 			>
 				<ContactModal />
 			</Modal>*/}
-
 		</>
 	);
 };

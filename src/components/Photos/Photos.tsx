@@ -4,8 +4,10 @@ import 'swiper/css/navigation';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { photos } from '../../data';
+import { FetchAboutResult } from '../../pages/About/About';
+import { UseQueryResult } from '@tanstack/react-query';
 import styles from './Photos.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface Pagination {
 	clickable: boolean;
@@ -31,16 +33,42 @@ const breakpoints = {
 	},
 };
 
-const Photos: React.FC = () => {
+interface PhotosProps {
+	data: UseQueryResult<FetchAboutResult, Error>;
+}
+
+const Photos: React.FC<PhotosProps> = ({ data }) => {
+	const {t} = useTranslation();
+	const { data: photos, isPending, isError, error } = data;
+	const images = photos?.about_data[0].images;
+	
+
+	if (isPending) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.loading}></div>
+			</div>
+		);
+	}
+
+	if (isError) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.alert}>{error.message}</div>
+			</div>
+		);
+	}
+
 	const pagination: Pagination = {
 		clickable: true,
 		renderBullet: (index, className) => {
 			return '<span class="' + className + '">' + (index + 1) + '</span>';
 		},
 	};
+
 	return (
 		<section className={styles.photos}>
-			<h2 className={styles.title}>Притулок у фотографіях</h2>
+			<h2 className={styles.title}>{t('photos.shelter')}</h2>
 			<Swiper
 				breakpoints={breakpoints}
 				spaceBetween={20}
@@ -51,10 +79,14 @@ const Photos: React.FC = () => {
 				navigation={true}
 				modules={[Pagination, Navigation]}
 			>
-				{photos.map((photo) => (
-					<SwiperSlide key={photo.id}>
+				{images?.map((image) => (
+					<SwiperSlide key={image.id}>
 						<div>
-							<img src={photo.img} alt='dog' />
+							<img
+								src={image.url}
+								alt={image.name}
+								className={styles.image}
+							/>
 						</div>
 					</SwiperSlide>
 				))}
