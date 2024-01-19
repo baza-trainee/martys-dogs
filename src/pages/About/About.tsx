@@ -5,6 +5,7 @@ import Photos from '../../components/Photos/Photos';
 import Support from '../../components/Support/Support';
 import Partners from '../../components/Partners/Partners';
 import VideoAboutShelter from '../../components/VideoAboutShelter/VideoAboutShelter';
+import { Statistics } from '../../components/Statistics/Statistics';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import { scrollOnTop } from '../../services/scrollTo';
@@ -23,6 +24,7 @@ const About = () => {
 		<main>
 			<HeroAbout />
 			<VideoAboutShelter />
+			<Statistics/>
 			<Partners/>
 			<Photos />
 			<Support />

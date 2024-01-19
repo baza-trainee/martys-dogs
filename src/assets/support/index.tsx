@@ -6,6 +6,9 @@ import whitePuppyDesktop1x from '../support/cute-white-little-puppy-desktop-1x.w
 import whitePuppyDesktop2x from '../support/cute-white-little-puppy-desktop-2x.webp';
 import novaPost from '../support/nova-post.svg';
 import ukrPost from '../support/ukr-post.svg';
+import mono from './mono.svg';
+import privat from './privat.svg';
+import paypal from './paypal.svg';
 
 export {
 	whitePuppyMobile1x,
@@ -15,5 +18,8 @@ export {
 	whitePuppyDesktop1x,
 	whitePuppyDesktop2x,
 	novaPost,
-	ukrPost
+	ukrPost,
+	mono,
+	privat,
+	paypal,
 };
