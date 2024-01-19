@@ -1,13 +1,3 @@
-// import {
-// 	FaFacebook,
-// 	FaInstagram,
-// 	FaLocationDot,
-// 	FaMobile,
-// 	FaPhone,
-// 	FaRegEnvelope,
-// 	FaYoutube,
-// } from 'react-icons/fa6';
-
 import { FaFacebook, FaInstagram, FaRegEnvelope, FaYoutube } from "react-icons/fa";
 import { FiPhoneCall, FiSmartphone } from "react-icons/fi";
 

@@ -1,9 +1,10 @@
+import { FaFacebook, FaInstagram, FaRegEnvelope, FaYoutube } from "react-icons/fa";
+import { FiPhoneCall, FiSmartphone } from "react-icons/fi";
+
 import { Link } from "react-router-dom";
+import footerLogo from '../../assets/footer_logo.webp';
 import styles from "./Footer.module.scss";
 import { useTranslation } from 'react-i18next';
-import footerLogo from '../../assets/footer_logo.webp';
-import { FaRegEnvelope, FaFacebook, FaInstagram, FaYoutube} from "react-icons/fa";
-import { FiPhoneCall, FiSmartphone } from "react-icons/fi";
 
 const Footer = () => {
 	const { t } = useTranslation();
@@ -53,7 +54,7 @@ const Footer = () => {
 								href="#"
 								className={styles.footer_nav_link}
 							>
-								{t('footer.confid')}
+								{t('footer.policy')}
 							</a>
 						</li>
 						<li
@@ -116,7 +117,7 @@ const Footer = () => {
 								className={styles.footer_contact_cat}
 							>
 								<div
-									className={styles.footer_contact_cat_daug}
+									className={styles.footer_contact_cat_dog}
 								>
 									<FiSmartphone
 										className={styles.footer_contact_icon}

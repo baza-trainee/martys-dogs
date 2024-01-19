@@ -16,7 +16,7 @@
 		"lng_en": "EN"
 	},
 	"footer": {
-		"confid": "Privacy Policy",
+		"policy": "Privacy Policy",
 		"rules": "Terms of use of the site",
 		"reports": "Reporting",
 		"contact": "Contacts",
@@ -25,6 +25,12 @@
 	},
 	"photos": {
 		"shelter": "Shelter in photos"
+	},
+	"tailsHero": {
+		"title": "Our tails",
+		"text": "Meet our four-legged heroes: each of them is looking for a home and waiting for your help. Learn more about our pets, choose who you want to help, or open your heart to a new friend",
+		"tailA": "Sniff, sniff... You smell nice!",
+		"tailB": "Welcome to our furry family!"
 	},
 	"contactsBlock": {
 		"contacts": "Contacts of the shelter “Tails”",
