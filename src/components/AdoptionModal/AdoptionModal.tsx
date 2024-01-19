@@ -1,11 +1,11 @@
 import { FaAngleRight } from 'react-icons/fa6';
-import styles from './ThanksModal.module.scss';
+import styles from './AdoptionModal.module.scss';
 import Button from '../../layout/Button/Button';
 // import { Link } from 'react-router-dom';
 import { useModalContext } from '../../context/useGlobalContext';
 import { useNavigate } from 'react-router-dom';
 
-const ThanksModal: React.FC = () => {
+const AdoptionModal: React.FC = () => {
 	// const modalContext = useModalContext();
 	// const closeModal = modalContext?.closeModal || (() => {});
 	const { closeModal } = useModalContext();
@@ -19,29 +19,29 @@ const ThanksModal: React.FC = () => {
 		<div className={styles.wrapper}>
 			<div className={styles.thumb}></div>
 			<div className={styles.text}>
-				<h2 className={styles.title}>Дякуємо за донат!</h2>
+				<h2 className={styles.title}>Ваше серце стало більшим!</h2>
 				<p className={styles.info}>
-					Ваша допомога має величезне значення. Завдяки Вашому внеску
-					ми можемо продовжувати дбати про наших чотирилапих друзів,
-					забезпечуючи їм необхідний догляд та шанс на краще життя.
+					Дякуємо, що підготувати свій відкритий дім і свою душу для
+					нового чотирилапого друга. Наша команда "Хвостики" вже не
+					може дочекатися, щоб зв'язатися з вами та допомогти вам
+					знайти ідеального пухнастого компаньйона..
 				</p>
 				<p className={styles.gratitude}>
-					Щиро дякуємо від усіх наших хвостатих друзів!
+					Ми скоро зателефонуємо вам, щоб обговорити наступні кроки і
+					відповісти на ваші питання.
 				</p>
-				<div className={styles.button}>
-					{/* <Link to='/'> */}
+				<div className={styles.return}>
 					<Button
 						name={'Повернутися на головну'}
 						btnClasses={'primary'}
 						onClick={returnToHome}
 						type={'button'}
-						children={<FaAngleRight />}
+						children={<FaAngleRight className={styles.arrow} />}
 					/>
-					{/* </Link> */}
 				</div>
 			</div>
 		</div>
 	);
 };
 
-export default ThanksModal;
+export default AdoptionModal;

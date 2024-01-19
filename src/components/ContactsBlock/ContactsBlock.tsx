@@ -1,81 +1,60 @@
-import 'leaflet/dist/leaflet.css';
+import { FaFacebook, FaInstagram, FaRegEnvelope, FaYoutube } from "react-icons/fa";
+import { FiPhoneCall, FiSmartphone } from "react-icons/fi";
 
-import {
-	FaFacebook,
-	FaInstagram,
-	FaLocationDot,
-	FaMobile,
-	FaPhone,
-	FaRegEnvelope,
-	FaYoutube,
-} from 'react-icons/fa6';
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
-
+import { GrLocation } from "react-icons/gr";
+import shelter from '../../assets/shelter.webp';
 import styles from './ContactsBlock.module.scss';
+import { useTranslation } from 'react-i18next';
 
 const ContactsBlock: React.FC = () => {
+	const { t } = useTranslation();
 	return (
 		<section className={styles.contacts}>
-			<h1 className={styles.title}>Контакти притулку “Хвостики”</h1>
+			<h1 className={styles.title}>{t('contactsBlock.contacts')}</h1>
 			<div className={styles.container}>
 				<div className={styles.links}>
 					<div className={styles.addresses}>
 						<div className={styles.city}>
 							<div className={styles.icon}>
-								<FaLocationDot />
+							<GrLocation />
 							</div>
 							<p className={styles.black}>
-								м. Чернівці, вул. Прутська, 6
+								{t('contactsBlock.city')}
 							</p>
 						</div>
 						<div className={styles.city}>
 							<div className={styles.icon}>
 								<FaRegEnvelope />
 							</div>
-							<a
-								href='mailto:cityofgoodnessua@gmail.com'
-								target='_blank'
-								rel='noopener noreferrer'
-								className={styles.text}
-							>
+							<p className={styles.black}>
 								cityofgoodnessua@gmail.com
-							</a>
+							</p>
 						</div>
 					</div>
 					<div className={styles.addresses}>
-						<h2 className={styles.big}>Контактні телефони:</h2>
+						<h2 className={styles.big}>
+							{t('contactsBlock.phones')}
+						</h2>
 						<div className={styles.city}>
 							<div className={styles.icon}>
-								<FaMobile />
+								<FiSmartphone />
 							</div>
-							<a
-								href='tel:+380950536009'
-								target='_blank'
-								rel='noopener noreferrer'
-								className={styles.text}
-							>
-								380 95 053 60 09
-							</a>
+							<p className={styles.black}>380 95 053 60 09</p>
 						</div>
 						<div className={styles.city}>
 							<div className={styles.icon}>
-								<FaPhone />
+								<FiPhoneCall />
 							</div>
-							<a
-								href='tel:0800503231'
-								target='_blank'
-								rel='noopener noreferrer'
-								className={styles.text}
-							>
-								0 800 503 231
-							</a>
+							<p className={styles.black}>0 800 503 231</p>
 						</div>
 						<p className={styles.small}>
-							Безкоштовний з усіх номерів по Україні
+							{t('contactsBlock.free')}
 						</p>
 					</div>
 					<div className={styles.addresses}>
-						<h2 className={styles.big}>Наші соціальні мережі:</h2>
+						<h2 className={styles.big}>
+							{t('contactsBlock.socials')}
+						</h2>
 						<div className={styles.socials}>
 							<div className={styles.city}>
 								<div className={styles.icon}>
@@ -119,26 +98,9 @@ const ContactsBlock: React.FC = () => {
 						</div>
 					</div>
 				</div>
-				<MapContainer
-					center={[48.299653474393445, 25.935098153970504]}
-					zoom={14}
-					scrollWheelZoom={false}
-					className={styles.map}
-				>
-					<TileLayer
-						attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-						url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-					/>
-					<Marker position={[48.299653474393445, 25.935098153970504]}>
-						<Popup>
-							<h5>Притулок “Хвостики”</h5>
-							<p>
-								Разом ми можемо більше. <br></br>Подаруй собакам
-								нову надію на щасливе життя!
-							</p>
-						</Popup>
-					</Marker>
-				</MapContainer>
+				<div className={styles.images}>
+					<img src={shelter} alt='shelter' className={styles.image} />
+				</div>
 			</div>
 		</section>
 	);

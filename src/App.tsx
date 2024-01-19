@@ -2,15 +2,17 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import About from './pages/About/About';
+import AddPartner from './pages/AdminPartners/AddPartner';
 import AdminDogs from './pages/AdminDogs/AdminDogs';
 import AdminHomeLayout from './layout/AdminHomeLayout/AdminHomeLayout';
 import AdminNews from './pages/AdminsNews/AdminNews';
-import AdminNumbers from './pages/AdminNumbers/AdminNumbers';
 import AdminPartners from './pages/AdminPartners/AdminPartners';
 import AdminPhotos from './pages/AdminPhotos/AdminPhotos';
+import AdminStatistics from './pages/AdminStatistics/AdminStatistics';
 import Admins from './pages/Admins/Admins';
 import { AuthProvider } from './context/AuthContext';
 import Contacts from './pages/Contacts/Contacts';
+import EditPartner from './pages/AdminPartners/EditPartner';
 import Error from './pages/Error/Error';
 import HomeLayout from './layout/HomeLayout/HomeLayout';
 import Landing from './pages/Landing/Landing';
@@ -70,14 +72,23 @@ const router = createBrowserRouter([
 			{
 				path: 'partners',
 				element: <AdminPartners />,
+				
+			},
+			{
+				path: 'partner_add',
+				element: <AddPartner />,
+			},
+			{
+				path: 'partner_edit',
+				element: <EditPartner />,
 			},
 			{
 				path: 'news',
 				element: <AdminNews />,
 			},
 			{
-				path: 'numbers',
-				element: <AdminNumbers />,
+				path: 'statistics',
+				element: <AdminStatistics />,
 			},
 			{
 				path: 'photos',

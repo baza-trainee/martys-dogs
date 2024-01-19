@@ -14,20 +14,22 @@ ul {
 
 .item {
 	max-width: 353px;
-	height: 421px;
-	&:not(:last-child) {
-		margin-bottom: 40px;
+	display: none;
+
+	&:nth-child(-n + 1) {
+		display: block;
 	}
 
 	@include tablet {
-		&:not(:last-child) {
-			margin-bottom: 0px;
+		&:nth-child(-n + 2) {
+			display: grid;
 		}
-		max-width: 342px;
 	}
 
 	@include small-desktop {
-		max-width: 255px;
+		// max-width: 255px;
+		display: grid;
+		grid-template-rows: auto 1fr auto;
 	}
 
 	@include large-desktop {
@@ -90,14 +92,14 @@ ul {
 	font-weight: 500;
 	line-height: 1.4;
 	@include tablet {
-		height: 90px;
+		max-height: 90px;
 	}
 }
 
 .info {
 	margin: 16px 0;
 	@include small-desktop {
-		height: 151px;
+		max-height: 151px;
 		overflow: hidden;
 		-webkit-line-clamp: 6;
 		display: -webkit-box;

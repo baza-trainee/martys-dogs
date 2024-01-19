@@ -6,10 +6,10 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import Tail, { TailProps } from '../Tail/Tail';
 
 import { FaAngleRight } from 'react-icons/fa6';
+import { LandingData } from '../../pages/Landing/Landing';
 import { Link } from 'react-router-dom';
-import { fetchTails } from '../../services/fetchData';
+import { UseQueryResult } from '@tanstack/react-query';
 import styles from './Tails.module.scss';
-import { useQuery } from '@tanstack/react-query';
 
 interface Pagination {
 	clickable: boolean;
@@ -35,17 +35,12 @@ const breakpoints = {
 	},
 };
 
-const Tails: React.FC = () => {
-	const {
-		data: tails,
-		isPending,
-		isError,
-		error,
-	} = useQuery({
-		queryKey: ['tails'],
-		queryFn: fetchTails,
-		refetchInterval: 600000,
-	});
+interface TailsProps {
+	data: UseQueryResult<LandingData, Error>;
+}
+
+const Tails: React.FC<TailsProps> = ({ data }) => {
+	const { data: tails, isPending, isError, error } = data;
 
 	if (isPending) {
 		return (
@@ -71,7 +66,7 @@ const Tails: React.FC = () => {
 	};
 
 	return (
-		<section className={styles.tails}>
+		<section id='ourTails' className={styles.tails}>
 			<div className={styles.title}>
 				<h2>Познайомся з нашими хвостиками</h2>
 				<Link to='tails' className={styles.link}>
@@ -88,7 +83,7 @@ const Tails: React.FC = () => {
 				navigation={true}
 				modules={[Pagination, Navigation]}
 			>
-				{tails?.map((tail: TailProps) => (
+				{tails?.dog_cards?.map((tail: TailProps) => (
 					<SwiperSlide key={tail.id}>
 						<Tail {...tail} />
 					</SwiperSlide>
