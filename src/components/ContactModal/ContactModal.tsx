@@ -1,6 +1,8 @@
-import styles from './ContactModal.module.scss';
-import { useModalContext } from '../../context/useGlobalContext';
 import ContactForm from './ContactForm';
+import styles from './ContactModal.module.scss';
+
+// import { useModalContext } from '../../context/useGlobalContext';
+
 
 
 const ContactModal: React.FC = () => {

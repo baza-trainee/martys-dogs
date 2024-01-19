@@ -1,4 +1,5 @@
 // import AdoptionModal from '../../components/Modal/AdoptionModal';
+
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 import { Outlet } from 'react-router-dom';
@@ -8,8 +9,6 @@ import { Outlet } from 'react-router-dom';
 // import { useModalContext } from '../../context/useGlobalContext';
 
 // import ThanksModal from '../../components/Modal/ThanksModal';
-
-
 
 // import { useContext } from 'react';
 // import { ModalContext } from '../../context/ModalContext';
@@ -29,7 +28,7 @@ const HomeLayout = () => {
 			<Header />
 			<Outlet />
 			<Footer />
-	{/*		<Modal
+			{/*		<Modal
 				isModal={isModalOpen}
 				openModal={openModal}
 				closeModal={closeModal}
@@ -38,14 +37,13 @@ const HomeLayout = () => {
 				<AdoptionModal />
 			</Modal> */}
 
-		{/*	<Modal
+			{/*	<Modal
 				isModal={isModalOpen}
 				openModal={openModal}
 				closeModal={closeModal}
 			>
-				 <ThanksModal />
+			<ThanksModal />
 			</Modal>*/}
-
 
 			{/*<Modal
 				isModal={isModalOpen}
