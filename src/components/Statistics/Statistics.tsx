@@ -13,7 +13,7 @@ const dataValues = [
   {id:3, value:12},
 ]
 
-export const Statistics = () => {
+const Statistics = () => {
   const dataStatistics = dataLabels.map((label, index) => {
     const { text, image } = label;
     const { id, value } = dataValues[index]
@@ -30,3 +30,5 @@ export const Statistics = () => {
     </section>
   )
 }
+
+export default Statistics
