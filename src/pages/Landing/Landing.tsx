@@ -29,7 +29,7 @@ interface NewsItem {
 	photo: Photo;
 }
 
-interface DogCard {
+export interface DogCard {
 	id: number;
 	name: string;
 	ready_for_adoption: boolean;
