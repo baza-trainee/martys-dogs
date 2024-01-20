@@ -1,0 +1,50 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.statistics__item__box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 24px;
+
+  background-color: $color-gray-0;
+  border-radius: 32px;
+  gap:8px;
+
+  @include small_desktop{
+    padding:32px;
+    // flex: 1 2 auto;
+    // width:calc(100%/3)
+    width:100%;
+  
+  }
+}
+
+.item__title__box {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px
+}
+
+.item__title {
+font-size: 26px;
+font-weight: 800;
+line-height: 1.2;
+text-align: left;
+width:216px;
+
+color: $color-main-blue-mid;
+}
+
+.item__image {
+  height: 72px;
+  width:72px
+}
+
+.item__value {
+  font-size: 56px;;
+  font-weight: 800;
+  line-height: 1;
+
+  color: $color-main-blue-dark
+}
