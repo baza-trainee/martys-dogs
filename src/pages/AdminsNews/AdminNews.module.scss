@@ -1,0 +1,101 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+// container move to  common styles ???
+.container {
+	padding: 15px;
+	width: 100%;
+	gap: 32px;
+	display: flex;
+	flex-direction: column;
+	background-color: $color-gray-0;
+
+	@include tablet {
+		// padding-top: 80px;
+		// padding-bottom: 52px;
+		// padding-left: 32px;
+		// padding-right: 32px;
+	}
+
+	@include small-desktop {
+		// padding: 100px;
+	}
+}
+
+.title {
+	margin-bottom: 24px;
+	// font-size: 32px;
+	font-weight: 800;
+	line-height: 1.2;
+	color: $color-gray-100;
+
+	// @include tablet {
+	// 	margin-bottom: 40px;
+	// }
+
+	// @include small-desktop {
+	// 	font-size: 42px;
+	// }
+}
+
+///move to  separate component
+.addButton {
+	padding: 30px;
+	display: flex;
+	min-width: 100px;
+	max-height: 55px;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	border-radius: 40px;
+	color: #fff;
+	background: #009cd9;
+	text-decoration: none;
+	gap: 8px;
+	font-size: 20px;
+	transition: all 0.3s ease;
+	width: 100%;
+	@include tablet {
+		width: auto;
+	}
+	&:hover {
+		background: #005c80;
+	}
+}
+
+.news {
+	display: grid;
+	justify-items: center;
+	@include tablet {
+		grid-template: 1fr / repeat(2, 1fr);
+		column-gap: 20px;
+		// row-gap: 32px;
+	}
+
+	@include small-desktop {
+		display: grid;
+		grid-template: 1fr / repeat(4, 1fr);
+		column-gap: 20px;
+	}
+}
+
+.loading {
+	width: 6rem;
+	height: 6rem;
+	border: 5px solid #009cd9;
+	border-radius: 50%;
+	border-top-color: #fff;
+	animation: spinner 0.6s linear infinite;
+	margin: 6rem auto;
+}
+
+// .container {
+// 	background-color: #ebf5fb;
+// 	padding: 6rem;
+// }
+
+// .alert {
+// 	text-align: center;
+// 	font-size: 32px;
+// 	color: #005c80;
+// }
