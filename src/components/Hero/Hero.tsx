@@ -4,19 +4,9 @@ import styles from './Hero.module.scss';
 import { scrollToSection } from '../../services/scrollTo';
 import { useTranslation } from 'react-i18next';
 
-export interface ChangeLanguageParams {
-	lng: string;
-}
-export type ChangeLanguageFunction = (params: ChangeLanguageParams) => void;
 
 const Hero = () => {
 	const { t, i18n } = useTranslation();
-
-	const currentLanguage = i18n.language;
-
-	const changeLanguage: ChangeLanguageFunction = ({ lng }) => {
-		i18n.changeLanguage(lng);
-	};
 
 	return (
 		<section className={styles.hero}>
