@@ -1,11 +1,27 @@
 import ContactForm from './ContactForm';
+import { useTranslation } from 'react-i18next';
 import styles from './ContactModal.module.scss';
+import { Link } from 'react-router-dom';
 
 // import { useModalContext } from '../../context/useGlobalContext';
+/*
 
+export interface ChangeLanguageParams {
+	lng: string;
+}
 
+export type ChangeLanguageFunction = (params: ChangeLanguageParams) => void;
+
+*/
 
 const ContactModal: React.FC = () => {
+	const { t, i18n } = useTranslation();
+
+/*	const currentLanguage = i18n.language;
+
+	const changeLanguage: ChangeLanguageFunction = ({ lng }) => {
+		i18n.changeLanguage(lng);
+	};*/
 
 	return (
 		<div className={styles.wrapper}>
@@ -13,14 +29,12 @@ const ContactModal: React.FC = () => {
 
 			<div className={styles.contentBlock}>
 				<div className={styles.textBlock}>
-					<h2>Ваша любов до тварин – справжній подарунок! Дякуємо вам за вирішення
-						подарувати дім хвостику</h2>
-					<p>
-						Ми скоро зв'яжемося, щоб розповісти вам більше і обговорити наступні кроки.
+					<h2>{t('contactModal.title')}</h2>
+					<p>{t('contactModal.subtitle')}
 					</p>
 				</div>
 
-				<ContactForm  />
+				<ContactForm />
 			</div>
 		</div>
 	);

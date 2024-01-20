@@ -39,7 +39,7 @@ const ContactForm: React.FC = () => {
 		// Валідація номеру телефону
 		const phoneRegex = /^[\+]?3?[\s]?8?[\s]?\(?0\d{2}?\)?[\s]?\d{3}[\s|-]?\d{2}[\s|-]?\d{2}$/;
 		if (!phoneRegex.test(formData.phoneNumber)) {
-			setErrors((prevErrors) => ({ ...prevErrors, phoneNumber: `Введіть номер телефону` }));
+			setErrors((prevErrors) => ({ ...prevErrors, phoneNumber: `Введіть коректний номер мобільного` }));
 		}
 
 		// Логіка обробки форми при відсутності помилок
