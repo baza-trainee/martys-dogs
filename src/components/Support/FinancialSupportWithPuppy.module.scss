@@ -1,0 +1,134 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+
+.container{
+  // max-width: 353px;
+  border-radius: 30px;
+  overflow: hidden;
+
+  @include tablet{
+    // max-width: 704px;
+    min-height: 367px;
+    display: flex;
+  }
+
+  @include small_desktop{
+    min-width: 50%;
+    height: 519px;
+  }
+}
+
+.title{
+  text-align: start;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.4;
+  color: $color-gray-100;
+
+  @include large_desktop{
+    font-style: 24px;
+    line-height: 1.2;
+  }
+}
+
+.information{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 20px;
+    
+    gap: 16px;
+  
+  // border-radius: 30px;
+  background-color:$color-main-blue-light;
+
+  @include tablet{
+    padding: 40px;
+    gap:24px;
+  }
+
+  @include small_desktop{
+    padding: 50px 40px;
+  }
+
+  @include large_desktop{
+    padding: 105px 40px;
+  }
+}
+
+.text{
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+  color:$color-gray-100;
+  text-align: start;
+
+  @include tablet{
+    font-size:16px;
+  }
+}
+
+.link{
+  display: flex;
+  width: 100%;
+    padding: 12px 24px;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    
+    border-radius: 30px;
+    background-color:$color-accent;
+
+    color:$color-gray-0;
+    font-size: 16px;
+      font-weight: 700;
+      line-height: 1.4;
+}
+
+.image_box{
+width:100%;
+max-height: 46%;
+background: linear-gradient(90deg, #40B0D3,#40B0D3,#60BCDD,#54C1DF);
+display: flex;
+justify-content: center;
+@include tablet{
+  max-width:200px;
+}
+// @include small_desktop{
+//   max-width:37.7%
+// }
+}
+
+.image{
+  width:353px;
+  height:auto;
+
+  @include tablet{
+    min-width: 200px;
+  }
+}
+
+.icon{
+  position:relative;
+width:24px;
+height: 24px;
+  svg:first-child{
+    position:absolute;
+    width:13px;
+    height: 13px;
+    bottom:0;
+    left: 0;
+  }
+
+  svg:last-child{
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    top: 0;
+      right: 0;
+  }
+}

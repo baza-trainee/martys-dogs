@@ -1,0 +1,40 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+
+.statistics__section{
+  padding: 40px 20px;
+  background-color: $color-main-blue-light;
+
+  @include tablet {
+padding:80px 32px;
+  }
+
+  @include small_desktop{
+    padding:100px;
+  }
+}
+
+.statistics__list{
+  display: flex;
+  flex-direction: column;
+  gap:16px;
+
+  @include tablet {
+    gap:20px;
+  }
+
+  @include small_desktop {
+    flex-direction: row;
+  }
+}
+
+.statistics__item{
+ 
+  list-style: none;
+
+  @include small_desktop {
+display: flex;
+width:100%;
+  }
+}
