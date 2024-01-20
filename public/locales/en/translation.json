@@ -23,6 +23,16 @@
 		"callDis": "Free from all numbers in Ukraine",
 		"copyright": "Development of Baza Trainee Ukraine 2023 © All rights reserved"
 	},
+	"hero": {
+		"title": "Dog greetings from a special shelter, where the cycle of goodness and wool happens!",
+		"about": "We are Tails of dog shelter and canister therapy center from City of Goodness. All of us:",
+		"point_1": "Vaccinated",
+		"point_2": "Sterilized",
+		"point_3": "Got rid of parasites",
+		"point_4": "Treat with love",
+		"CTA": "We are looking for a home and help with an open heart",
+		"button": "Support tails"
+	},
 	"tail": {
 		"ready": "Ready to be your friend",
 		"vaccine": "Parasite vaccination/treatment",
