@@ -56,7 +56,7 @@
 		"phones": "Contact numbers:",
 		"free": "Free from all numbers within Ukraine",
 		"socials": "Our social media:"
-  },
+	},
 	"catalog": {
 		"header_title": "Meet our tails",
 		"header_button": "Apply filters",
@@ -75,5 +75,25 @@
 		"filter_size_medium": "Medium",
 		"filter_size_large": "Large",
 		"filter_checkbox": "Readiness for adoption"
+	},
+	"heroAbout": {
+		"title": "Here, every animal finds shelter and help!",
+		"text": "Welcome to our shelter. We provide temporary shelter, care and finding new, loving families for our four-legged friends.",
+		"goal": "Our goal is to create a comfortable and safe environment for every animal, where they can feel warmth, attention and love.",
+		"goal_text": "We have dogs of all breeds, sizes and personalities looking for a forever home. We work with volunteers and veterinary professionals to ensure that each dog receives the necessary medical care, vaccinations and appropriate grooming.",
+		"goal_text_bottom": "Our adoption process is extremely simple. You can visit our shelter, meet our dogs, get to know their personalities and choose a new friend for your family. Every dog deserves a happy life, and we will help you find the one who will become your faithful companion.",
+		"button": "View all tails"
+	},
+	"thanksModal": {
+		"title": "Thank you for your donation!",
+		"info": "Your help makes a huge value. Thanks to your contribution, we can continue to take care of our four-legged friends, providing them with the necessary care and a chance for a better life.",
+		"gratitude": "Thank you from all our tailed friends!",
+		"button": "Back to the main page"
+	},
+	"adoption": {
+		"title": "Your heart is now bigger!",
+		"info": "Thank you for preparing your open home and your soul for a new four-legged friend. Our Tails team can't wait to get in touch with you and help you find the perfect furry companion.",
+		"gratitude": "We will call you soon to discuss the next steps and answer your questions.",
+		"button": "Back to the main page"
 	}
 }
