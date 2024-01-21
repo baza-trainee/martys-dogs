@@ -79,23 +79,19 @@ const Tail: React.FC<TailProps> = ({
 					<p>{description}</p>
 				</div>
 				<div className={styles.container}>
-					<a
-						href='https://www.monobank.com.ua/'
-						target='_blank'
-						rel='noopener noreferrer'
+					<button
+						onClick={() => console.log('button')}
 						className={styles.donate}
 					>
 						{t('tail.donate')}
-					</a>
+					</button>
 					{ready_for_adoption && (
-						<a
-							href='https://www.monobank.com.ua/'
-							target='_blank'
-							rel='noopener noreferrer'
+						<button
+							onClick={() => console.log('button')}
 							className={styles.adopt}
 						>
 							{t('tail.adopt')}
-						</a>
+						</button>
 					)}
 				</div>
 			</div>
