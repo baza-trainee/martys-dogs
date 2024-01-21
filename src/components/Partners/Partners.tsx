@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './Partners.module.scss';
 import Icon1 from '../../assets/partners_about/PurinaLogo.svg';
 import Icon2 from '../../assets/partners_about/RoyalCanineLogo.svg';
@@ -13,10 +14,11 @@ export interface PartnersProps {
   icons: IconProps[];
 }
 
-export const PartnersAboutPage: React.FC<PartnersProps> = ({ title, icons }) => {
+export const PartnersAboutPage: React.FC<PartnersProps> = ({ icons }) => {
+  const { t } = useTranslation();
   return (
     <section className={styles.partnersContainer}>
-      <h2 className={styles.partnersTitle} data-testid="partners-title">{title}</h2>
+      <h2 className={styles.partnersTitle} data-testid="partners-title">{t('partners.title')}</h2>
       <div className={styles.partnersIconContainer}>
         {icons.map((icon, index) => (
           <div key={index} className={styles.partnersIcon}>

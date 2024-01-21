@@ -1,21 +1,6 @@
 @import '../../scss/variables';
 @import '../../scss/mixins';
 
-$videoContainerPadding1280: 100px;
-$videoContainerPadding768: 80px 32px;
-$videoContainerPadding393: 40px 20px;
-
-$playButtonSize: 100px;
-
-$pawImgSize393: 120px;
-$pawImgSize768: 80px;
-$pawImgSize1280: 120px;
-$pawImgSize1440: 100px;
-$pawImgSize1920: 120px;
-
-$videoInfoTitleSize393: 28px;
-$videoInfoTitleSize1280: 42px;
-
 .videoContainerWrapper {
 	display: grid;
 	place-items: center;
@@ -37,25 +22,25 @@ $videoInfoTitleSize1280: 42px;
 		box-sizing: border-box;
 		position: relative;
 
-		padding: $videoContainerPadding393;
+		padding: 40px 20px;
 		color: $color-gray-100;
 
 		@include tablet {
-			padding: $videoContainerPadding768;
+			padding: 80px 32px;
 			gap: 48px;
 		}
 
 		@include small_desktop {
-			padding: $videoContainerPadding1280;
+			padding: 100px;
 			width: 1280px;
 		}
 
 		@include large_desktop {
-			flex-direction: row;
-			width: auto;
+			width: 1440px;
 		}
 
 		@include full_desktop {
+			flex-direction: row;
 			width: 1920px;
 		}
 
@@ -67,7 +52,7 @@ $videoInfoTitleSize1280: 42px;
 			@include small_desktop {
 				flex-direction: column;
 			}
-			@include large_desktop {
+			@include full_desktop {
 				flex-direction: row;
 			}
 		}
@@ -108,8 +93,8 @@ $videoInfoTitleSize1280: 42px;
 
 				.playButtonImage {
 					position: absolute;
-					width: $playButtonSize;
-					height: $playButtonSize;
+					width: 100px;
+					height: 100px;
 					top: 50%;
 					left: 50%;
 					transform: translate(-50%, -50%);
@@ -126,7 +111,29 @@ $videoInfoTitleSize1280: 42px;
 					}
 				}
 			}
+			.loader {
+				width: 48px;
+				height: 48px;
+				border: 5px solid $color-gray-0;
+				border-bottom-color: $color-main-blue-mid;
+				border-radius: 50%;
+				display: inline-block;
+				box-sizing: border-box;
+				animation: rotation 1s linear infinite;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
 
+			@keyframes rotation {
+				0% {
+					transform: rotate(0deg);
+				}
+				100% {
+					transform: rotate(360deg);
+				}
+			}
 			.videoElement {
 				position: absolute;
 				z-index: 1;
@@ -145,28 +152,19 @@ $videoInfoTitleSize1280: 42px;
 	.textContainer {
 		@include tablet {
 			position: relative;
-			margin-bottom: 24px;
 		}
 
 		@include small_desktop {
 			position: unset;
-			margin-bottom: 0;
-			
 		}
 
 		.videoTitle {
-			margin-bottom: 16px;
+			margin-bottom: 32px;
 			line-height: 120%;
-			font-size: $videoInfoTitleSize393;
-
-			@include tablet {
-				margin: 24px 0 32px 0;
-			}
+			font-size: 28px;
 
 			@include small_desktop {
-				margin-top: 0;
-				margin-bottom: 32px;
-				font-size: $videoInfoTitleSize1280;
+				font-size: 42px;
 			}
 
 			@include large_desktop {
@@ -179,11 +177,16 @@ $videoInfoTitleSize1280: 42px;
 		}
 
 		.videoDescription {
-			margin-bottom: 16px;
 			word-wrap: break-word;
 			line-height: 140%;
 
+			@include tablet {
+				max-width: 90vw;
+			}
+
 			@include small_desktop {
+				margin-bottom: 16px;
+				max-width: none;
 				font-size: 20px;
 			}
 
@@ -193,7 +196,7 @@ $videoInfoTitleSize1280: 42px;
 				font-weight: 700;
 
 				@include tablet {
-					margin-bottom: 48px;
+					margin-bottom: 16px;
 				}
 
 				@include small_desktop {
@@ -216,7 +219,7 @@ $videoInfoTitleSize1280: 42px;
 				@include tablet {
 					margin-bottom: 0;
 				}
-				
+
 				&.main {
 					@include small_desktop {
 						margin-bottom: 32px;
@@ -226,22 +229,17 @@ $videoInfoTitleSize1280: 42px;
 		}
 
 		.pawImage {
-			width: $pawImgSize393;
-			height: $pawImgSize393;
+			width: 120px;
+			height: 120px;
 
 			@include tablet {
-				width: $pawImgSize768;
-				height: $pawImgSize768;
+				width: 80px;
+				height: 80px;
 			}
 
 			@include small_desktop {
-				width: $pawImgSize1280;
-				height: $pawImgSize1280;
-			}
-
-			@include full_desktop {
-				width: $pawImgSize1920;
-				height: $pawImgSize1920;
+				width: 120px;
+				height: 120px;
 			}
 
 			&.main {
@@ -249,8 +247,8 @@ $videoInfoTitleSize1280: 42px;
 
 				@include tablet {
 					position: absolute;
-					right: 5%;
-					bottom: -22%;
+					right: 0;
+					bottom: -50px;
 				}
 				@include small_desktop {
 					position: unset;
@@ -261,15 +259,11 @@ $videoInfoTitleSize1280: 42px;
 					display: none;
 				}
 
-				@include large_desktop {
+				@include full_desktop {
 					display: block;
 					position: absolute;
-					right: 45%;
-					bottom: 1%;
-				}
-
-				@include full_desktop {
 					right: 50%;
+					bottom: 0;
 				}
 			}
 		}

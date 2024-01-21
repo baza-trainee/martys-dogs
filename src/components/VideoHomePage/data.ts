@@ -11,6 +11,7 @@ import therapyLargeScreen from '../../assets/video_main/boy/boy1920.webp';
 import pawsImg from '../../assets/video_main/VectorPaws.svg';
 import playButtonImg from '../../assets/video_main/Play.svg';
 
+
 export const videoLinks = {
 	main: 'https://www.youtube.com/watch?v=2igwkVve1nk',
 	therapy: 'https://www.facebook.com/joriksss/videos/335880469139977',
@@ -26,11 +27,11 @@ const mediaQueryCommon = {
 
 export const mainPosters = [
 	{
-		srcSet: `${mainMobile} 440w, ${mainTablet} 768w`,
+		srcSet: `${mainMobile} 440w, ${mainTablet} 767w`,
 		mediaQuery: mediaQueryCommon.mobile,
 	},
 	{
-		srcSet: `${mainTablet} 769w, ${mainDesktop} 1200w`,
+		srcSet: `${mainTablet} 768w, ${mainDesktop} 1200w`,
 		mediaQuery: mediaQueryCommon.tablet,
 		
 	},
@@ -50,11 +51,11 @@ export const mainPosters = [
 
 export const therapyPosters = [
 	{
-		srcSet: `${therapyMobile} 393w, ${therapyTablet} 768w`,
+		srcSet: `${therapyMobile} 393w, ${therapyTablet} 767w`,
 		mediaQuery: mediaQueryCommon.mobile,
 	},
 	{
-		srcSet: `${therapyTablet} 769w, ${therapyDesktop} 1200w`,
+		srcSet: `${therapyTablet} 768w, ${therapyDesktop} 1200w`,
 		mediaQuery: mediaQueryCommon.tablet,
 	},
 	{
@@ -74,39 +75,38 @@ export const therapyPosters = [
 
 export const otherImages = {
 	playButtonImage: playButtonImg,
-	pawsImage:pawsImg
+	pawsImage: pawsImg
 }
 
 export const titles = {
-	main: 'Подаруй собакам нову надію на щасливе життя!',
-	therapy: 'Каністерапія з хвостиками'
+	main: 'mainVideo.title',
+	therapy: 'canisTherapy.title'
 };
 
 
 export const mainDescription = [
 	{
-		text: "Приєднуйтесь до нашої спільноти людей з великим серцем, які допомагають цим беззахисним тваринам знайти своїх вірних друзів. Наш веб-сайт для збору пожертв є зв'язком між вами та цими тваринами, які потребують допомоги. Разом ми можемо змінити їхнє життя на краще!"
+		text: 'mainVideo.paragraph_one'
 	},
 	{
-		text: `Кожен ваш вклад має велике значення для поліпшення їхнього добробуту. Ваша підтримка допомагає нам забезпечувати безперебійну медичну допомогу, належне харчування, безпечний притулок та всебічний догляд для собак.`
+		text: 'mainVideo.paragraph_two'
 	},
 	{
-		text: 'Ваша допомога має велике значення для покращення життя цих тварин. Кожен ваш внесок допомагає нам забезпечити собакам необхідну медичну допомогу, належне харчування, безпечне місце проживання і належний догляд.'
+		text: 'mainVideo.paragraph_three'
 	},
 ];
 
 export const therapyDescription = [
 	{
-		text: 'Каністерапія (від лат. сanis — собака + грец. θεραπεία — лікування) — вид терапії з використанням спеціально підготовлених собак у медичній та соціальній реабілітації.'
+		text: 'canisTherapy.paragraph_one'
 	},
 	{
-		text: "Ми віримо, що кожне хвилинне спілкування з нашими пухнастими друзями може зцілити душу. Тут, серед веселих хвостів та м'яких лапок, ми створили особливий простір, де магія каністерапії оживає. У цьому місці дитячі сміхи змішуються з радісним лаєм, а кожен день наповнений чудесами взаєморозуміння та дружби."
+		text: 'canisTherapy.paragraph_two'
 	},
 	{
-		text: `Наші чотирилапі терапевти, зі своєю унікальною історією та нестримною любов'ю до життя, надихають дітей відкривати світ з нової перспективи. Вони вчать маленьких сердець щедрості, доброти та емпатії. Чи то ніжні обійми, чи радісна гра, – кожен момент, проведений з нашими «Хвостиками», підкреслює, що турбота і любов можуть знайти форму в найнесподіваніших образах.`
+		text: 'canisTherapy.paragraph_three'
 	},
 	{
-		text: 'Запрошуємо вас та ваші родини відвідати наш притулок, де серця зігріваються, дружба розцвітає, а чотирилапі друзі чекають, щоб подарувати вам щастя. Давайте разом творити добро – "Хвостики" вже готові поділитися своєю безмежною енергією та невичерпною радістю!'
-	},
+		text: 'canisTherapy.paragraph_four'
+	}
 ];
-

@@ -91,7 +91,7 @@ const ChangePartners: React.FC<Props> = ({
             type="text"
             id="website"
             value={state.inputWeb}
-            onChange={(e) => setState((prev) => ({ ...prev, input2: e.target.value }))}
+            onChange={(e) => setState((prev) => ({ ...prev, inputWeb: e.target.value }))}
             placeholder={placeholderWeb}
           />
         </div>
