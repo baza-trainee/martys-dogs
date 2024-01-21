@@ -4,6 +4,10 @@
 		"part1": "To get started, edit <1>src/pages/About.tsx</1> and save to reload.",
 		"part2": "Switch language between english and ukrainian using buttons above."
 	},
+	"tails": {
+		"title": "Meet our tails",
+		"tails": "All tails of the shelter"
+	},
 	"news": {
 		"title": "Shelter news",
 		"button": "Read more"
