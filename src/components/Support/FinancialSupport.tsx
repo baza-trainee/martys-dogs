@@ -6,6 +6,8 @@ import Button from '../../layout/Button/Button';
 import ButtonSupport from './ButtonSupport';
 import { mono, privat, paypal } from '../../assets/support';
 import { useModalContext } from '../../context/useGlobalContext';
+import Modal from '../../layout/ModalLayout/Modal';
+import ThanksModal from '../ThanksModal/ThanksModal';
 
 const data = [
 	{ link: 'https://www.monobank.ua/', src: mono },
@@ -16,7 +18,8 @@ const data = [
 const FinancialSupport = () => {
 	const [link, setLink] = useState<undefined | string>('');
 	console.log(link);
-	const { openModal } = useModalContext();
+	const { openModal, closeModal, isModalOpen, activateModal } =
+		useModalContext();
 
 	const onHandleClick = (e: React.SyntheticEvent<EventTarget>) => {
 		const target = e.currentTarget as HTMLButtonElement;
@@ -30,8 +33,11 @@ const FinancialSupport = () => {
 		// } else {
 		//   window.open(link,'_blank')
 		// }
+		console.log('thanks');
 		window.open(link, '_blank');
 		openModal();
+		activateModal('thanks');
+		console.log('after');
 	};
 
 	return (

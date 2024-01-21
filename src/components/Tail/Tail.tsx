@@ -3,6 +3,9 @@ import { FaCakeCandles, FaCheck } from 'react-icons/fa6';
 import { GrExpand } from 'react-icons/gr';
 import styles from './Tail.module.scss';
 import { useTranslation } from 'react-i18next';
+import { useModalContext } from '../../context/useGlobalContext';
+import Modal from '../../layout/ModalLayout/Modal';
+import ContactModal from '../ContactModal/ContactModal';
 
 export interface TailProps {
 	id: number;
@@ -35,6 +38,12 @@ const Tail: React.FC<TailProps> = ({
 	photo,
 }) => {
 	const { t } = useTranslation();
+	const { openModal, activateModal, activeModal } = useModalContext();
+	const handleModal = () => {
+		console.log(activeModal);
+		openModal();
+		activateModal('contact');
+	};
 
 	return (
 		<div className={styles.card}>
@@ -86,10 +95,7 @@ const Tail: React.FC<TailProps> = ({
 						{t('tail.donate')}
 					</button>
 					{ready_for_adoption && (
-						<button
-							onClick={() => console.log('button')}
-							className={styles.adopt}
-						>
+						<button onClick={handleModal} className={styles.adopt}>
 							{t('tail.adopt')}
 						</button>
 					)}

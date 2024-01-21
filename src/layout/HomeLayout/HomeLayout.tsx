@@ -13,45 +13,46 @@ import ThanksModal from '../../components/ThanksModal/ThanksModal';
 // import { useContext } from 'react';
 // import { ModalContext } from '../../context/ModalContext';
 // import { useModalContext } from '../../context/useGlobalContext';
-// import AdoptionModal from '../../components/AdoptionModal/AdoptionModal';
-// import ContactModal from '../../components/ContactModal/ContactModal';
+import AdoptionModal from '../../components/AdoptionModal/AdoptionModal';
+import ContactModal from '../../components/ContactModal/ContactModal';
 
 const HomeLayout = () => {
 	// const modalContext = useModalContext();
 	// const isModalOpen = modalContext?.isModalOpen || false;
 	// const openModal = modalContext?.openModal || (() => {});
 	// const closeModal = modalContext?.closeModal || (() => {});
-	const { isModalOpen, openModal, closeModal } = useModalContext();
+	const { isModalOpen, openModal, closeModal, activeModal } =
+		useModalContext();
 	console.log(isModalOpen);
 	return (
 		<>
 			<Header />
 			<Outlet />
 			<Footer />
-			{/*		<Modal
-				isModal={isModalOpen}
-				openModal={openModal}
-				closeModal={closeModal}
-			>
-				<ThanksModal />
-				<AdoptionModal />
-			</Modal> */}
-
 			<Modal
 				isModal={isModalOpen}
 				openModal={openModal}
 				closeModal={closeModal}
 			>
-				<ThanksModal />
+				{activeModal === 'contact' && <ContactModal />}
+				{activeModal === 'adoption' && <AdoptionModal />}
+				{activeModal === 'thanks' && <ThanksModal />}
 			</Modal>
-
-			{/*<Modal
+			{/* <Modal
 				isModal={isModalOpen}
-				openModal={openModal}
+				openModal={() => openModal('adoption')}
 				closeModal={closeModal}
 			>
-				<ContactModal />
-			</Modal>*/}
+				{activeModal === 'adoption' && <AdoptionModal />}
+			</Modal> */}
+			{/* <Modal
+				isModal={isModalOpen}
+				openModal={() => openModal('thanks')}
+				closeModal={closeModal}
+			>
+				{activeModal === 'thanks' && <ThanksModal />}
+				{/* <ThanksModal /> */}
+			{/* </Modal> */} */
 		</>
 	);
 };
