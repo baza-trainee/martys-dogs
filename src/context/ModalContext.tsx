@@ -16,15 +16,11 @@ const initialModalContext = {
 	closeModal: () => {},
 };
 
-// export const ModalContext = createContext<ModalContextType | undefined>(
-// 	undefined,
-// );
-
 export const ModalContext =
 	createContext<ModalContextType>(initialModalContext);
 
 export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
-	const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+	const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 	const openModal = () => {
 		setIsModalOpen(true);
 	};
