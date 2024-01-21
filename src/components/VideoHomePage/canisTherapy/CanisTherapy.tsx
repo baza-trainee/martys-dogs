@@ -1,11 +1,10 @@
-import React from 'react';
 import styles from '../Video.module.scss';
 import VideoDescription from '../VideoDescription';
 import VideoPlayer from '../VideoPlayer';
 import {
 	therapyPosters,
-	therapyDescription,
 	titles,
+	therapyDescription,
 	videoLinks,
 	otherImages,
 } from '../data';
