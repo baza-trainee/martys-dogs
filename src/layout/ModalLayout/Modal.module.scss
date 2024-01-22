@@ -48,10 +48,14 @@
 	@include tablet {
 		top: 24px;
 		right: 24px;
-
 	}
 	&:hover {
 		color: $color-accent;
 		background: $color-main-bg;
 	}
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
 }
