@@ -1,27 +1,11 @@
 import ContactForm from './ContactForm';
 import { useTranslation } from 'react-i18next';
+
 import styles from './ContactModal.module.scss';
-import { Link } from 'react-router-dom';
 
-// import { useModalContext } from '../../context/useGlobalContext';
-/*
-
-export interface ChangeLanguageParams {
-	lng: string;
-}
-
-export type ChangeLanguageFunction = (params: ChangeLanguageParams) => void;
-
-*/
 
 const ContactModal: React.FC = () => {
-	const { t, i18n } = useTranslation();
-
-/*	const currentLanguage = i18n.language;
-
-	const changeLanguage: ChangeLanguageFunction = ({ lng }) => {
-		i18n.changeLanguage(lng);
-	};*/
+	const { t } = useTranslation();
 
 	return (
 		<div className={styles.wrapper}>

@@ -12,15 +12,9 @@ form {
     gap: 20px;
   }
 
-  @include large-desktop {
-
-
-  }
-
 }
 
 .inputsContainer {
-
   display: flex;
   flex-direction: column;
 
@@ -33,12 +27,6 @@ form {
     gap: 16px;
   }
 
-  @include large-desktop {
-    //width: 100%;
-    //display: flex;
-    //flex-direction: column;
-
-  }
 }
 
 .btnContainer {
