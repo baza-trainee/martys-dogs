@@ -4,8 +4,6 @@ import Button from '../../layout/Button/Button';
 import { useModalContext } from '../../context/useGlobalContext';
 import { useState } from 'react';
 import * as React from 'react';
-import Modal from '../../layout/ModalLayout/Modal';
-import AdoptionModal from '../AdoptionModal/AdoptionModal';
 
 interface FormData {
 	name: string;

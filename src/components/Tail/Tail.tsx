@@ -4,8 +4,6 @@ import { GrExpand } from 'react-icons/gr';
 import styles from './Tail.module.scss';
 import { useTranslation } from 'react-i18next';
 import { useModalContext } from '../../context/useGlobalContext';
-import Modal from '../../layout/ModalLayout/Modal';
-import ContactModal from '../ContactModal/ContactModal';
 
 export interface TailProps {
 	id: number;
