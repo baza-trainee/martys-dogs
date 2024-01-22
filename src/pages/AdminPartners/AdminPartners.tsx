@@ -1,6 +1,7 @@
+import { FaEdit, FaRegPlusSquare, FaSearch, FaTrash } from 'react-icons/fa';
 import React, { useState } from 'react';
+
 import { Link } from 'react-router-dom';
-import { FaSearch, FaTrash, FaEdit, FaRegPlusSquare } from 'react-icons/fa';
 import Logo1Image from '../../assets/partners_about/PurinaLogo.svg';
 import Logo2Image from '../../assets/partners_about/RoyalCanineLogo.svg';
 import styles from './AdminPartners.module.scss';
@@ -12,9 +13,9 @@ interface Logo {
 }
 
 const logos: Logo[] = [
-	{ id: 1, src: Logo1Image, alt: 'Пуріна' },
-	{ id: 2, src: Logo1Image, alt: 'Пуріна' },
-	{ id: 3, src: Logo2Image, alt: 'Роял Канін' },
+	{ id: 1, src: Logo1Image, alt: 'Purina' },
+	{ id: 2, src: Logo1Image, alt: 'Purina' },
+	{ id: 3, src: Logo2Image, alt: 'Royal Canin' },
 	{ id: 4, src: Logo1Image },
 	{ id: 5, src: Logo2Image },
 	{ id: 6, src: Logo1Image },
@@ -82,7 +83,7 @@ const AdminPartners: React.FC = () => {
 						onChange={handleSearch}
 					/>
 					<button className={styles.searchButton}>
-						<i className={styles.serchIcon}>
+						<i className={styles.searchIcon}>
 							<FaSearch />
 						</i>
 					</button>
