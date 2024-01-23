@@ -31,6 +31,16 @@ const Footer = () => {
 							className={styles.footer_nav_cat}
 						>
 							<Link
+								to="/"
+								className={styles.footer_nav_link}
+							>
+								{t('header.nav_main')}
+							</Link>
+						</li>
+						<li
+							className={styles.footer_nav_cat}
+						>
+							<Link
 								to="/about"
 								className={styles.footer_nav_link}
 							>
@@ -94,7 +104,6 @@ const Footer = () => {
 									className={styles.footer_contact_icon}
 								/>
 								<a
-									href="mailto:cityofgoodnessua@gmail.com"
 									className={styles.footer_contact_link}
 								>
 									cityofgoodnessua@gmail.com
@@ -107,7 +116,6 @@ const Footer = () => {
 									className={styles.footer_contact_icon}
 								/>
 								<a
-									href="tel:+380950536009"
 									className={styles.footer_contact_link}
 								>
 									+380 95 053 60 09
@@ -117,13 +125,12 @@ const Footer = () => {
 								className={styles.footer_contact_cat}
 							>
 								<div
-									className={styles.footer_contact_cat_dog}
+									className={styles.footer_contact_cat_dog }
 								>
 									<FiSmartphone
 										className={styles.footer_contact_icon}
 									/>
 									<a
-										href="tel:800503231"
 										className={styles.footer_contact_link}
 									>
 										0 800 503 231
@@ -140,7 +147,7 @@ const Footer = () => {
 							className={styles.footer_soc}
 						>
 							<a
-								href="#"
+								href="https://www.facebook.com/maybutneukr/"
 								className={styles.footer_soc_link}
 							>
 								<FaFacebook
@@ -148,7 +155,7 @@ const Footer = () => {
 								/>
 							</a>
 							<a
-								href="#"
+								href="https://www.instagram.com/misto.dobra/"
 								className={styles.footer_soc_link}
 							>
 								<FaInstagram
@@ -156,7 +163,7 @@ const Footer = () => {
 								/>
 							</a>
 							<a
-								href="#"
+								href="https://www.youtube.com/channel/UCTkEh1ww0RrNk7KUK4-ffBw/videos"
 								className={styles.footer_soc_link}
 							>
 								<FaYoutube
