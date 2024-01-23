@@ -57,8 +57,10 @@ const NewsItem: React.FC<NewsItemProps> = ({
 			</div>
 			<div className={styles.info}>
 				<h3 className={styles.title}>{title}</h3>
-				<p className={styles.date}>{getDateName(post_at)}</p>
-				<p className={styles.text}>{sub_text}</p>
+				<div>
+					<p className={styles.date}>{getDateName(post_at)}</p>
+					<p className={styles.text}>{sub_text}</p>
+				</div>
 			</div>
 			<a href={url} target='blank' rel='noopener noreferrer'>
 				<Button

@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import ReactPlayer from 'react-player';
 import styles from './Video.module.scss';
 
 interface Poster {
 	srcSet: string;
 	mediaQuery: string;
-	sizes?:string;
+	sizes?: string;
 }
 
 interface VideoPlayerProps {
@@ -22,11 +22,19 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 	playButtonImage,
 }) => {
 	const [showControls, setShowControls] = useState<boolean>(false);
+	const [isLoading, setIsLoading] = useState<boolean>(true);
+
+	const handleReady = () => {
+		setIsLoading(false);
+	};
+
+	const handleBuffer = () => {
+		setIsLoading(true);
+	};
 
 	const handleClick = () => {
 		setShowControls(!showControls);
 	};
-	
 
 	return (
 		<div className={styles.videoPlayer}>
@@ -63,16 +71,21 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 			</div>
 
 			{showControls && (
-				<ReactPlayer
-					url={videoUrl}
-					playing
-					controls
-					width='100%'
-					height='100%'
-					className={`${styles.videoElement} ${
-						showControls ? styles.showControls : ''
-					}`}
-				/>
+				<>
+					{isLoading && <div className={styles.loader}></div>}
+					<ReactPlayer
+						url={videoUrl}
+						playing
+						controls
+						width='100%'
+						height='100%'
+						className={`${styles.videoElement} ${
+							showControls ? styles.showControls : ''
+						}`}
+						onReady={handleReady}
+						onBuffer={handleBuffer}
+					/>
+				</>
 			)}
 		</div>
 	);

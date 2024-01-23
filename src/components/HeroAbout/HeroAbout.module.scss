@@ -165,14 +165,16 @@ img {
 	font-size: 14px;
 	font-weight: 500;
 	line-height: 1.4;
+	@include small-desktop {
+		font-size: 20px;
+	}
+}
+.goal_text_bottom {
+	composes: goal_text;
 	margin-bottom: 24px;
 
 	@include tablet {
 		margin-bottom: 64px;
-	}
-
-	@include small-desktop {
-		font-size: 20px;
 	}
 }
 

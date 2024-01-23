@@ -68,8 +68,8 @@ const Landing: React.FC = () => {
 			<MainVideo />
 			<CanisTherapy />
 			<Tails data={data} />
-			<Partners />
 			<Support />
+			<Partners />
 			<News data={data} />
 		</main>
 	);

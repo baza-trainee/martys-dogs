@@ -49,7 +49,7 @@ const Modal: React.FC<ModalProps> = ({ isModal, closeModal, children }) => {
 						className={styles.close}
 						onClick={closeModal}
 					>
-						<FaXmark size='lg' />
+						<FaXmark className={styles.icon} />
 					</button>
 					{children}
 				</div>

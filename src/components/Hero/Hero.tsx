@@ -2,8 +2,12 @@ import Button from '../../layout/Button/Button';
 import { FaPaw } from 'react-icons/fa6';
 import styles from './Hero.module.scss';
 import { scrollToSection } from '../../services/scrollTo';
+import { useTranslation } from 'react-i18next';
+
 
 const Hero = () => {
+	const { t } = useTranslation();
+
 	return (
 		<section className={styles.hero}>
 
@@ -12,12 +16,12 @@ const Hero = () => {
 				<div className={styles.textBlock}>
 
 					<div className={styles.headingContainer}>
-						<h1>Собачі вітання з особливого притулку, де відбувається колообіг добра і шерсті! </h1>
+						<h1>{t('hero.title')}</h1>
 					</div>
 
 					<div className={styles.contentContainer}>
 						<p>
-							Ми - це Хвостики притулку для собак та центру каністерапії Міста Добра. Всі ми:
+							{t('hero.about')}
 						</p>
 
 
@@ -27,33 +31,33 @@ const Hero = () => {
 									<FaPaw />
 									<FaPaw />
 								</div>
-								<span>Вакциновані</span>
+								<span>{t('hero.point_1')}</span>
 							</div>
 							<div className={styles.listItem}>
 								<div className={styles.listBubble}>
 									<FaPaw />
 									<FaPaw />
 								</div>
-								<span>Стерилізовані</span>
+								<span>{t('hero.point_2')}</span>
 							</div>
 							<div className={styles.listItem}>
 								<div className={styles.listBubble}>
 									<FaPaw />
 									<FaPaw />
 								</div>
-								<span>Оброблені від паразитів</span>
+								<span>{t('hero.point_3')}</span>
 							</div>
 							<div className={styles.listItem}>
 								<div className={styles.listBubble}>
 									<FaPaw />
 									<FaPaw />
 								</div>
-								<span>Лікуємо любов’ю</span>
+								<span>{t('hero.point_4')}</span>
 							</div>
 						</div>
 
 						<p>
-							З відкритим серцем шукаємо дім та допомогу
+							{t('hero.CTA')}
 						</p>
 					</div>
 
@@ -61,7 +65,7 @@ const Hero = () => {
 						<Button
 							btnClasses={'primary'}
 							type={'button'}
-							name={'Підтримати хвостиків'}
+							name={t('hero.button')}
 							onClick={() => scrollToSection('support')}
 							children={
 								<div>
