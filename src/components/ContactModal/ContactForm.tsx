@@ -93,11 +93,11 @@ const ContactForm: React.FC = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
+		<form   className={styles.form} onSubmit={handleSubmit}>
 
 			<div className={styles.inputsContainer}>
 
-				<div>
+				<div  className={styles.inputBox}>
 					<label
 						htmlFor="name"
 						className={errors.name ? styles.labelError : styles.label}
@@ -115,15 +115,14 @@ const ContactForm: React.FC = () => {
 							onChange={handleChange}
 							minLength={2}
 							required
-							// onBlur={handleBlur}
 						/>
 
-						{errors.name && <div className={styles.errorMessage}>{errors.name}</div>}
+						{errors.name && <div className={styles.errorMessage}>{t('contactModal.name_error')}</div>}
 					</div>
 				</div>
 
 
-				<div>
+				<div  className={styles.inputBox}>
 					<label
 						htmlFor="phoneNumber"
 						className={errors.phoneNumber ? styles.labelError : styles.label}
@@ -140,14 +139,13 @@ const ContactForm: React.FC = () => {
 							value={formData.phoneNumber}
 							onChange={handleChange}
 							required
-							// onBlur={handleBlur}
 						/>
-						{errors.phoneNumber && <div className={styles.errorMessage}>{errors.phoneNumber}</div>}
+						{errors.phoneNumber && <div className={styles.errorMessage}>{t('contactModal.tel_error')}</div>}
 
 					</div>
 				</div>
 
-				<div>
+				<div  className={styles.inputBox}>
 					<label
 						htmlFor="comment"
 						className={styles.label}
@@ -162,7 +160,6 @@ const ContactForm: React.FC = () => {
 							className={styles.input}
 							placeholder={t('contactModal.comment_placeholder')}
 							onChange={handleChange}
-							// onBlur={handleBlur}
 						/>
 
 					</div>

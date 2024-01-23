@@ -39,7 +39,7 @@
 
   @include tablet {
     margin: 33px 32px 20px 32px;
-    width: 340px;
+    width: 380px;
 
   }
 
@@ -47,13 +47,12 @@
     margin: 40px 32px;
     width: 402px;
     justify-content: space-between;
-    gap: 20px;
+    //gap: 20px;
   }
 
   @include large-desktop {
     flex-direction: column;
     align-items: flex-end;
-
     margin: 80px 32px;
     width: 540px;
   }
@@ -66,7 +65,9 @@
   gap: 8px;
   align-self: stretch;
 
-
+  @include tablet {
+    width: 340px;
+  }
 
   @include small-desktop {
     gap: 16px;
@@ -77,7 +78,7 @@
     font-size: 20px;
     font-weight: 800;
     line-height: 28px;
-
+    margin: 0;
 
     @include small-desktop {
       font-size: 26px;

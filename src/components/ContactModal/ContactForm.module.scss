@@ -1,12 +1,15 @@
 @import '../../scss/variables';
 @import '../../scss/mixins';
 
-form {
+.form {
   gap: 16px;
   display: flex;
   flex-direction: column;
   width: 100%;
 
+  @include tablet {
+    gap: 0;
+  }
 
   @include small_desktop {
     gap: 20px;
@@ -18,13 +21,9 @@ form {
   display: flex;
   flex-direction: column;
 
-  @include tablet {
-    gap: 8px;
-  }
 
   @include small_desktop {
     width: 100%;
-    gap: 16px;
   }
 
 }
@@ -59,7 +58,7 @@ form {
   align-self: stretch;
   border-radius: 40px;
   background: $color-gray-0;
-  box-shadow: 0  2px 8px 0 rgba(0, 0, 0, 0.04) inset;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04) inset;
   padding: 8px 16px;
 
   &::placeholder {
@@ -68,6 +67,7 @@ form {
     font-weight: 500;
     line-height: 22.4px;
   }
+
   @include small_desktop {
     padding: 12px 16px;
   }
@@ -90,6 +90,19 @@ form {
 
 .inputWrapper {
   padding: 4px 0;
+}
+
+
+.inputBox {
+  min-height: 86px;
+
+ /* @include tablet {
+    min-height: 106px;
+  }*/
+
+  @include small_desktop {
+    min-height: 94px;
+  }
 }
 
 .inputError {
