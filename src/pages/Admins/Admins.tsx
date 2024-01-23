@@ -17,8 +17,8 @@ const Admins = () => {
 
 	return (
 		<main className={styles.main}>
-			<h2>Адміністратори</h2>
-			<table>
+			<h2 className={styles.title}>Адміністратори</h2>
+			<table className={styles.table}>
 				<thead>
 					<tr>
 						<th>ID</th>
