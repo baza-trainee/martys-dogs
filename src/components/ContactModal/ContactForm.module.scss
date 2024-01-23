@@ -94,11 +94,11 @@
 
 
 .inputBox {
-  min-height: 86px;
+  min-height: 106px;
 
- /* @include tablet {
-    min-height: 106px;
-  }*/
+  @include tablet {
+    min-height: 86px;
+  }
 
   @include small_desktop {
     min-height: 94px;

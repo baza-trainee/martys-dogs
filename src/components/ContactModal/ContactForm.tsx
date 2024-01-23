@@ -42,11 +42,11 @@ const ContactForm: React.FC = () => {
 
 	const validateName = () => {
 		if (touched.name && formData.name.trim().length < 2) {
-			setErrors((prevErrors) => ({ ...prevErrors, name: `Введіть щонайменше 2 символи` }));
+			setErrors((prevErrors) => ({ ...prevErrors, name: t('contactModal.name_length_error') }));
 		} else if (touched.name && !nameRegex.test(formData.name)) {
 			setErrors((prevErrors) => ({
 				...prevErrors,
-				name: `Дозволена латиниця, кирилиця, пробіл, дефіс, апостроф`,
+				name: t('contactModal.name_character_error'),
 			}));
 		} else {
 			setErrors((prevErrors) => ({ ...prevErrors, name: '' }));
@@ -55,7 +55,7 @@ const ContactForm: React.FC = () => {
 
 	const validateNumber = () => {
 		if (touched.phoneNumber && !phoneRegex.test(formData.phoneNumber)) {
-			setErrors((prevErrors) => ({ ...prevErrors, phoneNumber: `Введіть коректний номер мобільного` }));
+			setErrors((prevErrors) => ({ ...prevErrors, phoneNumber: t('contactModal.tel_error') }));
 		} else {
 			setErrors((prevErrors) => ({ ...prevErrors, phoneNumber: '' }));
 		}
@@ -74,7 +74,7 @@ const ContactForm: React.FC = () => {
 		e.preventDefault();
 		validateName();
 		validateNumber();
-		console.log('Success. Send contacts:' + 'name - ' + formData.name + '; phone - ' + formData.phoneNumber + '; comment - ' + formData.comment);
+		console.log('Success. Send contacts:' + 'name - ' + formData.name.trim() + '; phone - ' + formData.phoneNumber + '; comment - ' + formData.comment);
 		setFormData({
 			name: '',
 			phoneNumber: '',
@@ -93,11 +93,11 @@ const ContactForm: React.FC = () => {
 	};
 
 	return (
-		<form   className={styles.form} onSubmit={handleSubmit}>
+		<form className={styles.form} onSubmit={handleSubmit}>
 
 			<div className={styles.inputsContainer}>
 
-				<div  className={styles.inputBox}>
+				<div className={styles.inputBox}>
 					<label
 						htmlFor="name"
 						className={errors.name ? styles.labelError : styles.label}
@@ -117,12 +117,12 @@ const ContactForm: React.FC = () => {
 							required
 						/>
 
-						{errors.name && <div className={styles.errorMessage}>{t('contactModal.name_error')}</div>}
+						{errors.name && <div className={styles.errorMessage}>{errors.name}</div>}
 					</div>
 				</div>
 
 
-				<div  className={styles.inputBox}>
+				<div className={styles.inputBox}>
 					<label
 						htmlFor="phoneNumber"
 						className={errors.phoneNumber ? styles.labelError : styles.label}
@@ -140,12 +140,12 @@ const ContactForm: React.FC = () => {
 							onChange={handleChange}
 							required
 						/>
-						{errors.phoneNumber && <div className={styles.errorMessage}>{t('contactModal.tel_error')}</div>}
+						{errors.phoneNumber && <div className={styles.errorMessage}>{errors.phoneNumber}</div>}
 
 					</div>
 				</div>
 
-				<div  className={styles.inputBox}>
+				<div className={styles.inputBox}>
 					<label
 						htmlFor="comment"
 						className={styles.label}
