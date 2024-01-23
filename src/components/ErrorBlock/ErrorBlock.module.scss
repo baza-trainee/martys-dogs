@@ -6,7 +6,7 @@
     text-align: center;
     gap: 48px;
     padding: 100px;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
         padding: 20px 64px;
 	}
 }
@@ -16,7 +16,7 @@
     font-weight: 900;
     line-height: 80%;
     color: #0D0031;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 767px) {
         font-size: 9.375rem;
 	}
 }
@@ -26,7 +26,7 @@
     line-height: 140%;
     font-size: 1.25rem;
     color: #000F36;
-    @media screen and (max-width: 1280px) {
+    @media screen and (max-width: 1279px) {
         font-size: 0.875rem;
 	}
 }
@@ -48,7 +48,4 @@
 	&:hover {
 		background: #005c80;
 	}
-	// @media screen and (max-width: 768px) {
-	// 	width: 100%;
-	// }
 }

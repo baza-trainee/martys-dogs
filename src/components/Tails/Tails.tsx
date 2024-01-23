@@ -75,6 +75,12 @@ const Tails: React.FC<TailsProps> = ({ data }) => {
 					{t('tails.tails')} <FaAngleRight />
 				</Link>
 			</div>
+			<p className={styles.subtitle}>
+				{t('tails.subtitle')}
+			</p>
+			<p className={styles.text}>
+				{t('tails.text')}
+			</p>
 			<Swiper
 				breakpoints={breakpoints}
 				spaceBetween={20}
