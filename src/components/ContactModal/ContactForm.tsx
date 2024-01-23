@@ -1,8 +1,8 @@
 import { FaRegHeart } from 'react-icons/fa6';
-import styles from './ContactForm.module.scss';
 import Button from '../../layout/Button/Button';
 import { useModalContext } from '../../context/useGlobalContext';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import * as React from 'react';
 
 import styles from './ContactForm.module.scss';
