@@ -1,4 +1,4 @@
-import React from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './Video.module.scss';
 
 interface VideoDescription {
@@ -20,9 +20,10 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
 	pawImage,
 	pawImageStyle,
 }) => {
+	const { t } = useTranslation();
 	return (
 		<div className={styles.textContainer}>
-			<h1 className={styles.videoTitle}>{title}</h1>
+			<h1 className={styles.videoTitle}>{t(title)}</h1>
 
 			{descriptionKeys.map((videoDescription, index) => (
 				<p
@@ -31,7 +32,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
 						descriptionStyle ? styles[descriptionStyle] : ''
 					}`}
 				>
-					{videoDescription.text}
+					{t(videoDescription.text)}
 				</p>
 			))}
 			<img

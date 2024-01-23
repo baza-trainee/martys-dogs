@@ -309,3 +309,31 @@ export const photos = [
 		img: photo2,
 	},
 ];
+
+export const adminsData = [
+	{
+		id: '1',
+		name: 'Юлія Волкова',
+		status: true
+	},
+	{
+		id: '2',
+		name: 'Ольга Фоміна',
+		status: false
+	},
+	{
+		id: '3',
+		name: 'Анастасія Малишко',
+		status: true
+	},
+	{
+		id: '4',
+		name: 'Віктор Толбухін',
+		status: false
+	},
+	{
+		id: '5',
+		name: 'Михайло Петрик',
+		status: true
+	},
+];

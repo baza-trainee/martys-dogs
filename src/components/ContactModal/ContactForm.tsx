@@ -1,6 +1,6 @@
 import { FaRegHeart } from 'react-icons/fa6';
+import styles from './ContactForm.module.scss';
 import Button from '../../layout/Button/Button';
-import { useTranslation } from 'react-i18next';
 import { useModalContext } from '../../context/useGlobalContext';
 import { useState, useEffect } from 'react';
 import * as React from 'react';
@@ -15,7 +15,7 @@ interface FormData {
 }
 
 const ContactForm: React.FC = () => {
-	const { closeModal } = useModalContext();
+	const { activateModal } = useModalContext();
 	const { t } = useTranslation();
 
 	const [formData, setFormData] = useState<FormData>({
@@ -85,7 +85,7 @@ const ContactForm: React.FC = () => {
 			phoneNumber: false,
 			comment: false,
 		});
-		closeModal();
+		activateModal('adoption');
 	};
 
 	const isSubmitDisabled = () => {

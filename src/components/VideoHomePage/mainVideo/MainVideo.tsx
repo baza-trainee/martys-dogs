@@ -1,11 +1,10 @@
-import React from 'react';
 import styles from '../Video.module.scss';
 import VideoDescription from '../VideoDescription';
 import VideoPlayer from '../VideoPlayer';
 import {
 	mainPosters,
-	mainDescription,
 	titles,
+	mainDescription,
 	videoLinks,
 	otherImages,
 } from '../data';
@@ -22,7 +21,7 @@ const MainVideo: React.FC = () => {
 				/>
 
 				<VideoDescription
-					title={titles.main}
+					title= {titles.main}
 					descriptionStyle="main"
 					descriptionKeys={mainDescription}
 					pawImage={otherImages.pawsImage}

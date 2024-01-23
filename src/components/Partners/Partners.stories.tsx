@@ -23,7 +23,6 @@ Default.args = {
 
 export const CustomPartners = Template.bind({});
 CustomPartners.args = {
-	title: 'Список логотипів',
 	icons: [
 		{ src: Icon2, alt: 'Роял Канін' },
 		{ src: Icon1, alt: 'Пуріна' },

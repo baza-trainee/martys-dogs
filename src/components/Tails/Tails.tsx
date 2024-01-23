@@ -10,6 +10,7 @@ import { LandingData } from '../../pages/Landing/Landing';
 import { Link } from 'react-router-dom';
 import { UseQueryResult } from '@tanstack/react-query';
 import styles from './Tails.module.scss';
+import { useTranslation } from 'react-i18next';
 
 interface Pagination {
 	clickable: boolean;
@@ -40,6 +41,7 @@ interface TailsProps {
 }
 
 const Tails: React.FC<TailsProps> = ({ data }) => {
+	const { t } = useTranslation();
 	const { data: tails, isPending, isError, error } = data;
 
 	if (isPending) {
@@ -68,9 +70,9 @@ const Tails: React.FC<TailsProps> = ({ data }) => {
 	return (
 		<section id='ourTails' className={styles.tails}>
 			<div className={styles.title}>
-				<h2>Познайомся з нашими хвостиками</h2>
+				<h2>{t('tails.title')}</h2>
 				<Link to='tails' className={styles.link}>
-					Усі хвостики притулку <FaAngleRight />
+					{t('tails.tails')} <FaAngleRight />
 				</Link>
 			</div>
 			<Swiper
