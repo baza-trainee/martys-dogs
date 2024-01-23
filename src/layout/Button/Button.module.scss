@@ -40,7 +40,8 @@
     background: $color-main-blue-dark;
   }
 
-  &:focus {
+  &:focus-visible  {
+    outline: none;
     border: 1px solid $color-main-blue-dark;
   }
 
@@ -66,7 +67,7 @@
     color: $color-main-blue-dark;
   }
 
-  &:focus {
+  &:focus-visible {
     border-color: $color-main-blue-dark;
   }
 
@@ -98,7 +99,8 @@
     color: $color-main-blue-dark;
   }
 
-  &:focus {
+  &:focus-visible  {
+    outline: none;
     border-color: $color-main-blue-dark;
   }
 
