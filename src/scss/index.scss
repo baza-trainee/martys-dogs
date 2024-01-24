@@ -54,15 +54,12 @@ h5 {
 }
 
 .swiper-pagination {
-	display: none;
-	margin: 40px auto;
-	gap: 20px;
-	justify-content: center;
-	@include small_desktop {
-		display: flex;
-	}
+	display: flex;
+	gap: 12px;
 }
 
+.prev,
+.next,
 .swiper-pagination-bullet {
 	width: 40px;
 	height: 40px;
@@ -86,15 +83,24 @@ h5 {
 	margin: auto;
 }
 
-.swiper-button-next,
-.swiper-button-prev {
-	display: none !important;
-	color: #009cd9 !important;
-	@media screen and (max-width: 768px) {
-		display: none !important;
-	}
-}
-
 button {
 	cursor: pointer;
 }
+
+.navigationContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+	margin-top: 40px;
+}
+
+.next,
+.prev {
+	color: #009cd9;
+}
+
+.swiper-button-disabled {
+	color: #dbdbdb;
+}
+
