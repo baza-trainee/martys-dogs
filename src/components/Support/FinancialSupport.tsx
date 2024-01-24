@@ -5,6 +5,7 @@ import style from './FinancialSupport.module.scss';
 import Button from '../../layout/Button/Button';
 import ButtonSupport from './ButtonSupport';
 import { mono,privat,paypal } from '../../assets/support';
+import { t } from 'i18next';
 
 const data=[
   { link: 'https://www.monobank.ua/', src: mono },
@@ -23,33 +24,20 @@ console.log(link)
   }
 
   const onHandleLinkClick = () => {
-   
-   
-    // if (!link) {
-    //   alert('Будь-ласка, виберить метод оплати')
-    // } else {
-    //   window.open(link,'_blank')
-    // }
-    window.open(link,'_blank')
-
-    
+    window.open(link, '_blank');
   }
 
   return (
-    <div className={style.container}>
-      <div className={style.box__description}>
-      <h2 className={style.title}>Допоможіть нам фінансово</h2>
-        <p className={style.description}>Ваша допомога робить чудеса: підтримайте нас сьогодні.</p>
-      </div>
+    <>
       <div className={style.box__buttons}>
-        {data.map(({link, src})=>(
-        <ButtonSupport link={link} src={src} onClick={onHandleClick } />
+        {data.map(({link, src},index)=>(
+          <ButtonSupport link={link} src={src} onClick={onHandleClick} key={index} />
 ))}
       </div>
       <Button
 					btnClasses='primary'
 					type='button'
-					name='Допомогти фінансово'
+					name={t('support.button')}
         onClick={onHandleLinkClick}
         disabled={!link}
 					children={
@@ -58,8 +46,8 @@ console.log(link)
 							<FaPaw />
 						</div>
 					}
-				></Button>
-    </div>
+      ></Button>
+    </>
   )
 }
 

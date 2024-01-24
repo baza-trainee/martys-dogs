@@ -1,17 +1,34 @@
+import { useTranslation } from 'react-i18next';
+
+import ContainerSupport from './ContainerSupport';
 import FinancialSupport from './FinancialSupport';
 import NonfinancialSupport from './NonfinancialSupport';
 import style from './Support.module.scss';
 
 
 const Support = () => {
-
+	const { t } = useTranslation();
 	return (
 		<section id='support' className={style.section}>
-			<h2>Як підтримати притулок</h2>
-			<p>Долучайтеся до нашої місії - допоможіть нам знайти кожній собаці теплий та люблячий дім. Ваша підтримка - це можливість змінювати життя та рятувати тих, хто потребує нашої допомоги.</p>
+			<h2 className={style.title}>{t('support.title')}</h2>
+			<p className={style.description}>{t('support.description') }</p>
 			<div className={style.container}>
-				<FinancialSupport/>
-				<NonfinancialSupport/>
+				<ContainerSupport
+					title={t('support.financial_title')}
+					description={t('support.financial_description')}
+					containerSupportClasses='financial'
+				>
+					<FinancialSupport/>
+				</ContainerSupport>
+				<ContainerSupport
+					title={t('support.nonfinancial_title')}
+					description={t('support.nonfinancial_description')}
+					containerSupportClasses='nonfinancial'
+				>
+					
+					<NonfinancialSupport />
+				</ContainerSupport>
+				
 				</div>
 			</section>
 	);
