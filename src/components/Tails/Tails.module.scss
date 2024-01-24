@@ -2,10 +2,10 @@
 	max-width: 1920px;
 	margin: auto;
 	padding: 100px;
-	@media screen and (max-width: 1280px) {
+	@media screen and (max-width: 1259px) {
 		padding: 80px 32px;
 	}
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 767px) {
 		padding: 20px 40px;
 	}
 }
@@ -15,17 +15,37 @@
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 40px;
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 767px) {
 		flex-direction: column;
 		text-align: center;
 		gap: 16px;
 	}
 }
 
+.subtitle {
+	margin-bottom: 16px;
+	font-size: 20px;
+	font-weight: 700;
+	@media screen and (max-width: 1259px) {
+		font-size: 14px;
+	}
+}
+
+.text {
+	margin-bottom: 40px;
+	max-width: 1285px;
+	font-size: 20px;
+	font-weight: 500;
+	@media screen and (max-width: 1259px) {
+		font-size: 14px;
+		margin-bottom: 24px;
+	}
+}
+
 .link {
 	padding: 12px 24px;
 	display: flex;
-	min-width: 290px;
+	min-width: 297px;
 	max-height: 48px;
 	justify-content: center;
 	align-items: center;
@@ -39,7 +59,7 @@
 	&:hover {
 		background: #005c80;
 	}
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 767px) {
 		width: 100%;
 	}
 }

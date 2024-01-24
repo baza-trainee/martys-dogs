@@ -4,11 +4,18 @@
 		"part1": "To get started, edit <1>src/pages/About.tsx</1> and save to reload.",
 		"part2": "Switch language between english and ukrainian using buttons above."
 	},
+	"tails": {
+		"title": "Meet our tails",
+		"tails": "All tails of the shelter",
+		"subtitle": "The most delicious food, the most caring staff, the softest beds are no substitute for a family for these Tails!",
+		"text": "Find your Friend in the Tails shelter for dogs, and let him find you. All our dogs are friendly to children and fully socialized! Each dog has undergone a veterinary examination, is vaccinated, sterilized and treated for parasites. You can visit us and feel with your heart which of the dogs will become part of your family."
+	},
 	"news": {
 		"title": "Shelter news",
 		"button": "Read more"
 	},
 	"header": {
+		"nav_main": "Main",
 		"nav_about": "About the shelter",
 		"nav_pets": "Our tails",
 		"nav_contact": "Contacts",
@@ -24,7 +31,7 @@
 		"copyright": "Development of Baza Trainee Ukraine 2023 © All rights reserved"
 	},
 	"hero": {
-		"title": "Dog greetings from a special shelter, where the cycle of goodness and wool happens!",
+		"title": "Dog greetings from a special shelter, where the cycle of goodness and wool happen!",
 		"about": "We are Tails of dog shelter and canister therapy center from City of Goodness. All of us:",
 		"point_1": "Vaccinated",
 		"point_2": "Sterilized",
@@ -40,6 +47,20 @@
 		"sterilization": "Sterilization",
 		"donate": "Donate",
 		"adopt": "Adopt"
+	},
+	"contactModal": {
+		"title": "Your love for animals is a real gift! Thank you for the decision to give a home to the tail",
+		"subtitle": "We will be in touch shortly to tell you more and discuss the next steps.",
+		"name_label": "Your name*",
+		"name_placeholder": "Enter your name",
+		"name_length_error": "Please enter at least 2 characters",
+		"name_character_error": "Latin, Cyrillic, space, hyphen, apostrophe are allowed",
+		"tel_label": "Phone number*",
+		"tel_placeholder": "Enter the phone number",
+		"tel_error": "Enter valid mobile number",
+		"comment_label": "Comment",
+		"comment_placeholder": "Make a comment",
+		"button": "Send contacts"
 	},
 	"photos": {
 		"shelter": "Shelter in photos"
@@ -111,6 +132,10 @@
 	},
 	"partners": {
 		"title": "Our partners"
+	},
+	"error": {
+		"text": "Sorry, the page you are looking for has been removed or moved",
+		"button": "Go to the home page"
 	},
 	"statistics": {
 		"title_animal": "Number of animals in the shelter",

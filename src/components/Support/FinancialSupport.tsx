@@ -4,28 +4,39 @@ import { FaPaw } from 'react-icons/fa6';
 import style from './FinancialSupport.module.scss';
 import Button from '../../layout/Button/Button';
 import ButtonSupport from './ButtonSupport';
-import { mono,privat,paypal } from '../../assets/support';
+import { mono, privat, paypal } from '../../assets/support';
+import { useModalContext } from '../../context/useGlobalContext';
 import { t } from 'i18next';
 
-const data=[
-  { link: 'https://www.monobank.ua/', src: mono },
-  { link: 'https://privatbank.ua/udalenniy-banking/privat24', src: privat },
-  {link:'https://www.paypal.com/cz/home', src:paypal},
-]
+const data = [
+	{ link: 'https://www.monobank.ua/', src: mono },
+	{ link: 'https://privatbank.ua/udalenniy-banking/privat24', src: privat },
+	{ link: 'https://www.paypal.com/cz/home', src: paypal },
+];
 
 const FinancialSupport = () => {
-const [link, setLink] = useState<undefined|string>('')
-console.log(link)
- 
-  const onHandleClick = (e: React.SyntheticEvent<EventTarget>) => {
-   const target = e.currentTarget as HTMLButtonElement;
-    console.log(target.dataset.link)
-    setLink(target.dataset.link) 
-  }
+	const [link, setLink] = useState<undefined | string>('');
+	console.log(link);
+	const { openModal, activateModal } = useModalContext();
 
-  const onHandleLinkClick = () => {
-    window.open(link, '_blank');
-  }
+	const onHandleClick = (e: React.SyntheticEvent<EventTarget>) => {
+		const target = e.currentTarget as HTMLButtonElement;
+		console.log(target.dataset.link);
+		setLink(target.dataset.link);
+	};
+
+	const onHandleLinkClick = () => {
+		// if (!link) {
+		//   alert('Будь-ласка, виберить метод оплати')
+		// } else {
+		//   window.open(link,'_blank')
+		// }
+		console.log('thanks');
+		window.open(link, '_blank');
+		openModal();
+		activateModal('thanks');
+		console.log('after');
+	};
 
   return (
     <>
