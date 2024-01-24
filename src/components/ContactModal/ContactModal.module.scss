@@ -47,7 +47,6 @@
     margin: 40px 32px;
     width: 402px;
     justify-content: space-between;
-    //gap: 20px;
   }
 
   @include large-desktop {
@@ -87,6 +86,9 @@
       width: 360px;
     }
 
+    @include large_desktop {
+      width: 540px;
+    }
 
   }
 
@@ -96,12 +98,11 @@
     line-height: 19.6px;
     color: $color-main-blue-dark;
 
-
     @include small-desktop {
       font-size: 20px;
       line-height: 28px;
     }
 
-
   }
+
 }
