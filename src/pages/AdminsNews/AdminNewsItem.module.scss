@@ -17,6 +17,7 @@ ul {
 	margin-top: auto;
 	display: flex;
 	justify-content: center;
+	align-items: center;
 	gap: 10px;
 	padding: 8px;
 	border-radius: 4px;
@@ -27,6 +28,8 @@ ul {
 		font-size: 16px;
 		color: #333;
 		cursor: pointer;
+		border: none;
+		background-color: transparent;
 	}
 
 	.editIcon:hover,

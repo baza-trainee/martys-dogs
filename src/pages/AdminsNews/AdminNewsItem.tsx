@@ -26,6 +26,8 @@ const NewsItem: React.FC<NewsItemProps> = ({
 	photo,
 	// url,
 }) => {
+	/// fetch current news  from backend
+
 	const months: { [key: string]: string } = {
 		січень: 'січня',
 		лютий: 'лютого',
@@ -66,7 +68,9 @@ const NewsItem: React.FC<NewsItemProps> = ({
 				<Link to='/admin/news_edit' className={styles.link}>
 					<FaEdit className={styles.editIcon} />
 				</Link>
-				<FaTrash className={styles.deleteIcon} />
+				<button type='button' className={styles.deleteIcon}>
+					<FaTrash className={styles.deleteIcon} />
+				</button>
 			</div>
 		</li>
 	);
