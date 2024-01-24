@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { UseQueryResult } from '@tanstack/react-query';
 import styles from './Tails.module.scss';
 import { useTranslation } from 'react-i18next';
+import Button from '../../layout/Button/Button';
 
 interface Pagination {
 	el: string;
@@ -77,8 +78,13 @@ const Tails: React.FC<TailsProps> = ({ data }) => {
 		<section id='ourTails' className={styles.tails}>
 			<div className={styles.title}>
 				<h2>{t('tails.title')}</h2>
-				<Link to='tails' className={styles.link}>
-					{t('tails.tails')} <FaAngleRight />
+				<Link to='tails'>
+					<Button
+						btnClasses={'primary'}
+						type={'button'}
+						name={t('tails.tails')}
+						children={<FaAngleRight />}
+					></Button>
 				</Link>
 			</div>
 			<p className={styles.subtitle}>{t('tails.subtitle')}</p>
