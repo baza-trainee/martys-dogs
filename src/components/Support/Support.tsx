@@ -25,10 +25,8 @@ const Support = () => {
 					description={t('support.nonfinancial_description')}
 					containerSupportClasses='nonfinancial'
 				>
-					
 					<NonfinancialSupport />
 				</ContainerSupport>
-				
 				</div>
 			</section>
 	);

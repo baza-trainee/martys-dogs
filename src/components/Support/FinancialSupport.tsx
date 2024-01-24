@@ -26,11 +26,6 @@ const FinancialSupport = () => {
 	};
 
 	const onHandleLinkClick = () => {
-		// if (!link) {
-		//   alert('Будь-ласка, виберить метод оплати')
-		// } else {
-		//   window.open(link,'_blank')
-		// }
 		console.log('thanks');
 		window.open(link, '_blank');
 		openModal();
