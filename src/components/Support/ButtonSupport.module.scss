@@ -12,10 +12,14 @@
   background-color: #C8E8F5;
   border-radius: 40px;
   // outline-color: transparent;
-  border-color: transparent;
+  border:none
 }
 
 .button:active, .button:focus{
-  border-color:$color-main-blue-dark;
-  outline-color:$color-main-blue-dark;
+  border: 2px solid $color-main-blue-dark;
+  // outline-color:$color-main-blue-dark;
+}
+
+.image{
+  height: 30px;
 }

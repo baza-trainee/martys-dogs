@@ -136,5 +136,28 @@
 	"error": {
 		"text": "Sorry, the page you are looking for has been removed or moved",
 		"button": "Go to the home page"
+	},
+	"statistics": {
+		"title_animal": "Number of animals in the shelter",
+		"title_employees": "Number of employees",
+		"title_adoptions": "Number of successful adoptions"
+	},
+	"support": {
+		"title": "How to support the shelter",
+		"description": "Join our mission - help us find a warm and loving home for every dog. Your support is an opportunity to change lives and rescue those in need of our assistance.",
+		"financial_title": "Help us financially",
+		"financial_description": "Your help works wonders: support us today.",
+		"button": "Help us",
+		"nonfinancial_title": "Non-material assistance",
+		"nonfinancial_description": "Assisting street dogs goes beyond just financial support. We constantly need food, medications, spreading information, and more.",
+		"parcel": "Shipping information:",
+		"city": "Chernivtsi city",
+		"name": "Martha Levchenko",
+		"nova_poshta": "Nova Poshta",
+		"nova_poshta_point": "pickup point №1",
+		"nova_poshta_street": "248-O Ruska Street",
+		"ukr_poshta": "Ukr Poshta",
+		"ukr_poshta_point": "pickup point №58008",
+		"ukr_poshta_street": "36-A Yuri Gagarin Street"
 	}
 }

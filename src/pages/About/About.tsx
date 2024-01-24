@@ -43,7 +43,7 @@ const About = () => {
 		<main>
 			<HeroAbout />
 			<VideoAboutShelter />
-			<Statistics/>
+			<Statistics data={data } />
 			<Photos data={data} />
 			<Support />
 		</main>
