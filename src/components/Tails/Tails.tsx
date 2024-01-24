@@ -1,11 +1,11 @@
 import 'swiper/css';
 import 'swiper/css/navigation';
 
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import Tail, { TailProps } from '../Tail/Tail';
 
-import { FaAngleRight } from 'react-icons/fa6';
 import { LandingData } from '../../pages/Landing/Landing';
 import { Link } from 'react-router-dom';
 import { UseQueryResult } from '@tanstack/react-query';
@@ -13,18 +13,20 @@ import styles from './Tails.module.scss';
 import { useTranslation } from 'react-i18next';
 
 interface Pagination {
+	el: string;
 	clickable: boolean;
+	bulletClass: string;
 	renderBullet: (index: number, className: string) => string;
 }
 
 const breakpoints = {
 	1920: {
 		slidesPerView: 4,
-		slidesPerGroup: 4,
+		slidesPerGroup: 1,
 	},
 	1280: {
 		slidesPerView: 3,
-		slidesPerGroup: 3,
+		slidesPerGroup: 2,
 	},
 	768: {
 		slidesPerView: 2,
@@ -35,6 +37,8 @@ const breakpoints = {
 		slidesPerGroup: 1,
 	},
 };
+
+const numbers = window.innerWidth > 767 ? 8 : 3;
 
 interface TailsProps {
 	data: UseQueryResult<LandingData, Error>;
@@ -61,9 +65,11 @@ const Tails: React.FC<TailsProps> = ({ data }) => {
 	}
 
 	const pagination: Pagination = {
+		el: '.swiper-pagination',
 		clickable: true,
+		bulletClass: 'swiper-pagination-bullet',
 		renderBullet: (index, className) => {
-			return '<span class="' + className + '">' + (index + 1) + '</span>';
+			return `<span class="${className}">${index + 1}</span>`;
 		},
 	};
 
@@ -75,6 +81,8 @@ const Tails: React.FC<TailsProps> = ({ data }) => {
 					{t('tails.tails')} <FaAngleRight />
 				</Link>
 			</div>
+			<p className={styles.subtitle}>{t('tails.subtitle')}</p>
+			<p className={styles.text}>{t('tails.text')}</p>
 			<Swiper
 				breakpoints={breakpoints}
 				spaceBetween={20}
@@ -82,14 +90,26 @@ const Tails: React.FC<TailsProps> = ({ data }) => {
 				speed={1000}
 				effect={'fade'}
 				pagination={pagination}
-				navigation={true}
+				navigation={{
+					nextEl: '.next',
+					prevEl: '.prev',
+				}}
 				modules={[Pagination, Navigation]}
 			>
-				{tails?.dog_cards?.map((tail: TailProps) => (
+				{tails?.dog_cards?.slice(0, numbers).map((tail: TailProps) => (
 					<SwiperSlide key={tail.id}>
 						<Tail {...tail} />
 					</SwiperSlide>
 				))}
+				<div className='navigationContainer'>
+					<div className='prev'>
+						<FaAngleLeft />
+					</div>
+					<div className='swiper-pagination'></div>
+					<div className='next'>
+						<FaAngleRight />
+					</div>
+				</div>
 			</Swiper>
 		</section>
 	);

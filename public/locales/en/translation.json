@@ -6,7 +6,9 @@
 	},
 	"tails": {
 		"title": "Meet our tails",
-		"tails": "All tails of the shelter"
+		"tails": "All tails of the shelter",
+		"subtitle": "The most delicious food, the most caring staff, the softest beds are no substitute for a family for these Tails!",
+		"text": "Find your Friend in the Tails shelter for dogs, and let him find you. All our dogs are friendly to children and fully socialized! Each dog has undergone a veterinary examination, is vaccinated, sterilized and treated for parasites. You can visit us and feel with your heart which of the dogs will become part of your family."
 	},
 	"news": {
 		"title": "Shelter news",
@@ -115,20 +117,24 @@
 		"gratitude": "We will call you soon to discuss the next steps and answer your questions.",
 		"button": "Back to the main page"
 	},
-	"mainVideo":{
+	"mainVideo": {
 		"title": "Give dogs a new hope for a happy life!",
-		"paragraph_one":"Join our community of big-hearted people who are helping these defenseless animals find their true friends. Our donation website is the link between you and these animals in need. Together we can make a difference in their lives!",
-		"paragraph_two":"Every contribution you make makes a big difference to their welfare. Your support helps us provide uninterrupted medical care, proper nutrition, safe shelter and comprehensive dog care.",
-		"paragraph_three":"Your help makes a big difference in improving the lives of these animals. Every donation helps us to provide the dogs with the necessary medical care, proper nutrition, safe housing and proper care."
+		"paragraph_one": "Join our community of big-hearted people who are helping these defenseless animals find their true friends. Our donation website is the link between you and these animals in need. Together we can make a difference in their lives!",
+		"paragraph_two": "Every contribution you make makes a big difference to their welfare. Your support helps us provide uninterrupted medical care, proper nutrition, safe shelter and comprehensive dog care.",
+		"paragraph_three": "Your help makes a big difference in improving the lives of these animals. Every donation helps us to provide the dogs with the necessary medical care, proper nutrition, safe housing and proper care."
 	},
-	"canisTherapy":{
+	"canisTherapy": {
 		"title": "Canis therapy  with tails",
-		"paragraph_one":"Canis therapy (from Latin canis - dog + Greek θεραπεία - treatment) is a type of therapy using specially trained dogs in medical and social rehabilitation.",
-		"paragraph_two":"We believe that every minute of communication with our furry friends can heal the soul. Here, among the cheerful tails and soft paws, we have created a special space where the magic of dog-assisted therapy comes to life. In this place, children's laughter mixes with joyful barking, and every day is filled with miracles of mutual understanding and friendship.",
-		"paragraph_three":"Our four-legged therapists, with their unique stories and unbridled love of life, inspire children to discover the world from a new perspective. They teach little hearts about generosity, kindness and empathy. Whether it's a gentle hug or a joyful game, every moment spent with our Tails emphasizes that care and love can take shape in the most unexpected ways.",
-		"paragraph_four":"We invite you and your families to visit our shelter, where hearts warm, friendships blossom, and four-legged friends are waiting to give you happiness. Let's do good together - \"Tails\" are ready to share their boundless energy and inexhaustible joy!"
+		"paragraph_one": "Canis therapy (from Latin canis - dog + Greek θεραπεία - treatment) is a type of therapy using specially trained dogs in medical and social rehabilitation.",
+		"paragraph_two": "We believe that every minute of communication with our furry friends can heal the soul. Here, among the cheerful tails and soft paws, we have created a special space where the magic of dog-assisted therapy comes to life. In this place, children's laughter mixes with joyful barking, and every day is filled with miracles of mutual understanding and friendship.",
+		"paragraph_three": "Our four-legged therapists, with their unique stories and unbridled love of life, inspire children to discover the world from a new perspective. They teach little hearts about generosity, kindness and empathy. Whether it's a gentle hug or a joyful game, every moment spent with our Tails emphasizes that care and love can take shape in the most unexpected ways.",
+		"paragraph_four": "We invite you and your families to visit our shelter, where hearts warm, friendships blossom, and four-legged friends are waiting to give you happiness. Let's do good together - \"Tails\" are ready to share their boundless energy and inexhaustible joy!"
 	},
 	"partners": {
 		"title": "Our partners"
+	},
+	"error": {
+		"text": "Sorry, the page you are looking for has been removed or moved",
+		"button": "Go to the home page"
 	}
 }
