@@ -16,7 +16,6 @@ const data = [
 
 const FinancialSupport = () => {
 	const [link, setLink] = useState<undefined | string>('');
-	console.log(link);
 	const { openModal, activateModal } = useModalContext();
 
 	const onHandleClick = (e: React.SyntheticEvent<EventTarget>) => {
