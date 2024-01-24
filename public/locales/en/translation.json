@@ -15,6 +15,7 @@
 		"button": "Read more"
 	},
 	"header": {
+		"nav_main": "Main",
 		"nav_about": "About the shelter",
 		"nav_pets": "Our tails",
 		"nav_contact": "Contacts",
