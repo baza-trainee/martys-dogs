@@ -1,9 +1,11 @@
+@import '../../scss/_variables.scss';
+
 .login {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
-    background-color: #EBF5FB;
+    background-color: $color-main-bg;
 
 	.form {
 		padding: 2.5rem;
@@ -27,7 +29,7 @@
 			width: 100%;
 			padding: 0.5rem;
 			background-color: #4a90e2;
-			color: #fff;
+			color: $color-gray-0;
 			border: none;
 			cursor: pointer;
 
@@ -92,8 +94,8 @@
     transition: background-color 0.3s;
     width: 100%;
     padding: 1rem;
-    background-color: #009CD9;
-    color: #fff;
+    background-color: $color-accent;
+    color: $color-gray-0;
     border: none;
     cursor: pointer;
     border-radius: 0.25rem;
@@ -101,6 +103,6 @@
     margin-top: 1.25rem;
 
     &:hover {
-        background-color: #005C80;
+        background-color: $color-main-blue-dark;
     }
 }

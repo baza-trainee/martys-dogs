@@ -1,3 +1,5 @@
+@import '../../scss/variables';
+
 .error {
     display: flex;
     flex-direction: column;
@@ -15,7 +17,7 @@
     font-size: 12.5rem;
     font-weight: 900;
     line-height: 80%;
-    color: #0D0031;
+    color: $color-gray-100;
     @media screen and (max-width: 767px) {
         font-size: 9.375rem;
 	}
@@ -25,7 +27,7 @@
     font-weight: 700;
     line-height: 140%;
     font-size: 1.25rem;
-    color: #000F36;
+    color: $color-gray-90;
     @media screen and (max-width: 1279px) {
         font-size: 0.875rem;
 	}
@@ -39,13 +41,13 @@
 	justify-content: center;
 	align-items: center;
 	border-radius: 30px;
-	color: #fff;
+	color: $color-gray-0;
     font-size: 1.25rem;
-	background: #009cd9;
+	background: $color-accent;
 	text-decoration: none;
 	gap: 8px;
 	transition: background 0.3s ease;
 	&:hover {
-		background: #005c80;
+		background: $color-main-blue-dark;
 	}
 }
