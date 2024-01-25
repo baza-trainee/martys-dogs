@@ -38,21 +38,6 @@ const HomeLayout = () => {
 				{activeModal === 'adoption' && <AdoptionModal />}
 				{activeModal === 'thanks' && <ThanksModal />}
 			</Modal>
-			{/* <Modal
-				isModal={isModalOpen}
-				openModal={() => openModal('adoption')}
-				closeModal={closeModal}
-			>
-				{activeModal === 'adoption' && <AdoptionModal />}
-			</Modal> */}
-			{/* <Modal
-				isModal={isModalOpen}
-				openModal={() => openModal('thanks')}
-				closeModal={closeModal}
-			>
-				{activeModal === 'thanks' && <ThanksModal />}
-				{/* <ThanksModal /> */}
-			{/* </Modal> */} */
 		</>
 	);
 };
