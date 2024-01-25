@@ -1,6 +1,6 @@
 import Catalog from '../../components/Catalog/Catalog';
 import HeroOurTails from '../../components/HeroOurTails/HeroOurTails';
-import { fetchHome } from '../../services/fetchData';
+import { fetchCatalog, fetchHome } from '../../services/fetchData';
 import { scrollOnTop } from '../../services/scrollTo';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -10,7 +10,7 @@ const OurTails: React.FC = () => {
 	const location = useLocation();
 	const data = useQuery({
 		queryKey: ['tails'],
-		queryFn: fetchHome,
+		queryFn: fetchCatalog,
 		refetchInterval: 600000,
 	});
 

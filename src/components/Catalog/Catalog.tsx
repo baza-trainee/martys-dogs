@@ -11,6 +11,13 @@ interface TailsProps {
 	data: UseQueryResult<LandingData, Error>;
 }
 
+interface FilterParams {
+	age?: number;
+	size?: string;
+	gender?: string;
+	ready_for_adoption?:boolean;
+}
+
 const Catalog: React.FC<TailsProps> = ({ data }) => {
 	const [cards, setCards] = useState<DogCard[]>([]);
 	const [page, setPage] = useState<number>(1);
@@ -18,10 +25,15 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 	const cardsInPage = 12;
 	const { data: tails, isPending, isError, error } = data;
 	const { t } = useTranslation();
+	const [selectedFilters, setSelectedFilters] = useState<FilterParams>({
+		name: '',
+		size: '',
+		gender: '',
+	}); // Змінено тут
 
 	useEffect(() => {
 		if (tails) {
-			setCards(tails.dog_cards);
+			setCards(tails.Cards);
 		}
 	}, [tails]);
 
