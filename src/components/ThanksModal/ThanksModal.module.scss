@@ -62,7 +62,7 @@
 	}
 	@include small-desktop {
 		padding: 112px 32px 32px 32px;
-		width: 440px;
+		width: 542px;
 	}
 	@include large-desktop {
 		padding: 144px 32px 32px 32px;
@@ -86,7 +86,7 @@
 	line-height: 1.4;
 	color: $color-main-blue-dark;
 	@include small-desktop {
-		font-size: 16px;
+		font-size: 20px;
 	}
 	@include large-desktop {
 		margin-bottom: 16px;
@@ -102,6 +102,7 @@
 	margin-bottom: 24px;
 	@include small-desktop {
 		margin-bottom: 32px;
+		font-size: 20px;
 	}
 	@include large-desktop {
 		margin-bottom: 40px;
