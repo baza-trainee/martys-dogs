@@ -8,8 +8,22 @@ export const scrollToSection = (id: string) => {
 };
 
 export const scrollOnTop = () => {
-	window.scrollTo({
-		top: 0,
-		behavior: 'smooth',
-	});
+	const top = 0;
+
+	if ('scrollingElement' in document) {
+		document.scrollingElement?.scrollTo({
+			top,
+			behavior: 'smooth',
+		});
+	} else if (document.documentElement) {
+		document.documentElement.scrollTo({
+			top,
+			behavior: 'smooth',
+		});
+	} else {
+		window.scrollTo({
+			top,
+			behavior: 'smooth',
+		});
+	}
 };
