@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&display=swap');
 @import './mixins.scss';
+@import './variables.scss';
 
 *,
 ::after,
@@ -61,22 +62,30 @@ h5 {
 .prev,
 .next,
 .swiper-pagination-bullet {
-	width: 40px;
-	height: 40px;
+	transition: all 0.3s ease-in-out;
+	width: 48px;
+	height: 48px;
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 16px;
-	color: #000;
+	font-size: 20px;
+	color: $color-accent;
 	opacity: 1;
-	background-color: #f7f7f7;
+	background-color: $color-gray-10;
 	cursor: pointer;
+	&:hover {
+		background-color: $color-main-blue-light;
+	}
+
 }
 
 .swiper-pagination-bullet-active {
-	color: #fff;
-	background: #009cd9;
+	color: $color-gray-0;
+	background: $color-accent;
+	&:hover {
+		background: $color-accent;
+	}
 }
 
 .swiper-wrapper {
@@ -95,12 +104,10 @@ button {
 	margin-top: 40px;
 }
 
-.next,
-.prev {
-	color: #009cd9;
-}
-
 .swiper-button-disabled {
-	color: #dbdbdb;
+	color: $color-gray-40;
+	&:hover {
+		background-color: $color-gray-10;
+	}
 }
 

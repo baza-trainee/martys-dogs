@@ -10,7 +10,7 @@ interface ButtonSupportProps {
 
  const ButtonSupport:React.FC<ButtonSupportProps> = ({src,onClick,link}) => {
   return (
-    <button onClick={onClick} data-link={link} className={style.button}><img src={src } /></button>
+    <button onClick={onClick} data-link={link} className={style.button}><img src={src} className={style.image} /></button>
   )
 }
 

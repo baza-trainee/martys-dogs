@@ -64,11 +64,11 @@ const ContactForm: React.FC = () => {
 	useEffect(() => {
 		validateName();
 
-	}, [formData.name]); // Спрацьовує при кожній зміні імені
+	}, [formData.name]);
 
 	useEffect(() => {
 		validateNumber();
-	}, [formData.phoneNumber]); // Спрацьовує при кожній зміні імені
+	}, [formData.phoneNumber]);
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();

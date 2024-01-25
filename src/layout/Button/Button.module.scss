@@ -36,8 +36,10 @@
   background: $color-accent;
   color: $color-gray-10;
 
-  &:hover {
-    background: $color-main-blue-dark;
+  @include hover {
+    &:hover {
+      background: $color-main-blue-dark;
+    }
   }
 
   &:focus-visible  {
@@ -62,9 +64,11 @@
   color: $color-accent;
   background: $color-gray-0;
 
-  &:hover {
-    border-color: $color-main-blue-dark;
-    color: $color-main-blue-dark;
+  @include hover {
+    &:hover {
+      border-color: $color-main-blue-dark;
+      color: $color-main-blue-dark;
+    }
   }
 
   &:focus-visible {
@@ -94,10 +98,14 @@
 		width: 100%;
 	}
 
-  &:hover {
-    border-color: $color-main-blue-dark;
-    color: $color-main-blue-dark;
+
+  @include hover {
+    &:hover {
+      border-color: $color-main-blue-dark;
+      color: $color-main-blue-dark;
+    }
   }
+
 
   &:focus-visible  {
     outline: none;
@@ -113,8 +121,11 @@
     border-color: $color-gray-60;
     background: transparent;
 
-    &:hover {
-      color: $color-gray-60;
+
+    @include hover {
+      &:hover {
+        color: $color-gray-60;
+      }
     }
   }
 }
