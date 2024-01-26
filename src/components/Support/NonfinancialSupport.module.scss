@@ -7,6 +7,10 @@
   border: 1px solid $color-main-blue-light;
   background-color: $color-gray-0;
 
+  @include tablet{
+    padding: 40px;
+  }
+
   @include small_desktop {
       min-width: 50%;
       height: 519px;
@@ -14,9 +18,7 @@
     }
 }
 
-.address__container{
-margin-top: 32px;
-}
+
 .title {
       text-align: left;
       font-size: 20px;
@@ -25,25 +27,23 @@ margin-top: 32px;
       
       color: $color-gray-100;
 
-      @include small_desktop{
-font-size: 24px;
+      @include tablet {
+        font-size: 26px;
+        line-height: 1.2;
       }
-}
 
-.title__blue{
-  text-align: left;
-    font-size: 20px;
-    font-weight: 800;
-    line-height: 1.4;
-  
-  color:$color-main-blue-mid;
-
-    @include small_desktop {
+      @include small_desktop{
         font-size: 24px;
       }
 }
 
+.address__title{
+  color:$color-main-blue-mid;
+}
+
 .description {
+margin-top: 4px;
+
   text-align: left;
   font-size: 14px;
     font-weight: 500;
@@ -51,6 +51,9 @@ font-size: 24px;
 
     color:$color-gray-100;
 
+    @include tablet {
+      font-size: 16px;
+    }
     @include small_desktop{
       font-size: 16px;
     }
@@ -65,6 +68,10 @@ font-size: 24px;
 
     color: $color-gray-100;
 
+    @include tablet{
+      font-size:20px;
+    }
+
     @include small_desktop {
         font-size: 16px;
       }
@@ -74,7 +81,7 @@ font-size: 24px;
   display: flex;
   flex-direction: column;
 
-  margin-top: 8px;
+  margin-top: 24px;
 
   gap:16px;
 
@@ -82,6 +89,20 @@ font-size: 24px;
     margin-top: 24px;
   }
 }
+
+.address__position__column{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid $color-main-blue-mid;
+
+  @include tablet{
+    flex-direction: row;
+    gap:32px;
+  }
+}
+
 
 .address__position__row{
   display: flex;
@@ -104,5 +125,5 @@ color:$color-gray-100;
 }
 
 .image {
-  width:100px;
+  width: 120px;
 }
