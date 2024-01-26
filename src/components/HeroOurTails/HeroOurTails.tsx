@@ -21,7 +21,7 @@ const HeroOurTails: React.FC = () => {
 						<h5>{t('tailsHero.tailB')}</h5>
 						<div className={styles.arrow}></div>
 					</div>
-					<img src={hero} alt='dog' className={styles.image} />
+					<img src={hero} alt='Boys with dogs' className={styles.image} />
 				</div>
 			</div>
 		</section>

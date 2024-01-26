@@ -41,7 +41,7 @@ const breakpoints = {
 
 const numbers = window.innerWidth > 767 ? 8 : 3;
 
-interface TailsProps {
+export interface TailsProps {
 	data: UseQueryResult<LandingData, Error>;
 }
 
