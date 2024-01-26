@@ -35,8 +35,8 @@ const News: React.FC<NewsProps> = ({ data }) => {
 	}
 
 	return (
-		<section className={styles.background}>
-			<div className={styles.section}>
+		<section className={styles.section}>
+			<div className={styles.wrapper}>
 				<h2 className={styles.title}>{t('news.title')}</h2>
 				<ul className={styles.news}>
 					{news?.news_data?.map((item: NewsItemProps) => (

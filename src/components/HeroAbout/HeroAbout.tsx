@@ -7,8 +7,8 @@ const HeroAbout = () => {
 	const { t } = useTranslation();
 	return (
 		<>
-			<section className={styles.background}>
-				<div className={styles.hero}>
+			<section className={styles.hero}>
+				<div className={styles.hero_container}>
 					<div className={styles.hero_wrapper}>
 						<div className={styles.name}></div>
 						<h1 className={styles.title}>{t('heroAbout.title')}</h1>
@@ -17,8 +17,8 @@ const HeroAbout = () => {
 					<div className={styles.photo}></div>
 				</div>
 			</section>
-			<section className={styles.back}>
-				<div className={styles.info}>
+			<section className={styles.info}>
+				<div className={styles.info_container}>
 					<div className={styles.logo}></div>
 					<div className={styles.info_wrapper}>
 						<h2 className={styles.goal}>{t('heroAbout.goal')}</h2>
