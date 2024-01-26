@@ -2,7 +2,12 @@ import styles from './MobNavMenu.module.scss';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
-const MobNavMenu = () => {
+export interface MobNavMenuProps {
+  currentLanguage: string;
+  changeLanguage: ({ lng }: { lng: string }) => void;
+}
+
+const MobNavMenu = ({currentLanguage, changeLanguage}: MobNavMenuProps) => {
   const { t } = useTranslation();
 
   return (
@@ -12,6 +17,16 @@ const MobNavMenu = () => {
       <ul
         className={styles.header_menu_mob_cont}
       >
+        <li
+          className={styles.header_menu_mob_cat}
+        >
+          <Link 
+            to="/about"
+            className={styles.header_menu_mob_link}
+          >
+            {t('header.nav_main')}
+          </Link>
+        </li>
         <li
           className={styles.header_menu_mob_cat}
         >
@@ -43,6 +58,27 @@ const MobNavMenu = () => {
           </Link>
         </li>
       </ul>
+      <div
+        className={styles.header_lng}
+      >
+        <button
+          className={`${styles.header_lng_btn} ${currentLanguage === "ua" ? styles.header_lng_btn_active : ""}`}
+          onClick={() => changeLanguage({ lng: 'ua' })}
+        >
+          {t('header.lng_ua')}
+        </button>
+        <span
+          className={styles.header_lng_gap}
+        >
+          /
+        </span> 
+        <button
+          className={`${styles.header_lng_btn} ${currentLanguage !== "ua" ? styles.header_lng_btn_active : ""}`}
+          onClick={() => changeLanguage({ lng: 'en' })}
+        >
+          {t('header.lng_en')}
+        </button>
+      </div>
     </nav>
   );
 }
