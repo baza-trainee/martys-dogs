@@ -2,8 +2,28 @@
 @import '../../scss/mixins';
 
 .section {
-	padding: 40px 20px;
+	// max-width: 1920px;
+	// margin: auto;
+	// padding: 40px 20px;
 	background-color: $color-main-bg;
+
+	// @include tablet {
+	// 	padding-top: 80px;
+	// 	padding-bottom: 52px;
+	// 	padding-left: 32px;
+	// 	padding-right: 32px;
+	// }
+
+	// @include small-desktop {
+	// 	padding: 100px;
+	// }
+}
+
+.wrapper {
+	max-width: 1920px;
+	margin: auto;
+	padding: 40px 20px;
+	// background-color: $color-main-bg;
 
 	@include tablet {
 		padding-top: 80px;
@@ -15,6 +35,9 @@
 	@include small-desktop {
 		padding: 100px;
 	}
+	// @include full-desktop {
+	// 	max-width: 1920px;
+	// }
 }
 
 .title {
