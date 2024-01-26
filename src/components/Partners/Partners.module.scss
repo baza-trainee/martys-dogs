@@ -18,6 +18,7 @@ $partnersContainerPadding1280: 100px;
 	}
 	@include small_desktop {
 		padding: $partnersContainerPadding1280;
+		max-width: 1920px;
 	}
 }
 

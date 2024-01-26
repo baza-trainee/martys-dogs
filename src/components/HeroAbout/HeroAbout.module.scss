@@ -8,6 +8,10 @@ img {
 	height: auto;
 }
 
+.background {
+	background: $color-main-blue-light;
+}
+
 .hero {
 	// margin: 0 auto;
 	// width: 100%;
@@ -142,6 +146,10 @@ img {
 	@include full-desktop {
 		background-image: url('../../assets/hero_about/1920_1x.webp');
 	}
+}
+
+.back {
+	background-color: $color-main-bg;
 }
 
 .info {

@@ -1,6 +1,10 @@
 @import '../../scss/variables';
 @import '../../scss/mixins';
 
+.background {
+	background-color: $color-main-bg;
+}
+
 .section {
 	// max-width: 1920px;
 	// margin: auto;
@@ -21,7 +25,7 @@
 
 .wrapper {
 	max-width: 1920px;
-	margin: auto;
+	margin: 0 auto;
 	padding: 40px 20px;
 	// background-color: $color-main-bg;
 
