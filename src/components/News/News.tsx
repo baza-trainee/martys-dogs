@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
 
 // import { news } from './data';
 
-
 interface NewsProps {
 	data: UseQueryResult<LandingData, Error>;
 }
@@ -16,7 +15,7 @@ const News: React.FC<NewsProps> = ({ data }) => {
 	const { t } = useTranslation();
 
 	const { data: news, isPending, isError, error } = data;
-	
+
 	console.log(news?.news_data);
 
 	if (isPending) {
@@ -36,13 +35,15 @@ const News: React.FC<NewsProps> = ({ data }) => {
 	}
 
 	return (
-		<section className={styles.section}>
-			<h2 className={styles.title}>{t('news.title')}</h2>
-			<ul className={styles.news}>
-				{news?.news_data?.map((item: NewsItemProps) => (
-					<NewsItem key={item.id} {...item} />
-				))}
-			</ul>
+		<section className={styles.background}>
+			<div className={styles.section}>
+				<h2 className={styles.title}>{t('news.title')}</h2>
+				<ul className={styles.news}>
+					{news?.news_data?.map((item: NewsItemProps) => (
+						<NewsItem key={item.id} {...item} />
+					))}
+				</ul>
+			</div>
 		</section>
 	);
 };

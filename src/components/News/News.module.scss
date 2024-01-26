@@ -1,9 +1,14 @@
 @import '../../scss/variables';
 @import '../../scss/mixins';
 
+.background {
+	background-color: $color-main-bg;
+}
+
 .section {
 	padding: 40px 20px;
-	background-color: $color-main-bg;
+	max-width: 1920px;
+	margin: 0 auto;
 
 	@include tablet {
 		padding-top: 80px;

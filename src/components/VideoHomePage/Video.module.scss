@@ -32,16 +32,16 @@
 
 		@include small_desktop {
 			padding: 100px;
-			width: 1280px;
+			min-width: 1280px;
 		}
 
 		@include large_desktop {
-			width: 1440px;
+			min-width: 1440px;
 		}
 
 		@include full_desktop {
 			flex-direction: row;
-			width: 1920px;
+			max-width: 1920px;
 		}
 
 		&.main {

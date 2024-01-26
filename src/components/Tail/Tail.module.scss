@@ -12,12 +12,13 @@
 	width: 415px;
 	height: 508px;
 	border-radius: 30px;
+	font-size: 14px;
 	&:hover {
 		.intro {
 			max-height: 300px;
-			@media screen and (max-width: 767px) {
-				max-height: 210px;
-			}
+			// @media screen and (max-width: 767px) {
+			// 	max-height: 195px;
+			// }
 		}
 	}
 	@media screen and (max-width: 1919px) {
@@ -30,8 +31,8 @@
 		width: 342px;
 	}
 	@media screen and (max-width: 767px) {
-		width: 260px;
-		height: 380px;
+		// width: 300px;
+		// height: 380px;
 	}
 	.image {
 		border-radius: 30px;
@@ -89,29 +90,29 @@
 
 .overlay {
 	position: absolute;
-	bottom: 24px;
-	left: 24px;
+	bottom: 16px;
+	left: 16px;
 	padding: 16px;
 	background: $color-gray-0;
 	border-radius: 18px;
-	width: 367px;
+	width: 383px;
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
 	text-align: start;
 	@media screen and (max-width: 1919px) {
-		width: 352px;
+		width: 368px;
 	}
 	@media screen and (max-width: 1439px) {
-		width: 299px;
+		width: 315px;
 	}
 	@media screen and (max-width: 1279px) {
-		width: 294px;
+		width: 310px;
 	}
 	@media screen and (max-width: 767px) {
-		width: 228px;
-		bottom: 16px;
-		left: 16px;
+		// width: 268px;
+		// bottom: 16px;
+		// left: 16px;
 	}
 }
 
@@ -153,20 +154,31 @@
 	align-items: start;
 }
 
+.donate {
+	width: 100%;
+	flex: 1 1 100%;
+	@media screen and (max-width: 1919px) {
+		min-width: 120px;
+	}
+	@media screen and (max-width: 767px) {
+		min-width: 80px;
+	}
+}
+
 // .donate {
-// 	background-color: #009cd9;
-// 	padding: 12px 24px;
-// 	text-decoration: none;
-// 	border: 1px solid #009cd9;
-// 	border-radius: 30px;
-// 	font-size: 20px;
-// 	color: #ffffff;
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
-// 	transition: all 0.3s ease-in-out;
-// 	min-width: 165px;
-// 	width: 100%;
+// background-color: #009cd9;
+// padding: 12px 24px;
+// text-decoration: none;
+// border: 1px solid #009cd9;
+// border-radius: 30px;
+// font-size: 20px;
+// color: #ffffff;
+// display: flex;
+// justify-content: center;
+// align-items: center;
+// transition: all 0.3s ease-in-out;
+// min-width: 165px;
+// width: 100%;
 // 	flex: 1 1 100%;
 
 // 	&:hover {
