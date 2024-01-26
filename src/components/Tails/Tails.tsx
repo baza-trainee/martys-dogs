@@ -78,7 +78,7 @@ const Tails: React.FC<TailsProps> = ({ data }) => {
 		<section id='ourTails' className={styles.tails}>
 			<div className={styles.title}>
 				<h2>{t('tails.title')}</h2>
-				<Link to='tails'>
+				<Link to='tails' className={styles.link}>
 					<Button
 						btnClasses={'primary'}
 						type={'button'}
