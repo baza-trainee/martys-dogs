@@ -4,7 +4,7 @@ import style from './StatisticsItem.module.scss';
 interface StatistiItemProps {
   text: string;
   image: string;
-  value: number;
+  value: number|undefined;
 }
 
 

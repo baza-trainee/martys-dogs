@@ -1,9 +1,11 @@
 import { FaCakeCandles, FaCheck } from 'react-icons/fa6';
 
+import Button from '../../layout/Button/Button';
 import { GrExpand } from 'react-icons/gr';
+import { scrollToSection } from '../../services/scrollTo';
 import styles from './Tail.module.scss';
-import { useTranslation } from 'react-i18next';
 import { useModalContext } from '../../context/useGlobalContext';
+import { useTranslation } from 'react-i18next';
 
 export interface TailProps {
 	id: number;
@@ -86,16 +88,23 @@ const Tail: React.FC<TailProps> = ({
 					<p>{description}</p>
 				</div>
 				<div className={styles.container}>
-					<button
-						onClick={() => console.log('button')}
-						className={styles.donate}
-					>
-						{t('tail.donate')}
-					</button>
+					<div className={styles.donate}>
+						<Button
+							btnClasses={'primary'}
+							type={'button'}
+							name={t('tail.donate')}
+							onClick={() => scrollToSection('support')}
+						></Button>
+					</div>
 					{ready_for_adoption && (
-						<button onClick={handleModal} className={styles.adopt}>
-							{t('tail.adopt')}
-						</button>
+						<div className={styles.donate}>
+							<Button
+								btnClasses={'secondary'}
+								type={'button'}
+								name={t('tail.adopt')}
+								onClick={handleModal}
+							></Button>
+						</div>
 					)}
 				</div>
 			</div>

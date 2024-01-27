@@ -1,11 +1,11 @@
 import ContactForm from './ContactForm';
+import { useTranslation } from 'react-i18next';
+
 import styles from './ContactModal.module.scss';
-
-// import { useModalContext } from '../../context/useGlobalContext';
-
 
 
 const ContactModal: React.FC = () => {
+	const { t } = useTranslation();
 
 	return (
 		<div className={styles.wrapper}>
@@ -13,14 +13,12 @@ const ContactModal: React.FC = () => {
 
 			<div className={styles.contentBlock}>
 				<div className={styles.textBlock}>
-					<h2>Ваша любов до тварин – справжній подарунок! Дякуємо вам за вирішення
-						подарувати дім хвостику</h2>
-					<p>
-						Ми скоро зв'яжемося, щоб розповісти вам більше і обговорити наступні кроки.
+					<h2>{t('contactModal.title')}</h2>
+					<p>{t('contactModal.subtitle')}
 					</p>
 				</div>
 
-				<ContactForm  />
+				<ContactForm />
 			</div>
 		</div>
 	);

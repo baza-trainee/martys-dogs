@@ -1,0 +1,59 @@
+@import '../../scss/mixins';
+@import '../../scss/variables';
+
+.container {
+  display: flex;
+  flex-direction: column;
+
+  padding: 24px;
+  border-radius: 30px;
+
+  @include tablet {
+    padding: 40px;
+  }
+
+  @include small_desktop {
+    min-width: 50%;
+    height: 519px;
+    padding: 40px;
+   
+  }
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.4;
+
+  @include tablet {
+    font-size: 26px;
+    line-height: 1.2;
+  }
+}
+
+.description {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+
+  margin-top: 8px;
+
+  @include tablet {
+    font-style: 20px;
+  }
+}
+
+.financial{
+  gap:32px;
+  background-color: $color-main-blue-light;
+}
+
+.nonfinancial{
+  gap:16px;
+  border: 1px solid $color-main-blue-light;
+  background-color: $color-gray-0;
+
+  @include small_desktop{
+    gap:32px;
+  }
+}

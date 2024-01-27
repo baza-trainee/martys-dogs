@@ -6,13 +6,16 @@
 	},
 	"tails": {
 		"title": "Meet our tails",
-		"tails": "All tails of the shelter"
+		"tails": "All tails of the shelter",
+		"subtitle": "The most delicious food, the most caring staff, the softest beds are no substitute for a family for these Tails!",
+		"text": "Find your Friend in the Tails shelter for dogs, and let him find you. All our dogs are friendly to children and fully socialized! Each dog has undergone a veterinary examination, is vaccinated, sterilized and treated for parasites. You can visit us and feel with your heart which of the dogs will become part of your family."
 	},
 	"news": {
 		"title": "Shelter news",
 		"button": "Read more"
 	},
 	"header": {
+		"nav_main": "Main",
 		"nav_about": "About the shelter",
 		"nav_pets": "Our tails",
 		"nav_contact": "Contacts",
@@ -28,7 +31,7 @@
 		"copyright": "Development of Baza Trainee Ukraine 2023 © All rights reserved"
 	},
 	"hero": {
-		"title": "Dog greetings from a special shelter, where the cycle of goodness and wool happens!",
+		"title": "Dog greetings from a special shelter, where the cycle of goodness and wool happen!",
 		"about": "We are Tails of dog shelter and canister therapy center from City of Goodness. All of us:",
 		"point_1": "Vaccinated",
 		"point_2": "Sterilized",
@@ -44,6 +47,20 @@
 		"sterilization": "Sterilization",
 		"donate": "Donate",
 		"adopt": "Adopt"
+	},
+	"contactModal": {
+		"title": "Your love for animals is a real gift! Thank you for the decision to give a home to the tail",
+		"subtitle": "We will be in touch shortly to tell you more and discuss the next steps.",
+		"name_label": "Your name*",
+		"name_placeholder": "Enter your name",
+		"name_length_error": "Please enter at least 2 characters",
+		"name_character_error": "Latin, Cyrillic, space, hyphen, apostrophe are allowed",
+		"tel_label": "Phone number*",
+		"tel_placeholder": "Enter the phone number",
+		"tel_error": "Enter valid mobile number",
+		"comment_label": "Comment",
+		"comment_placeholder": "Make a comment",
+		"button": "Send contacts"
 	},
 	"photos": {
 		"shelter": "Shelter in photos"
@@ -100,20 +117,47 @@
 		"gratitude": "We will call you soon to discuss the next steps and answer your questions.",
 		"button": "Back to the main page"
 	},
-	"mainVideo":{
+	"mainVideo": {
 		"title": "Give dogs a new hope for a happy life!",
-		"paragraph_one":"Join our community of big-hearted people who are helping these defenseless animals find their true friends. Our donation website is the link between you and these animals in need. Together we can make a difference in their lives!",
-		"paragraph_two":"Every contribution you make makes a big difference to their welfare. Your support helps us provide uninterrupted medical care, proper nutrition, safe shelter and comprehensive dog care.",
-		"paragraph_three":"Your help makes a big difference in improving the lives of these animals. Every donation helps us to provide the dogs with the necessary medical care, proper nutrition, safe housing and proper care."
+		"paragraph_one": "Join our community of big-hearted people who are helping these defenseless animals find their true friends. Our donation website is the link between you and these animals in need. Together we can make a difference in their lives!",
+		"paragraph_two": "Every contribution you make makes a big difference to their welfare. Your support helps us provide uninterrupted medical care, proper nutrition, safe shelter and comprehensive dog care.",
+		"paragraph_three": "Your help makes a big difference in improving the lives of these animals. Every donation helps us to provide the dogs with the necessary medical care, proper nutrition, safe housing and proper care."
 	},
-	"canisTherapy":{
+	"canisTherapy": {
 		"title": "Canis therapy  with tails",
-		"paragraph_one":"Canis therapy (from Latin canis - dog + Greek θεραπεία - treatment) is a type of therapy using specially trained dogs in medical and social rehabilitation.",
-		"paragraph_two":"We believe that every minute of communication with our furry friends can heal the soul. Here, among the cheerful tails and soft paws, we have created a special space where the magic of dog-assisted therapy comes to life. In this place, children's laughter mixes with joyful barking, and every day is filled with miracles of mutual understanding and friendship.",
-		"paragraph_three":"Our four-legged therapists, with their unique stories and unbridled love of life, inspire children to discover the world from a new perspective. They teach little hearts about generosity, kindness and empathy. Whether it's a gentle hug or a joyful game, every moment spent with our Tails emphasizes that care and love can take shape in the most unexpected ways.",
-		"paragraph_four":"We invite you and your families to visit our shelter, where hearts warm, friendships blossom, and four-legged friends are waiting to give you happiness. Let's do good together - \"Tails\" are ready to share their boundless energy and inexhaustible joy!"
+		"paragraph_one": "Canis therapy (from Latin canis - dog + Greek θεραπεία - treatment) is a type of therapy using specially trained dogs in medical and social rehabilitation.",
+		"paragraph_two": "We believe that every minute of communication with our furry friends can heal the soul. Here, among the cheerful tails and soft paws, we have created a special space where the magic of dog-assisted therapy comes to life. In this place, children's laughter mixes with joyful barking, and every day is filled with miracles of mutual understanding and friendship.",
+		"paragraph_three": "Our four-legged therapists, with their unique stories and unbridled love of life, inspire children to discover the world from a new perspective. They teach little hearts about generosity, kindness and empathy. Whether it's a gentle hug or a joyful game, every moment spent with our Tails emphasizes that care and love can take shape in the most unexpected ways.",
+		"paragraph_four": "We invite you and your families to visit our shelter, where hearts warm, friendships blossom, and four-legged friends are waiting to give you happiness. Let's do good together - \"Tails\" are ready to share their boundless energy and inexhaustible joy!"
 	},
 	"partners": {
 		"title": "Our partners"
+	},
+	"error": {
+		"text": "Sorry, the page you are looking for has been removed or moved",
+		"button": "Go to the home page"
+	},
+	"statistics": {
+		"title_animal": "Number of animals in the shelter",
+		"title_employees": "Number of employees",
+		"title_adoptions": "Number of successful adoptions"
+	},
+	"support": {
+		"title": "How to support the shelter",
+		"description": "Join our mission - help us find a warm and loving home for every dog. Your support is an opportunity to change lives and rescue those in need of our assistance.",
+		"financial_title": "Help us financially",
+		"financial_description": "Your help works wonders: support us today.",
+		"button": "Help us",
+		"nonfinancial_title": "Non-material assistance",
+		"nonfinancial_description": "Assisting street dogs goes beyond just financial support. We constantly need food, medications, spreading information, and more.",
+		"parcel": "Shipping information:",
+		"city": "Chernivtsi city",
+		"name": "Martha Levchenko",
+		"nova_poshta": "Nova Poshta",
+		"nova_poshta_point": "pickup point №1",
+		"nova_poshta_street": "248-O Ruska Street",
+		"ukr_poshta": "Ukr Poshta",
+		"ukr_poshta_point": "pickup point №58008",
+		"ukr_poshta_street": "36-A Yuri Gagarin Street"
 	}
 }

@@ -1,8 +1,13 @@
 @import '../../scss/variables';
 @import '../../scss/mixins';
 
-.section{
+.background {
   background-color: $color-main-bg;
+}
+
+.section{
+  max-width: 1920px;
+  margin: 0 auto;
   padding:40px 20px;
   display: flex;
   flex-direction: column;
@@ -31,4 +36,30 @@
     flex-direction: row;
   }
   
+}
+
+.title{
+  width: 100%;
+  text-align: start;
+  // font-size: 28px;
+  font-weight: 800;
+  // line-height: 1.2;
+
+ @include small_desktop{
+  // font-size: 52px;
+ }
+}
+
+.description{
+  margin-top: 16px;
+  
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.4;
+
+  color: $color-main-blue-dark;
+
+  @include small_desktop{
+    font-size: 26px;
+  }
 }

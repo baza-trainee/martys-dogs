@@ -8,20 +8,23 @@ import { FetchAboutResult } from '../../pages/About/About';
 import { UseQueryResult } from '@tanstack/react-query';
 import styles from './Photos.module.scss';
 import { useTranslation } from 'react-i18next';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 
 interface Pagination {
+	el: string;
 	clickable: boolean;
+	bulletClass: string;
 	renderBullet: (index: number, className: string) => string;
 }
 
 const breakpoints = {
 	1920: {
 		slidesPerView: 4,
-		slidesPerGroup: 4,
+		slidesPerGroup: 1,
 	},
 	1280: {
 		slidesPerView: 3,
-		slidesPerGroup: 3,
+		slidesPerGroup: 2,
 	},
 	768: {
 		slidesPerView: 2,
@@ -33,15 +36,16 @@ const breakpoints = {
 	},
 };
 
+const numbers = window.innerWidth > 767 ? 8 : 3;
+
 interface PhotosProps {
 	data: UseQueryResult<FetchAboutResult, Error>;
 }
 
 const Photos: React.FC<PhotosProps> = ({ data }) => {
-	const {t} = useTranslation();
+	const { t } = useTranslation();
 	const { data: photos, isPending, isError, error } = data;
 	const images = photos?.about_data[0].images;
-	
 
 	if (isPending) {
 		return (
@@ -60,9 +64,11 @@ const Photos: React.FC<PhotosProps> = ({ data }) => {
 	}
 
 	const pagination: Pagination = {
+		el: '.swiper-pagination',
 		clickable: true,
+		bulletClass: 'swiper-pagination-bullet',
 		renderBullet: (index, className) => {
-			return '<span class="' + className + '">' + (index + 1) + '</span>';
+			return `<span class="${className}">${index + 1}</span>`;
 		},
 	};
 
@@ -76,10 +82,13 @@ const Photos: React.FC<PhotosProps> = ({ data }) => {
 				speed={1000}
 				effect={'fade'}
 				pagination={pagination}
-				navigation={true}
+				navigation={{
+					nextEl: '.next',
+					prevEl: '.prev',
+				}}
 				modules={[Pagination, Navigation]}
 			>
-				{images?.map((image) => (
+				{images?.slice(0, numbers).map((image) => (
 					<SwiperSlide key={image.id}>
 						<div>
 							<img
@@ -90,6 +99,15 @@ const Photos: React.FC<PhotosProps> = ({ data }) => {
 						</div>
 					</SwiperSlide>
 				))}
+				<div className='navigationContainer'>
+					<div className='prev'>
+						<FaAngleLeft />
+					</div>
+					<div className='swiper-pagination'></div>
+					<div className='next'>
+						<FaAngleRight />
+					</div>
+				</div>
 			</Swiper>
 		</section>
 	);

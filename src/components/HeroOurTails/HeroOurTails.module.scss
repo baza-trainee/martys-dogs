@@ -1,14 +1,16 @@
+@import '../../scss/_variables.scss';
+
 .tails {
-	background-color: #b6e1f2;
+	background-color: $color-main-blue-light;
 }
 
 .container {
 	display: flex;
 	max-width: 1920px;
-	margin: auto;
+	margin: 0 auto;
 	overflow: hidden;
 	gap: 20px;
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 767px) {
 		flex-direction: column;
 		gap: 50px;
 	}
@@ -21,13 +23,13 @@
 	justify-content: center;
 	flex-direction: column;
 	gap: 10px;
-	@media screen and (max-width: 1440px) {
+	@media screen and (max-width: 1439px) {
 		min-width: 400px;
 	}
-	@media screen and (max-width: 1280px) {
+	@media screen and (max-width: 1239px) {
 		padding: 0 32px;
 	}
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 767px) {
 		padding: 40px 20px 0 20px;
 		min-width: 350px;
 	}
@@ -39,8 +41,8 @@
 
 .text {
 	font-weight: 500;
-	color: #005c80;
-	@media screen and (max-width: 768px) {
+	color: $color-main-blue-dark;
+	@media screen and (max-width: 767px) {
 		font-size: 14px;
 	}
 }
@@ -49,10 +51,10 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	@media screen and (max-width: 1280px) {
+	@media screen and (max-width: 1279px) {
 		margin-right: -70px;
 	}
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 767px) {
 		margin-right: 0;
 	}
 }
@@ -62,12 +64,12 @@
 	bottom: 80px;
 	left: 20px;
 	padding: 24px;
-	background-color: #005c80;
+	background-color: $color-main-blue-dark;
 	max-width: 230px;
 	border-radius: 24px 0 24px 24px;
-	color: #ffffff;
+	color: $color-gray-0;
 	font-weight: 500;
-	@media screen and (max-width: 1280px) {
+	@media screen and (max-width: 1279px) {
 		display: none;
 	}
 }
@@ -77,12 +79,12 @@
 	bottom: 200px;
 	right: 250px;
 	padding: 24px;
-	background-color: #005c80;
+	background-color: $color-main-blue-dark;
 	max-width: 250px;
 	border-radius: 24px 0 24px 24px;
-	color: #ffffff;
+	color: $color-gray-0;
 	font-weight: 500;
-	@media screen and (max-width: 1280px) {
+	@media screen and (max-width: 1279px) {
 		display: none;
 	}
 }
@@ -95,5 +97,5 @@
 	height: 0;
 	border-style: solid;
 	border-width: 24px 24px 0 0;
-	border-color: transparent #005c80 transparent transparent;
+	border-color: transparent $color-main-blue-dark transparent transparent;
 }

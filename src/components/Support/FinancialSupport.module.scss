@@ -11,6 +11,9 @@ background-color:$color-main-blue-light;
 border-radius:30px;
 gap:32px;
 
+@include tablet {
+  padding: 40px;
+}
 
 @include small_desktop {
     min-width: 50%;
@@ -22,6 +25,11 @@ gap:32px;
   font-size: 20px;
   font-weight: 800;
   line-height: 1.4;
+
+  @include tablet {
+    font-size: 26px;
+    line-height: 1.2;
+  }
 }
 
 .description{
@@ -30,12 +38,20 @@ gap:32px;
   line-height: 1.4;
 
   margin-top: 8px;
+
+  @include tablet {
+    font-style: 20px;
+  }
 }
 
 .box__buttons{
 display: flex;
 flex-direction: column;
 gap:16px;
+
+@include tablet {
+  gap:24px;
+}
 }
 
 .icon {

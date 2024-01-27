@@ -1,13 +1,17 @@
+@import '../../scss/variables';
+
 .contacts {
 	padding: 100px;
-	@media screen and (max-width: 768px) {
+	max-width: 1920px;
+	margin: 0 auto;
+	@media screen and (max-width: 767px) {
 		padding: 40px 32px;
 	}
 }
 
 .title {
 	margin-bottom: 40px;
-	color: #005c80;
+	color: $color-main-blue-dark;
 	font-weight: 900;
 }
 
@@ -15,7 +19,7 @@
 	display: flex;
 	justify-content: space-between;
 	gap: 20px;
-	@media screen and (max-width: 1280px) {
+	@media screen and (max-width: 1279px) {
 		flex-direction: column;
 	}
 }
@@ -32,15 +36,15 @@
 	flex-direction: column;
 	gap: 16px;
 	margin-right: 100px;
-	@media screen and (max-width: 1440px) {
+	@media screen and (max-width: 1439px) {
 		margin-right: 0;
 	}
 }
 
 .icon {
-	color: #005c80;
+	color: $color-main-blue-dark;
 	padding: 8px;
-	background-color: #b6e1f2;
+	background-color: $color-main-blue-light;
 	border-radius: 10px;
 	display: flex;
 	justify-content: center;
@@ -56,9 +60,9 @@
 
 .black {
 	font-weight: 800;
-	color: #000;
+	color: $color-gray-100;
 	font-size: 1.5rem;
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 767px) {
 		font-size: 1.25rem;
 	}
 }
@@ -66,15 +70,15 @@
 .text {
 	font-weight: 800;
 	text-decoration: none;
-	color: #000;
+	color: $color-gray-100;
 	transition: color 0.3s ease;
 	&:hover {
-		color: #005c80;
+		color: $color-main-blue-dark;
 	}
 }
 
 .big {
-	color: #005c80;
+	color: $color-main-blue-dark;
 }
 
 .small {
@@ -85,7 +89,7 @@
 .socials {
 	display: flex;
 	justify-content: space-between;
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 767px) {
 		flex-direction: column;
 		gap: 16px;
 	}
@@ -99,7 +103,7 @@
 
 a {
 	font-size: 1.5rem;
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 767px) {
 		font-size: 1.25rem;
 	}
 }

@@ -8,10 +8,32 @@ img {
 	height: auto;
 }
 
-.hero {
-	width: 100%;
-	padding-top: 40px;
+.background {
 	background: $color-main-blue-light;
+}
+
+.hero {
+	// margin: 0 auto;
+	// width: 100%;
+	// padding-top: 40px;
+	background: $color-main-blue-light;
+
+	// @include tablet {
+	// 	padding-top: 80px;
+	// }
+
+	// @include small-desktop {
+	// 	display: flex;
+	// 	gap: 20px;
+	// 	padding: 0;
+	// }
+}
+
+.hero_container {
+	margin: 0 auto;
+	max-width: 1920px;
+	padding-top: 40px;
+	// background: $color-main-blue-light;
 
 	@include tablet {
 		padding-top: 80px;
@@ -93,10 +115,10 @@ img {
 		height: 47px;
 	}
 
-	@include full-desktop {
-		width: 400px;
-		height: 47px;
-	}
+	// @include full-desktop {
+	// 	width: 400px;
+	// 	height: 47px;
+	// }
 }
 
 .photo {
@@ -126,10 +148,32 @@ img {
 	}
 }
 
+.back {
+	background-color: $color-main-bg;
+}
+
 .info {
+	// padding: 40px 20px;
+	// align-self: stretch;
+	background-color: $color-main-bg;
+
+	// @include tablet {
+	// 	padding: 80px 32px;
+	// }
+
+	// @include small-desktop {
+	// 	display: grid;
+	// 	grid-template-columns: 414px 1fr;
+	// 	padding: 100px;
+	// 	gap: 48px;
+	// }
+}
+
+.info_container {
+	max-width: 1920px;
+	margin: 0 auto;
 	padding: 40px 20px;
 	align-self: stretch;
-	background-color: $color-main-bg;
 
 	@include tablet {
 		padding: 80px 32px;
