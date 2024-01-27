@@ -11,12 +11,12 @@ const meta: Meta = {
 
 export default meta;
 
-type FooterStory = Story;
+type MobNavMenuStory = Story;
 
-const Template: FooterStory = (args) => (
+const Template: MobNavMenuStory = (args) => (
   <I18nextProvider i18n={i18n}>
     <BrowserRouter>
-      <MobNavMenu {...args} />
+      <MobNavMenu {...args} currentLanguage="ua" changeLanguage={() => console.log("Language changed")} />
     </BrowserRouter>
   </I18nextProvider>
 );

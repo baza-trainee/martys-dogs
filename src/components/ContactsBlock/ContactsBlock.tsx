@@ -39,7 +39,7 @@ const ContactsBlock: React.FC = () => {
 							<div className={styles.icon}>
 								<FiSmartphone />
 							</div>
-							<p className={styles.black}>380 95 053 60 09</p>
+							<p className={styles.black}>+380 95 053 60 09</p>
 						</div>
 						<div className={styles.city}>
 							<div className={styles.icon}>

@@ -2,6 +2,8 @@
 
 .contacts {
 	padding: 100px;
+	max-width: 1920px;
+	margin: 0 auto;
 	@media screen and (max-width: 767px) {
 		padding: 40px 32px;
 	}

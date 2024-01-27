@@ -4,7 +4,8 @@
 
   min-height:352px;
   padding:40px 20px;
-  max-width:100%;
+  max-width:1920px;
+  margin: 0 auto;
 
   @include tablet {
     min-height:807px;

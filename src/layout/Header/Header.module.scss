@@ -13,11 +13,11 @@
 	display: flex;
 	flex-direction: column;
 
-	@media screen and (max-width: 1280px) {
+	@media screen and (max-width: 1279px) {
 		padding: 0 32px;
 	}
 
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 767px) {
 		padding: 0 20px;
 	}
 }
@@ -31,7 +31,7 @@
 .header_logo {
 	margin: 32px 0;
 
-	@media screen and (max-width: 1280px) {
+	@media screen and (max-width: 1279px) {
 		width: 74px;
 		margin: 16px 0;
 	}
@@ -41,7 +41,7 @@
 	display: flex;
 	list-style: none;
 
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 1279px) {
 		display: none;
 	}
 }
@@ -75,6 +75,12 @@
 	align-items: center;
 }
 
+.header_lng {
+	@media screen and (max-width: 1279px) {
+		display: none;
+	}
+}
+
 .header_lng_btn {
 	background-color: transparent;
 	border: none;
@@ -93,7 +99,7 @@
 		color: $color-accent;
 	}
 
-	@media screen and (max-width: 1280px) {
+	@media screen and (max-width: 1279px) {
 		font-size: 24px;
 	}
 }
@@ -110,7 +116,7 @@
 	display: none;
 	margin-left: 40px;
 
-	@media screen and (max-width: 768px) {
+	@media screen and (max-width: 1279px) {
 		display: flex;
 	}
 }
@@ -132,4 +138,22 @@
 
 .header_mob_menu_btn_close {
 	color: $color-main-blue-dark;
+}
+
+.mobMenuEnter {
+  opacity: 0;
+}
+
+.mobMenuEnterActive {
+  opacity: 1;
+  transition: opacity 400ms;
+}
+
+.mobMenuExit {
+  opacity: 1;
+}
+
+.mobMenuExitActive {
+  opacity: 0;
+  transition: opacity 400ms;
 }

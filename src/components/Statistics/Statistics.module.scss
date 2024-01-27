@@ -3,16 +3,7 @@
 
 
 .statistics__section{
-  padding: 40px 20px;
   background-color: $color-main-blue-light;
-
-  @include tablet {
-padding:80px 32px;
-  }
-
-  @include small_desktop{
-    padding:100px;
-  }
 }
 
 .loading__section{
@@ -48,13 +39,18 @@ padding:80px 32px;
   display: flex;
   flex-direction: column;
   gap:16px;
+  padding: 40px 20px;
+  max-width: 1920px;
+  margin: 0 auto;
 
   @include tablet {
+    padding:80px 32px;
     gap:20px;
   }
 
   @include small_desktop {
     flex-direction: row;
+    padding:100px;
   }
 }
 
