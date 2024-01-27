@@ -3,7 +3,6 @@ import Footer from '../../layout/Footer/Footer';
 import Header from '../../layout/Header/Header';
 
 const Error = () => {
-
 	return (
 		<>
 			<Header />

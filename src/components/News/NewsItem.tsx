@@ -53,13 +53,19 @@ const NewsItem: React.FC<NewsItemProps> = ({
 	return (
 		<li className={styles.item}>
 			<div className={styles.thumb}>
-				<img src={photo.url} alt='photo' className={styles.photo} />
+				<img
+					src={photo.url}
+					alt='news-photo'
+					className={styles.photo}
+				/>
 			</div>
 			<div className={styles.info}>
 				<h3 className={styles.title}>{title}</h3>
 				<div>
 					<p className={styles.date}>{getDateName(post_at)}</p>
-					<p className={styles.text}>{sub_text}</p>
+					<p className={styles.text} data-testid='newsItem'>
+						{sub_text}
+					</p>
 				</div>
 			</div>
 			<a href={url} target='blank' rel='noopener noreferrer'>
