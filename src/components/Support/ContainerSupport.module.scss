@@ -13,7 +13,7 @@
   }
 
   @include small_desktop {
-    min-width: 50%;
+    min-width: calc((100% - 20px)/2);
     height: 519px;
     padding: 40px;
    
