@@ -1,56 +1,8 @@
 @import '../../scss/variables';
 @import '../../scss/mixins';
 
-//  move  img  and ul  in  common  styles file
-img {
-	display: block;
-	max-width: 100%;
-	height: auto;
-}
-
-ul {
-	list-style: none;
-}
-
-///move to  separate component
-.logoActions {
-	margin-top: auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 10px;
-	padding: 8px;
-	border-radius: 4px;
-
-	.editIcon,
-	.deleteIcon {
-		margin: 4px;
-		font-size: 16px;
-		color: #333;
-		cursor: pointer;
-		border: none;
-		background-color: transparent;
-	}
-
-	.editIcon:hover,
-	.deleteIcon:hover {
-		color: #009cd9;
-	}
-}
-
 .item {
 	max-width: 353px;
-	// display: none;
-
-	// &:nth-child(-n + 1) {
-	// 	display: block;
-	// }
-
-	// @include tablet {
-	// 	&:nth-child(-n + 2) {
-	// 		display: grid;
-	// 	}
-	// }
 
 	@include small-desktop {
 		// max-width: 255px;
@@ -113,7 +65,6 @@ ul {
 }
 
 .text {
-	// margin-bottom: 16px;
 	color: $color-gray-80;
 	font-weight: 500;
 	line-height: 1.4;

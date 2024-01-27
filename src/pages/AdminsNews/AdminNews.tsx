@@ -1,8 +1,7 @@
-import { Link } from 'react-router-dom';
-import { FaRegPlusSquare } from 'react-icons/fa';
 import styles from './AdminNews.module.scss';
 import { news } from '../../components/News/data';
 import AdminNewsItem, { NewsItemProps } from '../AdminsNews/AdminNewsItem';
+import AddButton from '../../layout/AddButton/AddButton';
 
 const AdminNews: React.FC = () => {
 	return (
@@ -10,22 +9,12 @@ const AdminNews: React.FC = () => {
 			<div className={styles.header}>
 				<h2 className={styles.title}>Новини</h2>
 			</div>
-
-			<div className={styles.buttonsWrapper}>
-				<Link to='/admin/news_add'>
-					<button className={styles.addButton}>
-						<FaRegPlusSquare />
-						Додати новину
-					</button>
-				</Link>
-			</div>
-			<div className={styles.logoContainer}>
-				<ul className={styles.news}>
-					{news.map((item: NewsItemProps) => (
-						<AdminNewsItem key={item.id} {...item} />
-					))}
-				</ul>
-			</div>
+			<AddButton path='news_add' text='новину' />
+			<ul className={styles.news}>
+				{news.map((item: NewsItemProps) => (
+					<AdminNewsItem key={item.id} {...item} />
+				))}
+			</ul>
 		</div>
 	);
 };

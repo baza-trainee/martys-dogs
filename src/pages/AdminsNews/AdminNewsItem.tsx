@@ -1,5 +1,4 @@
-import { FaTrash, FaEdit } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import ItemActions from '../../layout/ItemActions/ItemActions';
 import styles from './AdminNewsItem.module.scss';
 
 export interface NewsItemProps {
@@ -62,16 +61,7 @@ const NewsItem: React.FC<NewsItemProps> = ({
 				<p className={styles.text}>{sub_text}</p>
 			</div>
 			{/* <a href={url} target='blank' rel='noopener noreferrer'></a> */}
-
-			{/* move  this  div with actions  to  separate component?  */}
-			<div className={styles.logoActions}>
-				<Link to='/admin/news_edit' className={styles.link}>
-					<FaEdit className={styles.editIcon} />
-				</Link>
-				<button type='button' className={styles.deleteIcon}>
-					<FaTrash className={styles.deleteIcon} />
-				</button>
-			</div>
+			<ItemActions path='news_edit' />
 		</li>
 	);
 };
