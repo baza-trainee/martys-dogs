@@ -73,15 +73,26 @@ h5 {
 	color: $color-accent;
 	opacity: 1;
 	background-color: $color-gray-10;
+	user-select: none;
 	cursor: pointer;
 	&:hover {
 		background-color: $color-main-blue-light;
+	}
+	// @media screen and (max-width: 767px) {
+	// 	padding: 40px 20px;
+	// }
+}
+
+.swiper-pagination-bullet {
+	@media screen and (max-width: 1279px) {
+		display: none;
 	}
 }
 
 .swiper-pagination-bullet-active {
 	color: $color-gray-0;
 	background: $color-accent;
+	display: flex;
 	&:hover {
 		background: $color-accent;
 	}

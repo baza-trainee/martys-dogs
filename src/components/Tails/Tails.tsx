@@ -23,11 +23,11 @@ interface Pagination {
 const breakpoints = {
 	1920: {
 		slidesPerView: 4,
-		slidesPerGroup: 1,
+		slidesPerGroup: 4,
 	},
 	1280: {
 		slidesPerView: 3,
-		slidesPerGroup: 2,
+		slidesPerGroup: 3,
 	},
 	768: {
 		slidesPerView: 2,
@@ -39,7 +39,7 @@ const breakpoints = {
 	},
 };
 
-const numbers = window.innerWidth > 767 ? 8 : 3;
+// const numbers = window.innerWidth > 767 ? 8 : 3;
 
 export interface TailsProps {
 	data: UseQueryResult<LandingData, Error>;
@@ -102,7 +102,7 @@ const Tails: React.FC<TailsProps> = ({ data }) => {
 				}}
 				modules={[Pagination, Navigation]}
 			>
-				{tails?.dog_cards?.slice(0, numbers).map((tail: TailProps) => (
+				{tails?.dog_cards?.map((tail: TailProps) => (
 					<SwiperSlide key={tail.id}>
 						<Tail {...tail} />
 					</SwiperSlide>
