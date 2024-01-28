@@ -106,6 +106,20 @@ button {
 	cursor: pointer;
 }
 
+a {
+	text-decoration: none;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+ul {
+	list-style: none;
+}
+
 .navigationContainer {
 	display: flex;
 	justify-content: center;
@@ -120,4 +134,3 @@ button {
 		background-color: $color-gray-10;
 	}
 }
-

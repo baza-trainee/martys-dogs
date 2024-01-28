@@ -20,6 +20,8 @@ import Login from './pages/Login/Login';
 import { ModalProvider } from './context/ModalContext';
 import OurTails from './pages/OurTails/OurTails';
 import Register from './pages/Register/Register';
+import AddNews from './pages/AdminsNews/AddNews';
+import EditNews from './pages/AdminsNews/EditNews';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -72,7 +74,6 @@ const router = createBrowserRouter([
 			{
 				path: 'partners',
 				element: <AdminPartners />,
-				
 			},
 			{
 				path: 'partner_add',
@@ -85,6 +86,14 @@ const router = createBrowserRouter([
 			{
 				path: 'news',
 				element: <AdminNews />,
+			},
+			{
+				path: 'news_add',
+				element: <AddNews />,
+			},
+			{
+				path: 'news_edit',
+				element: <EditNews />,
 			},
 			{
 				path: 'statistics',
