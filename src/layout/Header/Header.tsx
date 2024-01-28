@@ -1,12 +1,13 @@
-import { useState } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import styles from './Header.module.scss';
-import { useTranslation } from 'react-i18next';
-import headerLogo from '../../assets/header_logo.webp';
-import { Link } from 'react-router-dom';
+
 import { CiMenuBurger } from "react-icons/ci";
 import { IoCloseOutline } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 import MobNavMenu from '../../components/MobNavMenu/MobNavMenu';
+import headerLogo from '../../assets/header_logo.webp';
+import styles from './Header.module.scss';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface ChangeLanguageParams {
 	lng: string;
@@ -51,7 +52,7 @@ const Header: React.FC = () => {
 								className={styles.header_nav_category}
 							>
 								<Link
-									to="/about"
+									to="/"
 									className={styles.header_nav_link}
 								>
 									{t('header.nav_main')}

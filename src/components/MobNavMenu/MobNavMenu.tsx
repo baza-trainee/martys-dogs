@@ -1,6 +1,6 @@
+import { Link } from 'react-router-dom';
 import styles from './MobNavMenu.module.scss';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 
 export interface MobNavMenuProps {
   currentLanguage: string;
@@ -21,7 +21,7 @@ const MobNavMenu = ({currentLanguage, changeLanguage}: MobNavMenuProps) => {
           className={styles.header_menu_mob_cat}
         >
           <Link 
-            to="/about"
+            to="/"
             className={styles.header_menu_mob_link}
           >
             {t('header.nav_main')}
