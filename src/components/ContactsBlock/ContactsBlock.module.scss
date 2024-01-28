@@ -4,7 +4,7 @@
 	padding: 100px;
 	max-width: 1920px;
 	margin: 0 auto;
-	@media screen and (max-width: 767px) {
+	@media screen and (max-width: 1279px) {
 		padding: 40px 32px;
 	}
 }
@@ -13,12 +13,15 @@
 	margin-bottom: 40px;
 	color: $color-main-blue-dark;
 	font-weight: 900;
+	@media screen and (max-width: 1279px) {
+		font-size: 2rem;
+	}
 }
 
 .container {
 	display: flex;
 	justify-content: space-between;
-	gap: 20px;
+	gap: 50px;
 	@media screen and (max-width: 1279px) {
 		flex-direction: column;
 	}
@@ -35,7 +38,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
-	margin-right: 100px;
+	// margin-right: 100px;
 	@media screen and (max-width: 1439px) {
 		margin-right: 0;
 	}
@@ -45,25 +48,26 @@
 	color: $color-main-blue-dark;
 	padding: 8px;
 	background-color: $color-main-blue-light;
-	border-radius: 10px;
+	border-radius: 8px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 24px;
+	font-size: 16px;
 }
 
 .city {
 	display: flex;
 	gap: 16px;
 	align-items: center;
+	flex: 1 0 0;
 }
 
 .black {
 	font-weight: 800;
 	color: $color-gray-100;
-	font-size: 1.5rem;
-	@media screen and (max-width: 767px) {
-		font-size: 1.25rem;
+	font-size: 1.25rem;
+	@media screen and (max-width: 1279px) {
+		font-size: 1rem;
 	}
 }
 
@@ -72,13 +76,21 @@
 	text-decoration: none;
 	color: $color-gray-100;
 	transition: color 0.3s ease;
+	font-size: 1.25rem;
 	&:hover {
 		color: $color-main-blue-dark;
+	}
+	@media screen and (max-width: 1279px) {
+		font-size: 1rem;
 	}
 }
 
 .big {
 	color: $color-main-blue-dark;
+	font-size: 3.25rem;
+	@media screen and (max-width: 1279px) {
+		font-size: 1.75rem;
+	}
 }
 
 .small {
@@ -99,6 +111,17 @@
 	height: 480px;
 	width: 880px;
 	object-fit: cover;
+	object-position: 60% 50%;
+	@media screen and (max-width: 1919px) {
+		object-position: 70% 50%;
+	}
+	@media screen and (max-width: 1279px) {
+		object-position: 60% 50%;
+	}
+	@media screen and (max-width: 767px) {
+		object-position: 80% 50%;
+		// object-fit: contain;
+	}
 }
 
 a {
