@@ -4,7 +4,7 @@ import styles from './AddNews.module.scss';
 const AddNews: React.FC = () => {
 	const [title, setTitle] = useState('');
 	const [text, setText] = useState('');
-	const [image, setImage] = useState<File | null>(null);
+	const [, setImage] = useState<File | null>(null);
 	// const [date, setDate] = useState('');
 	const [link, setLink] = useState('');
 
