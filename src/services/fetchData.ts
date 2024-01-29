@@ -21,6 +21,7 @@ export const fetchHome = async () => {
 };
 
 export const fetchAbout = async () => {
+
 	try {
 		const response = await fetch(ABOUT);
 
@@ -38,7 +39,9 @@ export const fetchAbout = async () => {
 };
     
 
+/*
 export const fetchCatalog = async () => {
+
 	try {
 		const response = await fetch(CATALOG);
 
@@ -49,6 +52,29 @@ export const fetchCatalog = async () => {
 		const data = await response.json();
 		return data;
 		
+	} catch (error) {
+		console.error('Error while loading data:', error);
+		throw error;
+	}
+};
+*/
+export const fetchCatalog = async ({ queryKey }) => {
+	const [, { exact, queryString } = {}] = queryKey;
+
+	// Створюємо URL з параметрами фільтрації, якщо вони надані
+	const url = `https://matys-dogs2.onrender.com/catalog${exact ? '' : queryString || ''}`;
+
+	try {
+		const response = await fetch(url);
+
+		if (!response.ok) {
+			console.error(`Error loading data. Status: ${response.status}`);
+			// Додайте інші деталі про помилку, якщо вони доступні
+			throw new Error('Data loading error');
+		}
+
+		const data = await response.json();
+		return data;
 	} catch (error) {
 		console.error('Error while loading data:', error);
 		throw error;

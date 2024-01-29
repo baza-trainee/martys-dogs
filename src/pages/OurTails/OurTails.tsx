@@ -12,6 +12,7 @@ export interface OurTailsData {
 }
 
 const OurTails: React.FC = () => {
+
 	const location = useLocation();
 	const data = useQuery<OurTailsData>({
 		queryKey: ['tails'],
@@ -32,3 +33,5 @@ const OurTails: React.FC = () => {
 };
 
 export default OurTails;
+
+

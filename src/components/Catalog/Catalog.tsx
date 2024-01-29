@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { OurTailsData } from '../../pages/OurTails/OurTails' ;
-import { UseQueryResult,  useQueryClient } from '@tanstack/react-query';
+import { UseQueryResult, useQueryClient, useIsFetching } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import Button from '../../layout/Button/Button';
 import Tail from '../Tail/Tail';
 import { DogCard } from '../../pages/Landing/Landing';
 import styles from './Catalog.module.scss';
 import * as React from 'react';
+import { fetchCatalog } from '../../services/fetchData';
 
 interface TailsProps {
 	data: UseQueryResult<OurTailsData, Error>;
@@ -16,7 +17,7 @@ type FilterParams = {
 	age?: string;
 	size?: string;
 	gender?: string;
-	ready_for_adoption?:boolean;
+	ready_for_adoption?: boolean;
 } & { [key: string]: string | boolean };
 
 const Catalog: React.FC<TailsProps> = ({ data }) => {
@@ -30,51 +31,10 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 		age: '',
 		size: '',
 		gender: '',
-		ready_for_adoption: false
+		ready_for_adoption: false,
 	});
-/*	const [queryString, setQueryString] = useState<string>('');
-	const queryClient = useQueryClient();*/
-
-	const handleChange = (field: keyof FilterParams, value: string | boolean) => {
-		setSelectedFilters((prevFilters) => ({
-			...prevFilters,
-			[field]: value,
-		}));
-	};
-	const handleFilterSubmit = () => {
-		console.log('click');
-		console.log(selectedFilters);
-
-	};
-
-
-/*	const handleFilterSubmit = () => {
-		const filters = Object.entries(selectedFilters)
-			.filter(([key, value]) => value !== '')
-			.map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-			.join('&');
-
-		setQueryString(filters);
-
-		queryClient.invalidateQueries(['filteredTails', queryString]);
-	};*/
-	//To filter by age
-/*
-	const categorizeAge = (ageString: string): string => {
-		const age = parseFloat(ageString.replace(/[^0-9.]/g, ''));
-
-		if (isNaN(age)) {
-			return 'unknown';
-		} else if (age < 2) {
-			return 'щеня';
-		} else if (age >= 2 && age < 5) {
-			return 'дорослий';
-		} else {
-			return 'старий';
-		}
-	};
-*/
-
+	const [queryString, setQueryString] = useState<string>('');
+	const queryClient = useQueryClient();
 
 	useEffect(() => {
 		if (tails) {
@@ -83,9 +43,9 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 	}, [tails]);
 
 	useEffect(() => {
-		setCountPage(Math.ceil(cards.length / cardsInPage))
+		setCountPage(Math.ceil(cards.length / cardsInPage));
 	}, [cards, cardsInPage]);
-	
+
 	if (isPending) {
 		return (
 			<div className={styles.container}>
@@ -107,12 +67,68 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 			setPage(page - 1);
 		}
 	};
-	
+
 	const goToNextPage = () => {
 		if (page < countPage) {
 			setPage(page + 1);
 		}
 	};
+
+
+	const handleChange = (field: keyof FilterParams, value: string | boolean) => {
+
+		setSelectedFilters((prevFilters) => ({
+			...prevFilters,
+			[field]: value,
+		}));
+	};
+
+
+	const handleFilterSubmit = async () => {
+		/*	const filters = Object.entries(selectedFilters)
+				.filter(([key, value]) => value !== '')
+				.map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+				.join('&');*/
+
+		const newQueryString = `?age=${selectedFilters.age}&size=${selectedFilters.size}&gender=${selectedFilters.gender?.toLowerCase()}&ready_for_adoption=${selectedFilters.ready_for_adoption}`;
+
+		setQueryString(newQueryString);
+		/*const filteredTails = await queryClient.refetchQueries(
+			{
+				queryKey: ['tails', { exact: false, queryString }],
+			});
+		;
+*/
+		// Очищення кешу запиту перед новим запитом
+		queryClient.invalidateQueries(['tails']);
+
+/*
+		// Використання нового значення queryKey для автоматичного оновлення даних
+		const { data: filteredTails, isError, error } = await queryClient.fetchQuery(['tails', { exact: false, queryString }]);
+
+		console.log(selectedFilters);
+		console.log(newQueryString);
+		console.log(filteredTails);
+*/
+		try {
+			// Використовуйте новий синтаксис fetchQuery
+			const filteredTails = await queryClient.fetchQuery(
+				{
+					queryKey: ['tails',   { exact: false, queryString: newQueryString } ],
+					queryFn: fetchCatalog,
+				}
+			);
+
+
+			console.log(selectedFilters);
+			console.log(newQueryString);
+			console.log(filteredTails);
+		} catch (error) {
+			console.error('Error while fetching filtered tails:', error);
+		}
+
+	};
+
 
 	return (
 
@@ -319,3 +335,4 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 };
 
 export default Catalog;
+
