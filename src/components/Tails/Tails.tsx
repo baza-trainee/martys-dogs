@@ -39,8 +39,6 @@ const breakpoints = {
 	},
 };
 
-// const numbers = window.innerWidth > 767 ? 8 : 3;
-
 export interface TailsProps {
 	data: UseQueryResult<LandingData, Error>;
 }
@@ -77,7 +75,7 @@ const Tails: React.FC<TailsProps> = ({ data }) => {
 	return (
 		<section id='ourTails' className={styles.tails}>
 			<div className={styles.title}>
-				<h2>{t('tails.title')}</h2>
+				<h2 className={styles.letters}>{t('tails.title')}</h2>
 				<Link to='tails' className={styles.link}>
 					<Button
 						btnClasses={'primary'}

@@ -10,7 +10,7 @@
 	margin: 0 auto;
 	overflow: hidden;
 	gap: 20px;
-	@media screen and (max-width: 767px) {
+	@media screen and (max-width: 1279px) {
 		flex-direction: column;
 		gap: 50px;
 	}
@@ -18,32 +18,35 @@
 
 .content {
 	padding-left: 100px;
-	min-width: 600px;
+	min-width: 700px;
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	gap: 10px;
 	@media screen and (max-width: 1439px) {
-		min-width: 400px;
+		min-width: 500px;
 	}
-	@media screen and (max-width: 1239px) {
-		padding: 0 32px;
+	@media screen and (max-width: 1279px) {
+		padding: 80px 32px 0 32px;
+		min-width: 280px;
 	}
 	@media screen and (max-width: 767px) {
 		padding: 40px 20px 0 20px;
-		min-width: 350px;
 	}
 }
 
 .title {
 	line-height: 120%;
+	font-weight: 900;
+	color: $color-gray-100;
 }
 
 .text {
-	font-weight: 500;
+	font-weight: 700;
+	font-size: 1.25rem;
 	color: $color-main-blue-dark;
-	@media screen and (max-width: 767px) {
-		font-size: 14px;
+	@media screen and (max-width: 1279px) {
+		font-size: 0.875rem;
 	}
 }
 
@@ -69,7 +72,25 @@
 	border-radius: 24px 0 24px 24px;
 	color: $color-gray-0;
 	font-weight: 500;
+	@media screen and (max-width: 1919px) {
+		bottom: 30px;
+		left: 10px;
+	}
+	@media screen and (max-width: 1439px) {
+		bottom: 40px;
+		left: 10px;
+	}
 	@media screen and (max-width: 1279px) {
+		bottom: 80px;
+		left: 20px;
+	}
+	@media screen and (max-width: 1023px) {
+		max-width: 210px;
+		padding: 20px;
+		bottom: 60px;
+		left: 20px;
+	}
+	@media screen and (max-width: 767px) {
 		display: none;
 	}
 }
@@ -84,7 +105,25 @@
 	border-radius: 24px 0 24px 24px;
 	color: $color-gray-0;
 	font-weight: 500;
+	@media screen and (max-width: 1919px) {
+		bottom: 150px;
+		right: 200px;
+	}
+	@media screen and (max-width: 1439px) {
+		bottom: 150px;
+		right: 200px;
+	}
 	@media screen and (max-width: 1279px) {
+		bottom: 200px;
+		right: 250px;
+	}
+	@media screen and (max-width: 1023px) {
+		max-width: 210px;
+		padding: 20px;
+		bottom: 150px;
+		right: 200px;
+	}
+	@media screen and (max-width: 767px) {
 		display: none;
 	}
 }
