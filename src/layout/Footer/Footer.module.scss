@@ -60,7 +60,7 @@
 .footer_nav_link {
   color: $color-gray-0;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
   transition: color 0.2s ease-in-out;
 
@@ -75,11 +75,20 @@
 	}
 }
 
+.footer_nav_link_reports {
+  font-weight: 700;
+}
+
 .footer_con_title {
   color: $color-gray-0;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 800;
   line-height: 28px;
+
+  @media screen and (max-width: 767px) {
+		font-size: 24px;
+    text-align: center;
+	}
 }
 
 .footer_contacts {
@@ -104,12 +113,12 @@
     @media screen and (max-width: 767px) {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
     }
   }
 
   @media screen and (max-width: 767px) {
-		justify-content: center;
+		justify-content: flex-start;
 	}
 }
 
@@ -118,7 +127,6 @@
   align-items: center;
   @media screen and (max-width: 767px) {
 		align-self: flex-start;
-    margin-left: 10px;
 	}
 }
 
@@ -131,11 +139,12 @@
 .footer_contact_link {
   text-decoration: none;
   color: $color-gray-0;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 700;
   cursor: auto;
 
   @media screen and (max-width: 767px) {
+    font-size: 16px;
 		font-weight: 500;
 	}
 }
@@ -144,10 +153,12 @@
   color: $color-gray-0;
   font-size: 14px;
   font-weight: 400;
+  margin-top: 6px;
 
   @media screen and (max-width: 767px) {
 		font-size: 12px;
     font-weight: 300;
+    margin-top: 4px;
 	}
 }
 
