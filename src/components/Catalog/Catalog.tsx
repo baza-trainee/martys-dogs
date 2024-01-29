@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { LandingData } from '../../pages/Landing/Landing';
+import { OurTailsData } from '../../pages/OurTails/OurTails' ;
 import { UseQueryResult } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import Button from '../../layout/Button/Button';
@@ -8,11 +8,11 @@ import { DogCard } from '../../pages/Landing/Landing';
 import styles from './Catalog.module.scss';
 
 interface TailsProps {
-	data: UseQueryResult<LandingData, Error>;
+	data: UseQueryResult<OurTailsData, Error>;
 }
 
 interface FilterParams {
-	age?: number;
+	age?: string;
 	size?: string;
 	gender?: string;
 	ready_for_adoption?:boolean;
@@ -26,9 +26,10 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 	const { data: tails, isPending, isError, error } = data;
 	const { t } = useTranslation();
 	const [selectedFilters, setSelectedFilters] = useState<FilterParams>({
-		name: '',
+		age: '',
 		size: '',
 		gender: '',
+		ready_for_adoption: false
 	}); // Змінено тут
 
 	useEffect(() => {
@@ -70,9 +71,10 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 	};
 
 	return (
-		<section
+		/*<section
 			className={styles.catalog}
-		>
+		>*/
+		<section>
 			<div
 				className={styles.catalog_container}
 			>
@@ -102,13 +104,13 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 							className={styles.catalog_select_container}
 						>
 							<label
-								htmlFor="sex"
+								htmlFor="gender"
 								className={styles.catalog_select_label}
 							>
-								{t('catalog.filter_sex_label')}:
+								{t('catalog.filter_gender_label')}:
 							</label>
 							<select
-								id='sex'
+								id='gender'
 								value=""
 								onChange={() => {}}
 								className={styles.catalog_select}
@@ -117,17 +119,17 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 									value=""
 									disabled
 								>
-									{t('catalog.filter_sex_placeholder')}
+									{t('catalog.filter_gender_placeholder')}
 								</option>
 								<option
-									value={t('catalog.filter_sex_male')}
+									value={t('catalog.filter_gender_male')}
 								>
-									{t('catalog.filter_sex_male')}
+									{t('catalog.filter_gender_male')}
 								</option>
 								<option
-									value={t('catalog.filter_sex_female')}
+									value={t('catalog.filter_gender_female')}
 								>
-									{t('catalog.filter_sex_female')}
+									{t('catalog.filter_gender_female')}
 								</option>
 							</select>
 						</div>
