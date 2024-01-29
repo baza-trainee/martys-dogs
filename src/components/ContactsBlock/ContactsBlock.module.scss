@@ -38,7 +38,6 @@
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
-	// margin-right: 100px;
 	@media screen and (max-width: 1439px) {
 		margin-right: 0;
 	}
@@ -88,6 +87,7 @@
 .big {
 	color: $color-main-blue-dark;
 	font-size: 3.25rem;
+	font-weight: 800;
 	@media screen and (max-width: 1279px) {
 		font-size: 1.75rem;
 	}
@@ -120,7 +120,6 @@
 	}
 	@media screen and (max-width: 767px) {
 		object-position: 80% 50%;
-		// object-fit: contain;
 	}
 }
 
