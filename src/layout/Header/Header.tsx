@@ -25,6 +25,10 @@ const Header: React.FC = () => {
 		i18n.changeLanguage(lng);
 	};
 
+	const mobHandlerChangePage = () => {
+		setOpenMobMenu(false);
+	}
+
 	return (
 		<header
 			className={styles.header}
@@ -159,6 +163,7 @@ const Header: React.FC = () => {
 						<MobNavMenu
 							currentLanguage={currentLanguage}
 							changeLanguage={handlerChangeLanguage}
+							closeMenu={mobHandlerChangePage}
 						/>
 					</CSSTransition>
 				)}

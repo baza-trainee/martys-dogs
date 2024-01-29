@@ -85,7 +85,7 @@ const Footer = () => {
 							<a
 								href="#"
 								target="_blank"
-								className={styles.footer_nav_link}
+								className={`${styles.footer_nav_link} ${styles.footer_nav_link_reports}`}
 							>
 								{t('footer.reports')}
 							</a>
