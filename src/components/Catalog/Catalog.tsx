@@ -1,22 +1,23 @@
 import { useState, useEffect } from 'react';
 import { OurTailsData } from '../../pages/OurTails/OurTails' ;
-import { UseQueryResult } from '@tanstack/react-query';
+import { UseQueryResult,  useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import Button from '../../layout/Button/Button';
 import Tail from '../Tail/Tail';
 import { DogCard } from '../../pages/Landing/Landing';
 import styles from './Catalog.module.scss';
+import * as React from 'react';
 
 interface TailsProps {
 	data: UseQueryResult<OurTailsData, Error>;
 }
 
-interface FilterParams {
+type FilterParams = {
 	age?: string;
 	size?: string;
 	gender?: string;
 	ready_for_adoption?:boolean;
-}
+} & { [key: string]: string | boolean };
 
 const Catalog: React.FC<TailsProps> = ({ data }) => {
 	const [cards, setCards] = useState<DogCard[]>([]);
@@ -30,7 +31,50 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 		size: '',
 		gender: '',
 		ready_for_adoption: false
-	}); // Змінено тут
+	});
+/*	const [queryString, setQueryString] = useState<string>('');
+	const queryClient = useQueryClient();*/
+
+	const handleChange = (field: keyof FilterParams, value: string | boolean) => {
+		setSelectedFilters((prevFilters) => ({
+			...prevFilters,
+			[field]: value,
+		}));
+	};
+	const handleFilterSubmit = () => {
+		console.log('click');
+		console.log(selectedFilters);
+
+	};
+
+
+/*	const handleFilterSubmit = () => {
+		const filters = Object.entries(selectedFilters)
+			.filter(([key, value]) => value !== '')
+			.map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+			.join('&');
+
+		setQueryString(filters);
+
+		queryClient.invalidateQueries(['filteredTails', queryString]);
+	};*/
+	//To filter by age
+/*
+	const categorizeAge = (ageString: string): string => {
+		const age = parseFloat(ageString.replace(/[^0-9.]/g, ''));
+
+		if (isNaN(age)) {
+			return 'unknown';
+		} else if (age < 2) {
+			return 'щеня';
+		} else if (age >= 2 && age < 5) {
+			return 'дорослий';
+		} else {
+			return 'старий';
+		}
+	};
+*/
+
 
 	useEffect(() => {
 		if (tails) {
@@ -71,9 +115,7 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 	};
 
 	return (
-		/*<section
-			className={styles.catalog}
-		>*/
+
 		<section>
 			<div
 				className={styles.catalog_container}
@@ -90,8 +132,8 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 						name={t('catalog.header_button')}
 						btnClasses={'filter'}
 						type="submit"
-						disabled
-						onClick={() => {}}
+						// disabled
+						onClick={handleFilterSubmit}
 					/>
 				</div>
 				<div
@@ -111,8 +153,8 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 							</label>
 							<select
 								id='gender'
-								value=""
-								onChange={() => {}}
+								value={selectedFilters.gender}
+								onChange={(e) => handleChange('gender', e.target.value)}
 								className={styles.catalog_select}
 							>
 								<option
@@ -144,8 +186,8 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 							</label>
 							<select
 								id='age'
-								value=""
-								onChange={() => {}}
+								value={selectedFilters.age}
+								onChange={(e) => handleChange('age', e.target.value)}
 								className={styles.catalog_select}
 							>
 								<option
@@ -182,8 +224,8 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 							</label>
 							<select
 								id='size'
-								value=""
-								onChange={() => {}}
+								value={selectedFilters.size}
+								onChange={(e) => handleChange('size', e.target.value)}
 								className={styles.catalog_select}
 							>
 								<option
@@ -215,12 +257,14 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 					>
 						<input
 							type="checkbox"
-							id="myCheckbox"
-							name="myCheckbox"
+							id="ready_for_adoption"
+							name="ready_for_adoption"
+							checked={selectedFilters.ready_for_adoption}
+							onChange={(e) => handleChange('ready_for_adoption', e.target.checked)}
 							className={styles.catalog_checkbox}
 						/>
 						<label
-							htmlFor="myCheckbox"
+							htmlFor="ready_for_adoption"
 							className={styles.catalog_checkbox_label}
 						>
 							{t('catalog.filter_checkbox')}
