@@ -1,0 +1,35 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.itemActions {
+	margin-top: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	padding: 8px;
+	border-radius: 4px;
+
+	.editIcon,
+	.deleteIcon {
+		width: 25px;
+		height: 25px;
+		margin: 4px;
+		font-size: 16px;
+		color: #333;
+		cursor: pointer;
+		border: none;
+		background-color: transparent;
+	}
+
+	.editIcon:hover,
+	.deleteIcon:hover {
+		color: #009cd9;
+	}
+}
+
+.link {
+	display: block;
+	width: 25px;
+	height: 25px;
+}

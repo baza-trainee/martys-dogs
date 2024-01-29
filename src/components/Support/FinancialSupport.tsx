@@ -27,6 +27,7 @@ const FinancialSupport = () => {
 	const onHandleLinkClick = () => {
 		console.log('thanks');
 		window.open(link, '_blank');
+		setLink('')
 		openModal();
 		activateModal('thanks');
 		console.log('after');

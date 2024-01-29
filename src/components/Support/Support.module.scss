@@ -1,8 +1,13 @@
 @import '../../scss/variables';
 @import '../../scss/mixins';
 
-.section{
+.background {
   background-color: $color-main-bg;
+}
+
+.section{
+  max-width: 1920px;
+  margin: 0 auto;
   padding:40px 20px;
   display: flex;
   flex-direction: column;
@@ -18,10 +23,11 @@
 }
 
 .container{
+  width:100%;
   display: flex;
   flex-direction: column;
   margin-top: 24px;
-  gap:24px;
+  gap:20px;
 
   @include tablet{
     margin-top: 40px;

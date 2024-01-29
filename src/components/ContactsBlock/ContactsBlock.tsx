@@ -32,14 +32,14 @@ const ContactsBlock: React.FC = () => {
 						</div>
 					</div>
 					<div className={styles.addresses}>
-						<h2 className={styles.big}>
+						<h1 className={styles.big}>
 							{t('contactsBlock.phones')}
-						</h2>
+						</h1>
 						<div className={styles.city}>
 							<div className={styles.icon}>
 								<FiSmartphone />
 							</div>
-							<p className={styles.black}>380 95 053 60 09</p>
+							<p className={styles.black}>+380 95 053 60 09</p>
 						</div>
 						<div className={styles.city}>
 							<div className={styles.icon}>
@@ -52,16 +52,16 @@ const ContactsBlock: React.FC = () => {
 						</p>
 					</div>
 					<div className={styles.addresses}>
-						<h2 className={styles.big}>
+						<h1 className={styles.big}>
 							{t('contactsBlock.socials')}
-						</h2>
+						</h1>
 						<div className={styles.socials}>
 							<div className={styles.city}>
 								<div className={styles.icon}>
 									<FaFacebook />
 								</div>
 								<a
-									href='https://www.facebook.com/maybutneukr/'
+									href='https://www.facebook.com/profile.php?id=61553557254980'
 									target='_blank'
 									rel='noopener noreferrer'
 									className={styles.text}
@@ -74,7 +74,7 @@ const ContactsBlock: React.FC = () => {
 									<FaInstagram />
 								</div>
 								<a
-									href='https://www.instagram.com/misto.dobra/'
+									href='https://www.instagram.com/hvostuku_misto.dobra?igsh=YzVkODRmOTdmMw%3D%3D'
 									target='_blank'
 									rel='noopener noreferrer'
 									className={styles.text}

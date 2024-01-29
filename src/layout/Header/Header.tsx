@@ -1,11 +1,13 @@
-import { useState } from 'react';
-import styles from './Header.module.scss';
-import { useTranslation } from 'react-i18next';
-import headerLogo from '../../assets/header_logo.webp';
-import { Link } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 import { CiMenuBurger } from "react-icons/ci";
 import { IoCloseOutline } from "react-icons/io5";
+import { Link } from 'react-router-dom';
 import MobNavMenu from '../../components/MobNavMenu/MobNavMenu';
+import headerLogo from '../../assets/header_logo.webp';
+import styles from './Header.module.scss';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export interface ChangeLanguageParams {
 	lng: string;
@@ -17,9 +19,9 @@ const Header: React.FC = () => {
 	const [openMobMenu, setOpenMobMenu] = useState(false);
 	const { t, i18n } = useTranslation();
 
-	const currentLanguage = i18n.language;
+	const currentLanguage: string = i18n.language;
 
-	const changeLanguage: ChangeLanguageFunction = ({ lng }) => {
+	const handlerChangeLanguage: ChangeLanguageFunction = ({ lng }) => {
 		i18n.changeLanguage(lng);
 	};
 
@@ -46,6 +48,16 @@ const Header: React.FC = () => {
 						<ul
 							className={styles.header_nav}
 						>
+							<li
+								className={styles.header_nav_category}
+							>
+								<Link
+									to="/"
+									className={styles.header_nav_link}
+								>
+									{t('header.nav_main')}
+								</Link>
+							</li>
 							<li
 								className={styles.header_nav_category}
 							>
@@ -81,10 +93,13 @@ const Header: React.FC = () => {
 					<div
 						className={styles.header_right_cont}
 					>
-						<div>
+						<div
+							className={styles.header_lng}
+						>
 							<button
 								className={`${styles.header_lng_btn} ${currentLanguage === "ua" ? styles.header_lng_btn_active : ""}`}
-								onClick={() => changeLanguage({ lng: 'ua' })}
+								onClick={() => handlerChangeLanguage({ lng: 'ua' })}
+								data-testid="langBtnUa"
 							>
 								{t('header.lng_ua')}
 							</button>
@@ -95,7 +110,8 @@ const Header: React.FC = () => {
 							</span> 
 							<button
 								className={`${styles.header_lng_btn} ${currentLanguage !== "ua" ? styles.header_lng_btn_active : ""}`}
-								onClick={() => changeLanguage({ lng: 'en' })}
+								onClick={() => handlerChangeLanguage({ lng: 'en' })}
+								data-testid="langBtnEn"
 							>
 								{t('header.lng_en')}
 							</button>
@@ -107,6 +123,7 @@ const Header: React.FC = () => {
 								<button
 									className={styles.header_mob_menu_btn}
 									onClick={() => setOpenMobMenu(true)}
+									aria-label="CiMenuBurger"
 								>
 									<CiMenuBurger
 										className={styles.header_mob_menu_btn_burger}
@@ -116,6 +133,7 @@ const Header: React.FC = () => {
 								<button
 									className={styles.header_mob_menu_btn}
 									onClick={() => setOpenMobMenu(false)}
+									aria-label="IoCloseOutline"
 								>
 									<IoCloseOutline
 										className={styles.header_mob_menu_btn_close}
@@ -126,9 +144,25 @@ const Header: React.FC = () => {
 					</div>
 				</div>
 			</div>
-			{openMobMenu && (
-					<MobNavMenu />
+			<TransitionGroup>
+				{openMobMenu && (
+					<CSSTransition
+						key="mobNavMenu"
+						timeout={300}
+						classNames={{
+							enter: styles.mobMenuEnter,
+							enterActive: styles.mobMenuEnterActive,
+							exit: styles.mobMenuExit,
+							exitActive: styles.mobMenuExitActive,
+						}}
+					>
+						<MobNavMenu
+							currentLanguage={currentLanguage}
+							changeLanguage={handlerChangeLanguage}
+						/>
+					</CSSTransition>
 				)}
+			</TransitionGroup>
 		</header>
 	);
 };

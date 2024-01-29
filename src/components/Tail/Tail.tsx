@@ -88,19 +88,23 @@ const Tail: React.FC<TailProps> = ({
 					<p>{description}</p>
 				</div>
 				<div className={styles.container}>
-					<Button
-						btnClasses={'primary'}
-						type={'button'}
-						name={t('tail.donate')}
-						onClick={() => scrollToSection('support')}
-					></Button>
-					{ready_for_adoption && (
+					<div className={styles.donate}>
 						<Button
-							btnClasses={'secondary'}
+							btnClasses={'primary'}
 							type={'button'}
-							name={t('tail.adopt')}
-							onClick={handleModal}
+							name={t('tail.donate')}
+							onClick={() => scrollToSection('support')}
 						></Button>
+					</div>
+					{ready_for_adoption && (
+						<div className={styles.donate}>
+							<Button
+								btnClasses={'secondary'}
+								type={'button'}
+								name={t('tail.adopt')}
+								onClick={handleModal}
+							></Button>
+						</div>
 					)}
 				</div>
 			</div>
