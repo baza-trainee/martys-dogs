@@ -1,0 +1,25 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.addButton {
+	padding: 30px;
+	display: flex;
+	min-width: 100px;
+	max-height: 55px;
+	justify-content: center;
+	align-items: center;
+	border: none;
+	border-radius: 40px;
+	color: #fff;
+	background: #009cd9;
+	text-decoration: none;
+	gap: 8px;
+	font-size: 20px;
+	transition: all 0.3s ease;
+	@include tablet {
+		width: auto;
+	}
+	&:hover {
+		background: #005c80;
+	}
+}
