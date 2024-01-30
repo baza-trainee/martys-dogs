@@ -16,7 +16,12 @@ type MobNavMenuStory = Story;
 const Template: MobNavMenuStory = (args) => (
   <I18nextProvider i18n={i18n}>
     <BrowserRouter>
-      <MobNavMenu {...args} currentLanguage="ua" changeLanguage={() => console.log("Language changed")} />
+      <MobNavMenu
+        {...args}
+        currentLanguage="ua"
+        changeLanguage={() => console.log("Language changed")}
+        closeMenu={() => console.log("Close menu")}
+      />
     </BrowserRouter>
   </I18nextProvider>
 );

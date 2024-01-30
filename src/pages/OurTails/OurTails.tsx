@@ -1,5 +1,6 @@
 import Catalog from '../../components/Catalog/Catalog';
 import HeroOurTails from '../../components/HeroOurTails/HeroOurTails';
+import Support from '../../components/Support/Support';
 import { fetchHome } from '../../services/fetchData';
 import { scrollOnTop } from '../../services/scrollTo';
 import { useEffect } from 'react';
@@ -22,6 +23,7 @@ const OurTails: React.FC = () => {
 		<>
 			<HeroOurTails />
 			<Catalog data={data} />
+			<Support/>
 		</>
 	);
 };

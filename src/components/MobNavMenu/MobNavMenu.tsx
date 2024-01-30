@@ -5,9 +5,10 @@ import { useTranslation } from 'react-i18next';
 export interface MobNavMenuProps {
   currentLanguage: string;
   changeLanguage: ({ lng }: { lng: string }) => void;
+  closeMenu: () => void;
 }
 
-const MobNavMenu = ({currentLanguage, changeLanguage}: MobNavMenuProps) => {
+const MobNavMenu = ({currentLanguage, changeLanguage, closeMenu}: MobNavMenuProps) => {
   const { t } = useTranslation();
 
   return (
@@ -23,6 +24,7 @@ const MobNavMenu = ({currentLanguage, changeLanguage}: MobNavMenuProps) => {
           <Link 
             to="/"
             className={styles.header_menu_mob_link}
+            onClick={closeMenu}
           >
             {t('header.nav_main')}
           </Link>
@@ -33,6 +35,7 @@ const MobNavMenu = ({currentLanguage, changeLanguage}: MobNavMenuProps) => {
           <Link 
             to="/about"
             className={styles.header_menu_mob_link}
+            onClick={closeMenu}
           >
             {t('header.nav_about')}
           </Link>
@@ -43,6 +46,7 @@ const MobNavMenu = ({currentLanguage, changeLanguage}: MobNavMenuProps) => {
           <Link
             to="/tails"
             className={styles.header_menu_mob_link}
+            onClick={closeMenu}
           >
             {t('header.nav_pets')}
           </Link>
@@ -53,6 +57,7 @@ const MobNavMenu = ({currentLanguage, changeLanguage}: MobNavMenuProps) => {
           <Link
             to="/contacts"
             className={styles.header_menu_mob_link}
+            onClick={closeMenu}
           >
             {t('header.nav_contact')}
           </Link>

@@ -25,6 +25,10 @@
 	}
 }
 
+.letters {
+	font-weight: 800;
+}
+
 .subtitle {
 	margin-bottom: 16px;
 	font-size: 20px;
@@ -47,29 +51,10 @@
 
 .link {
 	min-width: 297px;
+	@media screen and (max-width: 759px) {
+		width: 100%;
+	}
 }
-
-// .link {
-// 	padding: 12px 24px;
-// 	display: flex;
-// 	min-width: 297px;
-// 	max-height: 48px;
-// 	justify-content: center;
-// 	align-items: center;
-// 	border-radius: 30px;
-// 	color: #fff;
-// 	background: #009cd9;
-// 	text-decoration: none;
-// 	gap: 8px;
-// 	font-size: 20px;
-// 	transition: background 0.3s ease;
-// 	&:hover {
-// 		background: #005c80;
-// 	}
-// 	@media screen and (max-width: 767px) {
-// 		width: 100%;
-// 	}
-// }
 
 @keyframes spinner {
 	to {
