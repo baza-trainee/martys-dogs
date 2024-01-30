@@ -11,7 +11,7 @@ import { MemoryRouter } from 'react-router-dom';
 import Tails from './Tails';
 
 const mockQueryData: LandingData = {
-	news_data: [
+	news: [
 		{
 			id: 1,
 			title: 'Exciting News from the Pet World',
