@@ -32,6 +32,10 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 		setIsLoading(true);
 	};
 
+	const handlePlay = () => {
+		setIsLoading(false);
+	  };
+
 	const handleClick = () => {
 		setShowControls(!showControls);
 	};
@@ -84,6 +88,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 						}`}
 						onReady={handleReady}
 						onBuffer={handleBuffer}
+						onPlay={handlePlay}
 					/>
 				</>
 			)}

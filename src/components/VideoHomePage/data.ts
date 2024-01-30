@@ -42,7 +42,7 @@ export const mainPosters = [
 	{
 		srcSet: mainDesktop,
 		mediaQuery: mediaQueryCommon.desktop,
-		width: '1400px',
+		width: '1450px',
 	},
 	{
 		srcSet: mainLargeScreen,
@@ -68,7 +68,7 @@ export const therapyPosters = [
 	{
 		srcSet: therapyDesktop,
 		mediaQuery: mediaQueryCommon.desktop,
-		width: '1400px',
+		width: '1450px',
 	},
 	{
 		srcSet: therapyLargeScreen,
