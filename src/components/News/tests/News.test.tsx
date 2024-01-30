@@ -4,11 +4,11 @@ import {
 	UseQueryResult,
 	useQuery,
 } from '@tanstack/react-query';
-import { render, screen, waitFor } from '../../utils/test-utils';
+import { render, screen, waitFor } from '../../../utils/test-utils';
 
-import { LandingData } from '../../pages/Landing/Landing';
+import { LandingData } from '../../../pages/Landing/Landing';
 import { MemoryRouter } from 'react-router-dom';
-import Tails from './Tails';
+import News from './../News';
 
 const mockQueryData: LandingData = {
 	news: [
@@ -49,23 +49,23 @@ const mockQueryData: LandingData = {
 	],
 };
 
-const MockTails: React.FC = () => {
+const MockNews: React.FC = () => {
 	const mockQueryResult: UseQueryResult<LandingData, Error> = useQuery({
 		queryKey: ['landing'],
 		queryFn: async () => mockQueryData,
 	});
 
-	return <Tails data={mockQueryResult} />;
+	return <News data={mockQueryResult} />;
 };
 
 const queryClient = new QueryClient();
 
-describe('Tails component tests', () => {
+describe('News component tests', () => {
 	it('contains h2 element', async () => {
 		render(
 			<QueryClientProvider client={queryClient}>
 				<MemoryRouter>
-					<MockTails />
+					<MockNews />
 				</MemoryRouter>
 			</QueryClientProvider>,
 		);
@@ -76,27 +76,18 @@ describe('Tails component tests', () => {
 		});
 	});
 
-	it('displays name for dog card', () => {
+	it('contains list  of  news', () => {
 		render(
 			<QueryClientProvider client={queryClient}>
 				<MemoryRouter>
-					<MockTails />
+					<MockNews />
 				</MemoryRouter>
 			</QueryClientProvider>,
 		);
-		const dogError = screen.getByText(/Buddy/i);
-		expect(dogError).toBeInTheDocument();
-	});
-
-	it('displays gender information for dog card', () => {
-		render(
-			<QueryClientProvider client={queryClient}>
-				<MemoryRouter>
-					<MockTails />
-				</MemoryRouter>
-			</QueryClientProvider>,
-		);
-		const newsError = screen.getByText(/Male/i);
-		expect(newsError).toBeInTheDocument();
+		const newsList = screen.getByRole('list');
+		const newsItem = screen.getByRole('listitem');
+		expect(newsList).toBeInTheDocument();
+		expect(newsItem).toBeInTheDocument;
+		expect(newsList).toContain(newsItem);
 	});
 });
