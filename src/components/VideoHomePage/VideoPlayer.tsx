@@ -5,7 +5,7 @@ import styles from './Video.module.scss';
 interface Poster {
 	srcSet: string;
 	mediaQuery: string;
-	sizes?: string;
+	width?:string;
 }
 
 interface VideoPlayerProps {
@@ -37,7 +37,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 	};
 
 	return (
-		<div className={styles.videoPlayer}>
+		<div className={styles.videoPlayer} data-testid="common-video-player">
 			<div
 				className={`${styles.posterOverlay} ${
 					showControls ? styles.disappear : ''
@@ -57,7 +57,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 							key={index}
 							srcSet={poster.srcSet}
 							media={poster.mediaQuery}
-							sizes={poster.sizes}
+							width={poster.width}
 							type='image/webp'
 						/>
 					))}
@@ -72,7 +72,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
 			{showControls && (
 				<>
-					{isLoading && <div className={styles.loader}></div>}
+					{isLoading && <div className={styles.loader} data-testid="loader"></div>}
 					<ReactPlayer
 						url={videoUrl}
 						playing

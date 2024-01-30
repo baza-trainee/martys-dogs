@@ -1,16 +1,15 @@
 import mainMobile from '../../assets/video_main/girl/girl393.webp';
 import mainTablet from '../../assets/video_main/girl/girl768.webp';
-import mainDesktop from '../../assets/video_main/girl/girl1280.webp';
-import mainLaptop from '../../assets/video_main/girl/girl1440.webp';
+import mainLaptop from '../../assets/video_main/girl/girl1280.webp';
 import mainLargeScreen from '../../assets/video_main/girl/girl1920.webp';
 import therapyMobile from '../../assets/video_main/boy/boy393.webp';
 import therapyTablet from '../../assets/video_main/boy/boy768.webp';
-import therapyDesktop from '../../assets/video_main/boy/boy1280.webp';
-import therapyLaptop from '../../assets/video_main/boy/boy1440.webp';
+import therapyLaptop from '../../assets/video_main/boy/boy1280.webp';
 import therapyLargeScreen from '../../assets/video_main/boy/boy1920.webp';
 import pawsImg from '../../assets/video_main/VectorPaws.svg';
 import playButtonImg from '../../assets/video_main/Play.svg';
-
+import mainDesktop from '../../assets/video_main/girl/girl1280cropped.webp';
+import therapyDesktop from '../../assets/video_main/boy/boy1280cropped.webp';
 
 export const videoLinks = {
 	main: 'https://www.youtube.com/watch?v=2igwkVve1nk',
@@ -31,17 +30,19 @@ export const mainPosters = [
 		mediaQuery: mediaQueryCommon.mobile,
 	},
 	{
-		srcSet: `${mainTablet} 768w, ${mainDesktop} 1200w`,
+		srcSet: `${mainTablet} 768w, ${mainLaptop} 1260w`,
 		mediaQuery: mediaQueryCommon.tablet,
-		
-	},
-	{
-		srcSet: mainDesktop,
-		mediaQuery: mediaQueryCommon.laptop,
+		width: '1300px',
 	},
 	{
 		srcSet: mainLaptop,
+		mediaQuery: mediaQueryCommon.laptop,
+		width: '1250px',
+	},
+	{
+		srcSet: mainDesktop,
 		mediaQuery: mediaQueryCommon.desktop,
+		width: '1400px',
 	},
 	{
 		srcSet: mainLargeScreen,
@@ -55,16 +56,19 @@ export const therapyPosters = [
 		mediaQuery: mediaQueryCommon.mobile,
 	},
 	{
-		srcSet: `${therapyTablet} 768w, ${therapyDesktop} 1200w`,
+		srcSet: `${therapyTablet} 768w, ${therapyLaptop} 1260w`,
 		mediaQuery: mediaQueryCommon.tablet,
-	},
-	{
-		srcSet: therapyDesktop,
-		mediaQuery: mediaQueryCommon.laptop,
+		width: '1200px',
 	},
 	{
 		srcSet: therapyLaptop,
+		mediaQuery: mediaQueryCommon.laptop,
+		width: '1250px',
+	},
+	{
+		srcSet: therapyDesktop,
 		mediaQuery: mediaQueryCommon.desktop,
+		width: '1400px',
 	},
 	{
 		srcSet: therapyLargeScreen,
@@ -72,41 +76,39 @@ export const therapyPosters = [
 	},
 ];
 
-
 export const otherImages = {
 	playButtonImage: playButtonImg,
-	pawsImage: pawsImg
-}
+	pawsImage: pawsImg,
+};
 
 export const titles = {
 	main: 'mainVideo.title',
-	therapy: 'canisTherapy.title'
+	therapy: 'canisTherapy.title',
 };
-
 
 export const mainDescription = [
 	{
-		text: 'mainVideo.paragraph_one'
+		text: 'mainVideo.paragraph_one',
 	},
 	{
-		text: 'mainVideo.paragraph_two'
+		text: 'mainVideo.paragraph_two',
 	},
 	{
-		text: 'mainVideo.paragraph_three'
+		text: 'mainVideo.paragraph_three',
 	},
 ];
 
 export const therapyDescription = [
 	{
-		text: 'canisTherapy.paragraph_one'
+		text: 'canisTherapy.paragraph_one',
 	},
 	{
-		text: 'canisTherapy.paragraph_two'
+		text: 'canisTherapy.paragraph_two',
 	},
 	{
-		text: 'canisTherapy.paragraph_three'
+		text: 'canisTherapy.paragraph_three',
 	},
 	{
-		text: 'canisTherapy.paragraph_four'
-	}
+		text: 'canisTherapy.paragraph_four',
+	},
 ];

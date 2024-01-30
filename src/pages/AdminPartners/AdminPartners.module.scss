@@ -36,23 +36,39 @@
 			align-items: center;
 			border: none;
 			border-radius: 40px;
-			color: #fff;
-			background: #009cd9;
+			color: $color-gray-0;
+			background: $color-accent;
 			text-decoration: none;
 			gap: 8px;
 			font-size: 20px;
 			transition: all 0.3s ease;
+			transform: translate(0em, 0.2em);
 			width: 100%;
 			@include tablet {
 				width: auto;
 			}
 			&:hover {
-				background: #005c80;
+				background: $color-gray-100;
+			}
+
+			&:focus {
+				outline: none;
+				box-shadow: 0 0 5px 2px $color-accent;
+			}
+
+			&:active {
+				transform: scale(0.95);
+			}
+
+			&:disabled {
+				cursor: not-allowed;
+				background: $color-gray-40;
+				color: $color-gray-80;
 			}
 		}
 
 		.searchBox {
-			background: #009cd9;
+			background: $color-accent;
 			height: 60px;
 			border-radius: 40px;
 			padding: 10px;
@@ -74,17 +90,17 @@
 		}
 
 		.searchBox:hover > .searchButton {
-			background: white;
-			color: #009cd9;
+			background: $color-gray-0;
+			color: $color-accent;
 		}
 
 		.searchButton {
-			color: white;
+			color: $color-gray-0;
 			float: right;
 			width: 40px;
 			height: 40px;
 			border-radius: 50%;
-			background: #009cd9;
+			background: $color-accent;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -95,9 +111,8 @@
 			border: none;
 			background: none;
 			outline: none;
-
 			padding: 0;
-			color: white;
+			color: $color-gray-0;
 			font-size: 16px;
 			transition: 0.4s;
 			line-height: 40px;
@@ -114,14 +129,14 @@
 
 		.logo {
 			margin: 10px;
-			background-color: #ebf5fb;
+			background-color: $color-main-bg;
 			display: flex;
 			flex-direction: column;
 			gap: 20px;
 			align-content: space-between;
 			transition: all 0.3s ease-in-out;
 			&:hover {
-				background-color: #b6e1f2;
+				background-color: $color-main-blue-light;
 				box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 			}
 
@@ -148,7 +163,7 @@
 
 				.editIcon:hover,
 				.deleteIcon:hover {
-					color: #009cd9;
+					color: $color-accent;
 				}
 			}
 		}
@@ -160,8 +175,8 @@
 			font-size: 18px;
 			padding: 12px;
 			min-width: 200px;
-			border: 1px solid #009cd9;
-			color: #009cd9;
+			border: 1px solid $color-accent;
+			color: $color-accent;
 			background-color: $color-main-bg;
 			border-radius: 40px;
 			transition: all 0.3s ease;
@@ -169,10 +184,7 @@
 			@include tablet {
 				width: auto;
 			}
-			&:hover {
-				background: #005c80;
-				color: #fff;
-			}
+			
 		}
 	}
 }

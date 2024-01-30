@@ -42,9 +42,23 @@ export interface DogCard {
 	photo: Photo;
 }
 
+export interface LogoData {
+	id: string;
+	name: string;
+	url: string;
+	category: string;
+  }
+  
+export interface Partner {
+	id: number;
+	name: string;
+	logo: LogoData;
+  }
+
 export interface LandingData {
 	news_data: NewsItem[];
 	dog_cards: DogCard[];
+	partners: Partner[];
 }
 
 const Landing: React.FC = () => {
@@ -69,7 +83,7 @@ const Landing: React.FC = () => {
 			<CanisTherapy />
 			<Tails data={data} />
 			<Support />
-			<Partners />
+			<Partners data={data}/>
 			<News data={data} />
 		</main>
 	);
