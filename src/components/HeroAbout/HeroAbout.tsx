@@ -11,7 +11,12 @@ const HeroAbout = () => {
 				<div className={styles.hero_container}>
 					<div className={styles.hero_wrapper}>
 						<div className={styles.name}></div>
-						<h1 className={styles.title}>{t('heroAbout.title')}</h1>
+						<h1
+							className={styles.title}
+							data-testid='heroAboutTitle'
+						>
+							{t('heroAbout.title')}
+						</h1>
 						<p className={styles.text}>{t('heroAbout.text')}</p>
 					</div>
 					<div className={styles.photo}></div>

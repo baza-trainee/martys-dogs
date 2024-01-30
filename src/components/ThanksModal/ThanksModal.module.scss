@@ -22,7 +22,8 @@
 	}
 	@include small-desktop {
 		width: 360px;
-		height: 532px;
+		// height: 532px;
+		height: auto;
 		background-image: url('../../assets/modal/thanks/1280_1x.webp');
 	}
 	@include large-desktop {

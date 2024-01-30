@@ -6,7 +6,7 @@ import styles from './Modal.module.scss';
 // import Button from '../../layout/Button/Button';
 // import ThankthModal from './ThankthModal';
 
-const modalElement = document.getElementById('modal-root') as Element;
+// const modalElement = document.getElementById('modal-root') as Element;
 
 interface ModalProps {
 	children: React.ReactNode;
@@ -40,22 +40,32 @@ const Modal: React.FC<ModalProps> = ({ isModal, closeModal, children }) => {
 		}
 	}, [isModal]);
 
+	if (!isModal) {
+		return null; // Return null when the modal is closed
+	}
+
 	return createPortal(
-		isModal && (
-			<div className={styles.backdrop} onClick={handleBackdrop}>
-				<div className={isModal ? styles.active : styles.modal}>
-					<button
-						type='button'
-						className={styles.close}
-						onClick={closeModal}
-					>
-						<FaXmark className={styles.icon} />
-					</button>
-					{children}
-				</div>
+		<div
+			className={styles.backdrop}
+			onClick={handleBackdrop}
+			data-testid='backdrop'
+		>
+			<div
+				className={isModal ? styles.active : styles.modal}
+				data-testid='modal'
+			>
+				<button
+					type='button'
+					data-testid='close'
+					className={styles.close}
+					onClick={closeModal}
+				>
+					<FaXmark className={styles.icon} />
+				</button>
+				{children}
 			</div>
-		),
-		modalElement,
+		</div>,
+		document.getElementById('modal-root') as Element,
 	);
 };
 

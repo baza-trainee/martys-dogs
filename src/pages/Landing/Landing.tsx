@@ -56,7 +56,7 @@ export interface Partner {
   }
 
 export interface LandingData {
-	news_data: NewsItem[];
+	news: NewsItem[];
 	dog_cards: DogCard[];
 	partners: Partner[];
 }
