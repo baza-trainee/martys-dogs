@@ -43,7 +43,7 @@ export interface DogCard {
 }
 
 export interface LandingData {
-	news_data: NewsItem[];
+	news: NewsItem[];
 	dog_cards: DogCard[];
 }
 

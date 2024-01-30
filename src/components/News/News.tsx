@@ -16,7 +16,7 @@ const News: React.FC<NewsProps> = ({ data }) => {
 
 	const { data: news, isPending, isError, error } = data;
 
-	console.log(news?.news_data);
+	console.log(news?.news);
 
 	if (isPending) {
 		return (
@@ -39,7 +39,7 @@ const News: React.FC<NewsProps> = ({ data }) => {
 			<div className={styles.wrapper}>
 				<h2 className={styles.title}>{t('news.title')}</h2>
 				<ul className={styles.news}>
-					{news?.news_data?.map((item: NewsItemProps) => (
+					{news?.news?.map((item: NewsItemProps) => (
 						<NewsItem key={item.id} {...item} />
 					))}
 				</ul>
