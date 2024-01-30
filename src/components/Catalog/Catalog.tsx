@@ -22,6 +22,7 @@ type FilterParams = {
 
 const Catalog: React.FC<TailsProps> = ({ data }) => {
 	const [cards, setCards] = useState<DogCard[]>([]);
+
 	const [page, setPage] = useState<number>(1);
 	const [countPage, setCountPage] = useState<number>(1);
 	const cardsInPage = 12;
@@ -41,6 +42,11 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 			setCards(tails.Cards);
 		}
 	}, [tails]);
+
+
+
+
+
 
 	useEffect(() => {
 		setCountPage(Math.ceil(cards.length / cardsInPage));
@@ -117,12 +123,17 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 					queryKey: ['tails',   { exact: false, queryString: newQueryString } ],
 					queryFn: fetchCatalog,
 				}
-			);
 
+			);
+// const result = filteredTails.json();
+
+			// ???? slice don't work if setCard
 
 			console.log(selectedFilters);
 			console.log(newQueryString);
 			console.log(filteredTails);
+
+			// console.log(result);
 		} catch (error) {
 			console.error('Error while fetching filtered tails:', error);
 		}
@@ -290,7 +301,7 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 				<div
 					className={styles.catalog_list}
 				>
-					{cards.slice((cardsInPage * page) - cardsInPage, cardsInPage * page).map((tail) => (
+					{cards?.slice((cardsInPage * page) - cardsInPage, cardsInPage * page).map((tail) => (
 						<div
 							key={tail.id}
 							className={styles.catalog_list_card}
@@ -299,7 +310,10 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 								{...tail}
 							/>
 						</div>
-					))}
+					))
+
+
+					}
 				</div>
 				<div
 					className={styles.catalog_pagination}
@@ -335,4 +349,5 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 };
 
 export default Catalog;
+
 
