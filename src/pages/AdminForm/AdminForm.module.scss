@@ -1,0 +1,57 @@
+@import '../../scss/_variables.scss';
+
+.main {
+	background-color: #dbdbdb;
+	width: 100%;
+	padding: 100px;
+
+	.table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	td {
+		padding: 20px;
+		border: 1px solid $color-main-blue-dark;
+		max-width: 500px;
+	}
+
+	th {
+		text-align: left;
+		padding: 20px;
+	}
+}
+
+.title {
+	margin-bottom: 50px;
+}
+
+.btn {
+	padding: 5px 10px;
+	width: 120px;
+	color: $color-gray-0;
+	background-color: $color-main-blue-mid;
+	border-radius: 40px;
+	transition: all 0.3s ease;
+	font-size: 16px;
+	width: 100%;
+	&:hover {
+		background: $color-main-blue-dark;
+		color: $color-gray-0;
+	}
+}
+
+.red {
+	padding: 5px 10px;
+	width: 120px;
+	color: $color-gray-0;
+	font-size: 16px;
+	background-color: #f495a9;
+	border-radius: 40px;
+	transition: all 0.3s ease;
+	width: 100%;
+	&:hover {
+		background: #fb6082;
+		color: $color-gray-0;
+	}
+}
