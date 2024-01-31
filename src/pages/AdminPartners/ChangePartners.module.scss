@@ -1,13 +1,24 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
 .container {
     max-width: 600px;
-    
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
   }
   
   .inputRow {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
+    gap: 40px;
     margin-bottom: 20px;
+    @include tablet {
+      flex-direction: row;
+      
+    }
   
     .inputContainer {
       flex: 1;
@@ -28,23 +39,85 @@
       }
       label {
         display: block;
+        font-size: 20px;
         margin-bottom: 5px;
       }
   
       input {
         width: 100%;
-        padding: 8px;
+        font-size: 20px;
+        padding: 15px 20px; 
+        background: $color-gray-0;
         box-sizing: border-box;
+        border: 1px solid  $color-gray-60;
+        border-radius: 40px;
+        transition: border-color 0.3s ease; 
+        @include tablet {
+          width: 200px;
+          font-size: 15px;
+        }
+        @include small_desktop {
+          min-width: 250px;
+          font-size: 20px;
+        }
+
+      &:focus {
+        box-shadow: #cff0ff 0px 10px 10px -5px;
+        outline: none;
+      }
+      
       }
     }
   }
   
   .buttonRow {
     display: flex;
+    flex-direction: column;
     gap: 24px;
-  
+    @include tablet {
+      flex-direction: row;
+    }
     button {
-      padding: 10px;
       cursor: pointer;
+      padding: 30px;
+      display: flex;
+      min-width: 200px;
+      max-height: 55px;
+      justify-content: center;
+      align-items: center;
+      border: none;
+      border-radius: 40px;
+      color: $color-gray-0;
+      background: $color-accent;
+      text-decoration: none;
+      gap: 8px;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      transform: translate(0em, 0.2em);
+      width: 100%;
+    
+      @include tablet {
+        width: auto;
+      }
+    
+      &:hover {
+        background:$color-main-blue-dark;
+      }
+    
+      &:focus {
+        outline: none; 
+        box-shadow: 0 0 5px 2px $color-accent; 
+      }
+    
+      &:active {
+        background-color:$color-gray-100;
+        transform: scale(0.95); 
+      }
+    
+      &:disabled {
+        cursor: not-allowed;
+        background: $color-gray-40;
+        color: $color-gray-80;
+      }
     }
   }
