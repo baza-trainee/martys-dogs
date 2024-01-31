@@ -2,8 +2,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import About from './pages/About/About';
+import AddNews from './pages/AdminsNews/AddNews';
 import AddPartner from './pages/AdminPartners/AddPartner';
 import AdminDogs from './pages/AdminDogs/AdminDogs';
+import AdminForm from './pages/AdminForm/AdminForm';
 import AdminHomeLayout from './layout/AdminHomeLayout/AdminHomeLayout';
 import AdminNews from './pages/AdminsNews/AdminNews';
 import AdminPartners from './pages/AdminPartners/AdminPartners';
@@ -12,6 +14,7 @@ import AdminStatistics from './pages/AdminStatistics/AdminStatistics';
 import Admins from './pages/Admins/Admins';
 import { AuthProvider } from './context/AuthContext';
 import Contacts from './pages/Contacts/Contacts';
+import EditNews from './pages/AdminsNews/EditNews';
 import EditPartner from './pages/AdminPartners/EditPartner';
 import Error from './pages/Error/Error';
 import HomeLayout from './layout/HomeLayout/HomeLayout';
@@ -20,8 +23,6 @@ import Login from './pages/Login/Login';
 import { ModalProvider } from './context/ModalContext';
 import OurTails from './pages/OurTails/OurTails';
 import Register from './pages/Register/Register';
-import AddNews from './pages/AdminsNews/AddNews';
-import EditNews from './pages/AdminsNews/EditNews';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
 			{
 				path: 'photos',
 				element: <AdminPhotos />,
+			},
+			{
+				path: 'sms',
+				element: <AdminForm />,
 			},
 			{
 				path: 'pass',
