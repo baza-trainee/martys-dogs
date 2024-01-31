@@ -47,6 +47,18 @@ const mockQueryData: LandingData = {
 			},
 		},
 	],
+	partners: [
+		{
+            id: 1,
+            name: "Misto dobra",
+            logo: {
+                id: "1",
+                name: "partner.webp",
+                url: 'https://example.com/partner-photo.jpg',
+                category: "image"
+            }
+        },
+	]
 };
 
 const MockNews: React.FC = () => {
