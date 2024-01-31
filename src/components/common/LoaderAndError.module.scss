@@ -13,6 +13,12 @@
 	margin: 6rem auto;
 }
 
+@keyframes spinner {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
 .alert {
 	text-align: center;
 	font-size: 32px;
