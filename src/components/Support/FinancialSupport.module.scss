@@ -1,77 +1,76 @@
 @import '../../scss/variables';
 @import '../../scss/mixins';
 
-.container{
-display: flex;
-flex-direction: column;
+.container {
+	display: flex;
+	flex-direction: column;
 
-padding:24px;
-background-color:$color-main-blue-light;
+	padding: 24px;
+	background-color: $color-main-blue-light;
 
-border-radius:30px;
-gap:32px;
+	border-radius: 30px;
+	gap: 32px;
 
-@include tablet {
-  padding: 40px;
+	@include tablet {
+		padding: 40px;
+	}
+
+	@include small_desktop {
+		min-width: 50%;
+		height: 519px;
+	}
 }
 
-@include small_desktop {
-    min-width: 50%;
-    height: 519px;
-}
-}
+.title {
+	font-size: 20px;
+	font-weight: 800;
+	line-height: 1.4;
 
-.title{
-  font-size: 20px;
-  font-weight: 800;
-  line-height: 1.4;
-
-  @include tablet {
-    font-size: 26px;
-    line-height: 1.2;
-  }
+	@include tablet {
+		font-size: 26px;
+		line-height: 1.2;
+	}
 }
 
-.description{
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.4;
+.description {
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 1.4;
+	margin-top: 8px;
 
-  margin-top: 8px;
-
-  @include tablet {
-    font-style: 20px;
-  }
+	@include tablet {
+		font-style: 20px;
+	}
 }
 
-.box__buttons{
-display: flex;
-flex-direction: column;
-gap:16px;
+.box__buttons {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
 
-@include tablet {
-  gap:24px;
-}
+	@include tablet {
+		gap: 24px;
+	}
 }
 
 .icon {
-  position: relative;
-  width: 24px;
-  height: 24px;
+	position: relative;
+	width: 24px;
+	height: 24px;
 
-  svg:first-child {
-    position: absolute;
-    width: 13px;
-    height: 13px;
-    bottom: 0;
-    left: 0;
-  }
+	svg:first-child {
+		position: absolute;
+		width: 13px;
+		height: 13px;
+		bottom: 0;
+		left: 0;
+	}
 
-  svg:last-child {
-    position: absolute;
-    width: 13px;
-    height: 13px;
-    top: 0;
-    right: 0;
-  }
+	svg:last-child {
+		position: absolute;
+		width: 13px;
+		height: 13px;
+		top: 0;
+		right: 0;
+	}
 }
