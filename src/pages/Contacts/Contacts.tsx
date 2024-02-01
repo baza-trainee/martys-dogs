@@ -1,8 +1,8 @@
 import ContactsBlock from '../../components/ContactsBlock/ContactsBlock';
 import Support from '../../components/Support/Support';
-import { useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 import { scrollOnTop } from '../../services/scrollTo';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Contacts = () => {
 	const location = useLocation();

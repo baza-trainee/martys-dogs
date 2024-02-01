@@ -1,21 +1,26 @@
+import { LandingData } from '../pages/Landing/Landing';
+import { OurTailsData } from '../pages/OurTails/OurTails';
+
 /*import { useQuery, useMutation, UseQueryOptions } from '@tanstack/react-query';*/
 const HOME = 'https://matys-dogs2.onrender.com';
 const ABOUT = 'https://matys-dogs2.onrender.com/about-us';
 const LOGIN = 'https://matys-dogs2.onrender.com/login';
 const CATALOG = 'https://matys-dogs2.onrender.com/catalog';
 
-
-export const fetchHome = async () => {
+export const fetchHome = async (language: string): Promise<LandingData> => {
 	try {
-		const response = await fetch(HOME);
+		const response = await fetch(HOME, {
+			headers: {
+				'Accept-Language': language,
+			},
+		});
 
 		if (!response.ok) {
 			throw new Error('Data loading error');
 		}
-		
+
 		const data = await response.json();
 		return data;
-		
 	} catch (error) {
 		console.error('Error while loading data:', error);
 		throw error;
@@ -29,28 +34,29 @@ export const fetchAbout = async () => {
 		if (!response.ok) {
 			throw new Error('Data loading error');
 		}
-		
+
 		const data = await response.json();
 		return data;
-		
 	} catch (error) {
 		console.error('Error while loading data:', error);
 		throw error;
 	}
 };
-    
 
-export const fetchCatalog = async () => {
+export const fetchCatalog = async (language: string): Promise<OurTailsData> => {
 	try {
-		const response = await fetch(CATALOG);
+		const response = await fetch(CATALOG, {
+			headers: {
+				'Accept-Language': language,
+			},
+		});
 
 		if (!response.ok) {
 			throw new Error('Data loading error');
 		}
-		
+
 		const data = await response.json();
 		return data;
-		
 	} catch (error) {
 		console.error('Error while loading data:', error);
 		throw error;
@@ -118,9 +124,6 @@ export const loginUser = async (
 		throw error;
 	}
 };
-
-
-
 
 /* Universal fetch  + query examples */
 
