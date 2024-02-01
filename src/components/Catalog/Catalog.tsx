@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-
+import Select, { StylesConfig } from 'react-select';
 import Button from '../../layout/Button/Button';
 import { DogCard } from '../../pages/Landing/Landing';
 import { OurTailsData } from '../../pages/OurTails/OurTails';
@@ -7,9 +7,20 @@ import Tail from '../Tail/Tail';
 import { UseQueryResult } from '@tanstack/react-query';
 import styles from './Catalog.module.scss';
 import { useTranslation } from 'react-i18next';
+import ArrowIconDown from '../../assets/dropdown_arrow_down.svg';
+import ArrowIconUp from '../../assets/dropdown_arrow_up.svg';
 
 interface CatalogProps {
 	data: UseQueryResult<OurTailsData, Error>;
+}
+
+interface OptionType {
+  value: string;
+  label: string;
+}
+
+interface CustomStyles extends StylesConfig {
+  control?: (provided: any, state: any) => any;
 }
 
 const Catalog: React.FC<CatalogProps> = ({ data }) => {
@@ -19,6 +30,75 @@ const Catalog: React.FC<CatalogProps> = ({ data }) => {
 	const cardsInPage = 12;
 	const { data: catalog, isPending, isError, error } = data;
 	const { t } = useTranslation();
+
+	const optionsSex: OptionType[] = [
+		{ value: 'boy', label: t('catalog.filter_sex_male') },
+		{ value: 'girl', label: t('catalog.filter_sex_female') },
+	];
+	
+	const optionsAge: OptionType[] = [
+		{ value: 'puppy', label: t('catalog.filter_age_puppy') },
+		{ value: 'young_dog', label: t('catalog.filter_age_young_dog') },
+		{ value: 'adult', label: t('catalog.filter_age_adult') }
+	];
+	
+	const optionsSize: OptionType[] = [
+		{ value: 'small', label: t('catalog.filter_size_small') },
+		{ value: 'medium', label: t('catalog.filter_size_medium') },
+		{ value: 'large', label: t('catalog.filter_size_large') }
+	];
+
+	const customStyles: CustomStyles = {
+		control: (provided, state) => ({
+			...provided,
+			padding: '6px 16px',
+			borderRadius: '40px',
+			borderColor: '#b6e1f2',
+			color: '#858585',
+			fontSize: '20px',
+			fontWeight: 500,
+			cursor: 'pointer',
+			position: 'relative',
+			'&:hover': {
+				borderColor: '#b6e1f2',
+			},
+			'&:before': {
+        content: '""',
+        backgroundImage: state.menuIsOpen ? `url(${ArrowIconUp})` : `url(${ArrowIconDown})`,
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundSize: '24px 24px',
+        width: '24px',
+        height: '24px',
+        position: 'absolute',
+        right: '8px',
+        top: '50%',
+        transform: 'translateY(-50%)',
+      },
+		}),
+		indicatorSeparator: () => ({
+			display: 'none',
+		}),
+		dropdownIndicator: (provided) => ({
+			...provided,
+			display: 'none',
+		}),
+		menu: (provided) => ({
+			...provided,
+			borderRadius: '24px',
+			boxShadow: '0 0 0 1px #b6e1f2',
+		}),
+		option: (provided) => ({
+			...provided,
+			backgroundColor: 'white',
+			cursor: 'pointer',
+			color: '#0D0031',
+			borderRadius: '24px',
+			'&:hover': {
+				color: '#009cd9',
+			},
+		}),
+	};
 
 	useEffect(() => {
 		if (catalog) {
@@ -75,7 +155,7 @@ const Catalog: React.FC<CatalogProps> = ({ data }) => {
 					</h2>
 					<Button
 						name={t('catalog.header_button')}
-						btnClasses={'filter'}
+						btnClasses={'filterPC'}
 						type="submit"
 						disabled
 						onClick={() => {}}
@@ -96,29 +176,12 @@ const Catalog: React.FC<CatalogProps> = ({ data }) => {
 							>
 								{t('catalog.filter_sex_label')}:
 							</label>
-							<select
-								id='sex'
-								value=""
+							<Select
+								options={optionsSex}
+								placeholder={t('catalog.filter_sex_placeholder')}
 								onChange={() => {}}
-								className={styles.catalog_select}
-							>
-								<option
-									value=""
-									disabled
-								>
-									{t('catalog.filter_sex_placeholder')}
-								</option>
-								<option
-									value={t('catalog.filter_sex_male')}
-								>
-									{t('catalog.filter_sex_male')}
-								</option>
-								<option
-									value={t('catalog.filter_sex_female')}
-								>
-									{t('catalog.filter_sex_female')}
-								</option>
-							</select>
+								styles={customStyles}
+							/>
 						</div>
 						<div
 							className={styles.catalog_select_container}
@@ -129,34 +192,12 @@ const Catalog: React.FC<CatalogProps> = ({ data }) => {
 							>
 								{t('catalog.filter_age_label')}:
 							</label>
-							<select
-								id='age'
-								value=""
+							<Select
+								options={optionsAge}
+								placeholder={t('catalog.filter_age_placeholder')}
 								onChange={() => {}}
-								className={styles.catalog_select}
-							>
-								<option
-									value=""
-									disabled
-								>
-									{t('catalog.filter_age_placeholder')}
-								</option>
-								<option
-									value={t('catalog.filter_age_puppy')}
-								>
-									{t('catalog.filter_age_puppy')}
-								</option>
-								<option
-									value={t('catalog.filter_age_adult')}
-								>
-									{t('catalog.filter_age_adult')}
-								</option>
-								<option
-									value={t('catalog.filter_age_old')}
-								>
-									{t('catalog.filter_age_old')}
-								</option>
-							</select>
+								styles={customStyles}
+							/>
 						</div>
 						<div
 							className={styles.catalog_select_container}
@@ -167,34 +208,12 @@ const Catalog: React.FC<CatalogProps> = ({ data }) => {
 							>
 								{t('catalog.filter_size_label')}:
 							</label>
-							<select
-								id='size'
-								value=""
+							<Select
+								options={optionsSize}
+								placeholder={t('catalog.filter_size_placeholder')}
 								onChange={() => {}}
-								className={styles.catalog_select}
-							>
-								<option
-									value=""
-									disabled
-								>
-									{t('catalog.filter_size_placeholder')}
-								</option>
-								<option
-									value={t('catalog.filter_size_small')}
-								>
-									{t('catalog.filter_size_small')}
-								</option>
-								<option
-									value={t('catalog.filter_size_medium')}
-								>
-									{t('catalog.filter_size_medium')}
-								</option>
-								<option
-									value={t('catalog.filter_size_large')}
-								>
-									{t('catalog.filter_size_large')}
-								</option>
-							</select>
+								styles={customStyles}
+							/>
 						</div>
 					</div>
 					<div
@@ -213,6 +232,13 @@ const Catalog: React.FC<CatalogProps> = ({ data }) => {
 							{t('catalog.filter_checkbox')}
 						</label>
 					</div>
+					<Button
+						name={t('catalog.header_button')}
+						btnClasses={'filterMob'}
+						type="submit"
+						disabled
+						onClick={() => {}}
+					/>
 				</div>
 				<div
 					className={styles.catalog_list}

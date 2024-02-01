@@ -37,7 +37,12 @@
   @media screen and (max-width: 1279px) {
     width: 120px;
     height: 105px;
+    margin-right: 32px;
   }
+
+  @media screen and (max-width: 767px) {
+		margin-right: 0;
+	}
 }
 
 .footer_nav {
