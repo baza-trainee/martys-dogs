@@ -39,7 +39,7 @@ const breakpoints = {
 	},
 };
 
-export interface TailsProps {
+interface TailsProps {
 	data: UseQueryResult<LandingData, Error>;
 }
 
