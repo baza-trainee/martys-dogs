@@ -95,7 +95,8 @@
 		"filter_size_small": "Small",
 		"filter_size_medium": "Medium",
 		"filter_size_large": "Large",
-		"filter_checkbox": "Readiness for adoption"
+		"filter_checkbox": "Readiness for adoption",
+		"filter_error": "Nothing found. Please change your filter settings."
 	},
 	"heroAbout": {
 		"title": "Here, every animal finds shelter and help!",

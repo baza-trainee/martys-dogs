@@ -1,3 +1,5 @@
+import { OurTailsData } from '../pages/OurTails/OurTails';
+
 const HOME = 'https://matys-dogs2.onrender.com';
 const ABOUT = 'https://matys-dogs2.onrender.com/about-us';
 const LOGIN = 'https://matys-dogs2.onrender.com/login';
@@ -10,10 +12,10 @@ export const fetchHome = async () => {
 		if (!response.ok) {
 			throw new Error('Data loading error');
 		}
-		
+
 		const data = await response.json();
 		return data;
-		
+
 	} catch (error) {
 		console.error('Error while loading data:', error);
 		throw error;
@@ -28,71 +30,61 @@ export const fetchAbout = async () => {
 		if (!response.ok) {
 			throw new Error('Data loading error');
 		}
-		
+
 		const data = await response.json();
 		return data;
-		
+
 	} catch (error) {
 		console.error('Error while loading data:', error);
 		throw error;
 	}
 };
-    
 
-/*
-export const fetchCatalog = async () => {
+export const fetchCatalog = async ({ queryKey }: { queryKey: [string, string, { filter: string }] }): Promise<OurTailsData> => {
+	const [, language, { filter: filterTerms }] = queryKey;
+	let url = CATALOG;
+
+	if (filterTerms) {
+		url += filterTerms;
+	}
 
 	try {
-		const response = await fetch(CATALOG);
+		const response = await fetch(url, {
+			headers: {
+				'Accept-Language': language,
+			},
+		});
 
 		if (!response.ok) {
-			throw new Error('Data loading error');
+			throw  (`Error while loading data. Status: ${response.status}`);
 		}
-		
+
 		const data = await response.json();
 		return data;
-		
 	} catch (error) {
-		console.error('Error while loading data:', error);
+		console.error(error);
 		throw error;
 	}
 };
-*/
+
 /*
-export const fetchCatalog = async ({ queryString }) => {
 
-
-	// Створюємо URL з параметрами фільтрації, якщо вони надані
-	const url = `${CATALOG}${queryString || ''}`;
-
-	try {
-		const response = await fetch(url);
-
-		if (!response.ok) {
-			console.error(`Error Status: ${response.status}`);
-			throw new Error('Data loading error');
-		}
-
-		const data = await response.json();
-		return data;
-	} catch (error) {
-		console.error('Error while loading data:', error);
-		throw error;
-	}
-};*/
-
-export const fetchCatalog = async (filterTerms) => {
+export const fetchCatalog = async (language: string, filterTerms: string): Promise<OurTailsData> => {
 	let url = CATALOG;
 	if (filterTerms) {
 		url += filterTerms;
 	}
 
 	try {
-		const response = await fetch(url);
+		const response = await fetch(url, {
+			headers: {
+				'Accept-Language': language,
+			},
+		});
 
 		if (!response.ok) {
 			console.error(`Error Status: ${response.status}`);
-			throw new Error('Fetch error: За вашим запитом нічого не знайдено. Як оновити сторінку, щоб повернутись до всіх собачек?');
+			throw new Error('Data loading error');
 		}
 
 		const data = await response.json();
@@ -102,6 +94,7 @@ export const fetchCatalog = async (filterTerms) => {
 		throw error;
 	}
 };
+*/
 
 // export const fetchHome = async () => {
 // 	try {

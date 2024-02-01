@@ -323,7 +323,8 @@ const Catalog: React.FC<TailsProps> = ({ data, changeTerms }) => {
 						)
 						: isError ? (
 								<div className={styles.container}>
-									<div className={styles.alert}>{error.message}</div>
+									<div className={styles.alert}>
+										{t('catalog.filter_error')}</div>
 								</div>
 							)
 							: cards?.slice((cardsInPage * page) - cardsInPage, cardsInPage * page).map((tail) => (
