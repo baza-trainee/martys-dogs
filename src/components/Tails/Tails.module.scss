@@ -26,7 +26,11 @@
 }
 
 .letters {
+	font-size: 3.25rem;
 	font-weight: 800;
+	@media screen and (max-width: 1279px) {
+		font-size: 1.75rem;
+	}
 	@media screen and (max-width: 767px) {
 		align-self: start;
 	}
