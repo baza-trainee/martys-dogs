@@ -1,5 +1,5 @@
-import { LandingData } from "../pages/Landing/Landing";
-import { OurTailsData } from "../pages/OurTails/OurTails";
+import { LandingData } from '../pages/Landing/Landing';
+import { OurTailsData } from '../pages/OurTails/OurTails';
 
 /*import { useQuery, useMutation, UseQueryOptions } from '@tanstack/react-query';*/
 const HOME = 'https://matys-dogs2.onrender.com';
@@ -7,7 +7,7 @@ const ABOUT = 'https://matys-dogs2.onrender.com/about-us';
 const LOGIN = 'https://matys-dogs2.onrender.com/login';
 const CATALOG = 'https://matys-dogs2.onrender.com/catalog';
 
-export const fetchHome = async (language: string): Promise<LandingData>  => {
+export const fetchHome = async (language: string): Promise<LandingData> => {
 	try {
 		const response = await fetch(HOME, {
 			headers: {
