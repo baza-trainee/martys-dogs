@@ -58,19 +58,41 @@ export const fetchCatalog = async () => {
 	}
 };
 */
-export const fetchCatalog = async ({ queryKey }) => {
-	const [, { exact, queryString } = {}] = queryKey;
+/*
+export const fetchCatalog = async ({ queryString }) => {
+
 
 	// Створюємо URL з параметрами фільтрації, якщо вони надані
-	const url = `https://matys-dogs2.onrender.com/catalog${exact ? '' : queryString || ''}`;
+	const url = `${CATALOG}${queryString || ''}`;
 
 	try {
 		const response = await fetch(url);
 
 		if (!response.ok) {
-			console.error(`Error loading data. Status: ${response.status}`);
-			// Додайте інші деталі про помилку, якщо вони доступні
+			console.error(`Error Status: ${response.status}`);
 			throw new Error('Data loading error');
+		}
+
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.error('Error while loading data:', error);
+		throw error;
+	}
+};*/
+
+export const fetchCatalog = async (filterTerms) => {
+	let url = CATALOG;
+	if (filterTerms) {
+		url += filterTerms;
+	}
+
+	try {
+		const response = await fetch(url);
+
+		if (!response.ok) {
+			console.error(`Error Status: ${response.status}`);
+			throw new Error('Fetch error: За вашим запитом нічого не знайдено. Як оновити сторінку, щоб повернутись до всіх собачек?');
 		}
 
 		const data = await response.json();

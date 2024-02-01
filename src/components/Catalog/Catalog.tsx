@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { OurTailsData } from '../../pages/OurTails/OurTails' ;
-import { UseQueryResult, useQueryClient, useIsFetching } from '@tanstack/react-query';
+import { UseQueryResult } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import Button from '../../layout/Button/Button';
 import Tail from '../Tail/Tail';
 import { DogCard } from '../../pages/Landing/Landing';
 import styles from './Catalog.module.scss';
 import * as React from 'react';
-import { fetchCatalog } from '../../services/fetchData';
 
 interface TailsProps {
 	data: UseQueryResult<OurTailsData, Error>;
+	changeTerms: (newQueryString: string) => void;
 }
 
 type FilterParams = {
@@ -20,9 +20,8 @@ type FilterParams = {
 	ready_for_adoption?: boolean;
 } & { [key: string]: string | boolean };
 
-const Catalog: React.FC<TailsProps> = ({ data }) => {
+const Catalog: React.FC<TailsProps> = ({ data, changeTerms }) => {
 	const [cards, setCards] = useState<DogCard[]>([]);
-
 	const [page, setPage] = useState<number>(1);
 	const [countPage, setCountPage] = useState<number>(1);
 	const cardsInPage = 12;
@@ -34,8 +33,8 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 		gender: '',
 		ready_for_adoption: false,
 	});
-	const [queryString, setQueryString] = useState<string>('');
-	const queryClient = useQueryClient();
+
+	const newQueryString = `?age=${selectedFilters.age?.toLowerCase()}&size=${selectedFilters.size?.toLowerCase()}&gender=${selectedFilters.gender?.toLowerCase()}&ready_for_adoption=${selectedFilters.ready_for_adoption}`;
 
 	useEffect(() => {
 		if (tails) {
@@ -44,15 +43,89 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 	}, [tails]);
 
 
-
-
-
-
 	useEffect(() => {
 		setCountPage(Math.ceil(cards.length / cardsInPage));
 	}, [cards, cardsInPage]);
 
-	if (isPending) {
+
+	const handleChange = (field: keyof FilterParams, value: string | boolean) => {
+		setSelectedFilters((prevFilters) => ({
+			...prevFilters,
+			[field]: value,
+		}));
+	};
+
+
+	const handleFilterSubmit = async () => {
+
+
+		//Anton
+		changeTerms(newQueryString);
+		console.log(selectedFilters);
+		console.log(newQueryString);
+		// setQueryString(newQueryString);
+
+
+		// Використання нового значення queryKey для автоматичного оновлення даних
+		/*	const { data: filteredTails, isError, error } = await queryClient.fetchQuery(['tails', { exact: false, queryString }]);
+
+			console.log(selectedFilters);
+			console.log(newQueryString);
+			console.log(filteredTails);*/
+		/*
+				try {
+					// Використовуйте новий синтаксис fetchQuery
+					const filteredTails = await queryClient.fetchQuery(
+						{
+							queryKey: ['tails',   { exact: false, queryString: newQueryString } ],
+							queryFn: fetchCatalog,
+						}
+
+					);
+
+					// ???? slice don't work if setCard
+
+					console.log(selectedFilters);
+					console.log(newQueryString);
+					console.log(filteredTails);
+
+				} catch (error) {
+					console.error('Error while fetching filtered tails:', error);
+				}
+		*/
+		//Without try to invalidate data,clear cache even if it will be error
+		/*await queryClient.invalidateQueries(['tails']);
+
+		try {
+			const filteredTails = await queryClient.fetchQuery({
+				queryKey: ['tails', { filter: newQueryString }],
+				queryFn: () => fetchCatalog({ queryString: newQueryString }),
+			});
+
+			console.log(selectedFilters);
+			console.log(newQueryString);
+			console.log(filteredTails);
+		} catch (error) {
+			console.error('Error while fetching filtered tails:', error);
+		}*/
+
+	};
+
+//	повернути верстку , щоб кнопки фільтрації були, і просто меседж
+	const handleResetFilters = () => {
+		setSelectedFilters({
+			age: '',
+			size: '',
+			gender: '',
+			ready_for_adoption: false,
+		});
+		setPage(1);
+		changeTerms('');
+		console.log(selectedFilters);
+		console.log(newQueryString);
+	};
+
+	/*if (isPending) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.loading}></div>
@@ -60,13 +133,15 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 		);
 	}
 
+
 	if (isError) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.alert}>{error.message}</div>
+				<button onClick={handleResetFilters}>Скинути фільтри</button>
 			</div>
 		);
-	}
+	}*/
 
 	const goToPrevPage = () => {
 		if (page > 1) {
@@ -78,66 +153,6 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 		if (page < countPage) {
 			setPage(page + 1);
 		}
-	};
-
-
-	const handleChange = (field: keyof FilterParams, value: string | boolean) => {
-
-		setSelectedFilters((prevFilters) => ({
-			...prevFilters,
-			[field]: value,
-		}));
-	};
-
-
-	const handleFilterSubmit = async () => {
-		/*	const filters = Object.entries(selectedFilters)
-				.filter(([key, value]) => value !== '')
-				.map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
-				.join('&');*/
-
-		const newQueryString = `?age=${selectedFilters.age}&size=${selectedFilters.size}&gender=${selectedFilters.gender?.toLowerCase()}&ready_for_adoption=${selectedFilters.ready_for_adoption}`;
-
-		setQueryString(newQueryString);
-		/*const filteredTails = await queryClient.refetchQueries(
-			{
-				queryKey: ['tails', { exact: false, queryString }],
-			});
-		;
-*/
-		// Очищення кешу запиту перед новим запитом
-		queryClient.invalidateQueries(['tails']);
-
-/*
-		// Використання нового значення queryKey для автоматичного оновлення даних
-		const { data: filteredTails, isError, error } = await queryClient.fetchQuery(['tails', { exact: false, queryString }]);
-
-		console.log(selectedFilters);
-		console.log(newQueryString);
-		console.log(filteredTails);
-*/
-		try {
-			// Використовуйте новий синтаксис fetchQuery
-			const filteredTails = await queryClient.fetchQuery(
-				{
-					queryKey: ['tails',   { exact: false, queryString: newQueryString } ],
-					queryFn: fetchCatalog,
-				}
-
-			);
-// const result = filteredTails.json();
-
-			// ???? slice don't work if setCard
-
-			console.log(selectedFilters);
-			console.log(newQueryString);
-			console.log(filteredTails);
-
-			// console.log(result);
-		} catch (error) {
-			console.error('Error while fetching filtered tails:', error);
-		}
-
 	};
 
 
@@ -301,19 +316,31 @@ const Catalog: React.FC<TailsProps> = ({ data }) => {
 				<div
 					className={styles.catalog_list}
 				>
-					{cards?.slice((cardsInPage * page) - cardsInPage, cardsInPage * page).map((tail) => (
-						<div
-							key={tail.id}
-							className={styles.catalog_list_card}
-						>
-							<Tail
-								{...tail}
-							/>
-						</div>
-					))
+					{isPending ? (
+							<div className={styles.container}>
+								<div className={styles.loading}></div>
+							</div>
+						)
+						: isError ? (
+								<div className={styles.container}>
+									<div className={styles.alert}>{error.message}</div>
+								</div>
+							)
+							: cards?.slice((cardsInPage * page) - cardsInPage, cardsInPage * page).map((tail) => (
+								<div
+									key={tail.id}
+									className={styles.catalog_list_card}
+								>
+									<Tail
+										{...tail}
+									/>
+								</div>
+							))
 
 
 					}
+
+
 				</div>
 				<div
 					className={styles.catalog_pagination}
