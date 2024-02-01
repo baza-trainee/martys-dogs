@@ -1,29 +1,30 @@
-import { useState, useEffect } from 'react';
-import { LandingData } from '../../pages/Landing/Landing';
-import { UseQueryResult } from '@tanstack/react-query';
-import { useTranslation } from 'react-i18next';
-import Button from '../../layout/Button/Button';
-import Tail from '../Tail/Tail';
-import { DogCard } from '../../pages/Landing/Landing';
-import styles from './Catalog.module.scss';
+import { useEffect, useState } from 'react';
 
-interface TailsProps {
-	data: UseQueryResult<LandingData, Error>;
+import Button from '../../layout/Button/Button';
+import { DogCard } from '../../pages/Landing/Landing';
+import { OurTailsData } from '../../pages/OurTails/OurTails';
+import Tail from '../Tail/Tail';
+import { UseQueryResult } from '@tanstack/react-query';
+import styles from './Catalog.module.scss';
+import { useTranslation } from 'react-i18next';
+
+interface CatalogProps {
+	data: UseQueryResult<OurTailsData, Error>;
 }
 
-const Catalog: React.FC<TailsProps> = ({ data }) => {
+const Catalog: React.FC<CatalogProps> = ({ data }) => {
 	const [cards, setCards] = useState<DogCard[]>([]);
 	const [page, setPage] = useState<number>(1);
 	const [countPage, setCountPage] = useState<number>(1);
 	const cardsInPage = 12;
-	const { data: tails, isPending, isError, error } = data;
+	const { data: catalog, isPending, isError, error } = data;
 	const { t } = useTranslation();
 
 	useEffect(() => {
-		if (tails) {
-			setCards(tails.dog_cards);
+		if (catalog) {
+			setCards(catalog.Cards);
 		}
-	}, [tails]);
+	}, [catalog]);
 
 	useEffect(() => {
 		setCountPage(Math.ceil(cards.length / cardsInPage))
