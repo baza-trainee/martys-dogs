@@ -27,6 +27,9 @@
 
 .letters {
 	font-weight: 800;
+	@media screen and (max-width: 767px) {
+		align-self: start;
+	}
 }
 
 .subtitle {
@@ -51,7 +54,7 @@
 
 .link {
 	min-width: 297px;
-	@media screen and (max-width: 759px) {
+	@media screen and (max-width: 767px) {
 		width: 100%;
 	}
 }
