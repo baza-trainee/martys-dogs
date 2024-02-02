@@ -86,18 +86,14 @@
   }
 }
 
-.filter {
+.filterPC {
   width: auto;
   background: $color-gray-0;
   border: 1px solid $color-accent;
   color: $color-accent;
   padding: 12px 32px;
   font-size: 24px;
-
-  @media screen and (max-width: 1280px) {
-		width: 100%;
-	}
-
+  white-space: nowrap;
 
   @include hover {
     &:hover {
@@ -128,4 +124,53 @@
       }
     }
   }
+
+  @media screen and (max-width: 1279px) {
+		display: none;
+	}
+}
+
+.filterMob {
+  width: auto;
+  background: $color-gray-0;
+  border: 1px solid $color-accent;
+  color: $color-accent;
+  padding: 12px 32px;
+  font-size: 24px;
+  white-space: nowrap;
+  display: none;
+
+  @include hover {
+    &:hover {
+      border-color: $color-main-blue-dark;
+      color: $color-main-blue-dark;
+    }
+  }
+
+
+  &:focus-visible  {
+    outline: none;
+    border-color: $color-main-blue-dark;
+  }
+
+  &:active {
+    border-color: $color-gray-100;
+    color: $color-gray-100;
+  }
+
+  &:disabled {
+    border-color: $color-gray-60;
+    background: transparent;
+
+
+    @include hover {
+      &:hover {
+        color: $color-gray-60;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1279px) {
+		display: block;
+	}
 }
