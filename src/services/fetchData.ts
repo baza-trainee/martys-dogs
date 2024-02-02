@@ -1,13 +1,19 @@
+import { LandingData } from '../pages/Landing/Landing';
 import { OurTailsData } from '../pages/OurTails/OurTails';
 
+/*import { useQuery, useMutation, UseQueryOptions } from '@tanstack/react-query';*/
 const HOME = 'https://matys-dogs2.onrender.com';
 const ABOUT = 'https://matys-dogs2.onrender.com/about-us';
 const LOGIN = 'https://matys-dogs2.onrender.com/login';
 const CATALOG = 'https://matys-dogs2.onrender.com/catalog';
 
-export const fetchHome = async () => {
+export const fetchHome = async (language: string): Promise<LandingData> => {
 	try {
-		const response = await fetch(HOME);
+		const response = await fetch(HOME, {
+			headers: {
+				'Accept-Language': language,
+			},
+		});
 
 		if (!response.ok) {
 			throw new Error('Data loading error');
@@ -15,7 +21,6 @@ export const fetchHome = async () => {
 
 		const data = await response.json();
 		return data;
-
 	} catch (error) {
 		console.error('Error while loading data:', error);
 		throw error;
@@ -76,25 +81,20 @@ export const fetchCatalog = async (language: string, filterTerms: string): Promi
 	}
 
 	try {
-		const response = await fetch(url, {
-			headers: {
-				'Accept-Language': language,
-			},
-		});
+		const response = await fetch(CATALOG);
 
 		if (!response.ok) {
-			console.error(`Error Status: ${response.status}`);
 			throw new Error('Data loading error');
 		}
-
+		
 		const data = await response.json();
 		return data;
+		
 	} catch (error) {
 		console.error('Error while loading data:', error);
 		throw error;
 	}
 };
-*/
 
 // export const fetchHome = async () => {
 // 	try {
@@ -157,3 +157,71 @@ export const loginUser = async (
 		throw error;
 	}
 };
+
+/* Universal fetch  + query examples */
+
+/*
+const BASE_URL = 'https://matys-dogs2.onrender.com';
+
+const fetchData1 = async (url: string, method = 'GET', data: any = null) => {
+	try {
+	  const response = await fetch(`${BASE_URL}${url}`, {
+		method,
+		headers: {
+		  'Content-Type': 'application/json',
+		},
+		body: data ? JSON.stringify(data) : null,
+	  });
+
+	  if (!response.ok) {
+		throw new Error('Request failed');
+	  }
+
+	  const responseData = await response.json();
+
+	  console.log(`Fetch Data from ${url}:`, responseData);
+
+	  return responseData;
+	} catch (error) {
+
+	  console.error(`Error fetching data from ${url}:`, error);
+	  throw error;
+	}
+  };
+
+
+
+export const useFetchHome1 = () => {
+  return useQuery({
+    queryKey: ['/'],
+    queryFn: () => fetchData1('/'),
+  });
+};
+
+export const useFetchAbout1 = () => {
+	return useQuery({
+	  queryKey: ['/about'],
+	  queryFn: () => fetchData1('/about'),
+	});
+  };
+
+  export const useFetchCatalog1 = () => {
+	return useQuery({
+	  queryKey: ['/catalog'],
+	  queryFn: () => fetchData1('/catalog'),
+	});
+  };
+
+
+export const useLoginUser1 = () => {
+  const loginMutation = useMutation({
+    mutationFn: ({ email, password }: { email: string; password: string }) =>
+	fetchData1('/login', 'POST', { email, password }),
+    onSuccess: () => {
+      console.log("Posted login successfully")
+    },
+  });
+
+  return loginMutation;
+};
+*/

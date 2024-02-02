@@ -11,6 +11,7 @@ import { fetchHome } from '../../services/fetchData';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import { useTranslation } from 'react-i18next';
 
 interface Photo {
 	id: string;
@@ -42,16 +43,32 @@ export interface DogCard {
 	photo: Photo;
 }
 
+export interface LogoData {
+	id: string;
+	name: string;
+	url: string;
+	category: string;
+}
+
+export interface Partner {
+	id: number;
+	name: string;
+	logo: LogoData;
+}
+
 export interface LandingData {
-	news_data: NewsItem[];
+	news: NewsItem[];
 	dog_cards: DogCard[];
+	partners: Partner[];
 }
 
 const Landing: React.FC = () => {
+	const { i18n } = useTranslation();
+	const language = i18n.language;
 	const location = useLocation();
-	const data = useQuery<LandingData>({
-		queryKey: ['landing'],
-		queryFn: fetchHome,
+	const data = useQuery<LandingData, Error>({
+		queryKey: ['landing', language],
+		queryFn: () => fetchHome(language),
 		refetchInterval: 600000,
 	});
 
@@ -69,7 +86,7 @@ const Landing: React.FC = () => {
 			<CanisTherapy />
 			<Tails data={data} />
 			<Support />
-			<Partners />
+			<Partners data={data} />
 			<News data={data} />
 		</main>
 	);

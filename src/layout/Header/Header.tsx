@@ -2,8 +2,8 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { CiMenuBurger } from "react-icons/ci";
 import { IoCloseOutline } from "react-icons/io5";
-import { Link } from 'react-router-dom';
 import MobNavMenu from '../../components/MobNavMenu/MobNavMenu';
+import { NavLink } from 'react-router-dom';
 import headerLogo from '../../assets/header_logo.webp';
 import styles from './Header.module.scss';
 import { useState } from 'react';
@@ -25,6 +25,10 @@ const Header: React.FC = () => {
 		i18n.changeLanguage(lng);
 	};
 
+	const mobHandlerChangePage = () => {
+		setOpenMobMenu(false);
+	}
+
 	return (
 		<header
 			className={styles.header}
@@ -35,7 +39,7 @@ const Header: React.FC = () => {
 				<div
 					className={styles.header_main}
 				>
-					<Link
+					<NavLink
 						to="/"
 					>
 						<img
@@ -43,7 +47,7 @@ const Header: React.FC = () => {
 							alt="Best Friend logo"
 							className={styles.header_logo}
 						/>
-					</Link>
+					</NavLink>
 					<nav>
 						<ul
 							className={styles.header_nav}
@@ -51,42 +55,42 @@ const Header: React.FC = () => {
 							<li
 								className={styles.header_nav_category}
 							>
-								<Link
+								<NavLink
 									to="/"
 									className={styles.header_nav_link}
 								>
 									{t('header.nav_main')}
-								</Link>
+								</NavLink>
 							</li>
 							<li
 								className={styles.header_nav_category}
 							>
-								<Link
+								<NavLink
 									to="/about"
 									className={styles.header_nav_link}
 								>
 									{t('header.nav_about')}
-								</Link>
+								</NavLink>
 							</li>
 							<li
 								className={styles.header_nav_category}
 							>
-								<Link
+								<NavLink
 									to="/tails"
 									className={styles.header_nav_link}
 								>
 									{t('header.nav_pets')}
-								</Link>
+								</NavLink>
 							</li>
 							<li
 								className={styles.header_nav_category}
 							>
-								<Link
+								<NavLink
 									to="/contacts"
 									className={styles.header_nav_link}
 								>
 									{t('header.nav_contact')}
-								</Link>
+								</NavLink>
 							</li>
 						</ul>
 					</nav>
@@ -159,6 +163,7 @@ const Header: React.FC = () => {
 						<MobNavMenu
 							currentLanguage={currentLanguage}
 							changeLanguage={handlerChangeLanguage}
+							closeMenu={mobHandlerChangePage}
 						/>
 					</CSSTransition>
 				)}

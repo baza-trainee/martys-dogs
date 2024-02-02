@@ -32,11 +32,6 @@
 
 		@include small_desktop {
 			padding: 100px;
-			min-width: 1280px;
-		}
-
-		@include large_desktop {
-			min-width: 1440px;
 		}
 
 		@include full_desktop {
@@ -65,7 +60,7 @@
 			position: relative;
 
 			@include large_desktop {
-				align-self: auto;
+				align-self: center;
 			}
 
 			@include full_desktop {
@@ -103,11 +98,10 @@
 				}
 
 				.posterImage {
-					max-width: 100%;
-					height: auto;
-
-					@include large_desktop {
+					border-radius: 16px;
+					@include full_desktop {
 						max-width: none;
+						height: auto;
 					}
 				}
 			}
@@ -139,8 +133,6 @@
 				z-index: 1;
 				top: 0;
 				left: 0;
-				width: 100%;
-				height: auto;
 			}
 
 			.showControls {
@@ -162,9 +154,10 @@
 			margin-bottom: 32px;
 			line-height: 120%;
 			font-size: 28px;
+			font-weight: 800;
 
 			@include small_desktop {
-				font-size: 42px;
+				font-size: 52px;
 			}
 
 			@include large_desktop {
@@ -172,17 +165,14 @@
 			}
 
 			@include full_desktop {
-				padding-right: 200px;
+				padding-right: 100px;
 			}
 		}
 
 		.videoDescription {
 			word-wrap: break-word;
 			line-height: 140%;
-
-			@include tablet {
-				max-width: 90vw;
-			}
+			font-size: 14px;
 
 			@include small_desktop {
 				margin-bottom: 16px;
@@ -192,7 +182,6 @@
 
 			&:first-of-type {
 				margin-bottom: 24px;
-				font-size: 14px;
 				font-weight: 700;
 
 				@include tablet {
@@ -201,7 +190,6 @@
 
 				@include small_desktop {
 					margin-bottom: 24px;
-					font-size: 20px;
 				}
 			}
 
@@ -217,7 +205,7 @@
 			&:last-of-type {
 				margin-bottom: 32px;
 				@include tablet {
-					margin-bottom: 0;
+					margin-bottom: 1.2%;
 				}
 
 				&.main {
@@ -248,7 +236,7 @@
 				@include tablet {
 					position: absolute;
 					right: 0;
-					bottom: -50px;
+					bottom: -45px;
 				}
 				@include small_desktop {
 					position: unset;

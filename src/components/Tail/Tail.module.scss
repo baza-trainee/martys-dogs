@@ -7,6 +7,12 @@
 	transition: max-height 0.5s ease;
 }
 
+.open {
+	overflow: hidden;
+	max-height: 300px;
+	transition: max-height 0.5s ease;
+}
+
 .card {
 	position: relative;
 	width: 415px;
@@ -16,9 +22,6 @@
 	&:hover {
 		.intro {
 			max-height: 300px;
-			// @media screen and (max-width: 767px) {
-			// 	max-height: 195px;
-			// }
 		}
 	}
 	@media screen and (max-width: 1919px) {
@@ -31,8 +34,11 @@
 		width: 342px;
 	}
 	@media screen and (max-width: 767px) {
-		// width: 300px;
-		// height: 380px;
+		&:hover {
+			.intro {
+				max-height: 0;
+			}
+		}
 	}
 	.image {
 		border-radius: 30px;
@@ -109,11 +115,6 @@
 	@media screen and (max-width: 1279px) {
 		width: 310px;
 	}
-	@media screen and (max-width: 767px) {
-		// width: 268px;
-		// bottom: 16px;
-		// left: 16px;
-	}
 }
 
 .title {
@@ -164,71 +165,6 @@
 		min-width: 80px;
 	}
 }
-
-// .donate {
-// background-color: #009cd9;
-// padding: 12px 24px;
-// text-decoration: none;
-// border: 1px solid #009cd9;
-// border-radius: 30px;
-// font-size: 20px;
-// color: #ffffff;
-// display: flex;
-// justify-content: center;
-// align-items: center;
-// transition: all 0.3s ease-in-out;
-// min-width: 165px;
-// width: 100%;
-// 	flex: 1 1 100%;
-
-// 	&:hover {
-// 		color: #009cd9;
-// 		border: 1px solid #009cd9;
-// 		background-color: #ffffff;
-// 	}
-
-// 	@media screen and (max-width: 1919px) {
-// 		min-width: 120px;
-// 	}
-
-// 	@media screen and (max-width: 767px) {
-// 		font-size: 14px;
-// 		min-width: 80px;
-// 		padding: 4px 4px;
-// 	}
-// }
-
-// .adopt {
-// 	background-color: #ffffff;
-// 	padding: 12px 24px;
-// 	text-decoration: none;
-// 	border: 1px solid #009cd9;
-// 	border-radius: 30px;
-// 	font-size: 20px;
-// 	color: #009cd9;
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
-// 	transition: all 0.3s ease-in-out;
-// 	min-width: 165px;
-// 	flex: 1 1 100%;
-
-// 	&:hover {
-// 		color: #ffffff;
-// 		border: 1px solid #009cd9;
-// 		background-color: #009cd9;
-// 	}
-
-// 	@media screen and (max-width: 1919px) {
-// 		min-width: 120px;
-// 	}
-
-// 	@media screen and (max-width: 767px) {
-// 		font-size: 16px;
-// 		min-width: 80px;
-// 		padding: 4px 4px;
-// 	}
-// }
 
 .image {
 	display: block;

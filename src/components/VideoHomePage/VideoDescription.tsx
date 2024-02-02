@@ -22,7 +22,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
 }) => {
 	const { t } = useTranslation();
 	return (
-		<div className={styles.textContainer}>
+		<div className={styles.textContainer} data-testid="common-video-description">
 			<h1 className={styles.videoTitle}>{t(title)}</h1>
 
 			{descriptionKeys.map((videoDescription, index) => (

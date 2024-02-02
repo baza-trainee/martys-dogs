@@ -11,7 +11,7 @@ import { MemoryRouter } from 'react-router-dom';
 import Tails from './Tails';
 
 const mockQueryData: LandingData = {
-	news_data: [
+	news: [
 		{
 			id: 1,
 			title: 'Exciting News from the Pet World',
@@ -47,6 +47,19 @@ const mockQueryData: LandingData = {
 			},
 		},
 	],
+	partners: [
+		{
+            id: 1,
+            name: "Misto dobra",
+            logo: {
+                id: "1",
+                name: "partner.webp",
+                url: 'https://example.com/partner-photo.jpg',
+                category: "image"
+            }
+        },
+	]
+
 };
 
 const MockTails: React.FC = () => {

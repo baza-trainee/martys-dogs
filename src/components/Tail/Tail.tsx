@@ -5,6 +5,7 @@ import { GrExpand } from 'react-icons/gr';
 import { scrollToSection } from '../../services/scrollTo';
 import styles from './Tail.module.scss';
 import { useModalContext } from '../../context/useGlobalContext';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export interface TailProps {
@@ -39,6 +40,12 @@ const Tail: React.FC<TailProps> = ({
 }) => {
 	const { t } = useTranslation();
 	const { openModal, activateModal, activeModal } = useModalContext();
+	const [isActive, setIsActive] = useState(false);
+
+	const handleClick = () => {
+		setIsActive(!isActive);
+	};
+
 	const handleModal = () => {
 		console.log(activeModal);
 		openModal();
@@ -46,7 +53,7 @@ const Tail: React.FC<TailProps> = ({
 	};
 
 	return (
-		<div className={styles.card}>
+		<div className={styles.card} onClick={handleClick}>
 			<img src={photo?.url} alt='dog' className={styles.image} />
 			{ready_for_adoption && (
 				<p className={styles.friend}>{t('tail.ready')}</p>
@@ -68,7 +75,10 @@ const Tail: React.FC<TailProps> = ({
 						</p>
 					</div>
 				</div>
-				<div className={styles.intro}>
+				<div
+					className={isActive ? styles.open : styles.intro}
+					onClick={handleClick}
+				>
 					<div className={styles.about}>
 						<p className={styles.vaccine}>
 							{t('tail.vaccine')}

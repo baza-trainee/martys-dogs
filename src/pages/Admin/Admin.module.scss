@@ -1,6 +1,11 @@
+.box {
+    // margin-left: -2rem;
+    // min-width: 25rem;
+    background-color: #dbdbdb;
+}
+
 .sidebar {
     min-width: 25rem;
-    min-height: 100vh;
 	background: #EBF5FB;
     display: flex;
     flex-direction: column;
@@ -10,6 +15,9 @@
     transition: all 0.3s ease-in-out;
     margin-left: -20rem;
     padding-bottom: 2rem;
+    overflow-y: auto;
+    // position: fixed;
+    min-height: 100vh;
 }
 .show {
     margin-left: 0;
@@ -66,6 +74,10 @@
         color: #009cd9;
         text-decoration: underline;
         text-underline-offset: 0.25rem;
+    }
+    .sms {
+        margin-left: 1rem;
+        color: #009cd9;
     }
 }
 
