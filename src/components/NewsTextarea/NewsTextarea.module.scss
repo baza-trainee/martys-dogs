@@ -1,0 +1,32 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.wrapper {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+.text {
+	display: block;
+	padding-bottom: 10px;
+	font-size: 20px;
+}
+
+.error {
+	padding-top: 10px;
+	font-size: 20px;
+	color: red;
+}
+
+.label {
+	display: flex;
+	flex-direction: column;
+}
+
+.textarea {
+	resize: none;
+	padding: 10px;
+	border-radius: 4px;
+	border: 2px solid $color-main-blue-mid;
+	outline: none;
+}

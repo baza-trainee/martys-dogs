@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import styles from './AdminNews.module.scss';
-import { news } from '../../components/News/data';
+// import { news } from '../../components/News/data';
 import AdminNewsItem, { NewsItemProps } from '../AdminsNews/AdminNewsItem';
 import AddButton from '../../layout/AddButton/AddButton';
+import { fetchNews } from '../../services/adminNews';
 
 interface Photo {
 	id: string;
@@ -23,24 +24,6 @@ interface NewsItem {
 export interface NewsData {
 	news: NewsItem[];
 }
-
-const NEWS = 'https://matys-dogs2.onrender.com/news';
-
-const fetchNews = async () => {
-	try {
-		const response = await fetch(NEWS);
-
-		if (!response.ok) {
-			throw new Error('Data loading error');
-		}
-
-		const data = await response.json();
-		return data;
-	} catch (error) {
-		console.error('Error while loading data:', error);
-		throw error;
-	}
-};
 
 const AdminNews: React.FC = () => {
 	const data = useQuery<NewsData>({

@@ -17,12 +17,16 @@
 	gap: 8px;
 	font-size: 20px;
 	transition: all 0.3s ease;
-	// @include tablet {
-	// 	width: auto;
-	// }
 	&:hover {
 		background: #005c80;
 	}
+}
+
+.button_wrapper {
+	display: flex;
+	justify-content: center;
+	padding-top: 20px;
+	gap: 30px;
 }
 
 .container {
@@ -39,11 +43,6 @@
 	margin-bottom: 40px;
 }
 
-.label {
-	display: flex;
-	flex-direction: column;
-}
-
 .group {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -52,59 +51,7 @@
 	// justify-content: space-between;
 }
 
-.wrapper {
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-
-.text {
-	display: block;
-	padding-bottom: 10px;
-	font-size: 20px;
-}
-
-.error {
-	padding-top: 10px;
-	font-size: 20px;
-	color: red;
-}
-
-.input {
-	// border-style: none;
-	outline: none;
-	height: 40px;
-	padding: 0 10px;
-	border-radius: 4px;
-	border: 2px solid $color-main-blue-mid;
-}
-
-.textarea {
-	resize: none;
-	padding: 10px;
-	border-radius: 4px;
-	border: 2px solid $color-main-blue-mid;
-	outline: none;
-}
-
-.button_wrapper {
-	display: flex;
-	justify-content: center;
-	padding-top: 20px;
-	gap: 30px;
-}
-
-input[type='file'] {
-	display: none;
-}
-
-.image {
-	display: flex;
-	cursor: pointer;
-}
-
-.icon {
-	width: 24px;
-	height: 24px;
-	margin-right: 20px;
-	margin-left: 10px;
-}
+// .form {
+// 	outline: none;
+// 	border-style: none;
+// }

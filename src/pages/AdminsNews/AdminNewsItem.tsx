@@ -25,8 +25,6 @@ const NewsItem: React.FC<NewsItemProps> = ({
 	photo,
 	// url,
 }) => {
-	/// fetch current news  from backend
-
 	const months: { [key: string]: string } = {
 		січень: 'січня',
 		лютий: 'лютого',
