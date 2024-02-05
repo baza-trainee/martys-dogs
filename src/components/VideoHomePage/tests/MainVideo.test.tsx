@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import MainVideo from './MainVideo';
+import MainVideo from '../mainVideo/MainVideo';
 import { BrowserRouter } from 'react-router-dom';
 
 

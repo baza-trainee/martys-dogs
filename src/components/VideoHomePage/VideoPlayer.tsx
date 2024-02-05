@@ -5,7 +5,7 @@ import styles from './Video.module.scss';
 interface Poster {
 	srcSet: string;
 	mediaQuery: string;
-	width?:string;
+	width?: string;
 }
 
 interface VideoPlayerProps {
@@ -34,24 +34,28 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
 	const handlePlay = () => {
 		setIsLoading(false);
-	  };
+	};
 
 	const handleClick = () => {
 		setShowControls(!showControls);
 	};
 
 	return (
-		<div className={styles.videoPlayer} data-testid="common-video-player">
+		<div className={styles.videoPlayer} data-testid='common-video-player'>
 			<div
 				className={`${styles.posterOverlay} ${
 					showControls ? styles.disappear : ''
 				}`}
 			>
-				<button onClick={handleClick}>
+				<button
+					onClick={handleClick}
+					className={`${styles.playButton} ${
+						showControls ? styles.disappear : ''
+					}`}
+				>
 					<img
 						src={playButtonImage}
 						alt='Play Button'
-						className={styles.playButtonImage}
 						loading='lazy'
 					/>
 				</button>
@@ -76,7 +80,12 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
 			{showControls && (
 				<>
-					{isLoading && <div className={styles.loader} data-testid="loader"></div>}
+					{isLoading && (
+						<div
+							className={styles.loader}
+							data-testid='loader'
+						></div>
+					)}
 					<ReactPlayer
 						url={videoUrl}
 						playing

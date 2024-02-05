@@ -2,7 +2,6 @@
 @import '../../scss/mixins';
 
 .partnersContainer {
-	
 	margin: 0 auto;
 	padding: 40px 20px;
 	background-color: $color-gray-0;
@@ -21,7 +20,7 @@
 		font-weight: 800;
 		line-height: 120%;
 		text-align: left;
-	
+
 		@include tablet {
 			margin-bottom: 40px;
 		}
@@ -29,7 +28,7 @@
 			font-size: 52px;
 		}
 	}
-	
+
 	.partnersIconContainer {
 		display: flex;
 		flex-direction: column;
@@ -37,29 +36,28 @@
 		flex-wrap: wrap;
 		gap: 40px;
 		padding: 0 40px;
-	
+
 		@include tablet {
 			justify-content: center;
 			flex-direction: row;
 		}
-	
+
 		@include small_desktop {
 			gap: 60px;
 		}
 
 		.partnersIcon {
 			transition: transform 0.3s ease-in-out;
-			width:160px;
-			height:auto;
-		
+			width: 160px;
+			height: auto;
+
 			@include tablet {
 				margin-bottom: 40px;
 			}
-		
+
 			&:hover {
 				transform: scale(1.2);
 			}
-		}	
+		}
 	}
 }
-
