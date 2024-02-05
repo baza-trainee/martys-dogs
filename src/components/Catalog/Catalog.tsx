@@ -28,7 +28,6 @@ type FilterParams = {
 	ready_for_adoption?: boolean;
 } & { [key: string]: string | boolean };
 
-// const Catalog: React.FC<TailsProps> = ({ data, changeTerms }) => {
 const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 	const [cards, setCards] = useState<DogCard[]>([]);
 	const [page, setPage] = useState<number>(1);
@@ -127,8 +126,6 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 
 
 	const handleChange = (field: keyof FilterParams, value: string | boolean) => {
-		// const handleChange = (field: keyof FilterParams, selectedOption: OptionType | null) => {
-		// 	let value = selectedOption?.value || '';
 		setSelectedFilters((prevFilters) => ({
 			...prevFilters,
 			[field]: value,
@@ -175,8 +172,6 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 						name={t('catalog.header_button')}
 						btnClasses={'filterPC'}
 						type="submit"
-						// Disabled logic!!!!!!!!!!!!!!!!!!!!!!!!!!
-						// disabled
 						onClick={handleFilterSubmit}
 					/>
 				</div>
@@ -197,9 +192,6 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 							<Select
 								options={optionsGender}
 								placeholder={t('catalog.filter_gender_placeholder')}
-								// value={selectedFilters.gender}
-								// onChange={(e) => handleChange('gender', e.target.value)}
-								// onChange={(selectedOption) => handleChange('gender', selectedOption)}
 								value={optionsGender.find((opt) => opt.value === selectedFilters.gender)}
 								onChange={(selectedOption) => handleChange('gender', selectedOption?.value || '')}
 								styles={customStyles}
@@ -217,9 +209,6 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 							<Select
 								options={optionsAge}
 								placeholder={t('catalog.filter_age_placeholder')}
-								// value={selectedFilters.age}
-								// onChange={(e) => handleChange('age', e.target.value)}
-								// onChange={(selectedOption) => handleChange('age', selectedOption)}
 								value={optionsAge.find((opt) => opt.value === selectedFilters.age)}
 								onChange={(selectedOption) => handleChange('age', selectedOption?.value || '')}
 								styles={customStyles}
@@ -238,9 +227,6 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 							<Select
 								options={optionsSize}
 								placeholder={t('catalog.filter_size_placeholder')}
-								// value={selectedFilters.size}
-								// onChange={(e) => handleChange('size', e.target.value)}
-								// onChange={(selectedOption) => handleChange('size', selectedOption)}
 								value={optionsSize.find((opt) => opt.value === selectedFilters.size)}
 								onChange={(selectedOption) => handleChange('size', selectedOption?.value || '')}
 								styles={customStyles}
@@ -269,8 +255,6 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 						name={t('catalog.header_button')}
 						btnClasses={'filterMob'}
 						type="submit"
-						// Disabled logic!!!!!!!!!!!!!!!!!!!!!!!!!!
-						// disabled
 						onClick={handleFilterSubmit}
 					/>
 				</div>
@@ -336,35 +320,6 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 							</>
 						)
 				}
-
-				{/*<div
-					className={styles.catalog_pagination}
-				>
-					<button
-						onClick={goToPrevPage}
-						disabled={page === 1}
-						className={styles.catalog_pagination_btn}
-					>
-						&lt;
-					</button>
-					{Array.from({ length: countPage }, (_, index) => (
-						<button
-							key={index + 1}
-							onClick={() => setPage(index + 1)}
-							disabled={page === index + 1}
-							className={`${styles.catalog_pagination_btn} ${page === index + 1 ? styles.active : ''}`}
-						>
-							{index + 1}
-						</button>
-					))}
-					<button
-						onClick={goToNextPage}
-						disabled={page === countPage}
-						className={styles.catalog_pagination_btn}
-					>
-						&gt;
-					</button>
-				</div>*/}
 			</div>
 		</section>
 	);
