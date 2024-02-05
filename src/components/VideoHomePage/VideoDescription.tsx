@@ -33,6 +33,7 @@ const VideoDescription: React.FC<VideoDescriptionProps> = ({
 					}`}
 				>
 					{t(videoDescription.text)}
+					
 				</p>
 			))}
 			<img

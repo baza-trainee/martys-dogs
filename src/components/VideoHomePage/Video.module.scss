@@ -58,22 +58,16 @@
 
 		.videoPlayer {
 			position: relative;
+			border-radius: 16px;
+			overflow: hidden;
 
 			@include large_desktop {
 				align-self: center;
 			}
 
 			@include full_desktop {
-				align-self: center;
-			}
-
-			@keyframes rotation {
-				0% {
-					transform: rotate(0deg);
-				}
-				100% {
-					transform: rotate(360deg);
-				}
+				width: 50%;
+				overflow: hidden;
 			}
 
 			.posterOverlay {
@@ -86,7 +80,7 @@
 					opacity: 0;
 				}
 
-				.playButtonImage {
+				.playButton {
 					position: absolute;
 					width: 100px;
 					height: 100px;
@@ -95,6 +89,26 @@
 					transform: translate(-50%, -50%);
 					transition: all 0.3s ease-in-out;
 					cursor: pointer;
+					border-radius: 50%;
+					border: none;
+					background-color: transparent;
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+					}
+
+					&:hover {
+						background-color: rgba(0, 0, 0, 0.1);
+					}
+
+					&:active {
+						transform: translate(-50%, -50%) scale(0.95);
+					}
+					&.disappear {
+						display: none;
+					}
 				}
 
 				.posterImage {
@@ -106,31 +120,48 @@
 				}
 			}
 			.loader {
-				width: 48px;
-				height: 48px;
-				border: 5px solid $color-gray-0;
-				border-bottom-color: $color-main-blue-mid;
-				border-radius: 50%;
-				display: inline-block;
-				box-sizing: border-box;
-				animation: rotation 1s linear infinite;
+				width: 50px;
+				height: 50px;
+				top: 44%;
+				left: 44%;
 				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
+				display: inline-block;
+				border-radius: 50%;
+				background:
+					radial-gradient(
+							farthest-side,
+							$color-main-blue-mid 94%,
+							#0000
+						)
+						top/3px 3px no-repeat,
+					conic-gradient(#0000 30%, $color-main-blue-mid);
+
+				-webkit-mask: radial-gradient(
+					farthest-side,
+					#0000 calc(100% - 3px),
+					#000 0
+				);
+				mask: radial-gradient(
+					farthest-side,
+					#0000 calc(100% - 3px),
+					#000 0
+				);
+				animation: spin 1s infinite linear;
+				@include tablet {
+					top: 48%;
+					left: 48%;
+				}
 			}
 
-			@keyframes rotation {
-				0% {
-					transform: rotate(0deg);
-				}
+			@keyframes spin {
 				100% {
-					transform: rotate(360deg);
+					transform: rotate(1turn);
 				}
 			}
+
 			.videoElement {
 				position: absolute;
-				z-index: 1;
+				z-index: 2;
 				top: 0;
 				left: 0;
 			}
@@ -148,6 +179,9 @@
 
 		@include small_desktop {
 			position: unset;
+		}
+		@include full_desktop {
+			width: 50%;
 		}
 
 		.videoTitle {
@@ -205,10 +239,13 @@
 			&:last-of-type {
 				margin-bottom: 32px;
 				@include tablet {
-					margin-bottom: 1.2%;
+					margin-bottom: 0;
 				}
 
 				&.main {
+					@include tablet {
+						margin-right: 50px;
+					}
 					@include small_desktop {
 						margin-bottom: 32px;
 					}

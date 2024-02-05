@@ -8,12 +8,12 @@ import therapyLaptop from '../../assets/video_main/boy/boy1280.webp';
 import therapyLargeScreen from '../../assets/video_main/boy/boy1920.webp';
 import pawsImg from '../../assets/video_main/VectorPaws.svg';
 import playButtonImg from '../../assets/video_main/Play.svg';
-import mainDesktop from '../../assets/video_main/girl/girl1280cropped.webp';
-import therapyDesktop from '../../assets/video_main/boy/boy1280cropped.webp';
+import mainDesktop from '../../assets/video_main/girl/girl1440.webp';
+import therapyDesktop from '../../assets/video_main/boy/boy1440.webp';
 
 export const videoLinks = {
 	main: 'https://www.youtube.com/watch?v=2igwkVve1nk',
-	therapy: 'https://www.facebook.com/joriksss/videos/335880469139977',
+	therapy: 'https://www.youtube.com/watch?v=wAiTioFrd2g',
 };
 
 const mediaQueryCommon = {
@@ -42,7 +42,7 @@ export const mainPosters = [
 	{
 		srcSet: mainDesktop,
 		mediaQuery: mediaQueryCommon.desktop,
-		width: '1450px',
+		width: '1800px',
 	},
 	{
 		srcSet: mainLargeScreen,
@@ -68,7 +68,7 @@ export const therapyPosters = [
 	{
 		srcSet: therapyDesktop,
 		mediaQuery: mediaQueryCommon.desktop,
-		width: '1450px',
+		width: '1800px',
 	},
 	{
 		srcSet: therapyLargeScreen,

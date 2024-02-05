@@ -7,7 +7,7 @@ interface ErrorAlertProps {
   export const ErrorAlert: React.FC<ErrorAlertProps> = ({ errorMessage }) => {
     return (
       <div className={styles.statusContainer}>
-        <div className={styles.alert}>{errorMessage}</div>
+        <span className={styles.alert}>{errorMessage}</span>
       </div>
     );
   };
@@ -15,7 +15,7 @@ interface ErrorAlertProps {
   export const Loader: React.FC = () => {
     return (
       <div className={styles.statusContainer}>
-        <div className={styles.loading}></div>
+        <div className={styles.loader}></div>
       </div>
     );
   };

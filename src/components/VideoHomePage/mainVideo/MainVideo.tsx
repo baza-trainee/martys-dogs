@@ -12,18 +12,20 @@ import {
 const MainVideo: React.FC = () => {
 	return (
 		<section className={`${styles.videoContainerWrapper} ${styles.main}`}>
-			<div className={`${styles.videoContainer} ${styles.main}`} data-testid="main-video-container">
+			<div
+				className={`${styles.videoContainer} ${styles.main}`}
+				data-testid='main-video-container'
+			>
 				<VideoPlayer
 					videoUrl={videoLinks.main}
 					defaultImage={mainPosters[0].srcSet}
 					posters={mainPosters}
 					playButtonImage={otherImages.playButtonImage}
-					
 				/>
 
 				<VideoDescription
-					title= {titles.main}
-					descriptionStyle="main"
+					title={titles.main}
+					descriptionStyle='main'
 					descriptionKeys={mainDescription}
 					pawImage={otherImages.pawsImage}
 					pawImageStyle='main'
