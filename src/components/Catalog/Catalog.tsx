@@ -40,7 +40,6 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 		age: '',
 		size: '',
 		gender: '',
-		// ready_for_adoption: false,
 		ready_for_adoption: false,
 	});
 
@@ -221,7 +220,7 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 								// value={selectedFilters.age}
 								// onChange={(e) => handleChange('age', e.target.value)}
 								// onChange={(selectedOption) => handleChange('age', selectedOption)}
-								value={optionsGender.find((opt) => opt.value === selectedFilters.age)}
+								value={optionsAge.find((opt) => opt.value === selectedFilters.age)}
 								onChange={(selectedOption) => handleChange('age', selectedOption?.value || '')}
 								styles={customStyles}
 							/>
@@ -242,7 +241,7 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 								// value={selectedFilters.size}
 								// onChange={(e) => handleChange('size', e.target.value)}
 								// onChange={(selectedOption) => handleChange('size', selectedOption)}
-								value={optionsGender.find((opt) => opt.value === selectedFilters.size)}
+								value={optionsSize.find((opt) => opt.value === selectedFilters.size)}
 								onChange={(selectedOption) => handleChange('size', selectedOption?.value || '')}
 								styles={customStyles}
 							/>
