@@ -1,0 +1,37 @@
+@import '../../../scss/variables';
+
+.statusContainer {
+	background-color: $color-main-bg;
+	padding: 6rem;
+}
+
+.alert {
+	text-align: center;
+	font-size: 32px;
+	color: $color-main-blue-dark;
+}
+.loader {
+	width: 50px;
+	height: 50px;
+	margin: 0 auto;
+	position: relative;
+	border-radius: 50%;
+	background:
+		radial-gradient(farthest-side, $color-main-blue-mid 94%, #0000) top/3px
+			3px no-repeat,
+		conic-gradient(#0000 30%, $color-main-blue-mid);
+
+	-webkit-mask: radial-gradient(
+		farthest-side,
+		#0000 calc(100% - 3px),
+		#000 0
+	);
+	mask: radial-gradient(farthest-side, #0000 calc(100% - 3px), #000 0);
+	animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+	100% {
+		transform: rotate(1turn);
+	}
+}

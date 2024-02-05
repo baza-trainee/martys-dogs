@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import CanisTherapy from './CanisTherapy';
+import CanisTherapy from '../canisTherapy/CanisTherapy';
 import { BrowserRouter } from 'react-router-dom';
 
 describe('CanisTherapy component', () => {

@@ -11,11 +11,16 @@ import {
 
 const CanisTherapy: React.FC = () => {
 	return (
-		<section className={`${styles.videoContainerWrapper} ${styles.therapy}`}>
-			<div className={`${styles.videoContainer} ${styles.therapy}`} data-testid="canis-video-container">
+		<section
+			className={`${styles.videoContainerWrapper} ${styles.therapy}`}
+		>
+			<div
+				className={`${styles.videoContainer} ${styles.therapy}`}
+				data-testid='canis-video-container'
+			>
 				<VideoDescription
 					title={titles.therapy}
-					descriptionStyle="therapy"
+					descriptionStyle='therapy'
 					descriptionKeys={therapyDescription}
 					pawImage={otherImages.pawsImage}
 					pawImageStyle='therapy'

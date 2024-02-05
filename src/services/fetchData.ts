@@ -28,6 +28,7 @@ export const fetchHome = async (language: string): Promise<LandingData> => {
 };
 
 export const fetchAbout = async () => {
+
 	try {
 		const response = await fetch(ABOUT);
 
@@ -37,31 +38,75 @@ export const fetchAbout = async () => {
 
 		const data = await response.json();
 		return data;
+
 	} catch (error) {
 		console.error('Error while loading data:', error);
 		throw error;
 	}
 };
 
-export const fetchCatalog = async (language: string): Promise<OurTailsData> => {
+export const fetchCatalog = async ({ queryKey }: { queryKey: [string, string, { filter: string }] }): Promise<OurTailsData> => {
+	const [, language, { filter: filterTerms }] = queryKey;
+	let url = CATALOG;
+
+	if (filterTerms) {
+		url += filterTerms;
+	}
+
 	try {
-		const response = await fetch(CATALOG, {
+		const response = await fetch(url, {
 			headers: {
 				'Accept-Language': language,
 			},
 		});
 
 		if (!response.ok) {
-			throw new Error('Data loading error');
+			throw  (`Error while loading data. Status: ${response.status}`);
 		}
 
 		const data = await response.json();
 		return data;
 	} catch (error) {
-		console.error('Error while loading data:', error);
+		console.error(error);
 		throw error;
 	}
 };
+
+interface LoginResponse {
+	message: string;
+	token_accsess: string;
+}
+
+export const loginUser = async (
+	email: string,
+	password: string,
+): Promise<LoginResponse> => {
+	try {
+		const response = await fetch(LOGIN, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email,
+				password,
+			}),
+		});
+		if (!response.ok) {
+			throw new Error('Login failed');
+		}
+
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.error('Login Error:', error);
+		throw error;
+	}
+};
+
+/*
+
+
 
 // export const fetchHome = async () => {
 // 	try {
@@ -139,24 +184,24 @@ const fetchData1 = async (url: string, method = 'GET', data: any = null) => {
 		},
 		body: data ? JSON.stringify(data) : null,
 	  });
-  
+
 	  if (!response.ok) {
 		throw new Error('Request failed');
 	  }
-  
+
 	  const responseData = await response.json();
-	  
+
 	  console.log(`Fetch Data from ${url}:`, responseData);
-  
+
 	  return responseData;
 	} catch (error) {
-	  
+
 	  console.error(`Error fetching data from ${url}:`, error);
 	  throw error;
 	}
   };
 
-  
+
 
 export const useFetchHome1 = () => {
   return useQuery({
@@ -182,7 +227,7 @@ export const useFetchAbout1 = () => {
 
 export const useLoginUser1 = () => {
   const loginMutation = useMutation({
-    mutationFn: ({ email, password }: { email: string; password: string }) => 
+    mutationFn: ({ email, password }: { email: string; password: string }) =>
 	fetchData1('/login', 'POST', { email, password }),
     onSuccess: () => {
       console.log("Posted login successfully")
