@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import Select, { StylesConfig } from 'react-select';
+import { CSSProperties, useEffect, useState } from 'react';
+import Select from 'react-select';
 import Button from '../../layout/Button/Button';
 import { DogCard } from '../../pages/Landing/Landing';
 import { OurTailsData } from '../../pages/OurTails/OurTails';
@@ -28,12 +28,20 @@ type FilterParams = {
 	ready_for_adoption?: boolean;
 } & { [key: string]: string | boolean };
 
+interface CustomStyles {
+	control?: (provided: any, state: any) => any;
+	dropdownIndicator?: (provided: any) => any;
+	indicatorSeparator?: () => any;
+	menu?: (provided: any) => any;
+	option?: (provided: any) => any;
+}
+
 const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 	const [cards, setCards] = useState<DogCard[]>([]);
 	const [page, setPage] = useState<number>(1);
 	const [countPage, setCountPage] = useState<number>(1);
 	const cardsInPage = 12;
-	const { data: catalog, isPending, isError, error } = data;
+	const { data: catalog, isPending, isError } = data;
 	const { t } = useTranslation();
 	const [selectedFilters, setSelectedFilters] = useState<FilterParams>({
 		age: '',
@@ -60,6 +68,7 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 		{ value: t('catalog.filter_size_medium'), label: t('catalog.filter_size_medium') },
 		{ value: t('catalog.filter_size_large'), label: t('catalog.filter_size_large') },
 	];
+
 
 	const customStyles: CustomStyles = {
 		control: (provided, state) => ({
@@ -185,11 +194,12 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 							className={styles.catalog_select_container}
 						>
 							<label
-								htmlFor="gender"
+
 								className={styles.catalog_select_label}>
 								{t('catalog.filter_gender_label')}:
 							</label>
 							<Select
+
 								options={optionsGender}
 								placeholder={t('catalog.filter_gender_placeholder')}
 								value={optionsGender.find((opt) => opt.value === selectedFilters.gender)}
@@ -202,11 +212,12 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 							className={styles.catalog_select_container}
 						>
 							<label
-								htmlFor="age"
+
 								className={styles.catalog_select_label}>
 								{t('catalog.filter_age_label')}:
 							</label>
 							<Select
+
 								options={optionsAge}
 								placeholder={t('catalog.filter_age_placeholder')}
 								value={optionsAge.find((opt) => opt.value === selectedFilters.age)}
@@ -219,12 +230,12 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 							className={styles.catalog_select_container}
 						>
 							<label
-								htmlFor="size"
+
 								className={styles.catalog_select_label}>
 								{t('catalog.filter_size_label')}:
 							</label>
-
 							<Select
+
 								options={optionsSize}
 								placeholder={t('catalog.filter_size_placeholder')}
 								value={optionsSize.find((opt) => opt.value === selectedFilters.size)}
