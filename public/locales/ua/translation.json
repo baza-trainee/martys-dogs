@@ -81,10 +81,10 @@
 	"catalog": {
 		"header_title": "Познайомся з нашими хвостиками",
 		"header_button": "Застосувати фільтри",
-		"filter_sex_label": "Cтать",
-		"filter_sex_placeholder": "Оберіть стать",
-		"filter_sex_male": "Xлопчик",
-		"filter_sex_female": "Дівчинка",
+		"filter_gender_label": "Стать",
+		"filter_gender_placeholder": "Оберіть стать",
+		"filter_gender_male": "Хлопчик",
+		"filter_gender_female": "Дівчинка",
 		"filter_age_label": "Вік",
 		"filter_age_placeholder": "Оберіть вік",
 		"filter_age_puppy": "Щеня",
@@ -95,7 +95,8 @@
 		"filter_size_small": "Маленький",
 		"filter_size_medium": "Середній",
 		"filter_size_large": "Великий",
-		"filter_checkbox": "Готовність до всиновлення"
+		"filter_checkbox": "Готовність до всиновлення",
+		"filter_error": "Нічого не знайдено. Будь ласка, змініть параметри фільтрації."
 	},
 	"heroAbout": {
 		"title": "Тут кожна тварина знаходить порятунок та допомогу!",

@@ -1,52 +1,74 @@
 import { useEffect, useState } from 'react';
-import Select, { StylesConfig } from 'react-select';
+import Select from 'react-select';
 import Button from '../../layout/Button/Button';
 import { DogCard } from '../../pages/Landing/Landing';
 import { OurTailsData } from '../../pages/OurTails/OurTails';
 import Tail from '../Tail/Tail';
 import { UseQueryResult } from '@tanstack/react-query';
 import styles from './Catalog.module.scss';
+import * as React from 'react';
 import { useTranslation } from 'react-i18next';
 import ArrowIconDown from '../../assets/dropdown_arrow_down.svg';
 import ArrowIconUp from '../../assets/dropdown_arrow_up.svg';
 
 interface CatalogProps {
 	data: UseQueryResult<OurTailsData, Error>;
+	changeTerms: (newQueryString: string) => void;
 }
 
 interface OptionType {
-  value: string;
-  label: string;
+	value: string;
+	label: string;
 }
 
-interface CustomStyles extends StylesConfig {
-  control?: (provided: any, state: any) => any;
+type FilterParams = {
+	age?: string;
+	size?: string;
+	gender?: string;
+	ready_for_adoption?: boolean;
+} & { [key: string]: string | boolean };
+
+interface CustomStyles {
+	control?: (provided: any, state: any) => any;
+	dropdownIndicator?: (provided: any) => any;
+	indicatorSeparator?: () => any;
+	menu?: (provided: any) => any;
+	option?: (provided: any) => any;
 }
 
-const Catalog: React.FC<CatalogProps> = ({ data }) => {
+const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 	const [cards, setCards] = useState<DogCard[]>([]);
 	const [page, setPage] = useState<number>(1);
 	const [countPage, setCountPage] = useState<number>(1);
 	const cardsInPage = 12;
-	const { data: catalog, isPending, isError, error } = data;
+	const { data: catalog, isPending, isError } = data;
 	const { t } = useTranslation();
+	const [selectedFilters, setSelectedFilters] = useState<FilterParams>({
+		age: '',
+		size: '',
+		gender: '',
+		ready_for_adoption: false,
+	});
 
-	const optionsSex: OptionType[] = [
-		{ value: 'boy', label: t('catalog.filter_sex_male') },
-		{ value: 'girl', label: t('catalog.filter_sex_female') },
+	const newQueryString = `?age=${selectedFilters.age?.toLowerCase()}&size=${selectedFilters.size?.toLowerCase()}&gender=${selectedFilters.gender?.toLowerCase()}&ready_for_adoption=${selectedFilters.ready_for_adoption}`;
+
+	const optionsGender: OptionType[] = [
+		{ value: t('catalog.filter_gender_male'), label: t('catalog.filter_gender_male') },
+		{ value: t('catalog.filter_gender_female'), label: t('catalog.filter_gender_female') },
 	];
-	
+
 	const optionsAge: OptionType[] = [
-		{ value: 'puppy', label: t('catalog.filter_age_puppy') },
-		{ value: 'young_dog', label: t('catalog.filter_age_young_dog') },
-		{ value: 'adult', label: t('catalog.filter_age_adult') }
+		{ value: t('catalog.filter_age_puppy'), label: t('catalog.filter_age_puppy') },
+		{ value: t('catalog.filter_age_young_dog'), label: t('catalog.filter_age_young_dog') },
+		{ value: t('catalog.filter_age_adult'), label: t('catalog.filter_age_adult') },
 	];
-	
+
 	const optionsSize: OptionType[] = [
-		{ value: 'small', label: t('catalog.filter_size_small') },
-		{ value: 'medium', label: t('catalog.filter_size_medium') },
-		{ value: 'large', label: t('catalog.filter_size_large') }
+		{ value: t('catalog.filter_size_small'), label: t('catalog.filter_size_small') },
+		{ value: t('catalog.filter_size_medium'), label: t('catalog.filter_size_medium') },
+		{ value: t('catalog.filter_size_large'), label: t('catalog.filter_size_large') },
 	];
+
 
 	const customStyles: CustomStyles = {
 		control: (provided, state) => ({
@@ -63,18 +85,18 @@ const Catalog: React.FC<CatalogProps> = ({ data }) => {
 				borderColor: '#b6e1f2',
 			},
 			'&:before': {
-        content: '""',
-        backgroundImage: state.menuIsOpen ? `url(${ArrowIconUp})` : `url(${ArrowIconDown})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        backgroundSize: '24px 24px',
-        width: '24px',
-        height: '24px',
-        position: 'absolute',
-        right: '8px',
-        top: '50%',
-        transform: 'translateY(-50%)',
-      },
+				content: '""',
+				backgroundImage: state.menuIsOpen ? `url(${ArrowIconUp})` : `url(${ArrowIconDown})`,
+				backgroundRepeat: 'no-repeat',
+				backgroundPosition: 'center',
+				backgroundSize: '24px 24px',
+				width: '24px',
+				height: '24px',
+				position: 'absolute',
+				right: '8px',
+				top: '50%',
+				transform: 'translateY(-50%)',
+			},
 		}),
 		indicatorSeparator: () => ({
 			display: 'none',
@@ -106,42 +128,44 @@ const Catalog: React.FC<CatalogProps> = ({ data }) => {
 		}
 	}, [catalog]);
 
-	useEffect(() => {
-		setCountPage(Math.ceil(cards.length / cardsInPage))
-	}, [cards, cardsInPage]);
-	
-	if (isPending) {
-		return (
-			<div className={styles.container}>
-				<div className={styles.loading}></div>
-			</div>
-		);
-	}
 
-	if (isError) {
-		return (
-			<div className={styles.container}>
-				<div className={styles.alert}>{error.message}</div>
-			</div>
-		);
-	}
+	useEffect(() => {
+		setCountPage(Math.ceil(cards.length / cardsInPage));
+	}, [cards, cardsInPage]);
+
+
+	const handleChange = (field: keyof FilterParams, value: string | boolean) => {
+		setSelectedFilters((prevFilters) => ({
+			...prevFilters,
+			[field]: value,
+		}));
+	};
+
+
+	const handleFilterSubmit = async () => {
+
+		changeTerms(newQueryString);
+		console.log(selectedFilters);
+		console.log(newQueryString);
+	};
+
 
 	const goToPrevPage = () => {
 		if (page > 1) {
 			setPage(page - 1);
 		}
 	};
-	
+
 	const goToNextPage = () => {
 		if (page < countPage) {
 			setPage(page + 1);
 		}
 	};
 
+
 	return (
-		<section
-			className={styles.catalog}
-		>
+
+		<section>
 			<div
 				className={styles.catalog_container}
 			>
@@ -157,8 +181,7 @@ const Catalog: React.FC<CatalogProps> = ({ data }) => {
 						name={t('catalog.header_button')}
 						btnClasses={'filterPC'}
 						type="submit"
-						disabled
-						onClick={() => {}}
+						onClick={handleFilterSubmit}
 					/>
 				</div>
 				<div
@@ -171,47 +194,52 @@ const Catalog: React.FC<CatalogProps> = ({ data }) => {
 							className={styles.catalog_select_container}
 						>
 							<label
-								htmlFor="sex"
-								className={styles.catalog_select_label}
-							>
-								{t('catalog.filter_sex_label')}:
+
+								className={styles.catalog_select_label}>
+								{t('catalog.filter_gender_label')}:
 							</label>
 							<Select
-								options={optionsSex}
-								placeholder={t('catalog.filter_sex_placeholder')}
-								onChange={() => {}}
+
+								options={optionsGender}
+								placeholder={t('catalog.filter_gender_placeholder')}
+								value={optionsGender.find((opt) => opt.value === selectedFilters.gender)}
+								onChange={(selectedOption) => handleChange('gender', selectedOption?.value || '')}
 								styles={customStyles}
 							/>
 						</div>
+
 						<div
 							className={styles.catalog_select_container}
 						>
 							<label
-								htmlFor="age"
-								className={styles.catalog_select_label}
-							>
+
+								className={styles.catalog_select_label}>
 								{t('catalog.filter_age_label')}:
 							</label>
 							<Select
+
 								options={optionsAge}
 								placeholder={t('catalog.filter_age_placeholder')}
-								onChange={() => {}}
+								value={optionsAge.find((opt) => opt.value === selectedFilters.age)}
+								onChange={(selectedOption) => handleChange('age', selectedOption?.value || '')}
 								styles={customStyles}
 							/>
 						</div>
+
 						<div
 							className={styles.catalog_select_container}
 						>
 							<label
-								htmlFor="size"
-								className={styles.catalog_select_label}
-							>
+
+								className={styles.catalog_select_label}>
 								{t('catalog.filter_size_label')}:
 							</label>
 							<Select
+
 								options={optionsSize}
 								placeholder={t('catalog.filter_size_placeholder')}
-								onChange={() => {}}
+								value={optionsSize.find((opt) => opt.value === selectedFilters.size)}
+								onChange={(selectedOption) => handleChange('size', selectedOption?.value || '')}
 								styles={customStyles}
 							/>
 						</div>
@@ -221,12 +249,14 @@ const Catalog: React.FC<CatalogProps> = ({ data }) => {
 					>
 						<input
 							type="checkbox"
-							id="myCheckbox"
-							name="myCheckbox"
+							id="ready_for_adoption"
+							name="ready_for_adoption"
+							checked={selectedFilters.ready_for_adoption}
+							onChange={(e) => handleChange('ready_for_adoption', e.target.checked)}
 							className={styles.catalog_checkbox}
 						/>
 						<label
-							htmlFor="myCheckbox"
+							htmlFor="ready_for_adoption"
 							className={styles.catalog_checkbox_label}
 						>
 							{t('catalog.filter_checkbox')}
@@ -236,55 +266,76 @@ const Catalog: React.FC<CatalogProps> = ({ data }) => {
 						name={t('catalog.header_button')}
 						btnClasses={'filterMob'}
 						type="submit"
-						disabled
-						onClick={() => {}}
+						onClick={handleFilterSubmit}
 					/>
 				</div>
-				<div
-					className={styles.catalog_list}
-				>
-					{cards.slice((cardsInPage * page) - cardsInPage, cardsInPage * page).map((tail) => (
-						<div
-							key={tail.id}
-							className={styles.catalog_list_card}
-						>
-							<Tail
-								{...tail}
-							/>
+				{isPending ? (
+						<div className={styles.container}>
+							<div className={styles.loading}></div>
 						</div>
-					))}
-				</div>
-				<div
-					className={styles.catalog_pagination}
-				>
-					<button
-						onClick={goToPrevPage}
-						disabled={page === 1}
-						className={styles.catalog_pagination_btn}
-					>
-						&lt;
-					</button>
-					{Array.from({ length: countPage }, (_, index) => (
-						<button
-							key={index + 1}
-							onClick={() => setPage(index + 1)}
-							disabled={page === index + 1}
-							className={`${styles.catalog_pagination_btn} ${page === index + 1 ? styles.active : ''}`}
-						>
-							{index + 1}
-						</button>
-					))}
-					<button
-						onClick={goToNextPage}
-						disabled={page === countPage}
-						className={styles.catalog_pagination_btn}
-					>
-						&gt;
-					</button>
-				</div>
+					)
+					: isError ? (
+							<div className={styles.container}>
+								<div className={styles.alert}>
+									{t('catalog.filter_error')}</div>
+							</div>
+						)
+						: (
+
+							<>
+								<div
+									className={styles.catalog_list}
+								>
+
+									{cards?.slice((cardsInPage * page) - cardsInPage, cardsInPage * page).map((tail) => (
+
+
+										<div
+											key={tail.id}
+											className={styles.catalog_list_card}
+										>
+											<Tail
+												{...tail}
+											/>
+										</div>))}
+								</div>
+
+								<div
+									className={styles.catalog_pagination}
+								>
+									<button
+										onClick={goToPrevPage}
+										disabled={page === 1}
+										className={styles.catalog_pagination_btn}
+									>
+										&lt;
+									</button>
+									{Array.from({ length: countPage }, (_, index) => (
+										<button
+											key={index + 1}
+											onClick={() => setPage(index + 1)}
+											disabled={page === index + 1}
+											className={`${styles.catalog_pagination_btn} ${page === index + 1 ? styles.active : ''}`}
+										>
+											{index + 1}
+										</button>
+									))}
+									<button
+										onClick={goToNextPage}
+										disabled={page === countPage}
+										className={styles.catalog_pagination_btn}
+									>
+										&gt;
+									</button>
+								</div>
+							</>
+						)
+				}
 			</div>
 		</section>
 	);
 };
 
 export default Catalog;
+
+
