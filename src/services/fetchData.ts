@@ -72,29 +72,41 @@ export const fetchCatalog = async ({ queryKey }: { queryKey: [string, string, { 
 	}
 };
 
-/*
+interface LoginResponse {
+	message: string;
+	token_accsess: string;
+}
 
-export const fetchCatalog = async (language: string, filterTerms: string): Promise<OurTailsData> => {
-	let url = CATALOG;
-	if (filterTerms) {
-		url += filterTerms;
-	}
-
+export const loginUser = async (
+	email: string,
+	password: string,
+): Promise<LoginResponse> => {
 	try {
-		const response = await fetch(CATALOG);
-
+		const response = await fetch(LOGIN, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				email,
+				password,
+			}),
+		});
 		if (!response.ok) {
-			throw new Error('Data loading error');
+			throw new Error('Login failed');
 		}
-		
+
 		const data = await response.json();
 		return data;
-		
 	} catch (error) {
-		console.error('Error while loading data:', error);
+		console.error('Login Error:', error);
 		throw error;
 	}
 };
+
+/*
+
+
 
 // export const fetchHome = async () => {
 // 	try {

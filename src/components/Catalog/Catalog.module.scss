@@ -197,11 +197,33 @@
 
 .container {
 	background-color: #ebf5fb;
-	padding: 6rem;
+
+	padding: 6rem 3rem;
+	width: 100%;
+
+	@include small_desktop {
+		padding: 6rem;
+	}
 }
 
 .alert {
 	text-align: center;
-	font-size: 32px;
+	font-size: 20px;
 	color: #005c80;
+
+	@include tablet {
+		font-size: 28px;
+	}
+	@include small_desktop {
+		font-size: 32px;
+	}
+
+	@include large_desktop {
+
+	}
+
+	@include full_desktop {
+
+	}
+
 }
