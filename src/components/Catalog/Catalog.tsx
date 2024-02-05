@@ -1,4 +1,4 @@
-import { CSSProperties, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import Button from '../../layout/Button/Button';
 import { DogCard } from '../../pages/Landing/Landing';
