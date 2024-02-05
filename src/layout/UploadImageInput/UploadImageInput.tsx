@@ -1,8 +1,5 @@
 import {
 	UseFormRegisterReturn,
-	FieldErrors,
-	// UseFormWatch,
-	// FieldValues,
 } from 'react-hook-form';
 import { FaUpload } from 'react-icons/fa';
 import styles from './UploadImageInput.module.scss';
