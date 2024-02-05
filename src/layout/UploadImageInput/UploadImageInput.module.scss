@@ -1,0 +1,35 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+input[type='file'] {
+	display: none;
+}
+
+.image {
+	display: flex;
+	cursor: pointer;
+}
+
+.icon {
+	width: 24px;
+	height: 24px;
+	margin-right: 20px;
+	margin-left: 10px;
+}
+
+.wrapper {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+.text {
+	display: block;
+	padding-bottom: 10px;
+	font-size: 20px;
+}
+
+.error {
+	padding-top: 10px;
+	font-size: 20px;
+	color: red;
+}

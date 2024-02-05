@@ -36,7 +36,9 @@ const Admins = () => {
 							<td>
 								<button
 									onClick={() => handleToggleStatus(admin.id)}
-									className={admin.status ? styles.red : styles.btn}
+									className={
+										admin.status ? styles.red : styles.btn
+									}
 								>
 									{admin.status
 										? 'Деактивувати'
