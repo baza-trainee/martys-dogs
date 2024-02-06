@@ -53,6 +53,7 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 	const newQueryString = `?age=${selectedFilters.age?.toLowerCase()}&size=${selectedFilters.size?.toLowerCase()}&gender=${selectedFilters.gender?.toLowerCase()}&ready_for_adoption=${selectedFilters.ready_for_adoption}`;
 
 	const optionsGender: OptionType[] = [
+		{ value: t('catalog.filter_gender_label'), label: t('catalog.filter_gender_label') },
 		{ value: t('catalog.filter_gender_male'), label: t('catalog.filter_gender_male') },
 		{ value: t('catalog.filter_gender_female'), label: t('catalog.filter_gender_female') },
 	];
@@ -135,10 +136,53 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 
 
 	const handleChange = (field: keyof FilterParams, value: string | boolean) => {
-		setSelectedFilters((prevFilters) => ({
-			...prevFilters,
-			[field]: value,
-		}));
+
+// console.log(Object.values(selectedFilters));
+
+
+	/*	if (selectedFilters) {
+			for (let filterValue in selectedFilters) {
+				console.log(value);
+				if (filterValue === filterValue) {
+					setSelectedFilters((prevFilters) => ({
+						...prevFilters,
+						[field]: '',
+
+					}));
+					// console.log(filterValue);
+				} else {
+					setSelectedFilters((prevFilters) => ({
+						...prevFilters,
+						[field]: value,
+					}));
+
+				}
+			}
+		}
+*/
+
+		if(typeof value === 'string' && value.toLowerCase() === field) {
+			console.log( value.toLowerCase());
+			setSelectedFilters((prevFilters) => ({
+				...prevFilters,
+				[field]: '',
+			}));
+		} else {
+			setSelectedFilters((prevFilters) => ({
+				...prevFilters,
+				[field]: value,
+			}));
+
+		}
+
+
+		let keysArr = Object.values(selectedFilters);
+		keysArr.map((key) => {
+			console.log(key);
+			if(typeof value === 'string' && key === value.toLowerCase()) {
+				console.log(`key ${key} equal value ${value}`)
+			}
+		})
 	};
 
 
@@ -147,6 +191,7 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 		changeTerms(newQueryString);
 		console.log(selectedFilters);
 		console.log(newQueryString);
+
 	};
 
 
@@ -235,7 +280,6 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 								{t('catalog.filter_size_label')}:
 							</label>
 							<Select
-
 								options={optionsSize}
 								placeholder={t('catalog.filter_size_placeholder')}
 								value={optionsSize.find((opt) => opt.value === selectedFilters.size)}
