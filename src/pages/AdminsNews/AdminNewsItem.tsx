@@ -1,5 +1,8 @@
-import ItemActions from '../../layout/ItemActions/ItemActions';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import ItemActions from '../../components/CommonUI/ItemActions/ItemActions';
+import { deleteNews } from '../../services/adminNews';
 import styles from './AdminNewsItem.module.scss';
+import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 
 export interface NewsItemProps {
 	id: number;
@@ -17,7 +20,7 @@ export interface NewsItemProps {
 }
 
 const NewsItem: React.FC<NewsItemProps> = ({
-	// id,
+	id,
 	title,
 	post_at,
 	// update_at,
@@ -48,6 +51,35 @@ const NewsItem: React.FC<NewsItemProps> = ({
 		return stringDate;
 	};
 
+
+	const queryClient = useQueryClient();
+	const {mutate, isError, isPending, error} = useMutation({
+		mutationFn: (id:number) =>
+			deleteNews(id).then((item) => console.log(item)),
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['news'] });
+		},
+	});
+
+	const deleteNewsHandler=(id:number)=>{
+console.log('delete news')
+mutate(id);
+	}
+
+	if (isPending) {
+		return (
+			<Loader/>
+		);
+	}
+
+	if (isError) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.alert}>{error.message}</div>
+			</div>
+		);
+	}
+
 	return (
 		<li className={styles.item}>
 			<div className={styles.thumb}>
@@ -59,7 +91,7 @@ const NewsItem: React.FC<NewsItemProps> = ({
 				<p className={styles.text}>{sub_text}</p>
 			</div>
 			{/* <a href={url} target='blank' rel='noopener noreferrer'></a> */}
-			<ItemActions path='news_edit' />
+			<ItemActions path='news_edit' onClick={()=>deleteNewsHandler(id)} />
 		</li>
 	);
 };
