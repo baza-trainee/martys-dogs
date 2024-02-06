@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import styles from './AdminNews.module.scss';
-// import { news } from '../../components/News/data';
+import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 import AdminNewsItem, { NewsItemProps } from '../AdminsNews/AdminNewsItem';
-import AddButton from '../../layout/AddButton/AddButton';
+import AddButton from '../../components/CommonUI/AddButton/AddButton';
 import { fetchNews } from '../../services/adminNews';
 
 interface Photo {
@@ -37,9 +37,7 @@ const AdminNews: React.FC = () => {
 	console.log(news?.news);
 	if (isPending) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.loading}></div>
-			</div>
+			<Loader/>
 		);
 	}
 

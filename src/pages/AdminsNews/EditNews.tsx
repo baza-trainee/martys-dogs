@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import styles from './AddNews.module.scss';
 import { IAddNews, changeNews } from '../../services/adminNews';
-import UploadImageInput from '../../layout/UploadImageInput/UploadImageInput';
+import UploadImageInput from '../../components/CommonUI/UploadImageInput/UploadImageInput';
 import HookFormInput from '../../components/HookFormInput/HookFormInput';
 import NewsTextarea from '../../components/NewsTextarea/NewsTextarea';
 

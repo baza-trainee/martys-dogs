@@ -66,10 +66,10 @@ export const changeNews = async (newsItem: IAddNews) => {
 	}
 };
 
-export const deleteNews = async (id: string) => {
+export const deleteNews = async (id: number) => {
 	try {
-		const response = await fetch(`${NEWS}${id}`, {
-			method: 'PUT',
+		const response = await fetch(`${NEWS}/${id}`, {
+			method: 'DELETE',
 			headers,
 		});
 		if (!response.ok) {

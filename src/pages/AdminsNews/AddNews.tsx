@@ -5,9 +5,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 // import axios from 'axios';
 import styles from './AddNews.module.scss';
 import { IAddNews, addNews } from '../../services/adminNews';
-import UploadImageInput from '../../layout/UploadImageInput/UploadImageInput';
+import UploadImageInput from '../../components/CommonUI/UploadImageInput/UploadImageInput';
 import HookFormInput from '../../components/HookFormInput/HookFormInput';
 import NewsTextarea from '../../components/NewsTextarea/NewsTextarea';
+import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 
 interface IFormInputs {
 	title: string;
@@ -35,7 +36,7 @@ const AddNews: React.FC = () => {
 
 	let uploadedImage;
 
-	const mutation = useMutation({
+	const {mutate, isError, isPending, isSuccess, error} = useMutation({
 		mutationFn: (news: IAddNews) =>
 			addNews(news).then((item) => console.log(item)),
 		onSuccess: () => {
@@ -58,7 +59,7 @@ const AddNews: React.FC = () => {
 		};
 		console.log(addedNews);
 		console.log(errors);
-		mutation.mutate(addedNews);
+	mutate(addedNews);
 		// reset();
 	};
 
@@ -66,6 +67,26 @@ const AddNews: React.FC = () => {
 		reset();
 		navigate('/admin/news');
 	};
+
+	if (isPending) {
+		return (
+			<Loader/>
+		);
+	}
+
+	if (isError) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.alert}>{error.message}</div>
+			</div>
+		);
+	}
+
+	if(isSuccess){
+		return(<div className={styles.container}>
+			<div className={styles.alert}>Новину  додано </div>
+		</div>)
+	}
 
 	return (
 		<div className={styles.container}>
