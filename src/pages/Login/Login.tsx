@@ -1,29 +1,30 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { useAuthContext } from '../../context/useGlobalContext';
 import FormInput from '../../components/FormInput/FormInput';
-import { loginUser } from '../../services/fetchData';
 import styles from './Login.module.scss';
 
 const Login: React.FC = () => {
 	const navigate = useNavigate();
-	const [email, setEmail] = useState('adminUser1@gmail.com');
-	const [password, setPassword] = useState('adminUser11!');
-	const [token, setToken] = useState<string | null>(null);
-	const login = (newToken: string) => {
-		setToken(newToken);
-	};
+	const [email, setEmail] = useState('otos333email@gamil.com');
+	const [password, setPassword] = useState('Admini33$$');
+
+	const { isLoggedIn, login } = useAuthContext();
+
+	useEffect(() => {
+		if (isLoggedIn) {
+			navigate('/admin');
+		}
+	}, []);
 
 	const handleLogin = async () => {
 		try {
-			const { message, token_accsess } = await loginUser(email, password);
+			const result = await login(email, password);
 
-			if (token_accsess) {
-				login(token_accsess);
-				console.log(message);
+			if (result === 'User login') {
 				navigate('/admin');
 			} else {
-				console.error('The access token was not received');
+				console.error('Login Error');
 			}
 		} catch (error) {
 			console.error('Login Error:', error);
@@ -37,8 +38,6 @@ const Login: React.FC = () => {
 	const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
 		setPassword(e.target.value);
 	};
-
-	console.log(token);
 
 	return (
 		<main className={styles.login}>

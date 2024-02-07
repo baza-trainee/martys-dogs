@@ -53,17 +53,20 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 	const newQueryString = `?age=${selectedFilters.age?.toLowerCase()}&size=${selectedFilters.size?.toLowerCase()}&gender=${selectedFilters.gender?.toLowerCase()}&ready_for_adoption=${selectedFilters.ready_for_adoption}`;
 
 	const optionsGender: OptionType[] = [
+		{ value: '', label: t('catalog.filter_gender_placeholder') },
 		{ value: t('catalog.filter_gender_male'), label: t('catalog.filter_gender_male') },
 		{ value: t('catalog.filter_gender_female'), label: t('catalog.filter_gender_female') },
 	];
 
 	const optionsAge: OptionType[] = [
+		{ value: '', label: t('catalog.filter_age_placeholder') },
 		{ value: t('catalog.filter_age_puppy'), label: t('catalog.filter_age_puppy') },
 		{ value: t('catalog.filter_age_young_dog'), label: t('catalog.filter_age_young_dog') },
 		{ value: t('catalog.filter_age_adult'), label: t('catalog.filter_age_adult') },
 	];
 
 	const optionsSize: OptionType[] = [
+		{ value: '', label: t('catalog.filter_size_placeholder') },
 		{ value: t('catalog.filter_size_small'), label: t('catalog.filter_size_small') },
 		{ value: t('catalog.filter_size_medium'), label: t('catalog.filter_size_medium') },
 		{ value: t('catalog.filter_size_large'), label: t('catalog.filter_size_large') },
@@ -133,6 +136,15 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 		setCountPage(Math.ceil(cards.length / cardsInPage));
 	}, [cards, cardsInPage]);
 
+	useEffect(() => {
+		setSelectedFilters(prevFilters => ({
+			...prevFilters,
+			age: '',
+			size: '',
+			gender: '',
+			ready_for_adoption: false,
+		}));
+	}, [t]);
 
 	const handleChange = (field: keyof FilterParams, value: string | boolean) => {
 		setSelectedFilters((prevFilters) => ({
@@ -143,10 +155,7 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 
 
 	const handleFilterSubmit = async () => {
-
 		changeTerms(newQueryString);
-		console.log(selectedFilters);
-		console.log(newQueryString);
 	};
 
 
@@ -235,7 +244,6 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 								{t('catalog.filter_size_label')}:
 							</label>
 							<Select
-
 								options={optionsSize}
 								placeholder={t('catalog.filter_size_placeholder')}
 								value={optionsSize.find((opt) => opt.value === selectedFilters.size)}
