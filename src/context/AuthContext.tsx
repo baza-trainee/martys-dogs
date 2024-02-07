@@ -17,7 +17,7 @@ const initialAuthContext = {
 	token: null,
 	isLoggedIn: false,
 	isPending: false,
-	login: async (email: string, password: string) => {
+	login: async () => {
     return Promise.resolve('');
   },
 	logout: () => {},
