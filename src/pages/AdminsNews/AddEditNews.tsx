@@ -1,11 +1,16 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import styles from './AddNews.module.scss';
-import { IAddNews, changeNews } from '../../services/adminNews';
+import {useEffect} from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
+import styles from './AddEditNews.module.scss';
+import { IAddNews, changeNews ,addNews, fetchNews} from '../../services/adminNews';
 import UploadImageInput from '../../components/CommonUI/UploadImageInput/UploadImageInput';
-import HookFormInput from '../../components/HookFormInput/HookFormInput';
+import HookFormInput from '../../components/CommonUI/HookFormInput/HookFormInput';
 import NewsTextarea from '../../components/NewsTextarea/NewsTextarea';
+import {NewsData} from './AdminNews';
+import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+
+
 
 interface IFormInputs {
 	title: string;
@@ -18,7 +23,7 @@ interface IFormInputs {
 	update_at?: string;
 }
 
-const EditNews: React.FC = () => {
+const AddEditNews: React.FC = () => {
 	const {
 		register,
 		handleSubmit,
@@ -26,16 +31,26 @@ const EditNews: React.FC = () => {
 		formState: { errors },
 		// formState: { errors, isValid },
 		watch,
+		setValue
 	} = useForm<IFormInputs>({ mode: 'onBlur' });
 
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 
 	let uploadedImage;
+	const  { newsId } = useParams();
+	const isAddMode = !newsId;
 
-	const mutation = useMutation({
-		mutationFn: (news: IAddNews) =>
-			changeNews(news).then((item) => console.log(item)),
+	const {mutate, isError, isPending, error} = useMutation({
+		mutationFn: (newsItem: IAddNews) => {
+			if(isAddMode){
+			return	addNews(newsItem).then((item) => console.log(item))}
+	else {
+			return	changeNews(newsItem, newsId).then((item) => console.log('changeNews',item))
+			}
+
+		},
+
 		onSuccess: () => {
 			queryClient.invalidateQueries({ queryKey: ['news'] });
 			reset();
@@ -43,9 +58,34 @@ const EditNews: React.FC = () => {
 		},
 	});
 
+	//// get all  news  to  find news for  edit  and  fill  edit form  with  its info
+	const data = useQuery<NewsData>({
+		queryKey: ['news'],
+		queryFn: fetchNews,
+		refetchInterval: 600000,
+	});
+
+	const { data: news } = data;
+	const newsToEdit = news?.news.find((item) => item.id === Number(newsId))
+	// console.log(newsToEdit)
+	// console.log(newsToEdit?.photo)
+
+useEffect(() => {
+	// need  get by id news ???
+const  fields:string[]= ['photo', 'url', 'title', 'title_en', 'sub_text', 'sub_text_en']
+fields.forEach((field )=> {
+	if(newsToEdit){
+		// @ts-expect-error   TO FIX type error
+		setValue(field, newsToEdit[field as keyof typeof newsToEdit])
+	// 	field === 'photo' ?
+	// 	console.log(newsToEdit?.photo?.name) :
+	// setValue(field, newsToEdit[field as keyof typeof newsToEdit])
+}
+})
+}, [newsToEdit, setValue])
+
+
 	const onSubmitHandler: SubmitHandler<IFormInputs> = (data) => {
-		console.log(errors);
-		// console.log(data);
 		uploadedImage = data?.photo?.[0];
 		const newsDate = new Date();
 		const addedNews = {
@@ -54,9 +94,7 @@ const EditNews: React.FC = () => {
 			post_at: newsDate,
 			update_at: newsDate,
 		};
-		console.log(addedNews);
-		console.log(errors);
-		mutation.mutate(addedNews);
+	mutate(addedNews);
 		// reset();
 	};
 
@@ -65,9 +103,23 @@ const EditNews: React.FC = () => {
 		navigate('/admin/news');
 	};
 
+	if (isPending) {
+		return (
+			<Loader/>
+		);
+	}
+
+	if (isError) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.alert}>{error.message}</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
-			<h3 className={styles.title}>Відредагуйте необхідні поля</h3>
+			<h3 className={styles.title}>{isAddMode ? 'Для додавання новини необхідно заповнити всі поля' : 'Відредагуйте необхідні поля'}</h3>
 			<form
 				className={styles.form}
 				onSubmit={handleSubmit(onSubmitHandler)}
@@ -178,7 +230,7 @@ const EditNews: React.FC = () => {
 						type='submit'
 						// disabled={!isValid}
 					>
-						Оновити
+						{isAddMode ?  'Додати' : 'Оновити'}
 					</button>
 					<button
 						className={styles.addButton}
@@ -192,4 +244,4 @@ const EditNews: React.FC = () => {
 	);
 };
 
-export default EditNews;
+export default AddEditNews;

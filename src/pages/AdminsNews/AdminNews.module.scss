@@ -24,9 +24,11 @@
 .news {
 	display: grid;
 	justify-items: center;
+	row-gap: 30px;
 	@include tablet {
 		grid-template: 1fr / repeat(2, 1fr);
 		column-gap: 20px;
+		row-gap: 20px;
 	}
 
 	@include small-desktop {

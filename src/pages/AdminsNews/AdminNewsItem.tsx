@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import ItemActions from '../../components/CommonUI/ItemActions/ItemActions';
 import { deleteNews } from '../../services/adminNews';
 import styles from './AdminNewsItem.module.scss';
@@ -53,6 +54,7 @@ const NewsItem: React.FC<NewsItemProps> = ({
 
 
 	const queryClient = useQueryClient();
+	const navigate=useNavigate()
 	const {mutate, isError, isPending, error} = useMutation({
 		mutationFn: (id:number) =>
 			deleteNews(id).then((item) => console.log(item)),
@@ -65,6 +67,11 @@ const NewsItem: React.FC<NewsItemProps> = ({
 console.log('delete news')
 mutate(id);
 	}
+
+	const editNewsHandler=(id:number)=>{
+		console.log(id)
+		navigate(`news_edit:${id}`)
+			}
 
 	if (isPending) {
 		return (
@@ -90,8 +97,7 @@ mutate(id);
 				<p className={styles.date}>{getDateName(post_at)}</p>
 				<p className={styles.text}>{sub_text}</p>
 			</div>
-			{/* <a href={url} target='blank' rel='noopener noreferrer'></a> */}
-			<ItemActions path='news_edit' onClick={()=>deleteNewsHandler(id)} />
+			<ItemActions path={`news_edit/${id}`} onDeleteClick={()=>deleteNewsHandler(id)} onEditClick={()=>editNewsHandler(id)} />
 		</li>
 	);
 };

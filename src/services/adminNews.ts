@@ -13,7 +13,7 @@ export interface IAddNews {
 	photo: File;
 	post_at?: Date;
 	update_at?: Date;
-	id?: string;
+	id?: number;
 }
 
 export const fetchNews = async () => {
@@ -48,13 +48,16 @@ export const addNews = async (newsItem: IAddNews) => {
 	}
 };
 
-export const changeNews = async (newsItem: IAddNews) => {
+export const changeNews = async (newsItem: IAddNews, id: string) => {
 	try {
-		const response = await fetch(`${NEWS}${newsItem.id}`, {
+		console.log(newsItem)
+		console.log(id)
+		const response = await fetch(`${NEWS}/${id}`, {
 			method: 'PUT',
 			headers,
 			body: JSON.stringify(newsItem),
 		});
+		console.log(id)
 		if (!response.ok) {
 			throw new Error('Data loading error');
 		}
