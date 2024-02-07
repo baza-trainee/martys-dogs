@@ -1,13 +1,23 @@
-import { ChangeEvent, useState } from 'react';
-import { Form, Link } from 'react-router-dom';
+import { ChangeEvent, useState, useEffect } from 'react';
+import { Form, Link, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../context/useGlobalContext';
 
 import FormInput from '../../components/FormInput/FormInput';
 import styles from './Register.module.scss';
 
 const Register: React.FC = () => {
+	const navigate = useNavigate();
 	const [name, setName] = useState('');
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+
+	const { isLoggedIn } = useAuthContext();
+
+	useEffect(() => {
+		if (isLoggedIn) {
+			navigate('/admin');
+		}
+	}, []);
 
 	const handleLogin = async () => {
 		console.log(name, email, password);
