@@ -2,7 +2,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import About from './pages/About/About';
-import AddNews from './pages/AdminsNews/AddNews';
 import AddPartner from './pages/AdminPartners/AddPartner';
 import AdminDogs from './pages/AdminDogs/AdminDogs';
 import AdminForm from './pages/AdminForm/AdminForm';
