@@ -53,18 +53,20 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 	const newQueryString = `?age=${selectedFilters.age?.toLowerCase()}&size=${selectedFilters.size?.toLowerCase()}&gender=${selectedFilters.gender?.toLowerCase()}&ready_for_adoption=${selectedFilters.ready_for_adoption}`;
 
 	const optionsGender: OptionType[] = [
-		{ value: t('catalog.filter_gender_label'), label: t('catalog.filter_gender_label') },
+		{ value: '', label: t('catalog.filter_gender_placeholder') },
 		{ value: t('catalog.filter_gender_male'), label: t('catalog.filter_gender_male') },
 		{ value: t('catalog.filter_gender_female'), label: t('catalog.filter_gender_female') },
 	];
 
 	const optionsAge: OptionType[] = [
+		{ value: '', label: t('catalog.filter_age_placeholder') },
 		{ value: t('catalog.filter_age_puppy'), label: t('catalog.filter_age_puppy') },
 		{ value: t('catalog.filter_age_young_dog'), label: t('catalog.filter_age_young_dog') },
 		{ value: t('catalog.filter_age_adult'), label: t('catalog.filter_age_adult') },
 	];
 
 	const optionsSize: OptionType[] = [
+		{ value: '', label: t('catalog.filter_size_placeholder') },
 		{ value: t('catalog.filter_size_small'), label: t('catalog.filter_size_small') },
 		{ value: t('catalog.filter_size_medium'), label: t('catalog.filter_size_medium') },
 		{ value: t('catalog.filter_size_large'), label: t('catalog.filter_size_large') },
@@ -136,62 +138,15 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 
 
 	const handleChange = (field: keyof FilterParams, value: string | boolean) => {
-
-// console.log(Object.values(selectedFilters));
-
-
-	/*	if (selectedFilters) {
-			for (let filterValue in selectedFilters) {
-				console.log(value);
-				if (filterValue === filterValue) {
-					setSelectedFilters((prevFilters) => ({
-						...prevFilters,
-						[field]: '',
-
-					}));
-					// console.log(filterValue);
-				} else {
-					setSelectedFilters((prevFilters) => ({
-						...prevFilters,
-						[field]: value,
-					}));
-
-				}
-			}
-		}
-*/
-
-		if(typeof value === 'string' && value.toLowerCase() === field) {
-			console.log( value.toLowerCase());
-			setSelectedFilters((prevFilters) => ({
-				...prevFilters,
-				[field]: '',
-			}));
-		} else {
-			setSelectedFilters((prevFilters) => ({
-				...prevFilters,
-				[field]: value,
-			}));
-
-		}
-
-
-		let keysArr = Object.values(selectedFilters);
-		keysArr.map((key) => {
-			console.log(key);
-			if(typeof value === 'string' && key === value.toLowerCase()) {
-				console.log(`key ${key} equal value ${value}`)
-			}
-		})
+		setSelectedFilters((prevFilters) => ({
+			...prevFilters,
+			[field]: value,
+		}));
 	};
 
 
 	const handleFilterSubmit = async () => {
-
 		changeTerms(newQueryString);
-		console.log(selectedFilters);
-		console.log(newQueryString);
-
 	};
 
 
