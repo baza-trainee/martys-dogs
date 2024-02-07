@@ -136,6 +136,15 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 		setCountPage(Math.ceil(cards.length / cardsInPage));
 	}, [cards, cardsInPage]);
 
+	useEffect(() => {
+		setSelectedFilters(prevFilters => ({
+			...prevFilters,
+			age: '',
+			size: '',
+			gender: '',
+			ready_for_adoption: false,
+		}));
+	}, [t]);
 
 	const handleChange = (field: keyof FilterParams, value: string | boolean) => {
 		setSelectedFilters((prevFilters) => ({
