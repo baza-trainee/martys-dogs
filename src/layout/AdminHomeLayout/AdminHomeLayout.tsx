@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../context/useGlobalContext';
 import Admin from '../../pages/Admin/Admin';
 import { Outlet } from 'react-router-dom';

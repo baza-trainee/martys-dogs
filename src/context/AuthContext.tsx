@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState, useEffect } from 'react';
-import { loginUser, getIsAuth } from '../services/fetchData';
+import { loginUser } from '../services/fetchData';
 
 interface AuthContextType {
 	token: string | null;
@@ -53,28 +53,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		}
 	};
 
-	const isAuth = async () => {
-		const token = localStorage.getItem('auth-token');
+	// const isAuth = async () => {
+	// 	const token = localStorage.getItem('auth-token');
 
-    if (!token) {
-      return;
-		}
+  //   if (!token) {
+  //     return;
+	// 	}
 		
-		try {
-			setIsPending(true);
-			const { tokenIsValid } = await getIsAuth(token);
+	// 	try {
+	// 		setIsPending(true);
+	// 		const { tokenIsValid } = await getIsAuth(token);
 
-			if (tokenIsValid) {
-				setIsLoggedIn(true);
-				setToken(token);
-			}
+	// 		if (tokenIsValid) {
+	// 			setIsLoggedIn(true);
+	// 			setToken(token);
+	// 		}
 
-			setIsPending(false);
-		} catch (error) {
-			setIsPending(false);
-			console.error('isAuth Error:', error);
-		}
-	}
+	// 		setIsPending(false);
+	// 	} catch (error) {
+	// 		setIsPending(false);
+	// 		console.error('isAuth Error:', error);
+	// 	}
+	// }
 
 	const logout = () => {
 		setIsPending(true);

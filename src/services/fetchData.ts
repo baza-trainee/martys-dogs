@@ -6,7 +6,7 @@ const HOME = 'https://matys-dogs2.onrender.com';
 const ABOUT = 'https://matys-dogs2.onrender.com/about-us';
 const LOGIN = 'https://matys-dogs2.onrender.com/login';
 const CATALOG = 'https://matys-dogs2.onrender.com/catalog';
-const IS_AUTH = '';
+// const IS_AUTH = '';
 
 export const fetchHome = async (language: string): Promise<LandingData> => {
 	try {
@@ -75,7 +75,7 @@ export const fetchCatalog = async ({ queryKey }: { queryKey: [string, string, { 
 
 interface LoginResponse {
 	message: string;
-	token_accsess: string;
+	access_token: string;
 }
 
 export const loginUser = async (
