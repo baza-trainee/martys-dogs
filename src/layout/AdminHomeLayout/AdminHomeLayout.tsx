@@ -1,8 +1,21 @@
+import { useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../context/useGlobalContext';
 import Admin from '../../pages/Admin/Admin';
 import { Outlet } from 'react-router-dom';
 import styles from './AdminHomeLayout.module.scss';
 
 const AdminHomeLayout = () => {
+	const navigate = useNavigate();
+
+	const { isLoggedIn } = useAuthContext();
+
+	useEffect(() => {
+		if (!isLoggedIn) {
+			navigate('/login');
+		}
+	}, []);
+
 	return (
 		<main className={styles.container}>
 			<Admin />
