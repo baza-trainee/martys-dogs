@@ -3,7 +3,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import About from './pages/About/About';
 import AddPartner from './pages/AdminPartners/AddPartner';
-import AdminDogs from './pages/AdminDogs/AdminDogs';
+import AdminTails from './pages/AdminTails/AdminTails';
 import AdminForm from './pages/AdminForm/AdminForm';
 import AdminHomeLayout from './layout/AdminHomeLayout/AdminHomeLayout';
 import AdminNews from './pages/AdminsNews/AdminNews';
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
 		children: [
 			{
 				index: true,
-				element: <AdminDogs />,
+				element: <AdminTails />,
 			},
 			{
 				path: 'partners',
