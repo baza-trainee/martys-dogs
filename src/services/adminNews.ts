@@ -23,6 +23,7 @@ export const fetchNews = async () => {
 			throw new Error('Data loading error');
 		}
 		const data = await response.json();
+		console.log(data)
 		return data;
 	} catch (error) {
 		console.error('Error while loading data:', error);

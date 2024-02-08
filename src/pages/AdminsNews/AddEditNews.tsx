@@ -7,7 +7,7 @@ import { IAddNews, changeNews ,addNews, fetchNews} from '../../services/adminNew
 import UploadImageInput from '../../components/CommonUI/UploadImageInput/UploadImageInput';
 import HookFormInput from '../../components/CommonUI/HookFormInput/HookFormInput';
 import NewsTextarea from '../../components/NewsTextarea/NewsTextarea';
-import {NewsData} from './AdminNews';
+import {NewsItem} from './AdminNews';
 import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 
 
@@ -59,14 +59,17 @@ const AddEditNews: React.FC = () => {
 	});
 
 	//// get all  news  to  find news for  edit  and  fill  edit form  with  its info
-	const data = useQuery<NewsData>({
+	const { data: news } = useQuery<NewsItem[]>({
 		queryKey: ['news'],
 		queryFn: fetchNews,
 		refetchInterval: 600000,
 	});
 
-	const { data: news } = data;
-	const newsToEdit = news?.news.find((item) => item.id === Number(newsId))
+	// console.log(data)
+	// const { data: news } = data;
+	console.log(news)
+	const newsToEdit = news?.find((item) => item.id === Number(newsId))
+	// const newsToEdit = news?.news.find((item) => item.id === Number(newsId))
 	// console.log(newsToEdit)
 	// console.log(newsToEdit?.photo)
 

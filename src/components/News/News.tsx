@@ -4,6 +4,7 @@ import { LandingData } from '../../pages/Landing/Landing';
 import { UseQueryResult } from '@tanstack/react-query';
 import styles from './News.module.scss';
 import { useTranslation } from 'react-i18next';
+import { Loader } from '../CommonUI/LoaderAndError/LoaderAndError';
 
 // import { news } from './data';
 
@@ -20,9 +21,7 @@ const News: React.FC<NewsProps> = ({ data }) => {
 
 	if (isPending) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.loading}></div>
-			</div>
+		<Loader/>
 		);
 	}
 

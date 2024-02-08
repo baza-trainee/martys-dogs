@@ -53,11 +53,11 @@ const NewsItem: React.FC<NewsItemProps> = ({
 	return (
 		<li className={styles.item}>
 			<div className={styles.thumb}>
-				<img
+				{/* <img
 					src={photo.url}
 					alt='news-photo'
 					className={styles.photo}
-				/>
+				/> */}
 			</div>
 			<div className={styles.info}>
 				<h3 className={styles.title}>{title}</h3>

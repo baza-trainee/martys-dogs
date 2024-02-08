@@ -3,6 +3,8 @@
 
 .item {
 	max-width: 353px;
+	// background-color: $color-gray-0;
+	// border-radius: 24px;
 	@include small-desktop {
 		// max-width: 255px;
 		display: grid;
@@ -16,6 +18,11 @@
 	@include full-desktop {
 		max-width: 415px;
 	}
+}
+
+.wrapper{
+	background-color: $color-gray-0;
+	border-radius: 24px;
 }
 
 .thumb {

@@ -15,7 +15,7 @@ export interface NewsItemProps {
 	photo: {
 		// id: string;
 		// name: string;
-		url: string;
+		url?: string;
 		// category: string;
 	};
 }
@@ -89,15 +89,18 @@ mutate(id);
 
 	return (
 		<li className={styles.item}>
+			<div className={styles.wrapper}>
 			<div className={styles.thumb}>
-				<img src={photo.url} alt='photo' className={styles.photo} />
+				<img src={photo?.url} alt='photo' className={styles.photo} />
 			</div>
 			<div className={styles.info}>
 				<h3 className={styles.title}>{title}</h3>
 				<p className={styles.date}>{getDateName(post_at)}</p>
 				<p className={styles.text}>{sub_text}</p>
 			</div>
+			</div>
 			<ItemActions path={`news_edit/${id}`} onDeleteClick={()=>deleteNewsHandler(id)} onEditClick={()=>editNewsHandler(id)} />
+
 		</li>
 	);
 };

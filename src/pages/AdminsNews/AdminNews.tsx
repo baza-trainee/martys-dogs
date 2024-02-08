@@ -26,15 +26,19 @@ export interface NewsData {
 }
 
 const AdminNews: React.FC = () => {
-	const data = useQuery<NewsData>({
+	const {data:news, isPending, isError, error} = useQuery<NewsItem[]>({
 		queryKey: ['news'],
 		queryFn: fetchNews,
 		refetchInterval: 600000,
 	});
 
-	const { data: news, isPending, isError, error } = data;
-
+	// console.log(data)
+	// const { data: news, isPending, isError, error } = data;
+console.log(news?.length);
 	// console.log(news?.news);
+	// if(news) {
+	// 	console.log(news.news)
+	// }
 	if (isPending) {
 		return (
 			<Loader/>
@@ -56,7 +60,7 @@ const AdminNews: React.FC = () => {
 			</div>
 			<AddButton path='news_add' text='новину' />
 			<ul className={styles.news}>
-				{news?.news.map((item: NewsItemProps) => (
+				{news.map((item: NewsItemProps) => (
 					<AdminNewsItem key={item.id} {...item} />
 				))}
 			</ul>
