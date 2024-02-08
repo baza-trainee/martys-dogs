@@ -4,16 +4,20 @@ import styles from './ItemActions.module.scss';
 
 type ActionsProps = {
 	path: string;
-	onClick: ()=> void
+	onDeleteClick: ()=> void;
+	onEditClick: ()=>void;
 };
 
-const ItemActions: React.FC<ActionsProps> = ({ path,onClick }) => {
+const ItemActions: React.FC<ActionsProps> = ({ path, onDeleteClick,onEditClick }) => {
 	return (
 		<div className={styles.itemActions}>
-			<Link to={`/admin/${path}`} className={styles.link}>
-				<FaEdit className={styles.editIcon} />
+			<Link to={`/admin/${path}`} className={styles.link} >
+			<button type='button' className={styles.editIcon} onClick={onEditClick}>
+			<FaEdit className={styles.editIcon} />
+			</button>
+				{/* <FaEdit className={styles.editIcon} /> */}
 			</Link>
-			<button type='button' className={styles.deleteIcon} onClick={onClick}>
+			<button type='button' className={styles.deleteIcon} onClick={onDeleteClick}>
 				<FaTrash className={styles.deleteIcon} />
 			</button>
 		</div>

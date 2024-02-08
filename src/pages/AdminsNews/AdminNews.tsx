@@ -11,7 +11,7 @@ interface Photo {
 	url: string;
 	category: string;
 }
-interface NewsItem {
+export  interface NewsItem {
 	id: number;
 	title: string;
 	post_at: string;
@@ -34,7 +34,7 @@ const AdminNews: React.FC = () => {
 
 	const { data: news, isPending, isError, error } = data;
 
-	console.log(news?.news);
+	// console.log(news?.news);
 	if (isPending) {
 		return (
 			<Loader/>

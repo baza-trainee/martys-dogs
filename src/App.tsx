@@ -2,7 +2,6 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import About from './pages/About/About';
-import AddNews from './pages/AdminsNews/AddNews';
 import AddPartner from './pages/AdminPartners/AddPartner';
 import AdminDogs from './pages/AdminDogs/AdminDogs';
 import AdminForm from './pages/AdminForm/AdminForm';
@@ -14,7 +13,7 @@ import AdminStatistics from './pages/AdminStatistics/AdminStatistics';
 import Admins from './pages/Admins/Admins';
 import { AuthProvider } from './context/AuthContext';
 import Contacts from './pages/Contacts/Contacts';
-import EditNews from './pages/AdminsNews/EditNews';
+import AddEditNews from './pages/AdminsNews/AddEditNews';
 import EditPartner from './pages/AdminPartners/EditPartner';
 import Error from './pages/Error/Error';
 import HomeLayout from './layout/HomeLayout/HomeLayout';
@@ -90,11 +89,11 @@ const router = createBrowserRouter([
 			},
 			{
 				path: 'news_add',
-				element: <AddNews />,
+				element: <AddEditNews />,
 			},
 			{
-				path: 'news_edit',
-				element: <EditNews />,
+				path: 'news_edit/:newsId',
+				element: <AddEditNews />,
 			},
 			{
 				path: 'statistics',
