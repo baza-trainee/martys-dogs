@@ -1,13 +1,10 @@
 import NewsItem, { NewsItemProps } from './NewsItem';
-
 import { LandingData } from '../../pages/Landing/Landing';
 import { UseQueryResult } from '@tanstack/react-query';
 import styles from './News.module.scss';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '../CommonUI/LoaderAndError/LoaderAndError';
-
-// import { news } from './data';
-
+// import {data} from './data'
 interface NewsProps {
 	data: UseQueryResult<LandingData, Error>;
 }

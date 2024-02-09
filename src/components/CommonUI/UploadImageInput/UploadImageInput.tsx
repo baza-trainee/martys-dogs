@@ -25,7 +25,7 @@ const UploadImageInput: React.FC<UploadImageInputProps> = ({
 					type='file'
 					id='image'
 					placeholder='Upload photo'
-					accept='image/*'
+					// accept='image/*'
 				/>
 				<FaUpload className={styles.icon} />
 				<span className={styles.text}>

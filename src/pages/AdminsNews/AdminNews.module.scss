@@ -1,14 +1,13 @@
 @import '../../scss/variables';
 @import '../../scss/mixins';
 
-// container move to  common styles ???
 .container {
 	padding: 15px;
 	width: 100%;
 	gap: 32px;
 	display: flex;
 	flex-direction: column;
-	background-color: $color-gray-40
+	// background-color: $color-gray-40
 }
 
 .title {
@@ -26,7 +25,7 @@
 	justify-items: center;
 	row-gap: 30px;
 	@include tablet {
-		grid-template: 1fr / repeat(2, 1fr);
+		grid-template:repeat(2, 1fr) / repeat(2, 1fr);
 		column-gap: 20px;
 		row-gap: 20px;
 	}
@@ -47,14 +46,3 @@
 	animation: spinner 0.6s linear infinite;
 	margin: 6rem auto;
 }
-
-// .container {
-// 	background-color: #ebf5fb;
-// 	padding: 6rem;
-// }
-
-// .alert {
-// 	text-align: center;
-// 	font-size: 32px;
-// 	color: #005c80;
-// }

@@ -32,13 +32,6 @@ const AdminNews: React.FC = () => {
 		refetchInterval: 600000,
 	});
 
-	// console.log(data)
-	// const { data: news, isPending, isError, error } = data;
-console.log(news?.length);
-	// console.log(news?.news);
-	// if(news) {
-	// 	console.log(news.news)
-	// }
 	if (isPending) {
 		return (
 			<Loader/>

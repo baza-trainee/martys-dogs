@@ -28,8 +28,8 @@ const AddEditNews: React.FC = () => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { errors },
-		// formState: { errors, isValid },
+		// formState: { errors },
+		formState: { errors, isValid },
 		watch,
 		setValue
 	} = useForm<IFormInputs>({ mode: 'onBlur' });
@@ -65,9 +65,7 @@ const AddEditNews: React.FC = () => {
 		refetchInterval: 600000,
 	});
 
-	// console.log(data)
-	// const { data: news } = data;
-	console.log(news)
+	// console.log(news)
 	const newsToEdit = news?.find((item) => item.id === Number(newsId))
 	// const newsToEdit = news?.news.find((item) => item.id === Number(newsId))
 	// console.log(newsToEdit)
@@ -97,8 +95,8 @@ fields.forEach((field )=> {
 			post_at: newsDate,
 			update_at: newsDate,
 		};
+	console.log(addedNews)
 	mutate(addedNews);
-		// reset();
 	};
 
 	const onCancelHandler = () => {
@@ -169,7 +167,7 @@ fields.forEach((field )=> {
 						type={'text'}
 						id={'title'}
 						placeholder={'Enter news title'}
-						maxLength={30}
+						maxLength={60}
 					/>
 					<HookFormInput
 						label={'News title'}
@@ -178,7 +176,7 @@ fields.forEach((field )=> {
 								required:
 									'Вкажіть заголовок новини англійською',
 								pattern: {
-									value: /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
+									value: /^[a-zA-Z0-9 !`@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
 									message:
 										'можуть бути  цифри, англійські  літери, розділові знаки',
 								},
@@ -188,7 +186,7 @@ fields.forEach((field )=> {
 						type={'text'}
 						id={'title_en'}
 						placeholder={'Enter news title'}
-						maxLength={30}
+						maxLength={60}
 					/>
 				</div>
 				<div className={styles.group}>
@@ -206,7 +204,7 @@ fields.forEach((field )=> {
 						}}
 						id={'sub_text'}
 						placeholder={'Enter news text'}
-						maxLength={250}
+						maxLength={150}
 						errorMessage={errors['sub_text']?.message}
 					/>
 					<NewsTextarea
@@ -215,7 +213,7 @@ fields.forEach((field )=> {
 							...register('sub_text_en', {
 								required: 'Вкажіть текст новини англійською',
 								pattern: {
-									value: /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
+									value: /^[a-zA-Z0-9 !`@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
 									message:
 										'Можуть бути   англійські  літери,цифри, символи',
 								},
@@ -223,15 +221,15 @@ fields.forEach((field )=> {
 						}}
 						id={'sub_text_en'}
 						placeholder={'Enter news text'}
-						maxLength={250}
+						maxLength={150}
 						errorMessage={errors['sub_text_en']?.message}
 					/>
 				</div>
 				<div className={styles.button_wrapper}>
 					<button
-						className={styles.addButton}
+						className={isValid ?  styles.addButton : styles.disable}
 						type='submit'
-						// disabled={!isValid}
+						disabled={!isValid}
 					>
 						{isAddMode ?  'Додати' : 'Оновити'}
 					</button>
