@@ -42,45 +42,7 @@
   align-items: center;
   gap: 24px;
 
-  button {
-    cursor: pointer;
-    padding: 30px;
-    display: flex;
-    min-width: 200px;
-    max-height: 55px;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    border-radius: 40px;
-    color: $color-gray-0;
-    background: $color-accent;
-    text-decoration: none;
-    gap: 8px;
-    font-size: 20px;
-    transition: all 0.3s ease;
-    transform: translate(0em, 0.2em);
-    width: 100%;
 
-    &:hover {
-      background:$color-main-blue-dark;
-    }
-
-    &:focus {
-      outline: none;
-      box-shadow: 0 0 5px 2px $color-accent;
-    }
-
-    &:active {
-      background-color:$color-gray-100;
-      transform: scale(0.95);
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-      background: $color-gray-40;
-      color: $color-gray-80;
-    }
-  }
 }
 
 .logoContainer {
@@ -109,44 +71,6 @@
       height: auto;
     }
 
-    .logoActions {
-      margin-top: auto;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      padding: 8px;
-      border-radius: 4px;
 
-      .editIcon,
-      .deleteIcon {
-        margin: 4px;
-        font-size: 16px;
-        color: #333;
-        cursor: pointer;
-      }
-
-      .editIcon:hover,
-      .deleteIcon:hover {
-        color: $color-accent;
-      }
-    }
-  }
-}
-
-.loadMore {
-  margin: 10px auto;
-  .loadButton {
-    font-size: 18px;
-    padding: 12px;
-    min-width: 200px;
-    border: 1px solid $color-accent;
-    color: $color-accent;
-    background-color: $color-main-bg;
-    border-radius: 40px;
-    transition: all 0.3s ease;
-    width: 100%;
-    @include tablet {
-      width: auto;
-    }
   }
 }

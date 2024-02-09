@@ -1,28 +1,52 @@
 import styles from '../AdminPhotos/AdminPhotos.module.scss';
-import { FaTrash, FaUpload } from 'react-icons/fa';
 import Button from '../../layout/Button/Button';
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { fetchHome } from '../../services/fetchData';
 import { useEffect } from 'react';
-import { scrollOnTop, scrollToSection } from '../../services/scrollTo';
-import { DogCard } from '../Landing/Landing';
+import { scrollOnTop } from '../../services/scrollTo';
+import { fetchTails } from '../../services/fetchAdminTails';
+import TailsList from './TailsList';
 
-export interface AdminDogsData {
-	dog_card: DogCard[];
+
+export interface Photo {
+	id: string;
+	name: string;
+	url: string;
+	category: string;
 }
+
+export interface TailsListData {
+	id: number;
+	name: string;
+	name_en: string;
+	ready_for_adoption: boolean;
+	gender: string;
+	gender_en: string;
+	age: string;
+	age_en: string;
+	sterilization: boolean;
+	vaccination_parasite_treatment: boolean;
+	size: string;
+	size_en: string;
+	description: string;
+	description_en: string;
+	photo: Photo;
+}
+
+
+export type AdminTailsData = TailsListData[];
+
 
 const AdminTails = () => {
 	const location = useLocation();
-	const data = useQuery<AdminDogsData>({
-		queryKey: ['dogs'],
-		queryFn: () => fetchHome(),
+	const data = useQuery<AdminTailsData>({
+		queryKey: ['tailslist'],
+		queryFn: fetchTails,
 		retry: 1,
 	});
 
 	useEffect(() => {
-
 		location.pathname === '/' && !location.hash ? scrollOnTop() : null;
 	}, [location]);
 
@@ -44,7 +68,7 @@ const AdminTails = () => {
 			>
 
 				<div
-					className={styles.buttonRow}
+
 				>
 					<Button
 						onClick={() => console.log('open modal for adding new dog')}
@@ -53,17 +77,9 @@ const AdminTails = () => {
 
 				</div>
 			</div>
-			<div className={styles.logoContainer}>
-				<TailsList data={data}/>
-				{/*{visibleLogos.map((logo, index) => (
-					<div key={index} className={styles.logo}>
-						<img src={logo.image} />
-						<div className={styles.logoActions}>
-							<FaTrash className={styles.deleteIcon} />
-						</div>
-					</div>
-				))}*/}
-			</div>
+
+			<TailsList data={data} />
+
 
 		</div>
 

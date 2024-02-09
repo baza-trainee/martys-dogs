@@ -1,0 +1,274 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.catalog_container {
+  background-color: $color-gray-0;
+}
+
+.catalog_container {
+  max-width: 1920px;
+  padding: 100px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+
+  @media screen and (max-width: 1279px) {
+    padding: 80px 32px;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 40px 20px;
+  }
+}
+
+.catalog_header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+
+  @media screen and (max-width: 1279px) {
+    flex-direction: column;
+    margin-bottom: 32px;
+  }
+
+  @media screen and (max-width: 767px) {
+    margin-bottom: 24px;
+  }
+}
+
+.catalog_header_title {
+  font-size: 52px;
+  font-weight: 800;
+
+  @media screen and (max-width: 1279px) {
+    font-size: 28px;
+    align-self: flex-start;
+  }
+}
+
+.catalog_header_btn {
+  width: auto;
+  padding: 12px 32px;
+}
+
+.catalog_filter {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+
+  @media screen and (max-width: 1279px) {
+    margin-bottom: 32px;
+  }
+
+  @media screen and (max-width: 767px) {
+    margin-bottom: 24px;
+  }
+}
+
+.catalog_inputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+
+  @media screen and (max-width: 1279px) {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 0;
+  }
+}
+
+.catalog_select_container {
+  display: flex;
+  flex-direction: column;
+  width: 32.5%;
+
+  @media screen and (max-width: 1279px) {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.catalog_checkbox_label,
+.catalog_select_label {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.catalog_checkbox_container {
+  display: flex;
+  align-items: center;
+
+  @media screen and (max-width: 1279px) {
+    margin-bottom: 32px;
+  }
+
+  @media screen and (max-width: 767px) {
+    margin-bottom: 24px;
+  }
+}
+
+.catalog_checkbox {
+  margin-right: 8px;
+  transform: scale(1.8);
+}
+
+.catalog_list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 723px) {
+    justify-content: center;
+  }
+}
+
+.catalog_list_card {
+  margin-bottom: 20px;
+}
+
+.catalog_pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  @media screen and (max-width: 1279px) {
+    margin-top: 12px;
+  }
+
+  @media screen and (max-width: 767px) {
+    margin-top: 4px;
+  }
+}
+
+.catalog_pagination_btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: $color-accent;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-gray-10;
+  margin-right: 24px;
+  border: none;
+  transition: all 0.3s ease-in-out;
+
+  &:disabled {
+    background-color: $color-gray-10;
+    color: $color-gray-40;
+  }
+
+  &.active {
+    background-color: $color-accent;
+    color: $color-gray-0;
+
+    &:hover {
+      background-color: $color-accent;
+      color: $color-gray-0;
+    }
+  }
+
+  &:hover {
+    background-color: $color-main-blue-light;
+    color: $color-accent;
+  }
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  width: 6rem;
+  height: 6rem;
+  border: 5px solid #009cd9;
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spinner 0.6s linear infinite;
+  margin: 6rem auto;
+}
+
+.container {
+  background-color: #ebf5fb;
+
+  padding: 6rem 3rem;
+  width: 100%;
+
+  @include small_desktop {
+    padding: 6rem;
+  }
+}
+
+.alert {
+  text-align: center;
+  font-size: 20px;
+  color: #005c80;
+
+  @include tablet {
+    font-size: 28px;
+  }
+  @include small_desktop {
+    font-size: 32px;
+  }
+
+  @include large_desktop {
+
+  }
+
+  @include full_desktop {
+
+  }
+
+}
+
+/*logo {
+  margin: 10px;
+  width: 30%;
+  background-color: $color-main-bg;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-content: space-between;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background-color: $color-main-blue-light;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  }
+}*/
+
+.btnContainer {
+  display: flex;
+}
+
+.logoActions {
+  width: 50%;
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px;
+  margin-top: 10px;
+  background-color: $color-main-bg;
+  border-radius: 30px;
+
+  .editIcon,
+  .deleteIcon {
+    margin: 4px;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+  }
+
+  .editIcon:hover,
+  .deleteIcon:hover {
+    color: $color-accent;
+  }
+}
