@@ -1,4 +1,5 @@
 import Button from '../../layout/Button/Button';
+// import { useEffect , useRef} from 'react';
 import styles from './NewsItem.module.scss';
 import { useTranslation } from 'react-i18next';
 
@@ -51,6 +52,23 @@ const NewsItem: React.FC<NewsItemProps> = ({
 		return stringDate;
 	};
 
+
+	// const containerRef = useRef(null);
+	// const textRef=useRef(null);
+	// const texRef=useRef(null);
+	// useEffect(() => {
+  //   const container = containerRef.current;
+	// 	const text = textRef.current;
+	// 	const tex = texRef.current;
+	// 	console.log(container.scrollHeight)
+	// 	console.log(container.clientHeight)
+  //   if (container !== null &&  container.scrollHeight > container.clientHeight) {
+  //     tex.classList.add(styles.ellipsis);
+  //   }
+  // }, [sub_text]); // You might want to update this effect whenever the content changes
+
+
+
 	return (
 		<li className={styles.item}>
 			<div className={styles.thumb}>
@@ -60,14 +78,16 @@ const NewsItem: React.FC<NewsItemProps> = ({
 					className={styles.photo}
 				/> }
 			</div>
-			<div className={styles.info}>
+			{/* <div  ref={containerRef} className={styles.wrapper}> */}
+				<div className={styles.info}>
 				<h3 className={styles.title}>{title}</h3>
 				<div>
 					<p className={styles.date}>{getDateName(post_at)}</p>
 					<p className={styles.text} data-testid='newsItem'>
 						{sub_text}
 					</p>
-				</div>
+					</div>
+				{/* </div> */}
 			</div>
 			<a href={url} target='blank' rel='noopener noreferrer'>
 				<Button

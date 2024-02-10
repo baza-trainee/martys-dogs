@@ -4,7 +4,6 @@ import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError'
 import AdminNewsItem, { NewsItemProps } from '../AdminsNews/AdminNewsItem';
 import AddButton from '../../components/CommonUI/AddButton/AddButton';
 import { fetchNews } from '../../services/adminNews';
-
 interface Photo {
 	id: string;
 	name: string;
@@ -29,7 +28,6 @@ const AdminNews: React.FC = () => {
 	const {data:news, isPending, isError, error} = useQuery<NewsItem[]>({
 		queryKey: ['news'],
 		queryFn: fetchNews,
-		refetchInterval: 600000,
 	});
 
 	if (isPending) {

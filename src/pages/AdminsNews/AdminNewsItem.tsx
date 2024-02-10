@@ -4,7 +4,6 @@ import ItemActions from '../../components/CommonUI/ItemActions/ItemActions';
 import { deleteNews } from '../../services/adminNews';
 import styles from './AdminNewsItem.module.scss';
 import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
-
 export interface NewsItemProps {
 	id: number;
 	title: string;
@@ -51,7 +50,6 @@ const NewsItem: React.FC<NewsItemProps> = ({
 		const stringDate = `${date.getDate()} ${changedMonth} ${date.getFullYear()}`;
 		return stringDate;
 	};
-
 
 	const queryClient = useQueryClient();
 	const navigate=useNavigate()

@@ -9,9 +9,6 @@ import HookFormInput from '../../components/CommonUI/HookFormInput/HookFormInput
 import NewsTextarea from '../../components/NewsTextarea/NewsTextarea';
 import {NewsItem} from './AdminNews';
 import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
-
-
-
 interface IFormInputs {
 	title: string;
 	sub_text: string;
@@ -28,7 +25,6 @@ const AddEditNews: React.FC = () => {
 		register,
 		handleSubmit,
 		reset,
-		// formState: { errors },
 		formState: { errors, isValid },
 		watch,
 		setValue
@@ -36,7 +32,6 @@ const AddEditNews: React.FC = () => {
 
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
-
 	let uploadedImage;
 	const  { newsId } = useParams();
 	const isAddMode = !newsId;
@@ -46,13 +41,11 @@ const AddEditNews: React.FC = () => {
 			if(isAddMode){
 			return	addNews(newsItem).then((item) => console.log(item))}
 	else {
-			return	changeNews(newsItem, newsId).then((item) => console.log('changeNews',item))
+			return	changeNews(newsItem, newsId).then(() => console.log('changeNews'))
 			}
-
 		},
-
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['news'] });
+			queryClient.invalidateQueries({queryKey: ['news']})
 			reset();
 			navigate('/admin/news');
 		},
@@ -62,29 +55,18 @@ const AddEditNews: React.FC = () => {
 	const { data: news } = useQuery<NewsItem[]>({
 		queryKey: ['news'],
 		queryFn: fetchNews,
-		refetchInterval: 600000,
 	});
 
-	// console.log(news)
 	const newsToEdit = news?.find((item) => item.id === Number(newsId))
-	// const newsToEdit = news?.news.find((item) => item.id === Number(newsId))
-	// console.log(newsToEdit)
-	// console.log(newsToEdit?.photo)
-
 useEffect(() => {
 	// need  get by id news ???
 const  fields:string[]= ['photo', 'url', 'title', 'title_en', 'sub_text', 'sub_text_en']
 fields.forEach((field )=> {
 	if(newsToEdit){
 		// @ts-expect-error   TO FIX type error
-		setValue(field, newsToEdit[field as keyof typeof newsToEdit])
-	// 	field === 'photo' ?
-	// 	console.log(newsToEdit?.photo?.name) :
-	// setValue(field, newsToEdit[field as keyof typeof newsToEdit])
-}
+		setValue(field, newsToEdit[field as keyof typeof newsToEdit])}
 })
 }, [newsToEdit, setValue])
-
 
 	const onSubmitHandler: SubmitHandler<IFormInputs> = (data) => {
 		uploadedImage = data?.photo?.[0];
@@ -95,7 +77,6 @@ fields.forEach((field )=> {
 			post_at: newsDate,
 			update_at: newsDate,
 		};
-	console.log(addedNews)
 	mutate(addedNews);
 	};
 

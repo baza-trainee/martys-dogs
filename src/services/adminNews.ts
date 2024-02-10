@@ -17,6 +17,20 @@ export interface IAddNews {
 	id?: number;
 }
 
+export const setFormData = (newsItem:IAddNews)=>{
+	const formData = new FormData();
+	for (const [key, value] of Object.entries(newsItem)) {
+		if (key === 'photo') {
+				formData.append(key, value);
+		} else if (value instanceof Date) {
+				formData.append(key, value.toISOString());
+		} else if (value !== undefined) {
+				formData.append(key, value.toString());
+		}
+}
+return  formData;
+}
+
 export const fetchNews = async () => {
 	try {
 		const response = await fetch(NEWS, { headers });
@@ -24,7 +38,6 @@ export const fetchNews = async () => {
 			throw new Error('Data loading error');
 		}
 		const data = await response.json();
-		console.log(data)
 		return data;
 	} catch (error) {
 		console.error('Error while loading data:', error);
@@ -34,36 +47,10 @@ export const fetchNews = async () => {
 
 export const addNews = async (newsItem: IAddNews) => {
 	try {
-			const formData = new FormData();
-			for (const [key, value] of Object.entries(newsItem)) {
-				if (key === 'photo') {
-						formData.append(key, value);
-				} else if (value instanceof Date) {
-						formData.append(key, value.toISOString());
-				} else if (value !== undefined) {
-						formData.append(key, value.toString());
-				}
-		}
-			// formData.append('title', newsItem.title);
-			// formData.append('sub_text', newsItem.sub_text);
-			// formData.append('title_en', newsItem.title_en);
-			// formData.append('sub_text_en', newsItem.sub_text_en);
-			// formData.append('url', newsItem.url);
-			// formData.append('photo', newsItem.photo);
-			// if (newsItem.post_at) {
-			// 		formData.append('post_at', newsItem.post_at.toISOString());
-			// }
-			// if (newsItem.update_at) {
-			// 		formData.append('update_at', newsItem.update_at.toISOString());
-			// }
-			// if (newsItem.id) {
-			// 		formData.append('id', newsItem.id.toString());
-			// }
-
 			const response = await fetch(NEWS, {
 					method: 'POST',
 					headers,
-					body: formData,
+					body:  setFormData(newsItem),
 			});
 			if (!response.ok) {
 					throw new Error('Data loading error');
@@ -76,62 +63,13 @@ export const addNews = async (newsItem: IAddNews) => {
 	}
 };
 
-// export const addNews = async (newsItem: IAddNews) => {
-// 	console.log(newsItem)
-// 	try {
-// 		const response = await fetch(NEWS, {
-// 			method: 'POST',
-// 			headers,
-// 			// body: newsItem:,
-// 			body: JSON.stringify(newsItem),
-// 		});
-
-// 		if (!response.ok) {
-// 			throw new Error('Data loading error');
-// 		}
-// 		const data = await response.json();
-// 		return data;
-// 	} catch (error) {
-// 		console.error('Error while loading data:', error);
-// 		throw error;
-// 	}
-// };
-
 export const changeNews = async (newsItem: IAddNews, id: string) => {
 	try {
-		const formData = new FormData();
-		for (const [key, value] of Object.entries(newsItem)) {
-			if (key === 'photo') {
-					formData.append(key, value);
-			} else if (value instanceof Date) {
-					formData.append(key, value.toISOString());
-			} else if (value !== undefined) {
-					formData.append(key, value.toString());
-			}
-	}
-		// formData.append('title', newsItem.title);
-		// formData.append('sub_text', newsItem.sub_text);
-		// formData.append('title_en', newsItem.title_en);
-		// formData.append('sub_text_en', newsItem.sub_text_en);
-		// formData.append('url', newsItem.url);
-		// formData.append('photo', newsItem.photo);
-		// if (newsItem.post_at) {
-		// 		formData.append('post_at', newsItem.post_at.toISOString());
-		// }
-		// if (newsItem.update_at) {
-		// 		formData.append('update_at', newsItem.update_at.toISOString());
-		// }
-		// if (newsItem.id) {
-		// 		formData.append('id', newsItem.id.toString());
-		// }
-		console.log(newsItem)
-		console.log(id)
 		const response = await fetch(`${NEWS}/${id}`, {
 			method: 'PUT',
 			headers,
-			body: formData,
+			body: setFormData(newsItem),
 		});
-		console.log(id)
 		if (!response.ok) {
 			throw new Error('Data loading error');
 		}

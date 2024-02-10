@@ -91,6 +91,11 @@
 	}
 }
 
+// .wrapper {
+// 	padding: 16px 0;
+// 	height: 200px;
+// }
+
 .info {
 	margin: 16px 0;
 	height: 200px;
@@ -98,7 +103,12 @@
 	flex-direction: column;
 	justify-content: space-between;
 	@include small-desktop {
-		// max-height: 151px;
 		overflow: hidden;
 	}
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
