@@ -1,4 +1,5 @@
 import ReactPlayer from 'react-player/youtube';
+import { useTranslation } from 'react-i18next';
 import { FaPaw } from 'react-icons/fa6';
 
 import playButtonImg from '../../assets/video_main/Play.svg';
@@ -6,10 +7,12 @@ import style from './VideoAboutShelter.module.scss'
 
 
 const VideoAboutShelter = () => {
+  const { t } = useTranslation();
+
   return (
     <section className={style.section}>
       <div className={style.caption__container}>
-        <h2 className={style.caption}>Зануртеся в наш світ та відчуйте безмежну собачу любов! </h2>
+        <h2 className={style.caption}>{t('aboutVideo.title') }</h2>
         <div className={style.icon}>
           <FaPaw />
           <FaPaw/>

@@ -10,7 +10,7 @@ interface StatisticsProps {
   data: UseQueryResult<FetchAboutResult, Error>;
 }
 
-const Statistics:React.FC<StatisticsProps> = ({data}) => {
+const Statistics: React.FC<StatisticsProps> = ({ data }) => {
   const { data: statistics, isPending, isError, error } = data;
   const { t } = useTranslation();
 

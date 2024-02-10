@@ -27,7 +27,7 @@ export const AuthContext = createContext<AuthContextType>(initialAuthContext);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [token, setToken] = useState<string | null>(null);
-	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
 	const [isPending, setIsPending] = useState<boolean>(false);
 
 	const login = async (email: string, password: string) => {
