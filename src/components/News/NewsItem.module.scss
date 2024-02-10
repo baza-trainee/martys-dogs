@@ -1,17 +1,6 @@
 @import '../../scss/variables';
 @import '../../scss/mixins';
 
-//  move  img  and ul  in  common  styles file
-img {
-	display: block;
-	max-width: 100%;
-	height: auto;
-}
-
-ul {
-	list-style: none;
-}
-
 .item {
 	max-width: 353px;
 	display: none;
@@ -27,7 +16,6 @@ ul {
 	}
 
 	@include small-desktop {
-		// max-width: 255px;
 		display: grid;
 		grid-template-rows: auto 1fr auto;
 	}
@@ -71,7 +59,7 @@ ul {
 }
 
 .title {
-	font-size: 24px;
+	font-size: 26px;
 	font-weight: 800;
 	line-height: 1.2;
 	color: $color-gray-80;
@@ -79,7 +67,7 @@ ul {
 }
 
 .date {
-	font-size: 14px;
+	font-size: 20px;
 	font-weight: 400;
 	line-height: 1.4;
 	color: $color-gray-60;
@@ -88,27 +76,39 @@ ul {
 
 .text {
 	color: $color-gray-80;
+	font-size: 20px;
 	font-weight: 500;
 	line-height: 1.4;
 	@include tablet {
-		max-height: 90px;
+		// max-height: 90px;
 	}
 	@include small-desktop {
 		// max-height: 151px;
-		overflow: hidden;
-		-webkit-line-clamp: 3;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
+		// overflow: hidden;
+		// -webkit-line-clamp: 3;
+		// display: -webkit-box;
+		// -webkit-box-orient: vertical;
 	}
 }
 
+// .wrapper {
+// 	padding: 16px 0;
+// 	height: 200px;
+// }
+
 .info {
 	margin: 16px 0;
+	height: 200px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	@include small-desktop {
-		max-height: 151px;
 		overflow: hidden;
 	}
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

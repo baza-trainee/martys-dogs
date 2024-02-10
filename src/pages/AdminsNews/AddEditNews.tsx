@@ -7,11 +7,8 @@ import { IAddNews, changeNews ,addNews, fetchNews} from '../../services/adminNew
 import UploadImageInput from '../../components/CommonUI/UploadImageInput/UploadImageInput';
 import HookFormInput from '../../components/CommonUI/HookFormInput/HookFormInput';
 import NewsTextarea from '../../components/NewsTextarea/NewsTextarea';
-import {NewsData} from './AdminNews';
+import {NewsItem} from './AdminNews';
 import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
-
-
-
 interface IFormInputs {
 	title: string;
 	sub_text: string;
@@ -28,15 +25,13 @@ const AddEditNews: React.FC = () => {
 		register,
 		handleSubmit,
 		reset,
-		formState: { errors },
-		// formState: { errors, isValid },
+		formState: { errors, isValid },
 		watch,
 		setValue
 	} = useForm<IFormInputs>({ mode: 'onBlur' });
 
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
-
 	let uploadedImage;
 	const  { newsId } = useParams();
 	const isAddMode = !newsId;
@@ -46,44 +41,32 @@ const AddEditNews: React.FC = () => {
 			if(isAddMode){
 			return	addNews(newsItem).then((item) => console.log(item))}
 	else {
-			return	changeNews(newsItem, newsId).then((item) => console.log('changeNews',item))
+			return	changeNews(newsItem, newsId).then(() => console.log('changeNews'))
 			}
-
 		},
-
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['news'] });
+			queryClient.invalidateQueries({queryKey: ['news']})
 			reset();
 			navigate('/admin/news');
 		},
 	});
 
 	//// get all  news  to  find news for  edit  and  fill  edit form  with  its info
-	const data = useQuery<NewsData>({
+	const { data: news } = useQuery<NewsItem[]>({
 		queryKey: ['news'],
 		queryFn: fetchNews,
-		refetchInterval: 600000,
 	});
 
-	const { data: news } = data;
-	const newsToEdit = news?.news.find((item) => item.id === Number(newsId))
-	// console.log(newsToEdit)
-	// console.log(newsToEdit?.photo)
-
+	const newsToEdit = news?.find((item) => item.id === Number(newsId))
 useEffect(() => {
 	// need  get by id news ???
 const  fields:string[]= ['photo', 'url', 'title', 'title_en', 'sub_text', 'sub_text_en']
 fields.forEach((field )=> {
 	if(newsToEdit){
 		// @ts-expect-error   TO FIX type error
-		setValue(field, newsToEdit[field as keyof typeof newsToEdit])
-	// 	field === 'photo' ?
-	// 	console.log(newsToEdit?.photo?.name) :
-	// setValue(field, newsToEdit[field as keyof typeof newsToEdit])
-}
+		setValue(field, newsToEdit[field as keyof typeof newsToEdit])}
 })
 }, [newsToEdit, setValue])
-
 
 	const onSubmitHandler: SubmitHandler<IFormInputs> = (data) => {
 		uploadedImage = data?.photo?.[0];
@@ -95,7 +78,6 @@ fields.forEach((field )=> {
 			update_at: newsDate,
 		};
 	mutate(addedNews);
-		// reset();
 	};
 
 	const onCancelHandler = () => {
@@ -166,7 +148,7 @@ fields.forEach((field )=> {
 						type={'text'}
 						id={'title'}
 						placeholder={'Enter news title'}
-						maxLength={30}
+						maxLength={60}
 					/>
 					<HookFormInput
 						label={'News title'}
@@ -175,7 +157,7 @@ fields.forEach((field )=> {
 								required:
 									'Вкажіть заголовок новини англійською',
 								pattern: {
-									value: /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
+									value: /^[a-zA-Z0-9 !`@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
 									message:
 										'можуть бути  цифри, англійські  літери, розділові знаки',
 								},
@@ -185,7 +167,7 @@ fields.forEach((field )=> {
 						type={'text'}
 						id={'title_en'}
 						placeholder={'Enter news title'}
-						maxLength={30}
+						maxLength={60}
 					/>
 				</div>
 				<div className={styles.group}>
@@ -203,7 +185,7 @@ fields.forEach((field )=> {
 						}}
 						id={'sub_text'}
 						placeholder={'Enter news text'}
-						maxLength={250}
+						maxLength={150}
 						errorMessage={errors['sub_text']?.message}
 					/>
 					<NewsTextarea
@@ -212,7 +194,7 @@ fields.forEach((field )=> {
 							...register('sub_text_en', {
 								required: 'Вкажіть текст новини англійською',
 								pattern: {
-									value: /^[a-zA-Z0-9!@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
+									value: /^[a-zA-Z0-9 !`@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
 									message:
 										'Можуть бути   англійські  літери,цифри, символи',
 								},
@@ -220,15 +202,15 @@ fields.forEach((field )=> {
 						}}
 						id={'sub_text_en'}
 						placeholder={'Enter news text'}
-						maxLength={250}
+						maxLength={150}
 						errorMessage={errors['sub_text_en']?.message}
 					/>
 				</div>
 				<div className={styles.button_wrapper}>
 					<button
-						className={styles.addButton}
+						className={isValid ?  styles.addButton : styles.disable}
 						type='submit'
-						// disabled={!isValid}
+						disabled={!isValid}
 					>
 						{isAddMode ?  'Додати' : 'Оновити'}
 					</button>
