@@ -14,7 +14,7 @@ const AddPartner: React.FC = () => {
   const addPartnerMutation = useMutation({
     mutationFn:(data: PartnersStateType) => requestAdminPage('POST', '/partners', data)
 });
-
+const queryClient = useQueryClient();
   const handleSubmit = (state: PartnersStateType) => {
     const formData = createFormData(state);
 
@@ -23,6 +23,7 @@ const AddPartner: React.FC = () => {
     addPartnerMutation.mutate(transformFormData(formData), {
       onSuccess: () => {
         console.log('Add partner successful!');
+        queryClient.invalidateQueries({ queryKey: ['partners'] });
         navigate('/admin/partners');
       },
       onError: () => {
