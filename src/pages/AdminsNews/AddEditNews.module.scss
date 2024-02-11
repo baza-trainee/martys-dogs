@@ -4,7 +4,6 @@
 .addButton {
 	padding: 30px;
 	display: flex;
-	// min-width: 100px;
 	width: 153px;
 	max-height: 55px;
 	justify-content: center;
@@ -22,6 +21,16 @@
 	}
 }
 
+.disable{
+	composes: addButton;
+	background-color: $color-gray-60;
+cursor: auto;
+&:hover {
+	background-color: $color-gray-60;
+	pointer-events: none;
+}
+}
+
 .button_wrapper {
 	display: flex;
 	justify-content: center;
@@ -32,10 +41,7 @@
 .container {
 	padding: 35px;
 	width: 100%;
-	// gap: 32px;
-	// display: flex;
-	// flex-direction: column;
-	// background-color: $color-gray-0;
+	// background-color: $color-gray-40
 }
 
 .title {
@@ -47,11 +53,4 @@
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	gap: 30px;
-	// display: flex;
-	// justify-content: space-between;
 }
-
-// .form {
-// 	outline: none;
-// 	border-style: none;
-// }

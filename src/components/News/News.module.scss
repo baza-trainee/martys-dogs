@@ -6,28 +6,13 @@
 }
 
 .section {
-	// max-width: 1920px;
-	// margin: auto;
-	// padding: 40px 20px;
 	background-color: $color-main-bg;
-
-	// @include tablet {
-	// 	padding-top: 80px;
-	// 	padding-bottom: 52px;
-	// 	padding-left: 32px;
-	// 	padding-right: 32px;
-	// }
-
-	// @include small-desktop {
-	// 	padding: 100px;
-	// }
 }
 
 .wrapper {
 	max-width: 1920px;
 	margin: 0 auto;
 	padding: 40px 20px;
-	// background-color: $color-main-bg;
 
 	@include tablet {
 		padding-top: 80px;
@@ -39,9 +24,6 @@
 	@include small-desktop {
 		padding: 100px;
 	}
-	// @include full-desktop {
-	// 	max-width: 1920px;
-	// }
 }
 
 .title {
@@ -66,7 +48,6 @@
 	@include tablet {
 		grid-template: 1fr / repeat(2, 1fr);
 		column-gap: 20px;
-		// row-gap: 32px;
 	}
 
 	@include small-desktop {

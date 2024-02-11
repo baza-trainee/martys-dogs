@@ -1,12 +1,10 @@
 import NewsItem, { NewsItemProps } from './NewsItem';
-
 import { LandingData } from '../../pages/Landing/Landing';
 import { UseQueryResult } from '@tanstack/react-query';
 import styles from './News.module.scss';
 import { useTranslation } from 'react-i18next';
-
-// import { news } from './data';
-
+import { Loader } from '../CommonUI/LoaderAndError/LoaderAndError';
+// import {data} from './data'
 interface NewsProps {
 	data: UseQueryResult<LandingData, Error>;
 }
@@ -20,9 +18,7 @@ const News: React.FC<NewsProps> = ({ data }) => {
 
 	if (isPending) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.loading}></div>
-			</div>
+		<Loader/>
 		);
 	}
 

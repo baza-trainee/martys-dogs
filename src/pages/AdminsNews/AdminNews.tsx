@@ -4,14 +4,13 @@ import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError'
 import AdminNewsItem, { NewsItemProps } from '../AdminsNews/AdminNewsItem';
 import AddButton from '../../components/CommonUI/AddButton/AddButton';
 import { fetchNews } from '../../services/adminNews';
-
 interface Photo {
 	id: string;
 	name: string;
 	url: string;
 	category: string;
 }
-interface NewsItem {
+export  interface NewsItem {
 	id: number;
 	title: string;
 	post_at: string;
@@ -26,15 +25,11 @@ export interface NewsData {
 }
 
 const AdminNews: React.FC = () => {
-	const data = useQuery<NewsData>({
+	const {data:news, isPending, isError, error} = useQuery<NewsItem[]>({
 		queryKey: ['news'],
 		queryFn: fetchNews,
-		refetchInterval: 600000,
 	});
 
-	const { data: news, isPending, isError, error } = data;
-
-	console.log(news?.news);
 	if (isPending) {
 		return (
 			<Loader/>
@@ -56,7 +51,7 @@ const AdminNews: React.FC = () => {
 			</div>
 			<AddButton path='news_add' text='новину' />
 			<ul className={styles.news}>
-				{news?.news.map((item: NewsItemProps) => (
+				{news.map((item: NewsItemProps) => (
 					<AdminNewsItem key={item.id} {...item} />
 				))}
 			</ul>

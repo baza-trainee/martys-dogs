@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import ItemActions from '../../components/CommonUI/ItemActions/ItemActions';
 import { deleteNews } from '../../services/adminNews';
 import styles from './AdminNewsItem.module.scss';
 import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
-
 export interface NewsItemProps {
 	id: number;
 	title: string;
@@ -14,7 +14,7 @@ export interface NewsItemProps {
 	photo: {
 		// id: string;
 		// name: string;
-		url: string;
+		url?: string;
 		// category: string;
 	};
 }
@@ -51,8 +51,8 @@ const NewsItem: React.FC<NewsItemProps> = ({
 		return stringDate;
 	};
 
-
 	const queryClient = useQueryClient();
+	const navigate=useNavigate()
 	const {mutate, isError, isPending, error} = useMutation({
 		mutationFn: (id:number) =>
 			deleteNews(id).then((item) => console.log(item)),
@@ -65,6 +65,11 @@ const NewsItem: React.FC<NewsItemProps> = ({
 console.log('delete news')
 mutate(id);
 	}
+
+	const editNewsHandler=(id:number)=>{
+		console.log(id)
+		navigate(`news_edit:${id}`)
+			}
 
 	if (isPending) {
 		return (
@@ -83,15 +88,15 @@ mutate(id);
 	return (
 		<li className={styles.item}>
 			<div className={styles.thumb}>
-				<img src={photo.url} alt='photo' className={styles.photo} />
+				<img src={photo?.url} alt='photo' className={styles.photo} />
 			</div>
 			<div className={styles.info}>
 				<h3 className={styles.title}>{title}</h3>
 				<p className={styles.date}>{getDateName(post_at)}</p>
 				<p className={styles.text}>{sub_text}</p>
 			</div>
-			{/* <a href={url} target='blank' rel='noopener noreferrer'></a> */}
-			<ItemActions path='news_edit' onClick={()=>deleteNewsHandler(id)} />
+			<ItemActions path={`news_edit/${id}`} onDeleteClick={()=>deleteNewsHandler(id)} onEditClick={()=>editNewsHandler(id)} />
+
 		</li>
 	);
 };
