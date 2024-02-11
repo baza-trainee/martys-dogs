@@ -21,69 +21,61 @@ interface IFormInputs {
 }
 
 const AddEditNews: React.FC = () => {
-	const {
-		register,
-		handleSubmit,
-		reset,
-		formState: { errors, isValid },
-		watch,
-		setValue
-	} = useForm<IFormInputs>({ mode: 'onBlur' });
-
+	const { register, handleSubmit, reset, formState: { errors, isValid }, watch, setValue } = useForm<IFormInputs>({ mode: 'onBlur' });
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
-	let uploadedImage;
-	const  { newsId } = useParams();
+	const { newsId } = useParams();
 	const isAddMode = !newsId;
 
-	const {mutate, isError, isPending, error} = useMutation({
-		mutationFn: (newsItem: IAddNews) => {
-			if(isAddMode){
-			return	addNews(newsItem).then((item) => console.log(item))}
-	else {
-			return	changeNews(newsItem, newsId).then(() => console.log('changeNews'))
-			}
-		},
-		onSuccess: () => {
-			queryClient.invalidateQueries({queryKey: ['news']})
-			reset();
-			navigate('/admin/news');
-		},
+	const { mutate, isError, isPending, error } = useMutation({
+			mutationFn: (newsItem: IAddNews) => {
+					if (isAddMode) {
+							return addNews(newsItem).then((item) => console.log(item));
+					} else {
+							return changeNews(newsItem, newsId).then(() => console.log('changeNews'));
+					}
+			},
+			onSuccess: () => {
+					queryClient.invalidateQueries({ queryKey: ['news'] });
+					reset();
+					navigate('/admin/news');
+			},
 	});
 
-	//// get all  news  to  find news for  edit  and  fill  edit form  with  its info
 	const { data: news } = useQuery<NewsItem[]>({
-		queryKey: ['news'],
-		queryFn: fetchNews,
+			queryKey: ['news'],
+			queryFn: fetchNews,
 	});
 
-	const newsToEdit = news?.find((item) => item.id === Number(newsId))
-useEffect(() => {
-	// need  get by id news ???
-const  fields:string[]= ['photo', 'url', 'title', 'title_en', 'sub_text', 'sub_text_en']
-fields.forEach((field )=> {
-	if(newsToEdit){
-		// @ts-expect-error   TO FIX type error
-		setValue(field, newsToEdit[field as keyof typeof newsToEdit])}
-})
-}, [newsToEdit, setValue])
+	useEffect(() => {
+		const newsToEdit = news?.find((item) => item.id === Number(newsId));
+		if (newsToEdit) {
+				const fields: (keyof IAddNews)[] = ['photo', 'url', 'title', 'title_en', 'sub_text', 'sub_text_en'];
+				fields.forEach((field) => {
+					if (field !== 'id' && field in newsToEdit) {
+							setValue(field, newsToEdit[field as keyof typeof newsToEdit] as string);
+					}
+			});
+		}
+}, [news, newsId, setValue]);
 
-	const onSubmitHandler: SubmitHandler<IFormInputs> = (data) => {
-		uploadedImage = data?.photo?.[0];
-		const newsDate = new Date();
-		const addedNews = {
-			...data,
-			photo: uploadedImage,
-			post_at: newsDate,
-			update_at: newsDate,
-		};
-	mutate(addedNews);
+const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
+			const uploadedImage = data?.photo?.[0];
+			const newsDate = new Date();
+			const addedNews = {
+					...data,
+					photo: uploadedImage,
+					post_at: newsDate,
+					update_at: newsDate,
+			};
+			mutate(addedNews);
 	};
 
 	const onCancelHandler = () => {
-		reset();
-		navigate('/admin/news');
+			reset();
+			navigate('/admin/news');
 	};
+
 
 	if (isPending) {
 		return (

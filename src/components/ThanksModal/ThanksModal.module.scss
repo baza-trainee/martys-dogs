@@ -16,42 +16,19 @@
 		display: block;
 		width: 200px;
 		height: 400px;
-		// height: 100%;
-		background-image: url('../../assets/modal/thanks/768_1x.webp');
+		background-image: url('../../assets/modal/thanks/768_2x.webp');
 		background-size: cover;
 	}
 	@include small-desktop {
 		width: 360px;
 		// height: 532px;
 		height: auto;
-		background-image: url('../../assets/modal/thanks/1280_1x.webp');
+		background-image: url('../../assets/modal/thanks/1280_2x.webp');
 	}
 	@include large-desktop {
 		width: 360px;
 		height: 600px;
-		background-image: url('../../assets/modal/thanks/1440_1x.webp');
-	}
-	@include full_desktop {
-		background-image: url('../../assets/modal/thanks/1920_1x.webp');
-	}
-}
-
-@media (min-device-pixel-ratio: 2),
-	(min-resolution: 192dpi),
-	(min-resolution: 2dppx) {
-	.thumb {
-		@include tablet {
-			background-image: url('../../assets/modal/thanks/768_2x.webp');
-		}
-		@include small-desktop {
-			background-image: url('../../assets/modal/thanks/1280_2x.webp');
-		}
-		@include large-desktop {
-			background-image: url('../../assets/modal/thanks/1440_2x.webp');
-		}
-		@include full-desktop {
-			background-image: url('../../assets/modal/thanks/1920_2x.webp');
-		}
+		background-image: url('../../assets/modal/thanks/1920_2x.webp');
 	}
 }
 

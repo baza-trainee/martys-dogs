@@ -2,14 +2,11 @@ import { FaAngleRight } from 'react-icons/fa6';
 import { useTranslation } from 'react-i18next';
 import styles from './ThanksModal.module.scss';
 import Button from '../../layout/Button/Button';
-// import { Link } from 'react-router-dom';
 import { useModalContext } from '../../context/useGlobalContext';
 import { useNavigate } from 'react-router-dom';
 
 const ThanksModal: React.FC = () => {
 	const { t } = useTranslation();
-	// const modalContext = useModalContext();
-	// const closeModal = modalContext?.closeModal || (() => {});
 	const { closeModal } = useModalContext();
 	const navigate = useNavigate();
 	const returnToHome = () => {
