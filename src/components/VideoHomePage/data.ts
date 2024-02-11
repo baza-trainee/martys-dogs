@@ -1,15 +1,19 @@
-import mainMobile from '../../assets/video_main/girl/girl393.webp';
-import mainTablet from '../../assets/video_main/girl/girl768.webp';
-import mainLaptop from '../../assets/video_main/girl/girl1280.webp';
-import mainLargeScreen from '../../assets/video_main/girl/girl1920.webp';
-import therapyMobile from '../../assets/video_main/boy/boy393.webp';
-import therapyTablet from '../../assets/video_main/boy/boy768.webp';
-import therapyLaptop from '../../assets/video_main/boy/boy1280.webp';
-import therapyLargeScreen from '../../assets/video_main/boy/boy1920.webp';
+import mainMobile from '../../assets/video_main/girla/girl393.webp';
+import mainTablet from '../../assets/video_main/girla/girl768.webp';
+import mainLaptop from '../../assets/video_main/girla/girl1280.webp';
+import mainDesktop from '../../assets/video_main/girla/girl1440.webp';
+import mainLargeScreen from '../../assets/video_main/girla/girl768.webp';
+import therapyMobile from '../../assets/video_main/boys/boys393.webp';
+import therapyTablet from '../../assets/video_main/boys/boys768.webp';
+import therapyLaptop from '../../assets/video_main/boys/boys1280.webp';
+import therapyDesktop from '../../assets/video_main/boys/boys1440.webp';
+import therapyLargeScreen from '../../assets/video_main/boys/boys1920.webp';
 import pawsImg from '../../assets/video_main/VectorPaws.svg';
 import playButtonImg from '../../assets/video_main/Play.svg';
-import mainDesktop from '../../assets/video_main/girl/girl1440.webp';
-import therapyDesktop from '../../assets/video_main/boy/boy1440.webp';
+import mainDesktop2x from '../../assets/video_main/girla/girl1440@2xcopy.jpg';
+import therapyDesktop2x from '../../assets/video_main/boys/boys@2x1440copy.jpg';
+
+
 
 export const videoLinks = {
 	main: 'https://www.youtube.com/watch?v=2igwkVve1nk',
@@ -32,7 +36,7 @@ export const mainPosters = [
 	{
 		srcSet: `${mainTablet} 768w, ${mainLaptop} 1260w`,
 		mediaQuery: mediaQueryCommon.tablet,
-		width: '1300px',
+		width: '1200px',
 	},
 	{
 		srcSet: mainLaptop,
@@ -40,7 +44,7 @@ export const mainPosters = [
 		width: '1250px',
 	},
 	{
-		srcSet: mainDesktop,
+		srcSet: `${mainDesktop} 1800w, ${mainDesktop2x} 1900w`,
 		mediaQuery: mediaQueryCommon.desktop,
 		width: '1800px',
 	},
@@ -66,7 +70,7 @@ export const therapyPosters = [
 		width: '1250px',
 	},
 	{
-		srcSet: therapyDesktop,
+		srcSet: `${therapyDesktop} 1800w, ${therapyDesktop2x} 1900w`,
 		mediaQuery: mediaQueryCommon.desktop,
 		width: '1800px',
 	},
