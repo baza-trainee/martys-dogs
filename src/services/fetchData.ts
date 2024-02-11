@@ -1,7 +1,7 @@
 import { LandingData } from '../pages/Landing/Landing';
 import { OurTailsData } from '../pages/OurTails/OurTails';
 
-/*import { useQuery, useMutation, UseQueryOptions } from '@tanstack/react-query';*/
+
 const HOME = 'https://matys-dogs2.onrender.com';
 const ABOUT = 'https://matys-dogs2.onrender.com/about-us';
 const LOGIN = 'https://matys-dogs2.onrender.com/login';
@@ -196,70 +196,4 @@ export const getIsAuth = async (token: string): Promise<getIsAuthResponse> => {
 	}
 }
 
-/* Universal fetch  + query examples */
-
-/*
-const BASE_URL = 'https://matys-dogs2.onrender.com';
-
-const fetchData1 = async (url: string, method = 'GET', data: any = null) => {
-	try {
-	  const response = await fetch(`${BASE_URL}${url}`, {
-		method,
-		headers: {
-		  'Content-Type': 'application/json',
-		},
-		body: data ? JSON.stringify(data) : null,
-	  });
-
-	  if (!response.ok) {
-		throw new Error('Request failed');
-	  }
-
-	  const responseData = await response.json();
-
-	  console.log(`Fetch Data from ${url}:`, responseData);
-
-	  return responseData;
-	} catch (error) {
-
-	  console.error(`Error fetching data from ${url}:`, error);
-	  throw error;
-	}
-  };
-
-
-
-export const useFetchHome1 = () => {
-  return useQuery({
-    queryKey: ['/'],
-    queryFn: () => fetchData1('/'),
-  });
-};
-
-export const useFetchAbout1 = () => {
-	return useQuery({
-	  queryKey: ['/about'],
-	  queryFn: () => fetchData1('/about'),
-	});
-  };
-
-  export const useFetchCatalog1 = () => {
-	return useQuery({
-	  queryKey: ['/catalog'],
-	  queryFn: () => fetchData1('/catalog'),
-	});
-  };
-
-
-export const useLoginUser1 = () => {
-  const loginMutation = useMutation({
-    mutationFn: ({ email, password }: { email: string; password: string }) =>
-	fetchData1('/login', 'POST', { email, password }),
-    onSuccess: () => {
-      console.log("Posted login successfully")
-    },
-  });
-
-  return loginMutation;
-};
 */

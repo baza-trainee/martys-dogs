@@ -14,6 +14,7 @@ export interface PartnersProps {
 const Partners: React.FC<PartnersProps> = ({ data }) => {
 	const { t } = useTranslation();
 	const { isPending, isError, error, data: responseData } = data;
+	console.log(data)
 
 	if (isPending) {
 		return <Loader />;
