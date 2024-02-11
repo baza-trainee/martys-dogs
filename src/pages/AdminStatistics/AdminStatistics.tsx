@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { fetchAbout } from '../../services/fetchData';
+import { Loader,ErrorAlert } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 import ModalAdminStatistics from './ModalAdminStatistics';
+import styles from './AdminStatistics.module.scss';
 
 const AdminStatistics = () => {
 	const data = useQuery({
@@ -11,38 +13,44 @@ const AdminStatistics = () => {
 		refetchInterval: 60000,
 	});
 
-	const { data: statistics, isPending, isError, error, status } = data;
-	console.log(data)
-	const [animals, setAnimals] = useState(statistics?.about_data[0]?.quantity_of_animals);
-	const [employees, setEmployees] = useState(statistics?.about_data[0]?.quantity_of_employees);
-	const [adoptions, setAdoptions] = useState(statistics?.about_data[0]?.quantity_of_succeeds_adoptions);
+	const { data: statistics, isPending, isError, error, isSuccess } = data;
+
+	const dataAnimals = statistics?.about_data[0]?.quantity_of_animals;
+	const dataEmployees = statistics?.about_data[0]?.quantity_of_employees;
+	const dataAdoptions= statistics?.about_data[0]?.quantity_of_succeeds_adoptions
+	
+	const [animals, setAnimals] = useState(dataAnimals);
+	const [employees, setEmployees] = useState(dataEmployees);
+	const [adoptions, setAdoptions] = useState(dataAdoptions);
 	const [openModal, setOpenModal] = useState(false)
 
 	useEffect(() => {
-	if (status === 'success') {
-		setAnimals(statistics?.about_data[0]?.quantity_of_animals);
-		setEmployees(statistics?.about_data[0]?.quantity_of_employees);
-		setAdoptions(statistics?.about_data[0]?.quantity_of_succeeds_adoptions)
+	if (isSuccess) {
+		setAnimals(dataAnimals);
+		setEmployees(dataEmployees);
+		setAdoptions(dataAdoptions)
 	}	
-	},[status,statistics?.about_data])
-	console.log(data)
+	},[isSuccess,dataAnimals,dataEmployees,dataAdoptions])
 	
-	
-	if (isPending) {
-		return <div>Loading...</div>
-	}
-
-	if (isError) {
-		<div >{error.message}</div>
-	}
 
 	const onHandleClick = () => {
 		setOpenModal(!openModal)
 	}
+
+	const onButtonClick = () => {
+		setOpenModal(!openModal)
+	}
 		
 	return (
-		status === 'success' && (<div>
-			<table>
+	
+		
+			<div className={styles.main}>
+			<h2 className={styles.title}>Статистика</h2>
+			{isPending && <Loader />}
+			{isError && <ErrorAlert errorMessage={error.message} />}
+			{isSuccess && <>
+				<table className={styles.table}>
+				
 				<thead>
 					<tr>
 						<th>Назва</th>
@@ -64,10 +72,11 @@ const AdminStatistics = () => {
 					</tr>
 				</tbody>
 			</table>
-			<button onClick={onHandleClick}>Змінити</button>
-			{openModal && <ModalAdminStatistics animals={animals} employees={employees} adoptions={adoptions} />}
+				<button onClick={onHandleClick} className={styles.button}>Змінити</button>
+			</> }
+			{openModal && <ModalAdminStatistics animals={animals} employees={employees} adoptions={adoptions} onClick={onButtonClick}/>}
 		</div>)
-	)
+	
 }
 
 export default AdminStatistics;
