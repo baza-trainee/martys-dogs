@@ -6,7 +6,8 @@
 	flex-direction: column;
 	gap: 32px;
 	padding: 15px;
-	width: 100%;
+	width: 100vw;
+	background-color: $color-gray-20;
 
 	.title {
 		margin-right: auto;
@@ -65,59 +66,7 @@
 				background: $color-gray-40;
 				color: $color-gray-80;
 			}
-		}
-
-		.searchBox {
-			background: $color-accent;
-			height: 60px;
-			border-radius: 40px;
-			padding: 10px;
-
-			margin-left: auto;
-		}
-
-		.searchBox:hover > .searchInput {
-			width: 180px;
-
-			padding: 0 6px;
-			@include tablet {
-				width: 250px;
-				padding: 0 10px;
-			}
-			@include small_desktop {
-				width: 300px;
-			}
-		}
-
-		.searchBox:hover > .searchButton {
-			background: $color-gray-0;
-			color: $color-accent;
-		}
-
-		.searchButton {
-			color: $color-gray-0;
-			float: right;
-			width: 40px;
-			height: 40px;
-			border-radius: 50%;
-			background: $color-accent;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			transition: 0.4s;
-		}
-
-		.searchInput {
-			border: none;
-			background: none;
-			outline: none;
-			padding: 0;
-			color: $color-gray-0;
-			font-size: 16px;
-			transition: 0.4s;
-			line-height: 40px;
-			width: 0px;
-		}
+		}		
 	}
 
 	.logoContainer {
@@ -141,7 +90,7 @@
 			}
 
 			img {
-				width: 100%;
+				width: 200px;
 				height: auto;
 			}
 
@@ -169,22 +118,5 @@
 		}
 	}
 
-	.loadMore {
-		margin: 10px auto;
-		.loadButton {
-			font-size: 18px;
-			padding: 12px;
-			min-width: 200px;
-			border: 1px solid $color-accent;
-			color: $color-accent;
-			background-color: $color-main-bg;
-			border-radius: 40px;
-			transition: all 0.3s ease;
-			width: 100%;
-			@include tablet {
-				width: auto;
-			}
-			
-		}
-	}
+
 }
