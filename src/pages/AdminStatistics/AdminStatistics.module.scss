@@ -1,0 +1,45 @@
+@import '../../scss/_variables.scss';
+
+
+.main{
+  position:relative ;
+    background-color: #dbdbdb;
+      width: 100%;
+      padding: 100px;
+      
+      .table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+      
+        td {
+          padding: 20px;
+          border: 1px solid $color-main-blue-dark;
+          max-width: 500px;
+        }
+      
+        th {
+          text-align: left;
+          padding: 20px;
+        }
+}
+.title{
+    margin-bottom: 50px;
+}
+
+.button{
+    display: block;
+    width: 200px;
+    padding: 5px 10px;
+    margin: 20px auto 0px auto;
+    color: $color-gray-0;
+    background-color: $color-main-blue-mid;
+    border-radius: 40px;
+    transition: all 0.3s ease;
+    font-size: 16px;
+  
+    &:hover {
+      background: $color-main-blue-dark;
+      color: $color-gray-0;
+    }
+}
