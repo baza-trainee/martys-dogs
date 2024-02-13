@@ -37,6 +37,7 @@ const Tail: React.FC<TailProps> = ({
 	size,
 	description,
 	photo,
+	disabled
 }) => {
 	const { t } = useTranslation();
 	const { openModal, activateModal, activeModal } = useModalContext();
@@ -104,6 +105,7 @@ const Tail: React.FC<TailProps> = ({
 							type={'button'}
 							name={t('tail.donate')}
 							onClick={() => scrollToSection('support')}
+							disabled={disabled}
 						></Button>
 					</div>
 					{ready_for_adoption && (
@@ -113,6 +115,7 @@ const Tail: React.FC<TailProps> = ({
 								type={'button'}
 								name={t('tail.adopt')}
 								onClick={handleModal}
+								disabled={disabled}
 							></Button>
 						</div>
 					)}

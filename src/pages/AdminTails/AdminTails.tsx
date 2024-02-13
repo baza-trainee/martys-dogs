@@ -8,6 +8,7 @@ import { scrollOnTop } from '../../services/scrollTo';
 import { fetchTails } from '../../services/fetchAdminTails';
 import TailsList from './TailsList';
 import TailForm from './TailForm';
+import { FaRegPlusSquare } from 'react-icons/fa';
 
 
 export interface Photo {
@@ -70,7 +71,7 @@ const AdminTails = () => {
 					<Button
 						onClick={handleShowForm}
 						type={'button'}
-						btnClasses={'primary'} name={'Додати Хвостика'} />
+						btnClasses={'primary'} name={'Додати Хвостика'} children={<FaRegPlusSquare />}/>
 
 				</div>
 			</div>

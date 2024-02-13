@@ -137,7 +137,7 @@ const TailsList: React.FC<TailsListProps> = ({ data }) => {
 										key={tail.id}
 										className={styles.catalog_list_card}
 									>
-										<Tail
+										<Tail disabled={true}
 											{...tail}
 										/>
 
