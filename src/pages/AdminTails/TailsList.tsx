@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FaTrash, FaUpload } from 'react-icons/fa';
+import { FaTrash, FaEdit } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import ArrowIconUp from '../../assets/dropdown_arrow_up.svg';
 import ArrowIconDown from '../../assets/dropdown_arrow_down.svg';
@@ -147,7 +147,7 @@ const TailsList: React.FC<TailsListProps> = ({ data }) => {
 											</div>
 
 											<div className={styles.logoActions}>
-												edit
+												<FaEdit className={styles.editIcon} />
 											</div>
 										</div>
 

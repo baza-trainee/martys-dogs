@@ -261,10 +261,21 @@
 
   .editIcon,
   .deleteIcon {
-    margin: 4px;
-    font-size: 16px;
+
     color: #333;
     cursor: pointer;
+  }
+
+
+
+  .deleteIcon {
+    margin: 4px;
+    font-size: 16px;
+  }
+
+  .editIcon {
+    margin: 2px 0;
+    font-size: 19px;
   }
 
   .editIcon:hover,

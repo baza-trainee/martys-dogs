@@ -3,10 +3,11 @@ import Button from '../../layout/Button/Button';
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { scrollOnTop } from '../../services/scrollTo';
 import { fetchTails } from '../../services/fetchAdminTails';
 import TailsList from './TailsList';
+import TailForm from './TailForm';
 
 
 export interface Photo {
@@ -39,6 +40,7 @@ export type AdminTailsData = TailsListData[];
 
 
 const AdminTails = () => {
+	const [showForm, setShowForm] = useState(false);
 	const location = useLocation();
 	const data = useQuery<AdminTailsData>({
 		queryKey: ['tailslist'],
@@ -50,33 +52,30 @@ const AdminTails = () => {
 		location.pathname === '/' && !location.hash ? scrollOnTop() : null;
 	}, [location]);
 
+
+	const handleShowForm = () => {
+		setShowForm(true);
+	};
 	return (
 		<div
-			className={styles.container}
-		>
-			<div
-
-			>
-				<h2
-					className={styles.title}
-				>
+			className={styles.container}>
+			<div>
+				<h2 className={styles.title}>
 					Хвостики
 				</h2>
 			</div>
-			<div
-				className={styles.buttonsWrapper}
-			>
 
-				<div
-
-				>
+			<div className={styles.buttonsWrapper}>
+				<div>
 					<Button
-						onClick={() => console.log('open modal for adding new dog')}
+						onClick={handleShowForm}
 						type={'button'}
 						btnClasses={'primary'} name={'Додати Хвостика'} />
 
 				</div>
 			</div>
+
+			{showForm && (<TailForm/>)}
 
 			<TailsList data={data} />
 
