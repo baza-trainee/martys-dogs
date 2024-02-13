@@ -15,7 +15,7 @@ const Login: React.FC = () => {
 		if (isLoggedIn) {
 			navigate('/admin');
 		}
-	}, []);
+	}, [isLoggedIn]);
 
 	const handleLogin = async () => {
 		try {

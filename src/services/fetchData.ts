@@ -6,7 +6,7 @@ const HOME = 'https://matys-dogs2.onrender.com';
 const ABOUT = 'https://matys-dogs2.onrender.com/about-us';
 const LOGIN = 'https://matys-dogs2.onrender.com/login';
 const CATALOG = 'https://matys-dogs2.onrender.com/catalog';
-// const IS_AUTH = '';
+const IS_AUTH = 'https://matys-dogs2.onrender.com/is_auth';
 
 export const fetchHome = async (language: string): Promise<LandingData> => {
 	try {
@@ -105,10 +105,6 @@ export const loginUser = async (
 	}
 };
 
-/*
-
-
-
 // export const fetchHome = async () => {
 // 	try {
 // 		const response = await fetch(TAILS);
@@ -139,40 +135,40 @@ export const loginUser = async (
 // 	}
 // };
 
-interface LoginResponse {
-	message: string;
-	access_token: string;
-}
+// interface LoginResponse {
+// 	message: string;
+// 	access_token: string;
+// }
 
-export const loginUser = async (
-	email: string,
-	password: string,
-): Promise<LoginResponse> => {
-	try {
-		const response = await fetch(LOGIN, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				email,
-				password,
-			}),
-		});
-		if (!response.ok) {
-			throw new Error('Login failed');
-		}
+// export const loginUser = async (
+// 	email: string,
+// 	password: string,
+// ): Promise<LoginResponse> => {
+// 	try {
+// 		const response = await fetch(LOGIN, {
+// 			method: 'POST',
+// 			headers: {
+// 				'Content-Type': 'application/json',
+// 			},
+// 			body: JSON.stringify({
+// 				email,
+// 				password,
+// 			}),
+// 		});
+// 		if (!response.ok) {
+// 			throw new Error('Login failed');
+// 		}
 
-		const data = await response.json();
-		return data;
-	} catch (error) {
-		console.error('Login Error:', error);
-		throw error;
-	}
-};
+// 		const data = await response.json();
+// 		return data;
+// 	} catch (error) {
+// 		console.error('Login Error:', error);
+// 		throw error;
+// 	}
+// };
 
 interface getIsAuthResponse {
-	tokenIsValid: boolean;
+	is_authenticated: boolean;
 }
 
 export const getIsAuth = async (token: string): Promise<getIsAuthResponse> => {
@@ -196,4 +192,3 @@ export const getIsAuth = async (token: string): Promise<getIsAuthResponse> => {
 	}
 }
 
-*/
