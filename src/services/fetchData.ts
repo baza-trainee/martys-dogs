@@ -1,12 +1,12 @@
 import { LandingData } from '../pages/Landing/Landing';
 import { OurTailsData } from '../pages/OurTails/OurTails';
 
-/*import { useQuery, useMutation, UseQueryOptions } from '@tanstack/react-query';*/
+
 const HOME = 'https://matys-dogs2.onrender.com';
 const ABOUT = 'https://matys-dogs2.onrender.com/about-us';
 const LOGIN = 'https://matys-dogs2.onrender.com/login';
 const CATALOG = 'https://matys-dogs2.onrender.com/catalog';
-// const IS_AUTH = '';
+const IS_AUTH = 'https://matys-dogs2.onrender.com/is_auth';
 
 export const fetchHome = async (language: string): Promise<LandingData> => {
 	try {
@@ -105,10 +105,6 @@ export const loginUser = async (
 	}
 };
 
-/*
-
-
-
 // export const fetchHome = async () => {
 // 	try {
 // 		const response = await fetch(TAILS);
@@ -139,40 +135,40 @@ export const loginUser = async (
 // 	}
 // };
 
-interface LoginResponse {
-	message: string;
-	access_token: string;
-}
+// interface LoginResponse {
+// 	message: string;
+// 	access_token: string;
+// }
 
-export const loginUser = async (
-	email: string,
-	password: string,
-): Promise<LoginResponse> => {
-	try {
-		const response = await fetch(LOGIN, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				email,
-				password,
-			}),
-		});
-		if (!response.ok) {
-			throw new Error('Login failed');
-		}
+// export const loginUser = async (
+// 	email: string,
+// 	password: string,
+// ): Promise<LoginResponse> => {
+// 	try {
+// 		const response = await fetch(LOGIN, {
+// 			method: 'POST',
+// 			headers: {
+// 				'Content-Type': 'application/json',
+// 			},
+// 			body: JSON.stringify({
+// 				email,
+// 				password,
+// 			}),
+// 		});
+// 		if (!response.ok) {
+// 			throw new Error('Login failed');
+// 		}
 
-		const data = await response.json();
-		return data;
-	} catch (error) {
-		console.error('Login Error:', error);
-		throw error;
-	}
-};
+// 		const data = await response.json();
+// 		return data;
+// 	} catch (error) {
+// 		console.error('Login Error:', error);
+// 		throw error;
+// 	}
+// };
 
 interface getIsAuthResponse {
-	tokenIsValid: boolean;
+	is_authenticated: boolean;
 }
 
 export const getIsAuth = async (token: string): Promise<getIsAuthResponse> => {
@@ -196,70 +192,3 @@ export const getIsAuth = async (token: string): Promise<getIsAuthResponse> => {
 	}
 }
 
-/* Universal fetch  + query examples */
-
-/*
-const BASE_URL = 'https://matys-dogs2.onrender.com';
-
-const fetchData1 = async (url: string, method = 'GET', data: any = null) => {
-	try {
-	  const response = await fetch(`${BASE_URL}${url}`, {
-		method,
-		headers: {
-		  'Content-Type': 'application/json',
-		},
-		body: data ? JSON.stringify(data) : null,
-	  });
-
-	  if (!response.ok) {
-		throw new Error('Request failed');
-	  }
-
-	  const responseData = await response.json();
-
-	  console.log(`Fetch Data from ${url}:`, responseData);
-
-	  return responseData;
-	} catch (error) {
-
-	  console.error(`Error fetching data from ${url}:`, error);
-	  throw error;
-	}
-  };
-
-
-
-export const useFetchHome1 = () => {
-  return useQuery({
-    queryKey: ['/'],
-    queryFn: () => fetchData1('/'),
-  });
-};
-
-export const useFetchAbout1 = () => {
-	return useQuery({
-	  queryKey: ['/about'],
-	  queryFn: () => fetchData1('/about'),
-	});
-  };
-
-  export const useFetchCatalog1 = () => {
-	return useQuery({
-	  queryKey: ['/catalog'],
-	  queryFn: () => fetchData1('/catalog'),
-	});
-  };
-
-
-export const useLoginUser1 = () => {
-  const loginMutation = useMutation({
-    mutationFn: ({ email, password }: { email: string; password: string }) =>
-	fetchData1('/login', 'POST', { email, password }),
-    onSuccess: () => {
-      console.log("Posted login successfully")
-    },
-  });
-
-  return loginMutation;
-};
-*/

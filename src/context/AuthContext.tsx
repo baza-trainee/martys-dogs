@@ -1,5 +1,5 @@
 import { ReactNode, createContext, useState, useEffect } from 'react';
-import { loginUser } from '../services/fetchData';
+import { loginUser, getIsAuth } from '../services/fetchData';
 
 interface AuthContextType {
 	token: string | null;
@@ -27,7 +27,7 @@ export const AuthContext = createContext<AuthContextType>(initialAuthContext);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const [token, setToken] = useState<string | null>(null);
-	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(true);
+	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 	const [isPending, setIsPending] = useState<boolean>(false);
 
 	const login = async (email: string, password: string) => {
@@ -53,28 +53,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		}
 	};
 
-	// const isAuth = async () => {
-	// 	const token = localStorage.getItem('auth-token');
+	const isAuth = async () => {
+		const localToken = localStorage.getItem('auth-token');
 
-  //   if (!token) {
-  //     return;
-	// 	}
+    if (!localToken) {
+      return;
+		}
 		
-	// 	try {
-	// 		setIsPending(true);
-	// 		const { tokenIsValid } = await getIsAuth(token);
-
-	// 		if (tokenIsValid) {
-	// 			setIsLoggedIn(true);
-	// 			setToken(token);
-	// 		}
-
-	// 		setIsPending(false);
-	// 	} catch (error) {
-	// 		setIsPending(false);
-	// 		console.error('isAuth Error:', error);
-	// 	}
-	// }
+		try {
+			setIsPending(true);
+			const { is_authenticated } = await getIsAuth(localToken);
+			if (is_authenticated) {
+				setIsLoggedIn(true);
+				setToken(localToken);
+			}
+			setIsPending(false);
+		} catch (error) {
+			setIsPending(false);
+			console.error('isAuth Error:', error);
+		}
+	}
 
 	const logout = () => {
 		setIsPending(true);
@@ -93,7 +91,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	};
 
 	useEffect(() => { 
-    // isAuth();
+    isAuth();
   }, []);
 
 	return (
