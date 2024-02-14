@@ -1,18 +1,55 @@
-import { formData } from '../../data';
+import Loader, { ErrorAlert } from '../../components/CommonUI/LoaderAndError/LoaderAndError'
+import { getMessages, updateMessageStatus } from '../../services/adminsMessages'
+import { useEffect, useState } from 'react';
+
 import styles from './AdminForm.module.scss';
-import { useState } from 'react';
+
+// import { formData } from '../../data';
 
 const AdminForm = () => {
-	const [admins, setAdmins] = useState(formData);
+	const [messages, setMessages] = useState([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState(null);
+	useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const data = await getMessages();
+				setMessages(data);
+        setLoading(false);
+      } catch (error) {
+        setError(error);
+        setLoading(false);
+      }
+    };
+    fetchMessages();
+  }, []);
 
-	const handleToggleStatus = (adminId: string) => {
-		setAdmins((prevAdmins) =>
-			prevAdmins.map((admin) =>
-				admin.id === adminId
-					? { ...admin, status: !admin.status }
-					: admin,
-			),
+	if (loading) {
+		return <Loader backgroundColor={'#ebf5fb'} />;
+	}
+
+	if (error) {
+		return (
+			<ErrorAlert
+				errorMessage={error}
+				backgroundColor={'#ebf5fb'}
+			/>
 		);
+	}
+	// console.log(messages);
+
+	const handleToggleStatus = async (messageId: number) => {
+		try {
+			const newStatus = !messages.find(message => message.id === messageId).status;
+			await updateMessageStatus(messageId, newStatus);
+			setMessages(prevMessages =>
+				prevMessages.map(message =>
+					message.id === messageId ? { ...message, status: newStatus } : message
+				)
+			);
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	return (
@@ -21,7 +58,7 @@ const AdminForm = () => {
 			<table className={styles.table}>
 				<thead>
 					<tr>
-						<th>Дата</th>
+						<th>Хвостик</th>
 						<th>Телефон</th>
 						<th>Им'я</th>
 						<th>Повідомлення</th>
@@ -30,23 +67,23 @@ const AdminForm = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{admins.map((admin) => (
-						<tr key={admin.id}>
-							<td>{admin.data}</td>
-							<td>{admin.number}</td>
-							<td>{admin.name}</td>
-							<td>{admin.sms}</td>
+					{messages?.map((message) => (
+						<tr key={message.id}>
+							<td>{message.id_dog.name}</td>
+							<td>{message.phone_number}</td>
+							<td>{message.name}</td>
+							<td>{message.comment}</td>
 							<td>
-								{admin.status ? 'Оброблене' : 'Необроблене'}
+								{message.status ? 'Оброблене' : 'Необроблене'}
 							</td>
 							<td>
 								<button
-									onClick={() => handleToggleStatus(admin.id)}
+									onClick={() => handleToggleStatus(message.id)}
 									className={
-										admin.status ? styles.red : styles.btn
+										message.status ? styles.red : styles.btn
 									}
 								>
-									{admin.status
+									{message.status
 										? 'Розархівувати'
 										: 'Обробити'}
 								</button>
