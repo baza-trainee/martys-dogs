@@ -7,7 +7,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 40px;
-	background-color: $color-gray-20;
+	background-color: $color-gray-40;
 }
 .form {
 	max-width: 1000px;
@@ -43,6 +43,10 @@
 			display: block;
 			font-size: 20px;
 			margin-bottom: 5px;
+			span,p {
+				cursor:pointer;
+			}
+		
 		}
 
 		input {
@@ -68,10 +72,9 @@
 				outline: none;
 			}
 		}
-    .validationError {
-      color:red;
-      text-align: center;
-    }
+		.validationError {
+			color: red;
+		}
 	}
 }
 
