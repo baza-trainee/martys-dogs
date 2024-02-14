@@ -12,6 +12,7 @@ import { UseQueryResult } from '@tanstack/react-query';
 import styles from './Tails.module.scss';
 import { useTranslation } from 'react-i18next';
 import Button from '../../layout/Button/Button';
+import { Loader, ErrorAlert } from '../CommonUI/LoaderAndError/LoaderAndError';
 
 interface Pagination {
 	el: string;
@@ -48,18 +49,15 @@ const Tails: React.FC<TailsProps> = ({ data }) => {
 	const { data: tails, isPending, isError, error } = data;
 
 	if (isPending) {
-		return (
-			<div className={styles.container}>
-				<div className={styles.loading}></div>
-			</div>
-		);
+		return <Loader backgroundColor={'#ebf5fb'} />;
 	}
 
 	if (isError) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.alert}>{error.message}</div>
-			</div>
+			<ErrorAlert
+				errorMessage={error.message}
+				backgroundColor={'#ebf5fb'}
+			/>
 		);
 	}
 
