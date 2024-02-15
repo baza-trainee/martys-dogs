@@ -14,7 +14,6 @@ import Admins from './pages/Admins/Admins';
 import { AuthProvider } from './context/AuthContext';
 import Contacts from './pages/Contacts/Contacts';
 import AddEditNews from './pages/AdminsNews/AddEditNews';
-import EditPartner from './pages/AdminPartners/EditPartner';
 import Error from './pages/Error/Error';
 import HomeLayout from './layout/HomeLayout/HomeLayout';
 import Landing from './pages/Landing/Landing';
@@ -78,10 +77,6 @@ const router = createBrowserRouter([
 			{
 				path: 'partner_add',
 				element: <AddPartner />,
-			},
-			{
-				path: 'partner_edit',
-				element: <EditPartner />,
 			},
 			{
 				path: 'news',
