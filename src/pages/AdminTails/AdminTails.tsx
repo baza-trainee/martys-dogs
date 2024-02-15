@@ -54,8 +54,8 @@ const AdminTails = () => {
 	}, [location]);
 
 
-	const handleShowForm = () => {
-		setShowForm(true);
+	const handleShowForm = (formStatus: boolean) => {
+		setShowForm(formStatus);
 	};
 	return (
 		<div
@@ -76,7 +76,7 @@ const AdminTails = () => {
 				</div>
 			</div>
 
-			{showForm && (<TailForm />)}
+			{showForm && (<TailForm changeShowForm={handleShowForm}/>)}
 
 			<TailsList data={data} />
 

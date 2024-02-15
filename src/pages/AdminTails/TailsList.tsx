@@ -144,24 +144,20 @@ const TailsList: React.FC<TailsListProps> = ({ data }) => {
 
 										<div className={styles.btnContainer}>
 											<div className={styles.btnBox}>
-												{/*<FaTrash className={styles.deleteIcon} />*/}
 												<Button
-													onClick={() => console.log('click')}
+													onClick={() => console.log('delete')}
 													type={'button'}
-													btnClasses={'primary'}  children={<FaTrash  className={styles.deleteIcon}/>}/>
+													btnClasses={'delete'}  children={<FaTrash  className={styles.deleteIcon}/>}/>
 											</div>
 
 											<div className={styles.btnBox}>
-												{/*<FaTrash className={styles.deleteIcon} />*/}
 												<Button
-													onClick={() => console.log('click')}
+													onClick={() => console.log('edit')}
 													type={'button'}
 
-													btnClasses={'primary'}  children={<FaEdit className={styles.editIcon}/>}/>
+													btnClasses={'primary'}  children={<FaEdit />}/>
 											</div>
-										{/*	<div className={styles.logoActions}>
-												<FaEdit className={styles.editIcon} />
-											</div>*/}
+
 										</div>
 
 									</div>))}
