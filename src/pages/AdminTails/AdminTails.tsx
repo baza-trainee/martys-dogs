@@ -71,12 +71,12 @@ const AdminTails = () => {
 					<Button
 						onClick={handleShowForm}
 						type={'button'}
-						btnClasses={'primary'} name={'Додати Хвостика'} children={<FaRegPlusSquare />}/>
+						btnClasses={'add'} name={'Додати Хвостика'} children={<FaRegPlusSquare />} />
 
 				</div>
 			</div>
 
-			{showForm && (<TailForm/>)}
+			{showForm && (<TailForm />)}
 
 			<TailsList data={data} />
 

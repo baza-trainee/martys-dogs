@@ -246,9 +246,11 @@
 
 .btnContainer {
   display: flex;
+  margin-top: 10px;
+  justify-content: space-between;
 }
 
-.logoActions {
+/*.logoActions {
   width: 50%;
   margin-top: auto;
   display: flex;
@@ -259,27 +261,32 @@
   background-color: $color-main-bg;
   border-radius: 30px;
 
-  .editIcon,
-  .deleteIcon {
-
-    color: #333;
-    cursor: pointer;
-  }
+}*/
 
 
+.editIcon,
+.deleteIcon {
 
-  .deleteIcon {
-    margin: 4px;
-    font-size: 16px;
-  }
+  //color: #333;
+  cursor: pointer;
+}
 
-  .editIcon {
-    margin: 2px 0;
-    font-size: 19px;
-  }
 
-  .editIcon:hover,
-  .deleteIcon:hover {
-    color: $color-accent;
-  }
+
+.deleteIcon {
+  margin: 4px;
+  font-size: 16px;
+}
+
+.editIcon {
+  margin: 2px 0;
+  //font-size: 24px;
+}
+
+.editIcon:hover,
+.deleteIcon:hover {
+  color: $color-accent;
+}
+.btnBox{
+  width: 48%;
 }

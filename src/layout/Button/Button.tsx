@@ -24,6 +24,7 @@ const Button: React.FC<IButtonProps> = ({
 			className={[styles.button, btnClasses && styles[btnClasses]].join(
 				' ',
 			)}
+
 			disabled={disabled}
 			type={type}
 			onClick={onClick}

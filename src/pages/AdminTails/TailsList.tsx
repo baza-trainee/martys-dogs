@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FaTrash, FaEdit } from 'react-icons/fa';
+import { FaTrash, FaEdit, FaRegPlusSquare } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import ArrowIconUp from '../../assets/dropdown_arrow_up.svg';
 import ArrowIconDown from '../../assets/dropdown_arrow_down.svg';
@@ -7,6 +7,7 @@ import { UseQueryResult } from '@tanstack/react-query';
 import { AdminTailsData, TailsListData } from './AdminTails';
 import styles from '../../pages/AdminTails/TailsList.module.scss';
 import Tail from '../../components/Tail/Tail';
+import Button from '../../layout/Button/Button';
 
 interface TailsListProps {
 	data: UseQueryResult<AdminTailsData, Error>;
@@ -142,13 +143,25 @@ const TailsList: React.FC<TailsListProps> = ({ data }) => {
 										/>
 
 										<div className={styles.btnContainer}>
-											<div className={styles.logoActions}>
-												<FaTrash className={styles.deleteIcon} />
+											<div className={styles.btnBox}>
+												{/*<FaTrash className={styles.deleteIcon} />*/}
+												<Button
+													onClick={() => console.log('click')}
+													type={'button'}
+													btnClasses={'primary'}  children={<FaTrash  className={styles.deleteIcon}/>}/>
 											</div>
 
-											<div className={styles.logoActions}>
-												<FaEdit className={styles.editIcon} />
+											<div className={styles.btnBox}>
+												{/*<FaTrash className={styles.deleteIcon} />*/}
+												<Button
+													onClick={() => console.log('click')}
+													type={'button'}
+
+													btnClasses={'primary'}  children={<FaEdit className={styles.editIcon}/>}/>
 											</div>
+										{/*	<div className={styles.logoActions}>
+												<FaEdit className={styles.editIcon} />
+											</div>*/}
 										</div>
 
 									</div>))}
