@@ -7,6 +7,7 @@ const ABOUT = 'https://matys-dogs2.onrender.com/about-us';
 const LOGIN = 'https://matys-dogs2.onrender.com/login';
 const CATALOG = 'https://matys-dogs2.onrender.com/catalog';
 const IS_AUTH = 'https://matys-dogs2.onrender.com/is_auth';
+const FORM_CALLBACK = 'https://matys-dogs2.onrender.com/form-callback';
 
 export const fetchHome = async (language: string): Promise<LandingData> => {
 	try {
@@ -24,6 +25,52 @@ export const fetchHome = async (language: string): Promise<LandingData> => {
 		return data;
 	} catch (error) {
 		console.error('Error while loading data:', error);
+		throw error;
+	}
+};
+
+export interface FormUserData {
+	name: string;
+	phone_number: string;
+	comment?: string;
+	id_dog: number;
+}
+
+export const setFormData = (formUserData: FormUserData) => {
+	const newFormData = new FormData();
+	/*	for ( const  [key, value] of Object.entries(formData)) {
+			newFormData.append(key, value.toString());
+		}*/
+	Object.keys(formUserData).forEach(key => {
+		newFormData.append(key, formUserData[key].toString());
+	});
+	return newFormData;
+};
+
+export const sendFormData = async (formUserData: FormUserData) => {
+	try {
+		const response = await fetch(FORM_CALLBACK,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'multipart/form-data; boundary=--',
+				},
+				body: setFormData(formUserData) as FormData,
+			});
+		if (response.status === 500) {
+			throw new Error('Щось пішло не так. Спробуйте ще раз відправити дані.');
+		}
+		if (response.status === 400) {
+
+			throw new Error('Неправильні дані. Перевірте інформацію та спробуйте ще раз.');
+		}
+
+		const data = await response.json();
+		console.log(data);
+		return data;
+
+	} catch (error) {
+		console.error(error);
 		throw error;
 	}
 };
@@ -175,9 +222,9 @@ export const getIsAuth = async (token: string): Promise<getIsAuthResponse> => {
 	try {
 		const response = await fetch(IS_AUTH, {
 			headers: {
-        authorization: `Bearer ` + token,
-        accept: "application/json",
-      }
+				authorization: `Bearer ` + token,
+				accept: 'application/json',
+			},
 		});
 
 		if (!response.ok) {
@@ -190,5 +237,5 @@ export const getIsAuth = async (token: string): Promise<getIsAuthResponse> => {
 		console.error('IsAuth Error:', error);
 		throw error;
 	}
-}
+};
 

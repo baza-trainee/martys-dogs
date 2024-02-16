@@ -27,7 +27,7 @@ export interface TailProps {
 }
 
 const Tail: React.FC<TailProps> = ({
-	// id,
+	id,
 	name,
 	ready_for_adoption,
 	gender,
