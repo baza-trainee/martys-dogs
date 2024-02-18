@@ -1,39 +1,18 @@
 @import '../../scss/variables';
 @import '../../scss/mixins';
 
-//  move  img  and ul  in  common  styles file
-img {
-	display: block;
-	max-width: 100%;
-	height: auto;
-}
-
 .background {
 	background: $color-main-blue-light;
 }
 
 .hero {
-	// margin: 0 auto;
-	// width: 100%;
-	// padding-top: 40px;
 	background: $color-main-blue-light;
-
-	// @include tablet {
-	// 	padding-top: 80px;
-	// }
-
-	// @include small-desktop {
-	// 	display: flex;
-	// 	gap: 20px;
-	// 	padding: 0;
-	// }
 }
 
 .hero_container {
 	margin: 0 auto;
 	max-width: 1920px;
 	padding-top: 40px;
-	// background: $color-main-blue-light;
 
 	@include tablet {
 		padding-top: 80px;
@@ -114,37 +93,32 @@ img {
 		width: 405px;
 		height: 47px;
 	}
-
-	// @include full-desktop {
-	// 	width: 400px;
-	// 	height: 47px;
-	// }
 }
 
 .photo {
 	width: 100%;
 	height: 262px;
-	background-image: url('../../assets/hero_about/393_1x.webp');
+	background-image: url('../../assets/hero_about/393_2x.webp');
 	background-size: cover;
 	background-repeat: no-repeat;
 
 	@include tablet {
 		height: 476px;
-		background-image: url('../../assets/hero_about/768_1x.webp');
+		background-image: url('../../assets/hero_about/768_2x.webp');
 	}
 
 	@include small-desktop {
 		width: 50%;
 		height: 700px;
-		background-image: url('../../assets/hero_about/1280_1x.webp');
+		background-image: url('../../assets/hero_about/1280_2x.webp');
 	}
 
 	@include large-desktop {
-		background-image: url('../../assets/hero_about/1440_1x.webp');
+		background-image: url('../../assets/hero_about/1440_2x.webp');
 	}
 
 	@include full-desktop {
-		background-image: url('../../assets/hero_about/1920_1x.webp');
+		background-image: url('../../assets/hero_about/1920_2x.webp');
 	}
 }
 
@@ -153,20 +127,7 @@ img {
 }
 
 .info {
-	// padding: 40px 20px;
-	// align-self: stretch;
 	background-color: $color-main-bg;
-
-	// @include tablet {
-	// 	padding: 80px 32px;
-	// }
-
-	// @include small-desktop {
-	// 	display: grid;
-	// 	grid-template-columns: 414px 1fr;
-	// 	padding: 100px;
-	// 	gap: 48px;
-	// }
 }
 
 .info_container {
@@ -229,7 +190,7 @@ img {
 		display: block;
 		width: 414px;
 		height: 521px;
-		background-image: url('../../assets/hero_about/logo1280_1x.webp');
+		background-image: url('../../assets/hero_about/logo1280_2x.webp');
 		background-repeat: no-repeat;
 		background-position-x: center;
 		background-position-y: center;
@@ -245,38 +206,29 @@ img {
 	}
 }
 
-@media (min-device-pixel-ratio: 2),
-	(min-resolution: 192dpi),
-	(min-resolution: 2dppx) {
-	.logo {
-		background-image: url('../../assets/hero_about/logo1280_2x.webp');
-	}
-	.photo {
-		background-image: url('../../assets/hero_about/393_2x.webp');
-
-		@include tablet {
-			background-image: url('../../assets/hero_about/768_2x.webp');
-		}
-		@include small-desktop {
-			background-image: url('../../assets/hero_about/1280_2x.webp');
-		}
-		@include large-desktop {
-			background-image: url('../../assets/hero_about/1440_2x.webp');
-		}
-		@include full-desktop {
-			background-image: url('../../assets/hero_about/1920_2x.webp');
-		}
-	}
-}
-
 .button {
 	@include small-desktop {
 		width: 340px;
 	}
 }
 
-.icon {
-	width: 24px;
-	height: 24px;
-	background-image: url('../../assets/hero_about/paws.svg');
+.icon{
+position:relative;
+width:24px;
+height: 24px;
+  svg:first-child{
+    position:absolute;
+    width:13px;
+    height: 13px;
+    bottom:0;
+    left: 0;
+  }
+
+  svg:last-child{
+    position: absolute;
+    width: 13px;
+    height: 13px;
+    top: 0;
+      right: 0;
+  }
 }
