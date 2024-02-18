@@ -22,7 +22,7 @@ import { ModalProvider } from './context/ModalContext';
 import OurTails from './pages/OurTails/OurTails';
 import Register from './pages/Register/Register';
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			staleTime: 1000 * 60 * 5,
