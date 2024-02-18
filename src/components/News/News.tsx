@@ -16,6 +16,8 @@ const News: React.FC<NewsProps> = ({ data }) => {
 
 	console.log(news?.news);
 
+const string = 'Every day they spend active time with the children who are temporarily staying in the shelter, and to comfort each other'
+console.log(string.length)
 	if (isPending) {
 		return (
 		<Loader/>

@@ -177,7 +177,7 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 						}}
 						id={'sub_text'}
 						placeholder={'Enter news text'}
-						maxLength={150}
+						maxLength={100}
 						errorMessage={errors['sub_text']?.message}
 					/>
 					<NewsTextarea
@@ -194,7 +194,7 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 						}}
 						id={'sub_text_en'}
 						placeholder={'Enter news text'}
-						maxLength={150}
+						maxLength={100}
 						errorMessage={errors['sub_text_en']?.message}
 					/>
 				</div>
