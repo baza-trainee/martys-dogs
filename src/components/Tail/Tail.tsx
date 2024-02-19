@@ -49,7 +49,6 @@ const Tail: React.FC<TailProps> = ({
 	const handleModal = () => {
 		console.log(activeModal);
 		openModal();
-		// activateModal('contact');
 		activateModal('contact', id);
 		console.log(`id of dog: ${id}`)
 	};

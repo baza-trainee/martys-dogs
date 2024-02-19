@@ -46,7 +46,6 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
 		console.log(value);
 		setActiveModal(value);
 		setModalId(id || null);
-		console.log(`dog id: ${modalId}`);
 	};
 	const contextValue: ModalContextType = {
 		isModalOpen,

@@ -1,31 +1,32 @@
 import { FaRegHeart } from 'react-icons/fa6';
 import Button from '../../layout/Button/Button';
 import { useModalContext } from '../../context/useGlobalContext';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as React from 'react';
 
 import styles from './ContactForm.module.scss';
-import { ModalContext } from '../../context/ModalContext';
+import { FormUserData, sendFormData } from '../../services/fetchData';
+import { ErrorAlert, Loader } from '../CommonUI/LoaderAndError/LoaderAndError';
 
 
 interface FormData {
 	name: string;
 	phoneNumber: string;
 	comment: string;
-	id: number | null;
 }
 
 const ContactForm: React.FC = () => {
-	// const { activateModal } = useModalContext();
 	const { activateModal, modalId } = useModalContext();
 	const { t } = useTranslation();
-console.log(`modalId ${modalId} in modal`);
+
+	const [showLoader, setShowLoader] = useState<boolean>(false);
+	const [showError, setShowError] = useState<string>('');
 	const [formData, setFormData] = useState<FormData>({
 		name: '',
 		phoneNumber: '',
 		comment: '',
-		id: modalId,
+
 	});
 	const [touched, setTouched] = useState<Record<string, boolean>>({
 		name: false,
@@ -33,6 +34,7 @@ console.log(`modalId ${modalId} in modal`);
 		comment: false,
 	});
 	const [errors, setErrors] = useState<Record<string, string>>({});
+
 
 	const nameRegex = /^[A-Za-zА-Яа-яҐґЄєІіЇї\s'`’ʼ-]*$/;
 	const phoneRegex = /^[\+]?3?[\s]?8?[\s]?\(?0\d{2}?\)?[\s]?\d{3}[\s|-]?\d{2}[\s|-]?\d{2}$/;
@@ -74,8 +76,9 @@ console.log(`modalId ${modalId} in modal`);
 		validateNumber();
 	}, [formData.phoneNumber]);
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+		setShowLoader(true);
 		validateName();
 		validateNumber();
 
@@ -83,15 +86,32 @@ console.log(`modalId ${modalId} in modal`);
 			name: '',
 			phoneNumber: '',
 			comment: '',
-			id: modalId
 		});
 		setTouched({
 			name: false,
 			phoneNumber: false,
 			comment: false,
 		});
-		activateModal('adoption');
+
 		console.log(formData);
+
+		const formDataToSend: FormUserData = {
+			name: formData.name,
+			phone_number: formData.phoneNumber,
+			comment: formData.comment ,
+			id_dog: modalId,
+		};
+
+		try {
+			await sendFormData(formDataToSend);
+
+			setShowLoader(false);
+			setShowError('');
+		} catch (error) {
+			setShowLoader(false);
+			setShowError('Ваші дані не вдалось надіслати, перезавантажте сторінку');
+
+		}
 	};
 
 	const isSubmitDisabled = () => {
@@ -179,6 +199,8 @@ console.log(`modalId ${modalId} in modal`);
 					type={'submit'}
 					children={<FaRegHeart />}
 				/>
+				{showLoader && <Loader />}
+				{showError && <ErrorAlert errorMessage={showError} backgroundColor="rgba(255, 0, 0, 0.3)" />}
 			</div>
 
 		</form>

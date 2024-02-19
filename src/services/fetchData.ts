@@ -31,15 +31,13 @@ export const fetchHome = async (language: string): Promise<LandingData> => {
 export interface FormUserData {
 	name: string;
 	phone_number: string;
-	comment?: string;
-	id_dog: number;
+	comment: string;
+	id_dog: number | null;
 }
 
 export const setFormData = (formUserData: FormUserData) => {
 	const newFormData = new FormData();
-	/*	for ( const  [key, value] of Object.entries(formData)) {
-			newFormData.append(key, value.toString());
-		}*/
+
 	Object.keys(formUserData).forEach(key => {
 		newFormData.append(key, formUserData[key].toString());
 	});
@@ -57,15 +55,17 @@ export const sendFormData = async (formUserData: FormUserData) => {
 				body: setFormData(formUserData) as FormData,
 			});
 		if (response.status === 500) {
-			throw new Error('Щось пішло не так. Спробуйте ще раз відправити дані.');
+			throw new Error( 'Щось пішло не так. Спробуйте ще раз відправити дані.');
 		}
 		if (response.status === 400) {
 
 			throw new Error('Неправильні дані. Перевірте інформацію та спробуйте ще раз.');
 		}
+		if (response.status === 200) {
 
+			console.log(response);
+		}
 		const data = await response.json();
-		console.log(data);
 		return data;
 
 	} catch (error) {
