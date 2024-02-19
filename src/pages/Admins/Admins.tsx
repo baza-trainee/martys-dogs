@@ -13,12 +13,14 @@ interface Admin {
 	user: {
 		first_name: string;
 		last_name: string;
-	}
+	};
 	is_approved: boolean;
 }
 
 const Admins = () => {
 	const { token } = useAuthContext();
+	// const token =
+	// 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4OTc4Njc2LCJpYXQiOjE3MDc3NjkwNzYsImp0aSI6ImExZjZjODQ5ZWVjZTRkODhhYzBkNzJmYjFjN2NkN2I3IiwidXNlcl9pZCI6MX0.PgM1tmuFTqPhA6WxQgHZ3xyeAAvErxpdtJxqz69EYGg';
 	const [admins, setAdmins] = useState<Admin[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<null | unknown>(null);
@@ -52,10 +54,13 @@ const Admins = () => {
 			/>
 		);
 	}
+	
+		console.log(admins);
 
 	const handleToggleStatus = async (adminId: number) => {
 		try {
-			const newStatus = !admins.find((admin) => admin.id === adminId)?.is_approved;
+			const newStatus = !admins.find((admin) => admin.id === adminId)
+				?.is_approved;
 
 			if (token !== null) {
 				await updateAdminStatus(token, adminId, newStatus);
