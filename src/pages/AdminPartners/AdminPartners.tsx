@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './AdminPartners.module.scss';
 import { useQuery } from '@tanstack/react-query';
-import { FaEdit, FaRegPlusSquare, FaTrash } from 'react-icons/fa';
+import {  FaRegPlusSquare, FaTrash } from 'react-icons/fa';
 import {
 	Loader,
 	ErrorAlert,
@@ -51,11 +51,11 @@ const AdminPartners: React.FC = () => {
 	console.log(partners);
 
 	if (isPending) {
-		return <Loader backgroundColor='#EEEEEE'/>;
+		return <Loader backgroundColor='#dbdbdb'/>;
 	}
 
 	if (isError) {
-		return <ErrorAlert errorMessage={error?.message} backgroundColor='#EEEEEE'/>;
+		return <ErrorAlert errorMessage={error?.message} backgroundColor='#dbdbdb'/>;
 	}
 
 	return (
@@ -76,12 +76,6 @@ const AdminPartners: React.FC = () => {
 					<div key={partner.id} className={styles.logo}>
 						<img src={partner.logo.url} alt={`${partner.name}`} />
 						<div className={styles.logoActions}>
-							<Link
-								to={`/admin/partner_edit/${partner.id}`}
-								className={styles.link}
-							>
-								<FaEdit className={styles.editIcon} />
-							</Link>
 							<FaTrash
 								key={partner.id}
 								className={styles.deleteIcon}

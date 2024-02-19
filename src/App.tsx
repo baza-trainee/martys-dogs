@@ -13,7 +13,7 @@ import AdminPhotos from './pages/AdminPhotos/AdminPhotos';
 import AdminStatistics from './pages/AdminStatistics/AdminStatistics';
 import Admins from './pages/Admins/Admins';
 import Contacts from './pages/Contacts/Contacts';
-import EditPartner from './pages/AdminPartners/EditPartner';
+import AddEditNews from './pages/AdminsNews/AddEditNews';
 import Error from './pages/Error/Error';
 import HomeLayout from './layout/HomeLayout/HomeLayout';
 import Landing from './pages/Landing/Landing';
@@ -23,7 +23,7 @@ import Register from './pages/Register/Register';
 import { AuthProvider } from './context/AuthContext';
 import { ModalProvider } from './context/ModalContext';
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			staleTime: 1000 * 60 * 5,
@@ -78,10 +78,6 @@ const router = createBrowserRouter([
 			{
 				path: 'partner_add',
 				element: <AddPartner />,
-			},
-			{
-				path: 'partner_edit',
-				element: <EditPartner />,
 			},
 			{
 				path: 'news',

@@ -72,7 +72,7 @@ export const fetchCatalog = async ({ queryKey }: { queryKey: [string, string, { 
 	}
 };
 
-interface LoginResponse {
+export interface LoginResponse {
 	message: string;
 	access_token: string;
 }
