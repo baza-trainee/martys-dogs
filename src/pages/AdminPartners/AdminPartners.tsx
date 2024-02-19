@@ -1,14 +1,15 @@
-import React from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './AdminPartners.module.scss';
 import { useQuery } from '@tanstack/react-query';
-import {  FaRegPlusSquare, FaTrash } from 'react-icons/fa';
+import { FaRegPlusSquare, FaTrash } from 'react-icons/fa';
 import {
 	Loader,
 	ErrorAlert,
 } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 import { requestAdminPage } from '../../services/adminPartners';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useAuthContext } from '../../context/useGlobalContext';
 
 export interface LogoData {
 	id: string;
@@ -21,29 +22,50 @@ export interface Partner {
 	id: number;
 	name: string;
 	logo: LogoData;
+	website: null | string;
 }
 
 const AdminPartners: React.FC = () => {
-	//get items
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [errorAlert, setErrorAlert] = useState(false);
+	const { token } = useAuthContext();
+		//get items
 	const fetchDataQuery = useQuery<Partner[]>({
 		queryKey: ['partners'],
-		queryFn: () => requestAdminPage('GET', '/partners'),
+		queryFn: () =>
+			typeof token === 'string'
+				? requestAdminPage(token, 'GET', '/partners')
+				: Promise.resolve([]),
+		refetchInterval: 600000,
+		enabled: !!token,
 	});
 
 	const { data: partners, isPending, isError, error } = fetchDataQuery;
 	//delete item
 	const queryClient = useQueryClient();
 	const deletePartnerMutation = useMutation({
-		mutationFn: (id: string) =>
-			requestAdminPage('DELETE', `/partners/${id}`),
+		mutationFn: (id: string) => {
+			setIsSubmitting(true);
+			setErrorAlert(false);
+			if (token) {
+				return requestAdminPage(token, 'DELETE', `/partners/${id}`);
+			} else {
+				console.error('Token is null. Delete partner failed!');
+				return Promise.resolve();
+			}
+		},
 		onSuccess: () => {
+			setIsSubmitting(false);
 			console.log('Delete partner successful!');
 			queryClient.invalidateQueries({ queryKey: ['partners'] });
 		},
 		onError: (error) => {
+			setIsSubmitting(false);
+			setErrorAlert(true);
 			console.error('Delete partner failed!', error);
 		},
 	});
+
 	const handleDeleteClick = (id: string) => {
 		deletePartnerMutation.mutate(id);
 	};
@@ -51,18 +73,22 @@ const AdminPartners: React.FC = () => {
 	console.log(partners);
 
 	if (isPending) {
-		return <Loader backgroundColor='#dbdbdb'/>;
+		return <Loader backgroundColor='#dbdbdb' />;
 	}
 
 	if (isError) {
-		return <ErrorAlert errorMessage={error?.message} backgroundColor='#dbdbdb'/>;
+		return (
+			<ErrorAlert
+				errorMessage={error?.message}
+				backgroundColor='#dbdbdb'
+			/>
+		);
 	}
 
 	return (
 		<div className={styles.container}>
-			
 			<h2 className={styles.title}>Лого партнерів</h2>
-			
+
 			<div className={styles.buttonsWrapper}>
 				<Link to='/admin/partner_add' className={styles.link}>
 					<button className={styles.addButton}>
@@ -72,6 +98,13 @@ const AdminPartners: React.FC = () => {
 				</Link>
 			</div>
 			<div className={styles.logoContainer}>
+			{errorAlert && (
+				<ErrorAlert
+					errorMessage='Логотип не видалено. Перезавантажте, будь ласка, сторінку.'
+					backgroundColor='#dbdbdb'
+				/>
+			)}
+			{isSubmitting && <Loader backgroundColor='#dbdbdb' />}
 				{partners?.map((partner) => (
 					<div key={partner.id} className={styles.logo}>
 						<img src={partner.logo.url} alt={`${partner.name}`} />

@@ -60,14 +60,11 @@ export const PublicApi = {
 
 	loginUser(email: string, password: string): Promise<LoginResponse> {
 		return requestPublicPage('POST', '/login', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				email,
-				password,
-			}),
+		  email,  
+		  password,
+		  headers: {
+			'Content-Type': 'application/json',
+		  },
 		});
 	},
 };

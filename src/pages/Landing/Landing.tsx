@@ -54,6 +54,7 @@ export interface Partner {
 	id: number;
 	name: string;
 	logo: LogoData;
+	website: string | null;
 }
 
 export interface LandingData {
