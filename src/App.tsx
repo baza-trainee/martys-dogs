@@ -13,7 +13,6 @@ import AdminPhotos from './pages/AdminPhotos/AdminPhotos';
 import AdminStatistics from './pages/AdminStatistics/AdminStatistics';
 import Admins from './pages/Admins/Admins';
 import Contacts from './pages/Contacts/Contacts';
-import AddEditNews from './pages/AdminsNews/AddEditNews';
 import Error from './pages/Error/Error';
 import HomeLayout from './layout/HomeLayout/HomeLayout';
 import Landing from './pages/Landing/Landing';
