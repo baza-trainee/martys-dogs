@@ -1,27 +1,31 @@
 import { FaRegHeart } from 'react-icons/fa6';
 import Button from '../../layout/Button/Button';
 import { useModalContext } from '../../context/useGlobalContext';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as React from 'react';
 
 import styles from './ContactForm.module.scss';
+import { ModalContext } from '../../context/ModalContext';
 
 
 interface FormData {
 	name: string;
 	phoneNumber: string;
 	comment: string;
+	id: number | null;
 }
 
 const ContactForm: React.FC = () => {
-	const { activateModal } = useModalContext();
+	// const { activateModal } = useModalContext();
+	const { activateModal, modalId } = useModalContext();
 	const { t } = useTranslation();
-
+console.log(`modalId ${modalId} in modal`);
 	const [formData, setFormData] = useState<FormData>({
 		name: '',
 		phoneNumber: '',
 		comment: '',
+		id: modalId,
 	});
 	const [touched, setTouched] = useState<Record<string, boolean>>({
 		name: false,
@@ -74,11 +78,12 @@ const ContactForm: React.FC = () => {
 		e.preventDefault();
 		validateName();
 		validateNumber();
-		console.log('Success. Send contacts:' + 'name - ' + formData.name.trim() + '; phone - ' + formData.phoneNumber + '; comment - ' + formData.comment);
+
 		setFormData({
 			name: '',
 			phoneNumber: '',
 			comment: '',
+			id: modalId
 		});
 		setTouched({
 			name: false,
@@ -86,6 +91,7 @@ const ContactForm: React.FC = () => {
 			comment: false,
 		});
 		activateModal('adoption');
+		console.log(formData);
 	};
 
 	const isSubmitDisabled = () => {
