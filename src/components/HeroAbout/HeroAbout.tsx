@@ -2,6 +2,7 @@ import Button from '../../layout/Button/Button';
 import { Link } from 'react-router-dom';
 import styles from './HeroAbout.module.scss';
 import { useTranslation } from 'react-i18next';
+import { FaPaw } from 'react-icons/fa6';
 
 const HeroAbout = () => {
 	const { t } = useTranslation();
@@ -41,7 +42,10 @@ const HeroAbout = () => {
 									onClick={() => console.log('to tail')}
 									type={'button'}
 									children={
-										<div className={styles.icon}></div>
+										<div className={styles.icon}>
+											<FaPaw/>
+											<FaPaw/>
+										</div>
 									}
 								/>
 							</Link>
