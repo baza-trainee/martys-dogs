@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-const token =
-	'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4OTQ4OTk0LCJpYXQiOjE3MDYzNTY5OTQsImp0aSI6IjUyMWZlZDAyNDRjMTQ4NmViNzQyOWFjNjRmZGZlYzY4IiwidXNlcl9pZCI6MTl9.3-PXaKeYiNrsmDdft0eYAdV5rGLsSAEqKCH7dHQJ6EM';
+// const token =
+// 	'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4OTc4Njc2LCJpYXQiOjE3MDc3NjkwNzYsImp0aSI6ImExZjZjODQ5ZWVjZTRkODhhYzBkNzJmYjFjN2NkN2I3IiwidXNlcl9pZCI6MX0.PgM1tmuFTqPhA6WxQgHZ3xyeAAvErxpdtJxqz69EYGg';
 
-export const getMessages = async () => {
+export const getMessages = async (token: string) => {
 	const url = 'https://matys-dogs2.onrender.com/notification-admin';
 	try {
 		const { data } = await axios.get(url, {
 			headers: {
-				Authorization: token,
+				Authorization: `Bearer ` + token,
 			},
 		});
 		// console.log('Notification:', data);
@@ -18,7 +18,11 @@ export const getMessages = async () => {
 	}
 };
 
-export const updateMessageStatus = async (messageId, newStatus) => {
+export const updateMessageStatus = async (
+	token: string,
+	messageId: number,
+	newStatus: boolean,
+) => {
 	const url = `https://matys-dogs2.onrender.com/notification-admin/${messageId}`;
 	try {
 		const { data } = await axios.put(

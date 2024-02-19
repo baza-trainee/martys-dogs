@@ -1,28 +1,45 @@
-import Loader, { ErrorAlert } from '../../components/CommonUI/LoaderAndError/LoaderAndError'
-import { getMessages, updateMessageStatus } from '../../services/adminsMessages'
 import { useEffect, useState } from 'react';
 
 import styles from './AdminForm.module.scss';
+import Loader, {
+	ErrorAlert,
+} from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import {
+	getMessages,
+	updateMessageStatus,
+} from '../../services/adminsMessages';
+import { useAuthContext } from '../../context/useGlobalContext';
 
-// import { formData } from '../../data';
-
+interface Message {
+	id: number;
+	id_dog: {
+		name: number;
+	};
+	phone_number: number;
+	name: string;
+	comment: string;
+	status: boolean;
+}
 const AdminForm = () => {
-	const [messages, setMessages] = useState([]);
+	const { token } = useAuthContext();
+	const [messages, setMessages] = useState<Message[]>([]);
 	const [loading, setLoading] = useState(true);
-	const [error, setError] = useState(null);
+	const [error, setError] = useState<null | unknown>(null);
 	useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const data = await getMessages();
-				setMessages(data);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
-    fetchMessages();
-  }, []);
+		const fetchMessages = async () => {
+			if (token !== null) {
+				try {
+					const data = await getMessages(token);
+					setMessages(data);
+					setLoading(false);
+				} catch (error) {
+					setError(error);
+					setLoading(false);
+				}
+			}
+		};
+		fetchMessages();
+	}, [token]);
 
 	if (loading) {
 		return <Loader backgroundColor={'#ebf5fb'} />;
@@ -31,7 +48,7 @@ const AdminForm = () => {
 	if (error) {
 		return (
 			<ErrorAlert
-				errorMessage={error}
+				errorMessage={JSON.stringify(error)}
 				backgroundColor={'#ebf5fb'}
 			/>
 		);
@@ -40,12 +57,19 @@ const AdminForm = () => {
 
 	const handleToggleStatus = async (messageId: number) => {
 		try {
-			const newStatus = !messages.find(message => message.id === messageId).status;
-			await updateMessageStatus(messageId, newStatus);
-			setMessages(prevMessages =>
-				prevMessages.map(message =>
-					message.id === messageId ? { ...message, status: newStatus } : message
-				)
+			const newStatus = !messages.find(
+				(message) => message.id === messageId,
+			)?.status;
+
+			if (token !== null) {
+				await updateMessageStatus(token, messageId, newStatus);
+			}
+			setMessages((prevMessages) =>
+				prevMessages.map((message) =>
+					message.id === messageId
+						? { ...message, status: newStatus }
+						: message,
+				),
 			);
 		} catch (error) {
 			console.error(error);
@@ -67,7 +91,7 @@ const AdminForm = () => {
 					</tr>
 				</thead>
 				<tbody>
-					{messages?.map((message) => (
+					{messages?.map((message: Message) => (
 						<tr key={message.id}>
 							<td>{message.id_dog.name}</td>
 							<td>{message.phone_number}</td>
@@ -78,7 +102,9 @@ const AdminForm = () => {
 							</td>
 							<td>
 								<button
-									onClick={() => handleToggleStatus(message.id)}
+									onClick={() =>
+										handleToggleStatus(message.id)
+									}
 									className={
 										message.status ? styles.red : styles.btn
 									}

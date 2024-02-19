@@ -1,30 +1,44 @@
-// import { adminsData } from '../../data';
-
-import { ErrorAlert, Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
-import { getAdmins, updateAdminStatus } from '../../services/admins'
 import { useEffect, useState } from 'react';
 
 import styles from './Admins.module.scss';
+import {
+	ErrorAlert,
+	Loader,
+} from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { getAdmins, updateAdminStatus } from '../../services/admins';
+import { useAuthContext } from '../../context/useGlobalContext';
+
+interface Admin {
+	id: number;
+	user: {
+		first_name: string;
+		last_name: string;
+	}
+	is_approved: boolean;
+}
 
 const Admins = () => {
-	const [admins, setAdmins] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+	const { token } = useAuthContext();
+	const [admins, setAdmins] = useState<Admin[]>([]);
+	const [loading, setLoading] = useState(true);
+	const [error, setError] = useState<null | unknown>(null);
 
-  useEffect(() => {
-    const fetchAdmins = async () => {
-      try {
-        const data = await getAdmins();
-        setAdmins(data);
-        setLoading(false);
-      } catch (error) {
-        setError(error);
-        setLoading(false);
-      }
-    };
+	useEffect(() => {
+		const fetchAdmins = async () => {
+			if (token !== null) {
+				try {
+					const data = await getAdmins(token);
+					setAdmins(data);
+					setLoading(false);
+				} catch (error) {
+					setError(error);
+					setLoading(false);
+				}
+			}
+		};
 
-    fetchAdmins();
-  }, []);
+		fetchAdmins();
+	}, [token]);
 
 	if (loading) {
 		return <Loader backgroundColor={'#ebf5fb'} />;
@@ -33,30 +47,26 @@ const Admins = () => {
 	if (error) {
 		return (
 			<ErrorAlert
-				errorMessage={error}
+				errorMessage={JSON.stringify(error)}
 				backgroundColor={'#ebf5fb'}
 			/>
 		);
 	}
 
-	// const handleToggleStatus = (adminId: number) => {
-	// 	setAdmins((prevAdmins) =>
-	// 		prevAdmins.map((admin) =>
-	// 			admin.id === adminId
-	// 				? { ...admin, is_approved: !admin.is_approved }
-	// 				: admin,
-	// 		),
-	// 	);
-	// };
-	
 	const handleToggleStatus = async (adminId: number) => {
 		try {
-			const newStatus = !admins.find(admin => admin.id === adminId).is_approved;
-			await updateAdminStatus(adminId, newStatus);
-			setAdmins(prevAdmins =>
-				prevAdmins.map(admin =>
-					admin.id === adminId ? { ...admin, is_approved: newStatus } : admin
-				)
+			const newStatus = !admins.find((admin) => admin.id === adminId)?.is_approved;
+
+			if (token !== null) {
+				await updateAdminStatus(token, adminId, newStatus);
+			}
+
+			setAdmins((prevAdmins) =>
+				prevAdmins.map((admin) =>
+					admin.id === adminId
+						? { ...admin, is_approved: newStatus }
+						: admin,
+				),
 			);
 		} catch (error) {
 			console.error(error);
@@ -79,13 +89,19 @@ const Admins = () => {
 					{admins?.map((admin) => (
 						<tr key={admin.id}>
 							<td>{admin.id}</td>
-							<td>{admin.user?.first_name} {admin.user?.last_name}</td>
-							<td>{admin.is_approved ? 'Активний' : 'Неактивний'}</td>
+							<td>
+								{admin.user?.first_name} {admin.user?.last_name}
+							</td>
+							<td>
+								{admin.is_approved ? 'Активний' : 'Неактивний'}
+							</td>
 							<td>
 								<button
 									onClick={() => handleToggleStatus(admin.id)}
 									className={
-										admin.is_approved ? styles.red : styles.btn
+										admin.is_approved
+											? styles.red
+											: styles.btn
 									}
 								>
 									{admin.is_approved
