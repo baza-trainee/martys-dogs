@@ -14,7 +14,7 @@ const AdminHomeLayout = () => {
 		if (!isLoggedIn) {
 			navigate('/login');
 		}
-	}, []);
+	}, [isLoggedIn]);
 
 	return (
 		<main className={styles.container}>

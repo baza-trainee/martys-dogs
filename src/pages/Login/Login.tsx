@@ -1,8 +1,9 @@
-import { ChangeEvent, useState, useEffect } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../context/useGlobalContext';
+
 import FormInput from '../../components/FormInput/FormInput';
 import styles from './Login.module.scss';
+import { useAuthContext } from '../../context/useGlobalContext';
 
 const Login: React.FC = () => {
 	const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Login: React.FC = () => {
 		if (isLoggedIn) {
 			navigate('/admin');
 		}
-	}, []);
+	}, [isLoggedIn, navigate]);
 
 	const handleLogin = async () => {
 		try {
@@ -46,12 +47,16 @@ const Login: React.FC = () => {
 				<FormInput
 					label='Електронна пошта'
 					id='email'
+					name='email'
+					type='email'
 					value={email}
 					onChange={handleChangeEmail}
 				/>
 				<FormInput
 					label='Пароль'
 					id='password'
+					type='password'
+					name='password'
 					value={password}
 					onChange={handleChangePassword}
 				/>

@@ -14,7 +14,6 @@ export interface PartnersProps {
 const Partners: React.FC<PartnersProps> = ({ data }) => {
 	const { t } = useTranslation();
 	const { isPending, isError, error, data: responseData } = data;
-	console.log(data)
 
 	if (isPending) {
 		return <Loader />;
@@ -26,17 +25,33 @@ const Partners: React.FC<PartnersProps> = ({ data }) => {
 	if (!responseData) {
 		return <div></div>;
 	}
+	console.log(data);
 
-	return (<section className={styles.partnersContainer}>
-			<div className={styles.loader}></div>
+	return (
+		<section className={styles.partnersContainer}>
 			<h2 className={styles.partnersTitle}>{t('partners.title')}</h2>
 			<ul className={styles.partnersIconContainer}>
 				{responseData?.partners?.map((partner, index) => (
 					<li key={index} className={styles.partnersIcon}>
-						<img
-							src={partner.logo.url}
-							alt={`Logo ${partner.logo.name}`}
-						/>
+						{partner.website !== null ? (
+							<a
+								href={partner.website}
+								target='_blank'
+								rel='noopener noreferrer'
+								className={styles.partnersLink}
+							>
+								<img
+									
+									src={partner.logo.url}
+									alt={`Logo ${partner.logo.name}`}
+								/>
+							</a>
+						) : (
+							<img
+								src={partner.logo.url}
+								alt={`Logo ${partner.logo.name}`}
+							/>
+						)}
 					</li>
 				))}
 			</ul>

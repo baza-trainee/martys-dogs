@@ -1,68 +1,137 @@
-import { ChangeEvent, useState, useEffect } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Form, Link, useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../context/useGlobalContext';
 
 import FormInput from '../../components/FormInput/FormInput';
 import styles from './Register.module.scss';
+import { IUser, registerUser } from '../../services/register';
+import { useAuthContext } from '../../context/useGlobalContext';
 
 const Register: React.FC = () => {
 	const navigate = useNavigate();
-	const [name, setName] = useState('');
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	const [user, setUser] = useState<IUser>({
+		first_name: '',
+		last_name: '',
+		email: '',
+		password: '',
+		confirmPassword: '',
+	});
 
+	const [errors, setErrors] = useState<Partial<IUser>>({});
 	const { isLoggedIn } = useAuthContext();
 
 	useEffect(() => {
 		if (isLoggedIn) {
 			navigate('/admin');
 		}
-	}, []);
+	}, [isLoggedIn, navigate]);
 
-	const handleLogin = async () => {
-		console.log(name, email, password);
+	const validateForm = () => {
+		const errors: Partial<IUser> = {};
+
+		if (!user.first_name.trim()) {
+			errors.first_name = "Ім'я обов'язкове";
+		}
+		if (!user.last_name.trim()) {
+			errors.last_name = "Прізвище обов'язкове";
+		}
+		if (!user.email.trim()) {
+			errors.email = "Email обов'язковий";
+		} else if (!/\S+@\S+\.\S+/.test(user.email)) {
+			errors.email = 'Введіть правильну адресу електронної пошти';
+		}
+		if (!user.password.trim()) {
+			errors.password = "Пароль обов'язковий";
+		} else if (user.password.length < 8) {
+			errors.password = 'Пароль повинен містити принаймні 8 символів';
+		}
+		if (user.password !== user.confirmPassword) {
+			errors.confirmPassword = 'Паролі не співпадають';
+		} 
+		// else if (
+		// 	!/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(
+		// 		user.password,
+		// 	)
+		// ) {
+		// 	errors.password =
+		// 		'Пароль повинен містити принаймні одну велику літеру, одну маленьку літеру, одну цифру і один спеціальний символ';
+		// }
+
+		setErrors(errors);
+		return Object.keys(errors).length === 0;
 	};
 
-	const handleChangeName = (e: ChangeEvent<HTMLInputElement>) => {
-		setName(e.target.value);
+	const handleRegister = async (event: FormEvent) => {
+		event.preventDefault();
+		const isValid = validateForm();
+		if (isValid) {
+			try {
+				await registerUser(user);
+				navigate('/');
+			} catch (error: unknown) {
+				console.error(
+					'Помилка під час реєстрації:',
+					(error as Error).message,
+				);
+			}
+		}
 	};
 
-	const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-		setEmail(e.target.value);
+	const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const { name, value } = event.target;
+		setUser({ ...user, [name]: value });
 	};
 
-	const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-		setPassword(e.target.value);
-	};
-	
 	return (
 		<main className={styles.login}>
-			<Form method='POST' className={styles.form}>
-				<h4 className='text-3xl font-bold text-center'>Реєстрація</h4>
+			<Form onSubmit={handleRegister} className={styles.form}>
+				<h4>Реєстрація</h4>
 				<FormInput
 					label="Ім'я"
-					id='name'
-					value={name}
-					onChange={handleChangeName}
+					id='first_name'
+					name='first_name'
+					type='text'
+					value={user.first_name}
+					onChange={handleChange}
+					errorMessage={errors.first_name}
+				/>
+				<FormInput
+					label='Прізвище'
+					id='last_name'
+					name='last_name'
+					type='text'
+					value={user.last_name}
+					onChange={handleChange}
+					errorMessage={errors.last_name}
 				/>
 				<FormInput
 					label='Електронна пошта'
 					id='email'
-					value={email}
-					onChange={handleChangeEmail}
+					name='email'
+					type='email'
+					value={user.email}
+					onChange={handleChange}
+					errorMessage={errors.email}
 				/>
 				<FormInput
 					label='Пароль'
 					id='password'
-					value={password}
-					onChange={handleChangePassword}
+					type='password'
+					name='password'
+					value={user.password}
+					onChange={handleChange}
+					errorMessage={errors.password}
 				/>
-				<button
-					className={styles.button}
-					onClick={handleLogin}
-					type='button'
-				>
-					Увійти
+				<FormInput
+					label='Підтвердження паролю'
+					id='confirmPassword'
+					type='password'
+					name='confirmPassword'
+					value={user.confirmPassword}
+					onChange={handleChange}
+					errorMessage={errors.confirmPassword}
+				/>
+				<button className={styles.button} type='submit'>
+					Зареєструватися
 				</button>
 				<p className={styles.text}>
 					Вже адміністратор?
