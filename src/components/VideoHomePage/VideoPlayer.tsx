@@ -72,6 +72,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 					<img
 						src={defaultImage}
 						alt='Default Poster'
+						width="auto"
+						height="auto"
 						className={styles.posterImage}
 						loading='lazy'
 					/>

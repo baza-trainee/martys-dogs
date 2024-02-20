@@ -19,9 +19,14 @@
 	border: 2px solid #ccc;
 	border-radius: 0.25rem;
 	transition: border-color 0.3s ease-in-out;
+	margin-bottom: 0.25rem;
 
 	&:focus {
 		border-color: #4a90e2;
 		outline: none;
 	}
+}
+
+.error {
+	color: #ff0000;
 }

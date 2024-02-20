@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FaUpload } from 'react-icons/fa';
 import {
@@ -8,15 +8,17 @@ import {
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { requestAdminPage } from '../../services/adminPartners';
+import { useAuthContext } from '../../context/useGlobalContext';
 import styles from './AddPartners.module.scss';
 
-export interface PartnersStateType {
+interface PartnersStateType {
 	name: string;
-	//web: string;
 	logo: FileList | null;
+	website: string | null;
 }
 
-export const createFormData = (data: PartnersStateType): FormData => {
+const createFormData = (data: PartnersStateType): FormData => {
+	
 	const formData = new FormData();
 	formData.append('name', data.name);
   
@@ -24,7 +26,9 @@ export const createFormData = (data: PartnersStateType): FormData => {
 	  const logoFile = data.logo[0];
 	  formData.append('logo', logoFile, logoFile.name);
 	}
-  
+	if (data.website !== null && data.website.trim() !== '') {
+		formData.append('website', data.website);
+	  }
 	return formData;
   };
 
@@ -39,10 +43,12 @@ const AddPartner: React.FC = () => {
 	} = useForm<PartnersStateType>({
 		defaultValues: {},
 	});
+	const { token } = useAuthContext();
+	
 	const addPartnerMutation = useMutation({
 		mutationFn: async (data: PartnersStateType) => {
 			const formData = createFormData(data);
-			return requestAdminPage('POST', '/partners', formData, true);
+			return requestAdminPage(token ?? '', 'POST', '/partners', formData, true);
 		},
 	});
 
@@ -52,18 +58,10 @@ const AddPartner: React.FC = () => {
 	const [errorAlert, setErrorAlert] = useState(false);
 
 	
-
-	console.log('Logo value:', watch('logo'));
-
-	useEffect(() => {
-		console.log('Logo value changed:', watch('logo'));
-		
-	}, [watch('logo')]);
-
 	const handleCancel = () => {
 		setValue('name', '');
-		//setValue('web', '');
 		setValue('logo', null);
+		setValue('website', '');
 		console.log('Cancel clicked!');
 	};
 
@@ -179,40 +177,41 @@ const AddPartner: React.FC = () => {
 						)}
 					</div>
 
-					{/*<div className={styles.inputContainer}>
+					<div className={styles.inputContainer}>
 						<label htmlFor='website'>Сайт партнера:</label>
 						<input
 							type='text'
 							id='website'
-							{...register('web', {
-								required: "Веб-сайт обов'язковий",
+							{...register('website', {
 								pattern: {
 									value: /^(https?:\/\/)?([\w-]+\.)+[\w]{2,}(\/[\w-]*)*$/,
 									message: 'Введіть дійсний URL веб-сайту',
 								},
+								
 							})}
 							placeholder='Додайте посилання'
 						/>
-						{errors.web && (
+						{errors.website && (
 							<div className={styles.validationError}>
-								{errors.web.message}
+								{errors.website.message}
 							</div>
 						)}
-						</div>*/}
+						</div>
 				</div>
-				{isSubmitting && <Loader backgroundColor='#dbdbdb' />}
-				{errorAlert && (
-					<ErrorAlert
-						errorMessage='Submission failed.'
-						backgroundColor='#dbdbdb'
-					/>
-				)}
+				
 				<div className={styles.buttonRow}>
 					<button type='submit'>Додати</button>
 					<button type='button' onClick={handleCancel}>
 						Скасувати
 					</button>
 				</div>
+				{isSubmitting && <Loader backgroundColor='#dbdbdb' />}
+				{errorAlert && (
+					<ErrorAlert
+						errorMessage='Логотип не додано. Перезавантажте, будь ласка, сторінку.'
+						backgroundColor='#dbdbdb'
+					/>
+				)}
 			</form>
 		</div>
 	);
