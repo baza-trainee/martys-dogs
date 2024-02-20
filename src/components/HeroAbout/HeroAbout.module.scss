@@ -98,27 +98,14 @@
 .photo {
 	width: 100%;
 	height: 262px;
-	background-image: url('../../assets/hero_about/393_2x.webp');
-	background-size: cover;
-	background-repeat: no-repeat;
-
+	background: url('../../assets/hero_about/1280_2x.webp') no-repeat 60% 60% / cover lightgray;
 	@include tablet {
 		height: 476px;
-		background-image: url('../../assets/hero_about/768_2x.webp');
 	}
 
 	@include small-desktop {
 		width: 50%;
 		height: 700px;
-		background-image: url('../../assets/hero_about/1280_2x.webp');
-	}
-
-	@include large-desktop {
-		background-image: url('../../assets/hero_about/1440_2x.webp');
-	}
-
-	@include full-desktop {
-		background-image: url('../../assets/hero_about/1920_2x.webp');
 	}
 }
 

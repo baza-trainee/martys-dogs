@@ -45,6 +45,7 @@
 .news {
 	display: grid;
 	justify-items: center;
+	gap: 20px;
 	@include tablet {
 		grid-template: 1fr / repeat(2, 1fr);
 		column-gap: 20px;
