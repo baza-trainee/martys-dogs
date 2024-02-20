@@ -7,7 +7,7 @@ import * as React from 'react';
 
 import styles from './ContactForm.module.scss';
 import { FormUserData, sendFormData } from '../../services/fetchData';
-import { ErrorAlert, Loader } from '../CommonUI/LoaderAndError/LoaderAndError';
+import { MiniErrorAlert, MiniLoader } from '../CommonUI/LoaderAndError/LoaderAndError';
 
 
 interface FormData {
@@ -79,6 +79,7 @@ const ContactForm: React.FC = () => {
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setShowLoader(true);
+		setShowError('');
 		validateName();
 		validateNumber();
 
@@ -93,24 +94,22 @@ const ContactForm: React.FC = () => {
 			comment: false,
 		});
 
-		console.log(formData);
 
 		const formDataToSend: FormUserData = {
 			name: formData.name,
 			phone_number: formData.phoneNumber,
-			comment: formData.comment ,
+			comment: formData.comment,
 			id_dog: modalId,
 		};
 
 		try {
 			await sendFormData(formDataToSend);
-
 			setShowLoader(false);
 			setShowError('');
+			activateModal('adoption');
 		} catch (error) {
 			setShowLoader(false);
-			setShowError('Ваші дані не вдалось надіслати, перезавантажте сторінку');
-
+			setShowError(error.message);
 		}
 	};
 
@@ -119,92 +118,93 @@ const ContactForm: React.FC = () => {
 	};
 
 	return (
-		<form className={styles.form} onSubmit={handleSubmit}>
+		<>
+			<form className={styles.form} onSubmit={handleSubmit}>
 
-			<div className={styles.inputsContainer}>
+				<div className={styles.inputsContainer}>
 
-				<div className={styles.inputBox}>
-					<label
-						htmlFor="name"
-						className={errors.name ? styles.labelError : styles.label}
-					>
-						{t('contactModal.name_label')}
-					</label>
-					<div className={styles.inputWrapper}>
-						<input
-							id="name"
-							name="name"
-							type="text"
-							className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
-							placeholder={t('contactModal.name_placeholder')}
-							value={formData.name}
-							onChange={handleChange}
-							minLength={2}
-							required
-						/>
+					<div className={styles.inputBox}>
+						<label
+							htmlFor="name"
+							className={errors.name ? styles.labelError : styles.label}
+						>
+							{t('contactModal.name_label')}
+						</label>
+						<div className={styles.inputWrapper}>
+							<input
+								id="name"
+								name="name"
+								type="text"
+								className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
+								placeholder={t('contactModal.name_placeholder')}
+								value={formData.name}
+								onChange={handleChange}
+								minLength={2}
+								required
+							/>
 
-						{errors.name && <div className={styles.errorMessage}>{errors.name}</div>}
+							{errors.name && <div className={styles.errorMessage}>{errors.name}</div>}
+						</div>
 					</div>
+
+
+					<div className={styles.inputBox}>
+						<label
+							htmlFor="phoneNumber"
+							className={errors.phoneNumber ? styles.labelError : styles.label}
+						>
+							{t('contactModal.tel_label')}
+						</label>
+						<div className={styles.inputWrapper}>
+							<input
+								type="tel"
+								id="phoneNumber"
+								name="phoneNumber"
+								className={errors.phoneNumber ? `${styles.input} ${styles.inputError}` : styles.input}
+								placeholder={t('contactModal.tel_placeholder')}
+								value={formData.phoneNumber}
+								onChange={handleChange}
+								required
+							/>
+							{errors.phoneNumber && <div className={styles.errorMessage}>{errors.phoneNumber}</div>}
+
+						</div>
+					</div>
+
+					<div className={styles.inputBox}>
+						<label
+							htmlFor="comment"
+							className={styles.label}
+						>
+							{t('contactModal.comment_label')}
+						</label>
+						<div className={styles.inputWrapper}>
+							<input
+								id="comment"
+								name="comment"
+								value={formData.comment}
+								className={styles.input}
+								placeholder={t('contactModal.comment_placeholder')}
+								onChange={handleChange}
+							/>
+
+						</div>
+					</div>
+				</div>
+				<div className={styles.btnContainer}>
+					<Button
+						name={t('contactModal.button')}
+						btnClasses={'primary'}
+						disabled={isSubmitDisabled()}
+						type={'submit'}
+						children={<FaRegHeart />}
+					/>
 				</div>
 
 
-				<div className={styles.inputBox}>
-					<label
-						htmlFor="phoneNumber"
-						className={errors.phoneNumber ? styles.labelError : styles.label}
-					>
-						{t('contactModal.tel_label')}
-					</label>
-					<div className={styles.inputWrapper}>
-						<input
-							type="tel"
-							id="phoneNumber"
-							name="phoneNumber"
-							className={errors.phoneNumber ? `${styles.input} ${styles.inputError}` : styles.input}
-							placeholder={t('contactModal.tel_placeholder')}
-							value={formData.phoneNumber}
-							onChange={handleChange}
-							required
-						/>
-						{errors.phoneNumber && <div className={styles.errorMessage}>{errors.phoneNumber}</div>}
-
-					</div>
-				</div>
-
-				<div className={styles.inputBox}>
-					<label
-						htmlFor="comment"
-						className={styles.label}
-					>
-						{t('contactModal.comment_label')}
-					</label>
-					<div className={styles.inputWrapper}>
-						<input
-							id="comment"
-							name="comment"
-							value={formData.comment}
-							className={styles.input}
-							placeholder={t('contactModal.comment_placeholder')}
-							onChange={handleChange}
-						/>
-
-					</div>
-				</div>
-			</div>
-			<div className={styles.btnContainer}>
-				<Button
-					name={t('contactModal.button')}
-					btnClasses={'primary'}
-					disabled={isSubmitDisabled()}
-					type={'submit'}
-					children={<FaRegHeart />}
-				/>
-				{showLoader && <Loader />}
-				{showError && <ErrorAlert errorMessage={showError} backgroundColor="rgba(255, 0, 0, 0.3)" />}
-			</div>
-
-		</form>
-
+			</form>
+			{showLoader && <MiniLoader />}
+			{showError && <MiniErrorAlert errorMessage={showError} backgroundColor="rgba(255, 0, 0, 0.3)" />}</>
 	);
 };
 

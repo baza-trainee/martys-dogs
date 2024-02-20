@@ -55,15 +55,15 @@ export const sendFormData = async (formUserData: FormUserData) => {
 				body: setFormData(formUserData) as FormData,
 			});
 		if (response.status === 500) {
-			throw new Error( 'Щось пішло не так. Спробуйте ще раз відправити дані.');
+			throw new Error( 'Щось пішло не так. Спробуйте пізніше.');
 		}
 		if (response.status === 400) {
 
-			throw new Error('Неправильні дані. Перевірте інформацію та спробуйте ще раз.');
+			throw new Error('Неправильно введені дані. Перевірте інформацію та спробуйте ще раз.');
 		}
 		if (response.status === 200) {
-
 			console.log(response);
+			console.log(formUserData);
 		}
 		const data = await response.json();
 		return data;
