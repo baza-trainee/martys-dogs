@@ -22,7 +22,7 @@ interface IFormInputs {
 }
 
 const AddEditNews: React.FC = () => {
-	const { register, handleSubmit, reset, formState: { errors, isValid }, watch, setValue } = useForm<IFormInputs>({ mode: 'onBlur' });
+	const { register, handleSubmit, reset, formState: { errors, isValid }, watch, setValue } = useForm<IFormInputs>({ mode: 'onChange' });
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const { newsId } = useParams();
@@ -61,6 +61,7 @@ const AddEditNews: React.FC = () => {
 }, [news, newsId, setValue]);
 
 const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
+	console.log('click')
 			const uploadedImage = data?.photo?.[0];
 			const newsDate = new Date();
 			const addedNews = {
@@ -70,6 +71,7 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 					update_at: newsDate,
 			};
 			mutate(addedNews);
+			console.log(error?.message)
 	};
 
 	const onCancelHandler = () => {
@@ -103,6 +105,32 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 					register={{
 						...register('photo', {
 							required: 'Файл з фото не обрано',
+							validate: {
+								validImageFormat: (value: FileList | null) => {
+									if (!value) return true;
+									const supportedImageFormats = [
+										'image/jpeg',
+										'image/png',
+										'image/webp',
+									];
+									return (
+										supportedImageFormats.includes(
+											value?.[0].type,
+										) ||
+										'Виберіть дійсний файл зображення (JPEG, PNG або WebP)'
+									);
+								},
+								validImageSize: (value: FileList | null) => {
+									if (!value) return true;
+									const maxSize = 5 * 1024 * 1024; // 5MB
+									return (
+										value?.[0].size <= maxSize ||
+										`Розмір файлу повинен бути менше або рівний ${
+											maxSize / (1024 * 1024)
+										} MB`
+									);
+								},
+							}
 						}),
 					}}
 					watch={watch}

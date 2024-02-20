@@ -1,3 +1,4 @@
+import React from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import ItemActions from '../../components/CommonUI/ItemActions/ItemActions';
@@ -92,8 +93,10 @@ mutate(id);
 			</div>
 			<div className={styles.info}>
 				<h3 className={styles.title}>{title}</h3>
+				<div>
 				<p className={styles.date}>{getDateName(post_at)}</p>
 				<p className={styles.text}>{sub_text}</p>
+				</div>
 			</div>
 			<ItemActions path={`news_edit/${id}`} onDeleteClick={()=>deleteNewsHandler(id)} onEditClick={()=>editNewsHandler(id)} />
 
