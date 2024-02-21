@@ -32,28 +32,17 @@ export interface FormUserData {
 	name: string;
 	phone_number: string;
 	comment: string;
-	id_dog: number | null;
-	[key: string]: string | number | null;
+	id_dog: number;
 }
 
-export const setFormData = (formUserData: FormUserData| null) => {
-/*	const newFormData = new FormData();
+export const setFormData = (formUserData: FormUserData) => {
+	const newFormData = new FormData();
 
 	Object.keys(formUserData).forEach(key => {
 		newFormData.append(key, formUserData[key].toString());
 	});
-	return newFormData;*/
-	if (formUserData) {
-		const newFormData = new FormData();
+	return newFormData;
 
-		Object.keys(formUserData).forEach((key) => {
-			newFormData.append(key, formUserData[key].toString());
-		});
-
-		return newFormData;
-	} else {
-		throw new Error('formUserData is null');
-	}
 };
 
 export const sendFormData = async (formUserData: FormUserData) => {
