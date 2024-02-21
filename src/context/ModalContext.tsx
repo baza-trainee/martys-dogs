@@ -5,7 +5,8 @@ interface ModalContextType {
 	openModal: () => void;
 	closeModal: () => void;
 	activeModal: 'contact' | 'thanks' | 'adoption' | null;
-	activateModal: (value: 'contact' | 'thanks' | 'adoption' | null) => void;
+	activateModal: (value: 'contact' | 'thanks' | 'adoption' | null, id?: number) => void;
+	modalId: number | null;
 }
 
 interface ModalProviderProps {
@@ -18,6 +19,7 @@ const initialModalContext = {
 	closeModal: () => {},
 	activeModal: null,
 	activateModal: () => {},
+	modalId: null,
 };
 
 export const ModalContext =
@@ -28,6 +30,9 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
 	const [activeModal, setActiveModal] = useState<
 		'contact' | 'thanks' | 'adoption' | null
 	>(null);
+	const [modalId, setModalId] = useState<number | null>(null);
+
+
 	const openModal = () => {
 		console.log(activeModal);
 		setIsModalOpen(true);
@@ -37,9 +42,10 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
 		setIsModalOpen(false);
 		setActiveModal(null);
 	};
-	const activateModal = (value: 'contact' | 'thanks' | 'adoption' | null) => {
+	const activateModal = (value: 'contact' | 'thanks' | 'adoption' | null, id?: number) => {
 		console.log(value);
 		setActiveModal(value);
+		setModalId(id || null);
 	};
 	const contextValue: ModalContextType = {
 		isModalOpen,
@@ -47,6 +53,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
 		closeModal,
 		activeModal,
 		activateModal,
+		modalId
 	};
 
 	return (

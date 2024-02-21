@@ -6,6 +6,7 @@ const ABOUT = 'https://matys-dogs2.onrender.com/about-us';
 const LOGIN = 'https://matys-dogs2.onrender.com/login';
 const CATALOG = 'https://matys-dogs2.onrender.com/catalog';
 const IS_AUTH = 'https://matys-dogs2.onrender.com/is_auth';
+const FORM_CALLBACK = 'https://matys-dogs2.onrender.com/form-callback';
 
 export const fetchHome = async (language: string): Promise<LandingData> => {
 	try {
@@ -23,6 +24,70 @@ export const fetchHome = async (language: string): Promise<LandingData> => {
 		return data;
 	} catch (error) {
 		console.error('Error while loading data:', error);
+		throw error;
+	}
+};
+
+export interface FormUserData {
+	name: string;
+	phone_number: string;
+	comment: string;
+	id_dog: number | null;
+}
+
+export const setFormData = (formUserData: FormUserData) => {
+	const newFormData = new FormData();
+
+	/*Object.keys(formUserData).forEach(key => {
+		newFormData.append(key, formUserData[key].toString());
+	});
+	return newFormData;*/
+
+	/*	Object.entries(formUserData).forEach(([key, value]) => {
+			if (value === null) {
+				throw new Error(`Value for key "${key}" cannot be null`);
+			}
+
+			newFormData.append(key, value.toString());
+		});*/
+	Object.keys(formUserData).forEach(key => {
+		const value = formUserData[key as keyof FormUserData];
+		if (value === null) {
+			throw new Error(`Дані по цьому Хвостику недоступні. Спробуйте обрати іншого.`);
+		}
+		newFormData.append(key, value.toString());
+	});
+
+	return newFormData;
+
+};
+
+export const sendFormData = async (formUserData: FormUserData) => {
+	try {
+		const response = await fetch(FORM_CALLBACK,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'multipart/form-data; boundary=--',
+				},
+				body: setFormData(formUserData) as FormData,
+			});
+		if (response.status === 500) {
+			throw new Error('Щось пішло не так. Спробуйте пізніше.');
+		}
+		if (response.status === 400) {
+
+			throw new Error('Неправильно введені дані. Перевірте інформацію та спробуйте ще раз.');
+		}
+		if (response.status === 200) {
+			console.log(response);
+			console.log(formUserData);
+		}
+		const data = await response.json();
+		return data;
+
+	} catch (error) {
+		console.error(error);
 		throw error;
 	}
 };
@@ -174,9 +239,9 @@ export const getIsAuth = async (token: string): Promise<getIsAuthResponse> => {
 	try {
 		const response = await fetch(IS_AUTH, {
 			headers: {
-        authorization: `Bearer ` + token,
-        accept: "application/json",
-      }
+				authorization: `Bearer ` + token,
+				accept: 'application/json',
+			},
 		});
 
 		if (!response.ok) {
@@ -189,5 +254,5 @@ export const getIsAuth = async (token: string): Promise<getIsAuthResponse> => {
 		console.error('IsAuth Error:', error);
 		throw error;
 	}
-}
+};
 
