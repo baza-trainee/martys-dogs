@@ -12,11 +12,11 @@ interface PhotoAdminData {
 	name: string;
 	url: string;
 	category: string;
-};
+}
 
 interface QueryGetPhotos {
 	images: PhotoAdminData[]
-};
+}
 
 const AdminPhotos = () => {
 	const { token } = useAuthContext();
@@ -60,7 +60,7 @@ const AdminPhotos = () => {
 			setButtonError("Фото не додалося, перезавантажте сторінку");
 		}
 	});
-	
+
 	useEffect(() => {
     if (data && data.length > 0) {
 			setPhotos(data[0].images);
@@ -90,7 +90,7 @@ const AdminPhotos = () => {
 			setButtonLoader(true);
 			const formData = new FormData();
 			formData.append('images', image);
-			
+
 			console.log(formData);
 
 			uploadMutate({ token, imageData: formData });

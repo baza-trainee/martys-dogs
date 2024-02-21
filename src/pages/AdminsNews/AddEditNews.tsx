@@ -1,4 +1,3 @@
-import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form';
 import {useEffect} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -9,7 +8,8 @@ import UploadImageInput from '../../components/CommonUI/UploadImageInput/UploadI
 import HookFormInput from '../../components/CommonUI/HookFormInput/HookFormInput';
 import NewsTextarea from '../../components/NewsTextarea/NewsTextarea';
 import {NewsItem} from './AdminNews';
-import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { ErrorAlert, Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { useAuthContext } from '../../context/useGlobalContext';
 interface IFormInputs {
 	title: string;
 	sub_text: string;
@@ -17,8 +17,8 @@ interface IFormInputs {
 	sub_text_en: string;
 	url: string;
 	photo: FileList;
-	post_at?: string;
-	update_at?: string;
+	post_at: string | Date;
+	update_at?: string | Date;
 }
 
 const AddEditNews: React.FC = () => {
@@ -27,15 +27,18 @@ const AddEditNews: React.FC = () => {
 	const queryClient = useQueryClient();
 	const { newsId } = useParams();
 	const isAddMode = !newsId;
+	const { token } = useAuthContext();
+	// let postAt : string | Date;
 
-	const { mutate, isError, isPending, error } = useMutation({
-			mutationFn: (newsItem: IAddNews) => {
-					if (isAddMode) {
-							return addNews(newsItem).then((item) => console.log(item));
-					} else {
-							return changeNews(newsItem, newsId).then(() => console.log('changeNews'));
-					}
-			},
+	const { mutate, isError, isPending } = useMutation({
+			// mutationFn: () => {
+			// 	if (isAddMode) {
+			// 		return addNews({newsItem, token}).then((item) => console.log(item));
+			// } else {
+			// 		return changeNews({newsItem, newsId, token}).then(() => console.log('changeNews'));
+			// }
+			// },
+			mutationFn: isAddMode ? addNews : changeNews,
 			onSuccess: () => {
 					queryClient.invalidateQueries({ queryKey: ['news'] });
 					reset();
@@ -45,7 +48,9 @@ const AddEditNews: React.FC = () => {
 
 	const { data: news } = useQuery<NewsItem[]>({
 			queryKey: ['news'],
-			queryFn: fetchNews,
+			queryFn: () => typeof token === 'string' ? fetchNews(token) : Promise.resolve([]),
+		refetchInterval: 600000,
+		enabled: !!token,
 	});
 
 	useEffect(() => {
@@ -61,24 +66,29 @@ const AddEditNews: React.FC = () => {
 }, [news, newsId, setValue]);
 
 const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
-	console.log('click')
-			const uploadedImage = data?.photo?.[0];
+	if(token){const uploadedImage = data?.photo?.[0];
 			const newsDate = new Date();
 			const addedNews = {
-					...data,
-					photo: uploadedImage,
-					post_at: newsDate,
-					update_at: newsDate,
-			};
-			mutate(addedNews);
-			console.log(error?.message)
+				...data,
+				photo: uploadedImage,
+				post_at: newsDate,
+				update_at: newsDate,
+		}
+
+		console.log(addedNews)
+		if (isAddMode) {
+			mutate({ newsItem: addedNews, id: '', token });
+		} else {
+			mutate({ newsItem: addedNews, id: newsId, token });
+		}
+		}
+
 	};
 
 	const onCancelHandler = () => {
 			reset();
 			navigate('/admin/news');
 	};
-
 
 	if (isPending) {
 		return (
@@ -88,9 +98,7 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 
 	if (isError) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.alert}>{error.message}</div>
-			</div>
+			<ErrorAlert errorMessage='На жаль сталася помилка, перезавантажте  сторінку і спробуйте ще раз'/>
 		);
 	}
 
@@ -206,7 +214,7 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 						}}
 						id={'sub_text'}
 						placeholder={'Enter news text'}
-						maxLength={100}
+						maxLength={150}
 						errorMessage={errors['sub_text']?.message}
 					/>
 					<NewsTextarea
@@ -223,7 +231,7 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 						}}
 						id={'sub_text_en'}
 						placeholder={'Enter news text'}
-						maxLength={100}
+						maxLength={150}
 						errorMessage={errors['sub_text_en']?.message}
 					/>
 				</div>

@@ -1,10 +1,10 @@
-import React from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import ItemActions from '../../components/CommonUI/ItemActions/ItemActions';
 import { deleteNews } from '../../services/adminNews';
 import styles from './AdminNewsItem.module.scss';
-import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { Loader, ErrorAlert } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { useAuthContext } from '../../context/useGlobalContext';
 export interface NewsItemProps {
 	id: number;
 	title: string;
@@ -29,6 +29,8 @@ const NewsItem: React.FC<NewsItemProps> = ({
 	photo,
 	// url,
 }) => {
+	// console.log('post_at',  post_at)
+	// console.log('title',  title)
 	const months: { [key: string]: string } = {
 		січень: 'січня',
 		лютий: 'лютого',
@@ -52,19 +54,21 @@ const NewsItem: React.FC<NewsItemProps> = ({
 		return stringDate;
 	};
 
+
+	const { token } = useAuthContext();
 	const queryClient = useQueryClient();
 	const navigate=useNavigate()
-	const {mutate, isError, isPending, error} = useMutation({
-		mutationFn: (id:number) =>
-			deleteNews(id).then((item) => console.log(item)),
+	const {mutate, isError, isPending} = useMutation({
+		mutationFn: deleteNews,
 		onSuccess: () => {
-			queryClient.invalidateQueries({ queryKey: ['news'] });
+			queryClient.invalidateQueries({ queryKey: ['news'],exact: true  });
 		},
 	});
 
 	const deleteNewsHandler=(id:number)=>{
-console.log('delete news')
-mutate(id);
+if (token) {
+	mutate({id, token});
+}
 	}
 
 	const editNewsHandler=(id:number)=>{
@@ -80,16 +84,14 @@ mutate(id);
 
 	if (isError) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.alert}>{error.message}</div>
-			</div>
+			<ErrorAlert errorMessage='На жаль сталася помилка, перезавантажте  сторінку'/>
 		);
 	}
 
 	return (
 		<li className={styles.item}>
 			<div className={styles.thumb}>
-				<img src={photo?.url} alt='photo' className={styles.photo} />
+				<img src={photo?.url} alt='news photo' className={styles.photo} />
 			</div>
 			<div className={styles.info}>
 				<h3 className={styles.title}>{title}</h3>
