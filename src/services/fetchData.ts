@@ -33,6 +33,7 @@ export interface FormUserData {
 	phone_number: string;
 	comment: string;
 	id_dog: number | null;
+	[key: string]: string | number | null;
 }
 
 export const setFormData = (formUserData: FormUserData) => {
