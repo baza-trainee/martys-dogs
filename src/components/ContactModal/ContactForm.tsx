@@ -107,7 +107,7 @@ const ContactForm: React.FC = () => {
 			setShowLoader(false);
 			setShowError('');
 			activateModal('adoption');
-		} catch (error: Error) {
+		} catch (error: any) {
 			setShowLoader(false);
 			setShowError(error.message);
 		}

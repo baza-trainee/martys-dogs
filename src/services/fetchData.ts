@@ -36,13 +36,24 @@ export interface FormUserData {
 	[key: string]: string | number | null;
 }
 
-export const setFormData = (formUserData: FormUserData) => {
-	const newFormData = new FormData();
+export const setFormData = (formUserData: FormUserData| null) => {
+/*	const newFormData = new FormData();
 
 	Object.keys(formUserData).forEach(key => {
 		newFormData.append(key, formUserData[key].toString());
 	});
-	return newFormData;
+	return newFormData;*/
+	if (formUserData) {
+		const newFormData = new FormData();
+
+		Object.keys(formUserData).forEach((key) => {
+			newFormData.append(key, formUserData[key].toString());
+		});
+
+		return newFormData;
+	} else {
+		throw new Error('formUserData is null');
+	}
 };
 
 export const sendFormData = async (formUserData: FormUserData) => {
