@@ -1,3 +1,4 @@
+import React from 'react'
 import NewsItem, { NewsItemProps } from './NewsItem';
 import { LandingData } from '../../pages/Landing/Landing';
 import { UseQueryResult } from '@tanstack/react-query';
@@ -16,6 +17,8 @@ const News: React.FC<NewsProps> = ({ data }) => {
 
 	console.log(news?.news);
 
+// const string = 'During your cosy and warm celebrations, don't forget about the creatures for whom we are the whole world. Very soon we will launch a very important in'
+// console.log(string.length)
 	if (isPending) {
 		return (
 		<Loader/>

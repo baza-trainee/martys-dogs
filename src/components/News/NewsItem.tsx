@@ -1,3 +1,4 @@
+import React from 'react'
 import Button from '../../layout/Button/Button';
 // import { useEffect , useRef} from 'react';
 import styles from './NewsItem.module.scss';

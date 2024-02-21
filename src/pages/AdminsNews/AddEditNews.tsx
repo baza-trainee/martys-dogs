@@ -8,7 +8,8 @@ import UploadImageInput from '../../components/CommonUI/UploadImageInput/UploadI
 import HookFormInput from '../../components/CommonUI/HookFormInput/HookFormInput';
 import NewsTextarea from '../../components/NewsTextarea/NewsTextarea';
 import {NewsItem} from './AdminNews';
-import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { ErrorAlert, Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { useAuthContext } from '../../context/useGlobalContext';
 interface IFormInputs {
 	title: string;
 	sub_text: string;
@@ -16,25 +17,28 @@ interface IFormInputs {
 	sub_text_en: string;
 	url: string;
 	photo: FileList;
-	post_at?: string;
-	update_at?: string;
+	post_at: string | Date;
+	update_at?: string | Date;
 }
 
 const AddEditNews: React.FC = () => {
-	const { register, handleSubmit, reset, formState: { errors, isValid }, watch, setValue } = useForm<IFormInputs>({ mode: 'onBlur' });
+	const { register, handleSubmit, reset, formState: { errors, isValid }, watch, setValue } = useForm<IFormInputs>({ mode: 'onChange' });
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const { newsId } = useParams();
 	const isAddMode = !newsId;
+	const { token } = useAuthContext();
+	// let postAt : string | Date;
 
-	const { mutate, isError, isPending, error } = useMutation({
-			mutationFn: (newsItem: IAddNews) => {
-					if (isAddMode) {
-							return addNews(newsItem).then((item) => console.log(item));
-					} else {
-							return changeNews(newsItem, newsId).then(() => console.log('changeNews'));
-					}
-			},
+	const { mutate, isError, isPending } = useMutation({
+			// mutationFn: () => {
+			// 	if (isAddMode) {
+			// 		return addNews({newsItem, token}).then((item) => console.log(item));
+			// } else {
+			// 		return changeNews({newsItem, newsId, token}).then(() => console.log('changeNews'));
+			// }
+			// },
+			mutationFn: isAddMode ? addNews : changeNews,
 			onSuccess: () => {
 					queryClient.invalidateQueries({ queryKey: ['news'] });
 					reset();
@@ -44,7 +48,9 @@ const AddEditNews: React.FC = () => {
 
 	const { data: news } = useQuery<NewsItem[]>({
 			queryKey: ['news'],
-			queryFn: fetchNews,
+			queryFn: () => typeof token === 'string' ? fetchNews(token) : Promise.resolve([]),
+		refetchInterval: 600000,
+		enabled: !!token,
 	});
 
 	useEffect(() => {
@@ -60,22 +66,29 @@ const AddEditNews: React.FC = () => {
 }, [news, newsId, setValue]);
 
 const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
-			const uploadedImage = data?.photo?.[0];
+	if(token){const uploadedImage = data?.photo?.[0];
 			const newsDate = new Date();
 			const addedNews = {
-					...data,
-					photo: uploadedImage,
-					post_at: newsDate,
-					update_at: newsDate,
-			};
-			mutate(addedNews);
+				...data,
+				photo: uploadedImage,
+				post_at: newsDate,
+				update_at: newsDate,
+		}
+
+		console.log(addedNews)
+		if (isAddMode) {
+			mutate({ newsItem: addedNews, id: '', token });
+		} else {
+			mutate({ newsItem: addedNews, id: newsId, token });
+		}
+		}
+
 	};
 
 	const onCancelHandler = () => {
 			reset();
 			navigate('/admin/news');
 	};
-
 
 	if (isPending) {
 		return (
@@ -85,9 +98,7 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 
 	if (isError) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.alert}>{error.message}</div>
-			</div>
+			<ErrorAlert errorMessage='На жаль сталася помилка, перезавантажте  сторінку і спробуйте ще раз'/>
 		);
 	}
 
@@ -102,6 +113,32 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 					register={{
 						...register('photo', {
 							required: 'Файл з фото не обрано',
+							validate: {
+								validImageFormat: (value: FileList | null) => {
+									if (!value) return true;
+									const supportedImageFormats = [
+										'image/jpeg',
+										'image/png',
+										'image/webp',
+									];
+									return (
+										supportedImageFormats.includes(
+											value?.[0].type,
+										) ||
+										'Виберіть дійсний файл зображення (JPEG, PNG або WebP)'
+									);
+								},
+								validImageSize: (value: FileList | null) => {
+									if (!value) return true;
+									const maxSize = 5 * 1024 * 1024; // 5MB
+									return (
+										value?.[0].size <= maxSize ||
+										`Розмір файлу повинен бути менше або рівний ${
+											maxSize / (1024 * 1024)
+										} MB`
+									);
+								},
+							}
 						}),
 					}}
 					watch={watch}

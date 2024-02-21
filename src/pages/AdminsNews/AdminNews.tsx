@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import styles from './AdminNews.module.scss';
-import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { Loader, ErrorAlert } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 import AdminNewsItem, { NewsItemProps } from '../AdminsNews/AdminNewsItem';
 import AddButton from '../../components/CommonUI/AddButton/AddButton';
 import { fetchNews } from '../../services/adminNews';
+import { useAuthContext } from '../../context/useGlobalContext';
 interface Photo {
 	id: string;
 	name: string;
@@ -25,11 +26,17 @@ export interface NewsData {
 }
 
 const AdminNews: React.FC = () => {
-	const {data:news, isPending, isError, error} = useQuery<NewsItem[]>({
+	const { token } = useAuthContext();
+
+	const {data:news, isPending, isError} = useQuery<NewsItem[]>({
 		queryKey: ['news'],
-		queryFn: fetchNews,
+		queryFn: () => typeof token === 'string' ? fetchNews(token) : Promise.resolve([]),
+		refetchInterval: 600000,
+		enabled: !!token,
 	});
 
+const  str = 'Meet the family of sweet Milka and her black daughters and sons - such sweet oreos. Unfortunately, they were abandoned, right in the middle of the in the middle of winter, to starve to death!!!'
+console.log(str.length)
 	if (isPending) {
 		return (
 			<Loader/>
@@ -38,9 +45,7 @@ const AdminNews: React.FC = () => {
 
 	if (isError) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.alert}>{error.message}</div>
-			</div>
+			<ErrorAlert errorMessage='На жаль сталася помилка, перезавантажте  сторінку'/>
 		);
 	}
 
