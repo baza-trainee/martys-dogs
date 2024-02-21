@@ -50,15 +50,15 @@ export const setFormData = (formUserData: FormUserData) => {
 
 			newFormData.append(key, value.toString());
 		});*/
-	for (const key in formUserData) {
-		if (Object.prototype.hasOwnProperty.call(formUserData, key)) {
-			const value = formUserData[key];
-			if (value === null) {
-				throw new Error(`Дані по цьому Хвостику недоступні. Спробуйте обрати іншого.`);
-			}
-			newFormData.append(key, value.toString());
+	Object.keys(formUserData).forEach(key => {
+		const value = formUserData[key as keyof FormUserData];
+		if (value === null) {
+			throw new Error(`Дані по цьому Хвостику недоступні. Спробуйте обрати іншого.`);
 		}
-	}
+		newFormData.append(key, value.toString());
+	});
+
+	return newFormData;
 
 };
 
