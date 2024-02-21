@@ -32,16 +32,33 @@ export interface FormUserData {
 	name: string;
 	phone_number: string;
 	comment: string;
-	id_dog: number;
+	id_dog: number | null;
 }
 
 export const setFormData = (formUserData: FormUserData) => {
 	const newFormData = new FormData();
 
-	Object.keys(formUserData).forEach(key => {
+	/*Object.keys(formUserData).forEach(key => {
 		newFormData.append(key, formUserData[key].toString());
 	});
-	return newFormData;
+	return newFormData;*/
+
+	/*	Object.entries(formUserData).forEach(([key, value]) => {
+			if (value === null) {
+				throw new Error(`Value for key "${key}" cannot be null`);
+			}
+
+			newFormData.append(key, value.toString());
+		});*/
+	for (const key in formUserData) {
+		if (Object.prototype.hasOwnProperty.call(formUserData, key)) {
+			const value = formUserData[key];
+			if (value === null) {
+				throw new Error(`Дані по цьому Хвостику недоступні. Спробуйте обрати іншого.`);
+			}
+			newFormData.append(key, value.toString());
+		}
+	}
 
 };
 
@@ -56,7 +73,7 @@ export const sendFormData = async (formUserData: FormUserData) => {
 				body: setFormData(formUserData) as FormData,
 			});
 		if (response.status === 500) {
-			throw new Error( 'Щось пішло не так. Спробуйте пізніше.');
+			throw new Error('Щось пішло не так. Спробуйте пізніше.');
 		}
 		if (response.status === 400) {
 

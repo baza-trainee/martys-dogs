@@ -16,8 +16,6 @@ interface FormData {
 	comment: string;
 }
 
-
-
 const ContactForm: React.FC = () => {
 	const { activateModal, modalId } = useModalContext();
 	const { t } = useTranslation();
@@ -97,30 +95,18 @@ const ContactForm: React.FC = () => {
 		});
 
 
-	/*	const formDataToSend: FormUserData = {
+		const formDataToSend: FormUserData = {
 			name: formData.name,
 			phone_number: formData.phoneNumber,
 			comment: formData.comment,
 			id_dog: modalId,
-		};*/
+		};
 
 		try {
-			if (modalId !== null) {
-				const formDataToSend: FormUserData = {
-					name: formData.name,
-					phone_number: formData.phoneNumber,
-					comment: formData.comment,
-					id_dog: modalId,
-				};
-
-				await sendFormData(formDataToSend);
-				setShowLoader(false);
-				setShowError('');
-				activateModal('adoption');
-			} else {
-				// Обробка ситуації, коли modalId === null
-				throw new Error('modalId is null');
-			}
+			await sendFormData(formDataToSend);
+			setShowLoader(false);
+			setShowError('');
+			activateModal('adoption');
 		} catch (error: any) {
 			setShowLoader(false);
 			setShowError(error.message);
