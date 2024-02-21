@@ -27,7 +27,7 @@ export interface TailProps {
 }
 
 const Tail: React.FC<TailProps> = ({
-	// id,
+	id,
 	name,
 	ready_for_adoption,
 	gender,
@@ -49,7 +49,8 @@ const Tail: React.FC<TailProps> = ({
 	const handleModal = () => {
 		console.log(activeModal);
 		openModal();
-		activateModal('contact');
+		activateModal('contact', id);
+		console.log(`id of dog: ${id}`)
 	};
 
 	return (
