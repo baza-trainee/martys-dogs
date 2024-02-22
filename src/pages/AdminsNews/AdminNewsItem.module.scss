@@ -3,10 +3,14 @@
 
 .item {
 	max-width: 353px;
-
-	@include small-desktop {
+	@include tablet {
+		max-width: 342px;
 		display: grid;
 		grid-template-rows: auto 1fr auto;
+	}
+
+	@include small-desktop {
+		max-width: 255px;
 	}
 
 	@include large-desktop {
@@ -63,21 +67,7 @@
 	margin-bottom: 8px;
 }
 
-// .text {
-// 	color: $color-gray-80;
-// 	font-size: 20px;
-// 	font-weight: 500;
-// 	line-height: 1.4;
-// }
-
-
 .text {
-	// color: $color-gray-80;
-	// font-size: 20px;
-	// font-weight: 500;
-	// line-height: 1.4;
-
-
 	color: $color-gray-80;
 	font-weight: 500;
 	line-height: 1.4;
@@ -94,21 +84,12 @@
 		-webkit-box-orient: vertical;
 	}
 	@include small-desktop {
-		// max-height: 151px;
 		overflow: hidden;
 		-webkit-line-clamp: 3;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
-	}}
-
-// .info {
-// 	margin: 16px 0;
-// 	display: flex;
-// 	max-height: 200px;
-// 	flex-direction: column;
-// 	justify-content: space-between;
-// 	overflow: hidden;
-// }
+	}
+}
 
 .info {
 	margin: 16px 0;

@@ -78,3 +78,62 @@
 	font-size: 32px;
 	color: #005c80;
 }
+
+.button {
+  border-radius: 30px;
+  display: block;
+  height: 52px;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  border-style: none;
+	text-align: center;
+  transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+  }
+
+  &:disabled {
+    color: $color-gray-60;
+
+    svg {
+      fill: $color-gray-60;
+    }
+  }
+}
+
+
+.primary {
+	composes: button;
+  background: $color-accent;
+  color: $color-gray-10;
+
+  @include hover {
+    &:hover {
+      background: $color-main-blue-dark;
+    }
+  }
+
+  &:focus-visible  {
+    outline: none;
+    border: 1px solid $color-main-blue-dark;
+  }
+
+  //pressed
+  &:active {
+    background: $color-gray-100;
+  }
+
+  &:disabled {
+    background: $color-gray-20;
+  }
+
+}
