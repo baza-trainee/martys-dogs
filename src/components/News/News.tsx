@@ -5,20 +5,14 @@ import { UseQueryResult } from '@tanstack/react-query';
 import styles from './News.module.scss';
 import { useTranslation } from 'react-i18next';
 import { Loader } from '../CommonUI/LoaderAndError/LoaderAndError';
-// import {data} from './data'
 interface NewsProps {
 	data: UseQueryResult<LandingData, Error>;
 }
 
 const News: React.FC<NewsProps> = ({ data }) => {
 	const { t } = useTranslation();
-
 	const { data: news, isPending, isError, error } = data;
 
-	console.log(news?.news);
-
-// const string = 'During your cosy and warm celebrations, don't forget about the creatures for whom we are the whole world. Very soon we will launch a very important in'
-// console.log(string.length)
 	if (isPending) {
 		return (
 		<Loader/>
@@ -39,7 +33,9 @@ const News: React.FC<NewsProps> = ({ data }) => {
 				<h2 className={styles.title}>{t('news.title')}</h2>
 				<ul className={styles.news}>
 					{news?.news?.map((item: NewsItemProps) => (
-						<NewsItem key={item.id} {...item} />
+					<NewsItem key={item.id} {...item}>
+              <a href={item.url} target='_blank' rel='noopener noreferrer' className={styles.primary}>{t('news.button')}</a>
+            </NewsItem>
 					))}
 				</ul>
 			</div>

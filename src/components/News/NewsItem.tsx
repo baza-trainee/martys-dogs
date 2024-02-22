@@ -1,34 +1,27 @@
 import React from 'react'
-import Button from '../../layout/Button/Button';
-// import { useEffect , useRef} from 'react';
 import styles from './NewsItem.module.scss';
 import { useTranslation } from 'react-i18next';
 
+export interface Photo {
+	id: string;
+	name: string;
+	url: string;
+	category: string;
+}
 export interface NewsItemProps {
 	id: number;
 	title: string;
 	post_at: string;
-	update_at: string;
+	update_at?: string;
 	sub_text: string;
 	url: string;
-	photo: {
-		id: string;
-		name: string;
-		url: string;
-		category: string;
-	};
+	children?: React.ReactNode;
+	photo: Photo;
 }
 
-const NewsItem: React.FC<NewsItemProps> = ({
-	// id,
-	title,
-	post_at,
-	// update_at,
-	sub_text,
-	photo,
-	url,
-}) => {
-	const { t } = useTranslation();
+const NewsItem: React.FC<NewsItemProps> = ({title, post_at,  sub_text, photo, children}) => {
+
+	const {i18n } = useTranslation();
 
 	const months: { [key: string]: string } = {
 		січень: 'січня',
@@ -48,27 +41,12 @@ const NewsItem: React.FC<NewsItemProps> = ({
 	const getDateName = (data: string) => {
 		const date = new Date(data);
 		const monthFromDate = date.toLocaleString('uk-UA', { month: 'long' });
+		const monthFromDateEng = date.toLocaleString('en-EN', { month: 'long' });
 		const changedMonth = months[monthFromDate];
 		const stringDate = `${date.getDate()} ${changedMonth} ${date.getFullYear()}`;
-		return stringDate;
+		const engDate = `${date.getDate()} ${monthFromDateEng} ${date.getFullYear()}`;
+return  i18n.language === 'ua' ? stringDate :  engDate
 	};
-
-
-	// const containerRef = useRef(null);
-	// const textRef=useRef(null);
-	// const texRef=useRef(null);
-	// useEffect(() => {
-  //   const container = containerRef.current;
-	// 	const text = textRef.current;
-	// 	const tex = texRef.current;
-	// 	console.log(container.scrollHeight)
-	// 	console.log(container.clientHeight)
-  //   if (container !== null &&  container.scrollHeight > container.clientHeight) {
-  //     tex.classList.add(styles.ellipsis);
-  //   }
-  // }, [sub_text]); // You might want to update this effect whenever the content changes
-
-
 
 	return (
 		<li className={styles.item}>
@@ -79,7 +57,6 @@ const NewsItem: React.FC<NewsItemProps> = ({
 					className={styles.photo}
 				/> }
 			</div>
-			{/* <div  ref={containerRef} className={styles.wrapper}> */}
 				<div className={styles.info}>
 				<h3 className={styles.title}>{title}</h3>
 				<div>
@@ -88,16 +65,8 @@ const NewsItem: React.FC<NewsItemProps> = ({
 						{sub_text}
 					</p>
 					</div>
-				{/* </div> */}
 			</div>
-			<a href={url} target='blank' rel='noopener noreferrer'>
-				<Button
-					type={'button'}
-					name={t('news.button')}
-					btnClasses={'primary'}
-					onClick={() => console.log('to news')}
-				/>
-			</a>
+			{children}
 		</li>
 	);
 };

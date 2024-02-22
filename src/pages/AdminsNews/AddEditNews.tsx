@@ -7,9 +7,9 @@ import { IAddNews, changeNews ,addNews, fetchNews} from '../../services/adminNew
 import UploadImageInput from '../../components/CommonUI/UploadImageInput/UploadImageInput';
 import HookFormInput from '../../components/CommonUI/HookFormInput/HookFormInput';
 import NewsTextarea from '../../components/NewsTextarea/NewsTextarea';
-import {NewsItem} from './AdminNews';
 import { ErrorAlert, Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 import { useAuthContext } from '../../context/useGlobalContext';
+import { NewsItemProps} from '../../components/News/NewsItem';
 interface IFormInputs {
 	title: string;
 	sub_text: string;
@@ -17,7 +17,7 @@ interface IFormInputs {
 	sub_text_en: string;
 	url: string;
 	photo: FileList;
-	post_at: string | Date;
+	post_at?: string | Date;
 	update_at?: string | Date;
 }
 
@@ -28,16 +28,8 @@ const AddEditNews: React.FC = () => {
 	const { newsId } = useParams();
 	const isAddMode = !newsId;
 	const { token } = useAuthContext();
-	// let postAt : string | Date;
 
 	const { mutate, isError, isPending } = useMutation({
-			// mutationFn: () => {
-			// 	if (isAddMode) {
-			// 		return addNews({newsItem, token}).then((item) => console.log(item));
-			// } else {
-			// 		return changeNews({newsItem, newsId, token}).then(() => console.log('changeNews'));
-			// }
-			// },
 			mutationFn: isAddMode ? addNews : changeNews,
 			onSuccess: () => {
 					queryClient.invalidateQueries({ queryKey: ['news'] });
@@ -46,7 +38,7 @@ const AddEditNews: React.FC = () => {
 			},
 	});
 
-	const { data: news } = useQuery<NewsItem[]>({
+	const { data: news } = useQuery<NewsItemProps[]>({
 			queryKey: ['news'],
 			queryFn: () => typeof token === 'string' ? fetchNews(token) : Promise.resolve([]),
 		refetchInterval: 600000,
@@ -56,7 +48,7 @@ const AddEditNews: React.FC = () => {
 	useEffect(() => {
 		const newsToEdit = news?.find((item) => item.id === Number(newsId));
 		if (newsToEdit) {
-				const fields: (keyof IAddNews)[] = ['photo', 'url', 'title', 'title_en', 'sub_text', 'sub_text_en'];
+				const fields: (keyof IAddNews)[] = ['url', 'title', 'title_en', 'sub_text', 'sub_text_en', 'post_at'];
 				fields.forEach((field) => {
 					if (field !== 'id' && field in newsToEdit) {
 							setValue(field, newsToEdit[field as keyof typeof newsToEdit] as string);
@@ -71,7 +63,7 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 			const addedNews = {
 				...data,
 				photo: uploadedImage,
-				post_at: newsDate,
+				// post_at: newsDate,
 				update_at: newsDate,
 		}
 
@@ -82,7 +74,6 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 			mutate({ newsItem: addedNews, id: newsId, token });
 		}
 		}
-
 	};
 
 	const onCancelHandler = () => {
@@ -144,6 +135,19 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 					watch={watch}
 					errorMessage={errors['photo']?.message}
 				/>
+	{/* <HookFormInput
+					label={'Дата новини'}
+					register={{
+						...register('post_at', {
+							required: 'Оберіть дату',
+						}),
+					}}
+					errorMessage={errors['post_at']?.message}
+					type={'date'}
+					id={'post_at'}
+					placeholder={'Choose  news date'}
+				/> */}
+
 				<HookFormInput
 					label={'Посилання на новину в facebook'}
 					register={{
@@ -214,7 +218,7 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 						}}
 						id={'sub_text'}
 						placeholder={'Enter news text'}
-						maxLength={150}
+						maxLength={175}
 						errorMessage={errors['sub_text']?.message}
 					/>
 					<NewsTextarea
@@ -231,7 +235,7 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 						}}
 						id={'sub_text_en'}
 						placeholder={'Enter news text'}
-						maxLength={150}
+						maxLength={175}
 						errorMessage={errors['sub_text_en']?.message}
 					/>
 				</div>

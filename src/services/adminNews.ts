@@ -6,7 +6,7 @@ export interface IAddNews {
 	sub_text_en: string;
 	url: string;
 	photo: File;
-	post_at: Date | string | undefined;
+	post_at?: Date | string | undefined;
 	update_at?: Date;
 	id?: number;
 }

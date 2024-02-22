@@ -25,9 +25,8 @@
 	justify-items: center;
 	row-gap: 30px;
 	@include tablet {
-		grid-template:repeat(2, 1fr) / repeat(2, 1fr);
+		grid-template: 1fr / repeat(2, 1fr);
 		column-gap: 20px;
-		row-gap: 20px;
 	}
 
 	@include small-desktop {
