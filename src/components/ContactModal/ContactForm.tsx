@@ -67,6 +67,7 @@ const ContactForm: React.FC = () => {
 		}
 	};
 
+
 	useEffect(() => {
 		validateName();
 
@@ -75,6 +76,7 @@ const ContactForm: React.FC = () => {
 	useEffect(() => {
 		validateNumber();
 	}, [formData.phoneNumber]);
+
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -103,18 +105,18 @@ const ContactForm: React.FC = () => {
 		};
 
 		try {
-			await sendFormData(formDataToSend);
+		await sendFormData(formDataToSend);
 			setShowLoader(false);
 			setShowError('');
 			activateModal('adoption');
 		} catch (error: any) {
 			setShowLoader(false);
-			setShowError(error.message);
+			setShowError(t('contactModal.server_unresolved_error'));
 		}
 	};
 
 	const isSubmitDisabled = () => {
-		return !!Object.values(errors).find((error) => error !== '') || !formData.name || !formData.phoneNumber;
+		return !!Object.values(errors).find((error) => error !== '') || !formData.name || !formData.phoneNumber ;
 	};
 
 	return (
@@ -186,6 +188,7 @@ const ContactForm: React.FC = () => {
 								className={styles.input}
 								placeholder={t('contactModal.comment_placeholder')}
 								onChange={handleChange}
+								maxLength={100}
 							/>
 
 						</div>
@@ -204,7 +207,8 @@ const ContactForm: React.FC = () => {
 
 			</form>
 			{showLoader && <MiniLoader />}
-			{showError && <MiniErrorAlert errorMessage={showError} backgroundColor="rgba(255, 0, 0, 0.3)" />}</>
+			{showError && <MiniErrorAlert errorMessage={showError} backgroundColor="rgba(255, 0, 0, 0.3)" />}
+		</>
 	);
 };
 
