@@ -22,6 +22,8 @@ if (token) {
 }
 	}
 
+console.log(item.post_at)
+
 	if (isPending) {
 		return (
 			<Loader/>
