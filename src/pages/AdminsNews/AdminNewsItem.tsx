@@ -24,8 +24,6 @@ if (token) {
 }
 	}
 
-console.log('lang ', i18n.language)
-
 	if (isPending) {
 		return (
 			<Loader/>

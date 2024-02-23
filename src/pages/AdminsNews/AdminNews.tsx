@@ -22,8 +22,7 @@ const AdminNews: React.FC = () => {
 
 
 	console.log(news)
-// const  str = 'Meet the family of sweet Milka and her black daughters and sons - such sweet oreos. Unfortunately, they were abandoned, right in the middle of the in the middle of winter, to starve to death!!!'
-// console.log(str.length)
+
 	if (isPending) {
 		return (
 			<Loader/>

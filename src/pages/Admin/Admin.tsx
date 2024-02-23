@@ -1,3 +1,4 @@
+import { Dispatch, FC } from 'react';
 import {
 	Fa500Px,
 	FaAddressBook,
@@ -8,11 +9,14 @@ import {
 	FaNewspaper,
 	FaPeopleGroup,
 } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import { Link } from 'react-router-dom';
 import logo from '../../assets/header_logo.webp';
 import styles from './Admin.module.scss';
+import { Message } from '../AdminForm/AdminForm';
+import { getMessages } from '../../services/adminsMessages';
+import { useAuthContext } from '../../context/useGlobalContext';
 
 const links = [
 	{
@@ -58,11 +62,33 @@ const links = [
 		icon: <FaAddressBook />,
 	},
 ];
-const Sidebar = () => {
-	const [isSidebarOpen, setSidebarOpen] = useState(true);
-	const [sms, setSms] = useState(0);
 
-	useEffect(() => setSms(5), []);
+interface SidebarProps {
+	isSidebarOpen: boolean;
+	setSidebarOpen: Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Sidebar: FC<SidebarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
+	const { token } = useAuthContext();
+	const [messageQuantity, setMessageQuantity] = useState(0);
+
+	useEffect(() => {
+		const fetchSMS = async () => {
+			if (token !== null) {
+				try {
+					const data = await getMessages(token);
+					console.log(data);
+					setMessageQuantity(
+						data?.filter((message: Message) => !message.status)
+							.length,
+					);
+				} catch (error) {
+					console.log(error);
+				}
+			}
+		};
+		fetchSMS();
+	}, [token]);
 
 	const toggleSidebar = () => {
 		setSidebarOpen(!isSidebarOpen);
@@ -92,8 +118,10 @@ const Sidebar = () => {
 							<Link to={link.url}>
 								{link.icon}
 								{link.text}
-								{link.id === 6 && sms > 0 && (
-									<span className={styles.sms}>{sms}</span>
+								{link.id === 6 && messageQuantity > 0 && (
+									<span className={styles.sms}>
+										{messageQuantity}
+									</span>
 								)}
 							</Link>
 						</li>
