@@ -4,10 +4,8 @@ import { deleteNews } from '../../services/adminNews';
 import NewsItem,{ NewsItemProps} from '../../components/News/NewsItem';
 import { Loader, ErrorAlert } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 import { useAuthContext } from '../../context/useGlobalContext';
-import { useTranslation } from 'react-i18next';
 
 const AdminNewsItem: React.FC<NewsItemProps> = (item) => {
-	const {i18n } = useTranslation();
 
 	const { token } = useAuthContext();
 	const queryClient = useQueryClient();
