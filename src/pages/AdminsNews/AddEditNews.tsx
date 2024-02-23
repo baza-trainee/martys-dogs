@@ -171,9 +171,11 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 							...register('title', {
 								required: 'Вкажіть заголовок новини',
 								pattern: {
-									value: /^[\p{Script=Cyrillic}\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~ґєіїҐЄІЇ]*$/u,
+									value: /^[\p{Script=Cyrillic}a-zA-Z\d\s!"#№₴$%&'()*+,-./:;<=>?@[\\\]'^_`{|}~ґєіїҐЄІЇ](?=.*\S).*$/u,
+									// value: /^[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії0-9\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$/u,
+									// value: /^a-zA-Z0-9 !`@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
 									message:
-										'можуть бути  цифри, українські літери, розділові знаки',
+										'можуть бути  цифри, літери, розділові знаки',
 								},
 							}),
 						}}
@@ -190,7 +192,7 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 								required:
 									'Вкажіть заголовок новини англійською',
 								pattern: {
-									value: /^[a-zA-Z0-9 !`@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
+									value: /^[a-zA-Z\d\s!"#№₴$%&'()*+,-./:;<=>?@[\\\]'^_`{|}~](?=.*\S).*$/u,
 									message:
 										'можуть бути  цифри, англійські  літери, розділові знаки',
 								},
@@ -210,9 +212,9 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 							...register('sub_text', {
 								required: 'Вкажіть текст новини',
 								pattern: {
-									value: /^[\p{Script=Cyrillic}\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~ґєіїҐЄІЇ]*$/u,
+									value: /^[\p{Script=Cyrillic}a-zA-Z\d\s!"#№₴$%&'()*+,-./:;<=>?@[\\\]'^_`{|}~ґєіїҐЄІЇ](?=.*\S).*$/u,
 									message:
-										'Можуть бути українські літери, цифри, символи',
+										'Можуть бути літери, цифри, символи',
 								},
 							}),
 						}}
@@ -227,7 +229,7 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 							...register('sub_text_en', {
 								required: 'Вкажіть текст новини англійською',
 								pattern: {
-									value: /^[a-zA-Z0-9 !`@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
+									value: /^[a-zA-Z\d\s!"#№₴$%&'()*+,-./:;<=>?@[\\\]'^_`{|}~](?=.*\S).*$/u,
 									message:
 										'Можуть бути   англійські  літери,цифри, символи',
 								},

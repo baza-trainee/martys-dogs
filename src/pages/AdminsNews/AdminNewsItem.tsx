@@ -22,8 +22,6 @@ if (token) {
 }
 	}
 
-console.log(item.post_at)
-
 	if (isPending) {
 		return (
 			<Loader/>
@@ -37,7 +35,7 @@ console.log(item.post_at)
 	}
 
 	return (
-		<NewsItem {...item}>
+		<NewsItem  {...item} needTranslate={false}>
 				<ItemActions path={`news_edit/${item.id}`} onDeleteClick={()=>deleteNewsHandler(item.id)} />
 		</NewsItem>
 	);
