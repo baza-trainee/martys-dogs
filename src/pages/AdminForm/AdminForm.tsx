@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
 import styles from './AdminForm.module.scss';
 import Loader, {
@@ -10,7 +10,7 @@ import {
 } from '../../services/adminsMessages';
 import { useAuthContext } from '../../context/useGlobalContext';
 
-interface Message {
+export interface Message {
 	id: number;
 	id_dog: {
 		name: number;
@@ -20,7 +20,8 @@ interface Message {
 	comment: string;
 	status: boolean;
 }
-const AdminForm = () => {
+
+const AdminForm: FC = () => {
 	const { token } = useAuthContext();
 	const [messages, setMessages] = useState<Message[]>([]);
 	const [loading, setLoading] = useState(true);
@@ -41,18 +42,24 @@ const AdminForm = () => {
 		fetchMessages();
 	}, [token]);
 
+	// console.log(messages);
+	
 	if (loading) {
-		return <Loader backgroundColor={'#ebf5fb'} />;
+		return (
+			<div className={styles.container}>
+				<Loader />
+			</div>
+		);
 	}
 
 	if (error) {
 		return (
-			<ErrorAlert
-				errorMessage={JSON.stringify(error)}
-				backgroundColor={'#ebf5fb'}
-			/>
+			<div className={styles.container}>
+				<ErrorAlert errorMessage={JSON.stringify(error)} />
+			</div>
 		);
 	}
+
 	// console.log(messages);
 
 	const handleToggleStatus = async (messageId: number) => {

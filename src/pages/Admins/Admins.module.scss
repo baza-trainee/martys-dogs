@@ -1,7 +1,14 @@
 @import '../../scss/_variables.scss';
 
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+
 .main {
-	background-color: #dbdbdb;
+	// background-color: #dbdbdb;
 	width: 100%;
 	padding: 100px;
 

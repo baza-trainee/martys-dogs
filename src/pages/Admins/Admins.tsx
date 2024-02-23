@@ -21,6 +21,7 @@ const Admins = () => {
 	const { token } = useAuthContext();
 	// const token =
 	// 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4OTc4Njc2LCJpYXQiOjE3MDc3NjkwNzYsImp0aSI6ImExZjZjODQ5ZWVjZTRkODhhYzBkNzJmYjFjN2NkN2I3IiwidXNlcl9pZCI6MX0.PgM1tmuFTqPhA6WxQgHZ3xyeAAvErxpdtJxqz69EYGg';
+	
 	const [admins, setAdmins] = useState<Admin[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<null | unknown>(null);
@@ -43,19 +44,22 @@ const Admins = () => {
 	}, [token]);
 
 	if (loading) {
-		return <Loader backgroundColor={'#ebf5fb'} />;
+		return (
+			<div className={styles.container}>
+				<Loader />
+			</div>
+		);
 	}
 
 	if (error) {
 		return (
-			<ErrorAlert
-				errorMessage={JSON.stringify(error)}
-				backgroundColor={'#ebf5fb'}
-			/>
+			<div className={styles.container}>
+				<ErrorAlert errorMessage={JSON.stringify(error)} />
+			</div>
 		);
 	}
 	
-		console.log(admins);
+		// console.log(admins);
 
 	const handleToggleStatus = async (adminId: number) => {
 		try {
