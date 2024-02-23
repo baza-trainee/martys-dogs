@@ -1,16 +1,17 @@
+import { FC } from 'react'
 import { UseQueryResult } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 
 import StatisticsItem from './StatisticsItem';
 import style from './Statistics.module.scss';
-import { AboutData } from '../../pages/About/About'
+import { AboutData } from '../../pages/About/About';
 import { Heart, Paws, Person } from '../../assets/statistics';
 
 interface StatisticsProps {
 	data: UseQueryResult<AboutData[], Error>;
 }
 
-const Statistics: React.FC<StatisticsProps> = ({ data }) => {
+const Statistics: FC<StatisticsProps> = ({ data }) => {
 	const { data: statistics, isPending, isError, error } = data;
 	const { t } = useTranslation();
 
