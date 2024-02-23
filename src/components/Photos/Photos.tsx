@@ -1,14 +1,15 @@
 import 'swiper/css';
 import 'swiper/css/navigation';
 
+import { FC } from 'react';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-import { FetchAboutResult } from '../../pages/About/About';
 import { UseQueryResult } from '@tanstack/react-query';
-import styles from './Photos.module.scss';
 import { useTranslation } from 'react-i18next';
-import { FaAngleLeft, FaAngleRight } from 'react-icons/fa6';
+
+import styles from './Photos.module.scss';
+import { AboutData } from '../../pages/About/About';
 
 interface Pagination {
 	el: string;
@@ -39,13 +40,13 @@ const breakpoints = {
 const numbers = window.innerWidth > 767 ? 8 : 3;
 
 interface PhotosProps {
-	data: UseQueryResult<FetchAboutResult, Error>;
+	data: UseQueryResult<AboutData[], Error>;
 }
 
-const Photos: React.FC<PhotosProps> = ({ data }) => {
+const Photos: FC<PhotosProps> = ({ data }) => {
 	const { t } = useTranslation();
 	const { data: photos, isPending, isError, error } = data;
-	const images = photos?.about_data[0].images;
+	const images = photos?.[0]?.images;
 
 	if (isPending) {
 		return (
@@ -75,40 +76,45 @@ const Photos: React.FC<PhotosProps> = ({ data }) => {
 	return (
 		<section className={styles.photos}>
 			<h2 className={styles.title}>{t('photos.shelter')}</h2>
-			<Swiper
-				breakpoints={breakpoints}
-				spaceBetween={20}
-				loop={false}
-				speed={1000}
-				effect={'fade'}
-				pagination={pagination}
-				navigation={{
-					nextEl: '.next',
-					prevEl: '.prev',
-				}}
-				modules={[Pagination, Navigation]}
-			>
-				{images?.slice(0, numbers).map((image) => (
-					<SwiperSlide key={image.id}>
-						<div>
-							<img
-								src={image.url}
-								alt={image.name}
-								className={styles.image}
-							/>
+			{photos?.[0]?.images.length === 0 && (
+				<h4>{t('photos.noPhotos')}</h4>
+			)}
+			{photos?.[0]?.images.length > 0 && (
+				<Swiper
+					breakpoints={breakpoints}
+					spaceBetween={20}
+					loop={false}
+					speed={1000}
+					effect={'fade'}
+					pagination={pagination}
+					navigation={{
+						nextEl: '.next',
+						prevEl: '.prev',
+					}}
+					modules={[Pagination, Navigation]}
+				>
+					{images?.slice(0, numbers).map((image) => (
+						<SwiperSlide key={image.id}>
+							<div>
+								<img
+									src={image.url}
+									alt={image.name}
+									className={styles.image}
+								/>
+							</div>
+						</SwiperSlide>
+					))}
+					<div className='navigationContainer'>
+						<div className='prev'>
+							<FaAngleLeft />
 						</div>
-					</SwiperSlide>
-				))}
-				<div className='navigationContainer'>
-					<div className='prev'>
-						<FaAngleLeft />
+						<div className='swiper-pagination'></div>
+						<div className='next'>
+							<FaAngleRight />
+						</div>
 					</div>
-					<div className='swiper-pagination'></div>
-					<div className='next'>
-						<FaAngleRight />
-					</div>
-				</div>
-			</Swiper>
+				</Swiper>
+			)}
 		</section>
 	);
 };

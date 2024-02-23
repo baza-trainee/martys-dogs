@@ -1,3 +1,7 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+
 import HeroAbout from '../../components/HeroAbout/HeroAbout';
 import Photos from '../../components/Photos/Photos';
 import Statistics from '../../components/Statistics/Statistics';
@@ -5,9 +9,6 @@ import Support from '../../components/Support/Support';
 import VideoAboutShelter from '../../components/VideoAboutShelter/VideoAboutShelter';
 import { fetchAbout } from '../../services/fetchData';
 import { scrollOnTop } from '../../services/scrollTo';
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
 
 interface Image {
 	id: string;
@@ -21,10 +22,6 @@ export interface AboutData {
 	quantity_of_employees: number;
 	quantity_of_succeeds_adoptions: number;
 	images: Image[];
-}
-
-export interface FetchAboutResult {
-	about_data: AboutData[];
 }
 
 const About = () => {

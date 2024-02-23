@@ -1,5 +1,12 @@
 @import '../../scss/_variables.scss';
 
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+
 .main {
 	// background-color: #dbdbdb;
 	width: 100%;

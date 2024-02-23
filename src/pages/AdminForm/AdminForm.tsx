@@ -42,19 +42,24 @@ const AdminForm: FC = () => {
 		fetchMessages();
 	}, [token]);
 
-	console.log(messages);
+	// console.log(messages);
+	
 	if (loading) {
-		return <Loader backgroundColor={'#ebf5fb'} />;
+		return (
+			<div className={styles.container}>
+				<Loader />
+			</div>
+		);
 	}
 
 	if (error) {
 		return (
-			<ErrorAlert
-				errorMessage={JSON.stringify(error)}
-				backgroundColor={'#ebf5fb'}
-			/>
+			<div className={styles.container}>
+				<ErrorAlert errorMessage={JSON.stringify(error)} />
+			</div>
 		);
 	}
+
 	// console.log(messages);
 
 	const handleToggleStatus = async (messageId: number) => {
