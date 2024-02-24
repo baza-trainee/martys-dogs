@@ -89,7 +89,7 @@ const Admins = () => {
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th>Им'я</th>
+						<th>Ім'я</th>
 						<th>Статус</th>
 						<th>Активація</th>
 					</tr>
