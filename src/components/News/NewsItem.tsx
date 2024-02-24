@@ -17,9 +17,10 @@ export interface NewsItemProps {
 	url: string;
 	children?: React.ReactNode;
 	photo: Photo;
+	needTranslate?:boolean;
 }
 
-const NewsItem: React.FC<NewsItemProps> = ({title, post_at,  sub_text, photo, children}) => {
+const NewsItem: React.FC<NewsItemProps> = ({title, post_at,  sub_text, photo, needTranslate, children}) => {
 
 	const {i18n } = useTranslation();
 
@@ -45,8 +46,17 @@ const NewsItem: React.FC<NewsItemProps> = ({title, post_at,  sub_text, photo, ch
 		const changedMonth = months[monthFromDate];
 		const stringDate = `${date.getDate()} ${changedMonth} ${date.getFullYear()}`;
 		const engDate = `${date.getDate()} ${monthFromDateEng} ${date.getFullYear()}`;
-return  i18n.language === 'ua' ? stringDate :  engDate
+		if (i18n.language === 'ua' && needTranslate){
+			return stringDate;
+		} else  if (i18n.language === 'en' && needTranslate) {
+			return engDate;
+		} else {
+			return stringDate;
+		}
+// return  ((i18n.language === 'ua') && needTranslate ) ? stringDate :  engDate
 	};
+
+console.log(getDateName(post_at))
 
 	return (
 		<li className={styles.item}>
