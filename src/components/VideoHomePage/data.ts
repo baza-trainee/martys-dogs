@@ -1,19 +1,15 @@
-import mainMobile from '../../assets/video_main/girla/girl393.webp';
-import mainTablet from '../../assets/video_main/girla/girl768.webp';
-import mainLaptop from '../../assets/video_main/girla/girl1280.webp';
-import mainDesktop from '../../assets/video_main/girla/girl1440.webp';
-import mainLargeScreen from '../../assets/video_main/girla/girl768.webp';
+import mainMobile from '../../assets/video_main/girl/girl393.webp';
+import mainTablet from '../../assets/video_main/girl/girl768.webp';
+import mainLaptop from '../../assets/video_main/girl/girl1280.webp';
+import mainDesktop from '../../assets/video_main/girl/girl1440.webp';
+import mainDesktop2x from '../../assets/video_main/girl/girl1440@2x.webp';
 import therapyMobile from '../../assets/video_main/boys/boys393.webp';
 import therapyTablet from '../../assets/video_main/boys/boys768.webp';
 import therapyLaptop from '../../assets/video_main/boys/boys1280.webp';
 import therapyDesktop from '../../assets/video_main/boys/boys1440.webp';
-import therapyLargeScreen from '../../assets/video_main/boys/boys1920.webp';
+import therapyDesktop2x from '../../assets/video_main/boys/boys@2x1440.webp';
 import pawsImg from '../../assets/video_main/VectorPaws.svg';
 import playButtonImg from '../../assets/video_main/Play.svg';
-import mainDesktop2x from '../../assets/video_main/girla/girl1440@2xcopy.jpg';
-import therapyDesktop2x from '../../assets/video_main/boys/boys@2x1440copy.jpg';
-
-
 
 export const videoLinks = {
 	main: 'https://www.youtube.com/watch?v=2igwkVve1nk',
@@ -49,14 +45,15 @@ export const mainPosters = [
 		width: '1800px',
 	},
 	{
-		srcSet: mainLargeScreen,
+		srcSet: mainDesktop,
 		mediaQuery: mediaQueryCommon.largeScreen,
+		width: '880px'
 	},
 ];
 
 export const therapyPosters = [
 	{
-		srcSet: `${therapyMobile} 393w, ${therapyTablet} 767w`,
+		srcSet: `${therapyMobile} 440w, ${therapyTablet} 767w`,
 		mediaQuery: mediaQueryCommon.mobile,
 	},
 	{
@@ -75,8 +72,9 @@ export const therapyPosters = [
 		width: '1800px',
 	},
 	{
-		srcSet: therapyLargeScreen,
+		srcSet: therapyDesktop,
 		mediaQuery: mediaQueryCommon.largeScreen,
+		width: '900px'
 	},
 ];
 

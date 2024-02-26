@@ -119,6 +119,7 @@
 					}
 				}
 			}
+
 			.loader {
 				width: 50px;
 				height: 50px;
@@ -152,11 +153,21 @@
 					left: 48%;
 				}
 			}
-
 			@keyframes spin {
 				100% {
 					transform: rotate(1turn);
 				}
+			}
+
+			.error {
+				position: absolute;
+				display: inline-block;
+				top: 45%;
+				text-align: center;
+				font-size: 32px;
+				color: $color-main-blue-dark;
+				width: 100%; /* Set the width to 100% to ensure it takes the full width of the parent container */
+				box-sizing: border-box;
 			}
 
 			.videoElement {
