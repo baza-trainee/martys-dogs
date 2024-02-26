@@ -1,34 +1,27 @@
 import { useQuery } from '@tanstack/react-query';
 import styles from './AdminNews.module.scss';
-import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
-import AdminNewsItem, { NewsItemProps } from '../AdminsNews/AdminNewsItem';
+import { Loader, ErrorAlert } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import AdminNewsItem from '../AdminsNews/AdminNewsItem';
+import { NewsItemProps} from '../../components/News/NewsItem';
 import AddButton from '../../components/CommonUI/AddButton/AddButton';
 import { fetchNews } from '../../services/adminNews';
-interface Photo {
-	id: string;
-	name: string;
-	url: string;
-	category: string;
-}
-export  interface NewsItem {
-	id: number;
-	title: string;
-	post_at: string;
-	update_at: string;
-	sub_text: string;
-	url: string;
-	photo: Photo;
-}
-
+import { useAuthContext } from '../../context/useGlobalContext';
 export interface NewsData {
-	news: NewsItem[];
+	news: NewsItemProps[];
 }
 
 const AdminNews: React.FC = () => {
-	const {data:news, isPending, isError, error} = useQuery<NewsItem[]>({
+	const { token } = useAuthContext();
+
+	const {data:news, isPending, isError} = useQuery<NewsItemProps[]>({
 		queryKey: ['news'],
-		queryFn: fetchNews,
+		queryFn: () => typeof token === 'string' ? fetchNews(token) : Promise.resolve([]),
+		refetchInterval: 600000,
+		enabled: !!token,
 	});
+
+
+	console.log(news)
 
 	if (isPending) {
 		return (
@@ -38,9 +31,7 @@ const AdminNews: React.FC = () => {
 
 	if (isError) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.alert}>{error.message}</div>
-			</div>
+			<ErrorAlert errorMessage='На жаль сталася помилка, перезавантажте  сторінку'/>
 		);
 	}
 

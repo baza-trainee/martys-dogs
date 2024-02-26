@@ -60,10 +60,13 @@
 		"tel_error": "Enter valid mobile number",
 		"comment_label": "Comment",
 		"comment_placeholder": "Make a comment",
-		"button": "Send contacts"
+		"comment_length_error": "The maximum length is 100 characters",
+		"button": "Send contacts",
+		"server_unresolved_error": "Data loading error. Please try again later."
 	},
 	"photos": {
-		"shelter": "Shelter in photos"
+		"shelter": "Shelter in photos",
+		"noPhotos": "Photos of the shelter are not available"
 	},
 	"tailsHero": {
 		"title": "Our tails",

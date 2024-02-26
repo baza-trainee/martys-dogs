@@ -1,7 +1,7 @@
 @import '../../../scss/variables';
+@import "../../../scss/mixins";
 
 .statusContainer {
-	//background-color: $color-main-bg;
 	padding: 6rem;
 	width: 100%;
 	height: auto;
@@ -13,7 +13,44 @@
 	text-align: center;
 	font-size: 32px;
 	color: $color-main-blue-dark;
+	width: 100%;
 }
+
+.miniStatusContainer {
+	padding: 10px;
+	margin-top: 10px;
+	border-radius: 30px;
+	width: 100%;
+	height: auto;
+	display: flex;
+	align-items: center;
+
+	@include small_desktop {
+		padding: 20px;
+	}
+}
+
+.miniLoaderContainer {
+	padding: 10px 7px;
+	margin-top: 4px;
+
+	@include small_desktop {
+		padding: 22px;
+		margin-top: 10px;
+	}
+}
+
+.miniAlert {
+	text-align: center;
+	font-size: 16px;
+	color: darkred;
+	width: 100%;
+
+	@include small_desktop {
+		font-size: 20px;
+	}
+}
+
 .loader {
 	width: 50px;
 	height: 50px;

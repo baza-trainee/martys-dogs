@@ -1,10 +1,4 @@
 export const NEWS = 'https://matys-dogs2.onrender.com/news';
-const headers = {
-	'Content-Type': 'multipart/form-data; boundary=--',
-	Authorization:
-		'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4OTQ4OTk0LCJpYXQiOjE3MDYzNTY5OTQsImp0aSI6IjUyMWZlZDAyNDRjMTQ4NmViNzQyOWFjNjRmZGZlYzY4IiwidXNlcl9pZCI6MTl9.3-PXaKeYiNrsmDdft0eYAdV5rGLsSAEqKCH7dHQJ6EM',
-};
-
 export interface IAddNews {
 	title: string;
 	sub_text: string;
@@ -12,7 +6,7 @@ export interface IAddNews {
 	sub_text_en: string;
 	url: string;
 	photo: File;
-	post_at?: Date;
+	post_at?: Date | string | undefined;
 	update_at?: Date;
 	id?: number;
 }
@@ -31,9 +25,12 @@ export const setFormData = (newsItem:IAddNews)=>{
 return  formData;
 }
 
-export const fetchNews = async () => {
+export const fetchNews = async (token: string) => {
 	try {
-		const response = await fetch(NEWS, { headers });
+		const response = await fetch(NEWS, {headers : {
+			'Content-Type': 'multipart/form-data; boundary=--',
+			Authorization: `Bearer ${token}`,
+		} });
 		if (!response.ok) {
 			throw new Error('Data loading error');
 		}
@@ -45,11 +42,15 @@ export const fetchNews = async () => {
 	}
 };
 
-export const addNews = async (newsItem: IAddNews) => {
+export const addNews = async (addNewsInfo: {newsItem: IAddNews, token:string}) => {
+	const { newsItem, token } = addNewsInfo;
 	try {
 			const response = await fetch(NEWS, {
 					method: 'POST',
-					headers,
+					headers : {
+						'Content-Type': 'multipart/form-data; boundary=--',
+						Authorization: `Bearer ${token}`,
+					},
 					body:  setFormData(newsItem),
 			});
 			if (!response.ok) {
@@ -63,11 +64,16 @@ export const addNews = async (newsItem: IAddNews) => {
 	}
 };
 
-export const changeNews = async (newsItem: IAddNews, id: string) => {
+export const changeNews = async (changeNewsInfo:{newsItem: IAddNews, id: string, token: string}) => {
+	const { newsItem, id, token } = changeNewsInfo;
+
 	try {
 		const response = await fetch(`${NEWS}/${id}`, {
 			method: 'PUT',
-			headers,
+			headers : {
+				'Content-Type': 'multipart/form-data; boundary=--',
+				Authorization: `Bearer ${token}`,
+			},
 			body: setFormData(newsItem),
 		});
 		if (!response.ok) {
@@ -81,11 +87,15 @@ export const changeNews = async (newsItem: IAddNews, id: string) => {
 	}
 };
 
-export const deleteNews = async (id: number) => {
+export const deleteNews = async (deleteNewsInfo: {id: number, token:string}) => {
+	const { id, token } = deleteNewsInfo;
 	try {
 		const response = await fetch(`${NEWS}/${id}`, {
 			method: 'DELETE',
-			headers,
+			headers : {
+				'Content-Type': 'multipart/form-data; boundary=--',
+				Authorization: `Bearer ${token}`,
+			},
 		});
 		if (!response.ok) {
 			throw new Error('Data loading error');

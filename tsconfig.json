@@ -20,6 +20,10 @@
 		"noUnusedParameters": true,
 		"noFallthroughCasesInSwitch": true
 	},
-	"include": ["src", "jest.config.js"],
+	"include": [
+		"src",
+		"jest.config.js",
+		"../../Errors/Admins/AdminForm copy.tsx"
+	],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

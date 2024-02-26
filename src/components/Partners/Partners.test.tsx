@@ -22,7 +22,8 @@ import Partners from './Partners';
 		  name: "partner1_img",
 		  url: 'https://fake.com/partner-photo1.jpg',
 		  category: "image"
-		}
+		},
+		website: `http://www.example1.com`
 	  },
 	  {
 		id: 2,
@@ -32,8 +33,10 @@ import Partners from './Partners';
 		  name: "partner2_img",
 		  url: 'https://fake.com/partner-photo2.jpg',
 		  category: "image"
-		}
+		},
+		website: `http://www.example2.com`
 	  },
+	 
 	]
   };
   

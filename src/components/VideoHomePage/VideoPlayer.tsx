@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
 import styles from './Video.module.scss';
 
@@ -23,18 +23,33 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 }) => {
 	const [showControls, setShowControls] = useState<boolean>(false);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
+	const [error, setError] = useState<boolean>(false);
 
 	const handleReady = () => {
 		setIsLoading(false);
 	};
 
-	const handleBuffer = () => {
-		setIsLoading(true);
+	const handleOnlineStatusChange = () => {
+		if (!navigator.onLine) {
+			setError(true);
+			setIsLoading(false);
+		}
+
+		else if (navigator.onLine) {
+			setError(false);
+			setIsLoading(true);
+		}
 	};
 
-	const handlePlay = () => {
-		setIsLoading(false);
-	};
+	useEffect(() => {
+		window.addEventListener('online', handleOnlineStatusChange);
+		window.addEventListener('offline', handleOnlineStatusChange);
+
+		return () => {
+			window.removeEventListener('online', handleOnlineStatusChange);
+			window.removeEventListener('offline', handleOnlineStatusChange);
+		};
+	}, []);
 
 	const handleClick = () => {
 		setShowControls(!showControls);
@@ -72,6 +87,8 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 					<img
 						src={defaultImage}
 						alt='Default Poster'
+						width='auto'
+						height='auto'
 						className={styles.posterImage}
 						loading='lazy'
 					/>
@@ -80,25 +97,33 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
 			{showControls && (
 				<>
-					{isLoading && (
+					{isLoading && !error && (
 						<div
 							className={styles.loader}
 							data-testid='loader'
 						></div>
 					)}
-					<ReactPlayer
-						url={videoUrl}
-						playing
-						controls
-						width='100%'
-						height='100%'
-						className={`${styles.videoElement} ${
-							showControls ? styles.showControls : ''
-						}`}
-						onReady={handleReady}
-						onBuffer={handleBuffer}
-						onPlay={handlePlay}
-					/>
+					{error && (
+						<div className={styles.error} data-testid='error'>
+							Unable to load the video. Please check your internet
+							connection.
+						</div>
+					)}
+					{!error && (
+						<ReactPlayer
+							key={videoUrl}
+							url={videoUrl}
+							playing
+							controls
+							width='100%'
+							height='100%'
+							className={`${styles.videoElement} ${
+								showControls ? styles.showControls : ''
+							}`}
+							onReady={handleReady}
+							onError={handleOnlineStatusChange}
+						/>
+					)}
 				</>
 			)}
 		</div>

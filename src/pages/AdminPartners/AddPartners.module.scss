@@ -2,13 +2,13 @@
 @import '../../scss/mixins';
 
 .container {
-	width: 100vw;
+	width: 100%;
 	padding: 20px;
 	display: flex;
 	flex-direction: column;
 	gap: 40px;
-	background-color: $color-gray-40;
 }
+
 .form {
 	max-width: 1000px;
 }
@@ -21,6 +21,7 @@
 	margin-bottom: 20px;
 	@include tablet {
 		flex-direction: row;
+		flex-wrap: wrap;
 	}
 
 	.inputContainer {
@@ -43,10 +44,10 @@
 			display: block;
 			font-size: 20px;
 			margin-bottom: 5px;
-			span,p {
-				cursor:pointer;
+			span,
+			p {
+				cursor: pointer;
 			}
-		
 		}
 
 		input {

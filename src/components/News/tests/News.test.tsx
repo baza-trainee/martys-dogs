@@ -56,7 +56,8 @@ const mockQueryData: LandingData = {
                 name: "partner.webp",
                 url: 'https://example.com/partner-photo.jpg',
                 category: "image"
-            }
+            },
+			website: `http://www.example1.com`
         },
 	]
 };

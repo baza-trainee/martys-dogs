@@ -17,11 +17,11 @@
   @include tablet {
     display: block;
     width: 248px;
-    height: 538px;
+    height: 612.188px;
   }
   @include small-desktop {
     width: 359px;
-    height: 657px;
+    height: 750.750px;
   }
   @include large-desktop {
     width: 396px;
@@ -37,22 +37,21 @@
   width: 288px;
   gap: 16px;
 
+
   @include tablet {
     margin: 33px 32px 20px 32px;
     width: 380px;
-
+    gap: 0;
   }
 
   @include small-desktop {
     margin: 40px 32px;
     width: 402px;
-    justify-content: space-between;
   }
 
   @include large-desktop {
     flex-direction: column;
-    align-items: flex-end;
-    margin: 80px 32px;
+    margin: 55px 32px;
     width: 540px;
   }
 }
@@ -64,6 +63,9 @@
   gap: 8px;
   align-self: stretch;
 
+  @include tablet {
+    padding-bottom: 16px;
+  }
   @include small-desktop {
     gap: 16px;
   }

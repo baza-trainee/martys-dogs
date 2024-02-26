@@ -7,8 +7,9 @@ import { IAddNews, changeNews ,addNews, fetchNews} from '../../services/adminNew
 import UploadImageInput from '../../components/CommonUI/UploadImageInput/UploadImageInput';
 import HookFormInput from '../../components/CommonUI/HookFormInput/HookFormInput';
 import NewsTextarea from '../../components/NewsTextarea/NewsTextarea';
-import {NewsItem} from './AdminNews';
-import { Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { ErrorAlert, Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { useAuthContext } from '../../context/useGlobalContext';
+import { NewsItemProps} from '../../components/News/NewsItem';
 interface IFormInputs {
 	title: string;
 	sub_text: string;
@@ -16,73 +17,68 @@ interface IFormInputs {
 	sub_text_en: string;
 	url: string;
 	photo: FileList;
-	post_at?: string;
-	update_at?: string;
+	post_at?: string | Date;
+	update_at?: string | Date;
 }
 
 const AddEditNews: React.FC = () => {
-	const {
-		register,
-		handleSubmit,
-		reset,
-		formState: { errors, isValid },
-		watch,
-		setValue
-	} = useForm<IFormInputs>({ mode: 'onBlur' });
-
+	const { register, handleSubmit, reset, formState: { errors, isValid }, watch, setValue } = useForm<IFormInputs>({ mode: 'onChange' });
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
-	let uploadedImage;
-	const  { newsId } = useParams();
+	const { newsId } = useParams();
 	const isAddMode = !newsId;
+	const { token } = useAuthContext();
 
-	const {mutate, isError, isPending, error} = useMutation({
-		mutationFn: (newsItem: IAddNews) => {
-			if(isAddMode){
-			return	addNews(newsItem).then((item) => console.log(item))}
-	else {
-			return	changeNews(newsItem, newsId).then(() => console.log('changeNews'))
-			}
-		},
-		onSuccess: () => {
-			queryClient.invalidateQueries({queryKey: ['news']})
-			reset();
-			navigate('/admin/news');
-		},
+	const { mutate, isError, isPending } = useMutation({
+			mutationFn: isAddMode ? addNews : changeNews,
+			onSuccess: () => {
+					queryClient.invalidateQueries({ queryKey: ['news'] });
+					reset();
+					navigate('/admin/news');
+			},
 	});
 
-	//// get all  news  to  find news for  edit  and  fill  edit form  with  its info
-	const { data: news } = useQuery<NewsItem[]>({
-		queryKey: ['news'],
-		queryFn: fetchNews,
+	const { data: news } = useQuery<NewsItemProps[]>({
+			queryKey: ['news'],
+			queryFn: () => typeof token === 'string' ? fetchNews(token) : Promise.resolve([]),
+		refetchInterval: 600000,
+		enabled: !!token,
 	});
 
-	const newsToEdit = news?.find((item) => item.id === Number(newsId))
-useEffect(() => {
-	// need  get by id news ???
-const  fields:string[]= ['photo', 'url', 'title', 'title_en', 'sub_text', 'sub_text_en']
-fields.forEach((field )=> {
-	if(newsToEdit){
-		// @ts-expect-error   TO FIX type error
-		setValue(field, newsToEdit[field as keyof typeof newsToEdit])}
-})
-}, [newsToEdit, setValue])
+	useEffect(() => {
+		const newsToEdit = news?.find((item) => item.id === Number(newsId));
+		if (newsToEdit) {
+				const fields: (keyof IAddNews)[] = ['url', 'title', 'title_en', 'sub_text', 'sub_text_en', 'post_at'];
+				fields.forEach((field) => {
+					if (field !== 'id' && field in newsToEdit) {
+							setValue(field, newsToEdit[field as keyof typeof newsToEdit] as string);
+					}
+			});
+		}
+}, [news, newsId, setValue]);
 
-	const onSubmitHandler: SubmitHandler<IFormInputs> = (data) => {
-		uploadedImage = data?.photo?.[0];
-		const newsDate = new Date();
-		const addedNews = {
-			...data,
-			photo: uploadedImage,
-			post_at: newsDate,
-			update_at: newsDate,
-		};
-	mutate(addedNews);
+const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
+	if(token){const uploadedImage = data?.photo?.[0];
+			const newsDate = new Date();
+			const addedNews = {
+				...data,
+				photo: uploadedImage,
+				// post_at: newsDate,
+				update_at: newsDate,
+		}
+
+		console.log(addedNews)
+		if (isAddMode) {
+			mutate({ newsItem: addedNews, id: '', token });
+		} else {
+			mutate({ newsItem: addedNews, id: newsId, token });
+		}
+		}
 	};
 
 	const onCancelHandler = () => {
-		reset();
-		navigate('/admin/news');
+			reset();
+			navigate('/admin/news');
 	};
 
 	if (isPending) {
@@ -93,9 +89,7 @@ fields.forEach((field )=> {
 
 	if (isError) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.alert}>{error.message}</div>
-			</div>
+			<ErrorAlert errorMessage='На жаль сталася помилка, перезавантажте  сторінку і спробуйте ще раз'/>
 		);
 	}
 
@@ -110,11 +104,50 @@ fields.forEach((field )=> {
 					register={{
 						...register('photo', {
 							required: 'Файл з фото не обрано',
+							validate: {
+								validImageFormat: (value: FileList | null) => {
+									if (!value) return true;
+									const supportedImageFormats = [
+										'image/jpeg',
+										'image/png',
+										'image/webp',
+									];
+									return (
+										supportedImageFormats.includes(
+											value?.[0].type,
+										) ||
+										'Виберіть дійсний файл зображення (JPEG, PNG або WebP)'
+									);
+								},
+								validImageSize: (value: FileList | null) => {
+									if (!value) return true;
+									const maxSize = 5 * 1024 * 1024; // 5MB
+									return (
+										value?.[0].size <= maxSize ||
+										`Розмір файлу повинен бути менше або рівний ${
+											maxSize / (1024 * 1024)
+										} MB`
+									);
+								},
+							}
 						}),
 					}}
 					watch={watch}
 					errorMessage={errors['photo']?.message}
 				/>
+	{/* <HookFormInput
+					label={'Дата новини'}
+					register={{
+						...register('post_at', {
+							required: 'Оберіть дату',
+						}),
+					}}
+					errorMessage={errors['post_at']?.message}
+					type={'date'}
+					id={'post_at'}
+					placeholder={'Choose  news date'}
+				/> */}
+
 				<HookFormInput
 					label={'Посилання на новину в facebook'}
 					register={{
@@ -138,9 +171,11 @@ fields.forEach((field )=> {
 							...register('title', {
 								required: 'Вкажіть заголовок новини',
 								pattern: {
-									value: /^[\p{Script=Cyrillic}\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~ґєіїҐЄІЇ]*$/u,
+									value: /^[\p{Script=Cyrillic}a-zA-Z\d\s!"#№₴$%&'()*+,-./:;<=>?@[\\\]'^_`{|}~ґєіїҐЄІЇ](?=.*\S).*$/u,
+									// value: /^[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії0-9\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$/u,
+									// value: /^a-zA-Z0-9 !`@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
 									message:
-										'можуть бути  цифри, українські літери, розділові знаки',
+										'можуть бути  цифри, літери, розділові знаки',
 								},
 							}),
 						}}
@@ -157,7 +192,7 @@ fields.forEach((field )=> {
 								required:
 									'Вкажіть заголовок новини англійською',
 								pattern: {
-									value: /^[a-zA-Z0-9 !`@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
+									value: /^[a-zA-Z\d\s!"#№₴$%&'()*+,-./:;<=>?@[\\\]'^_`{|}~](?=.*\S).*$/u,
 									message:
 										'можуть бути  цифри, англійські  літери, розділові знаки',
 								},
@@ -177,15 +212,15 @@ fields.forEach((field )=> {
 							...register('sub_text', {
 								required: 'Вкажіть текст новини',
 								pattern: {
-									value: /^[\p{Script=Cyrillic}\d\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~ґєіїҐЄІЇ]*$/u,
+									value: /^[\p{Script=Cyrillic}a-zA-Z\d\s!"#№₴$%&'()*+,-./:;<=>?@[\\\]'^_`{|}~ґєіїҐЄІЇ](?=.*\S).*$/u,
 									message:
-										'Можуть бути українські літери, цифри, символи',
+										'Можуть бути літери, цифри, символи',
 								},
 							}),
 						}}
 						id={'sub_text'}
 						placeholder={'Enter news text'}
-						maxLength={150}
+						maxLength={175}
 						errorMessage={errors['sub_text']?.message}
 					/>
 					<NewsTextarea
@@ -194,7 +229,7 @@ fields.forEach((field )=> {
 							...register('sub_text_en', {
 								required: 'Вкажіть текст новини англійською',
 								pattern: {
-									value: /^[a-zA-Z0-9 !`@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
+									value: /^[a-zA-Z\d\s!"#№₴$%&'()*+,-./:;<=>?@[\\\]'^_`{|}~](?=.*\S).*$/u,
 									message:
 										'Можуть бути   англійські  літери,цифри, символи',
 								},
@@ -202,7 +237,7 @@ fields.forEach((field )=> {
 						}}
 						id={'sub_text_en'}
 						placeholder={'Enter news text'}
-						maxLength={150}
+						maxLength={175}
 						errorMessage={errors['sub_text_en']?.message}
 					/>
 				</div>

@@ -12,38 +12,20 @@
 
 .thumb {
 	display: none;
+	background: url('../../assets/modal/adoption/1280_2x.webp') no-repeat 50% 50% / cover lightgray;
+
 	@include tablet {
 		display: block;
 		width: 200px;
 		height: 400px;
-		background-image: url('../../assets/modal/adoption/768_1x.webp');
-		background-size: cover;
 	}
 	@include small-desktop {
 		width: 360px;
 		height: 532px;
-		background-image: url('../../assets/modal/adoption/1280_1x.webp');
 	}
 	@include large-desktop {
 		width: 360px;
 		height: 600px;
-		background-image: url('../../assets/modal/adoption/1440_1x.webp');
-	}
-}
-
-@media (min-device-pixel-ratio: 2),
-	(min-resolution: 192dpi),
-	(min-resolution: 2dppx) {
-	.thumb {
-		@include tablet {
-			background-image: url('../../assets/modal/adoption/768_2x.webp');
-		}
-		@include small-desktop {
-			background-image: url('../../assets/modal/adoption/1280_2x.webp');
-		}
-		@include large-desktop {
-			background-image: url('../../assets/modal/adoption/1440_2x.webp');
-		}
 	}
 }
 

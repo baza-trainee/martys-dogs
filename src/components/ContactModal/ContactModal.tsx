@@ -17,7 +17,6 @@ const ContactModal: React.FC = () => {
 					<p>{t('contactModal.subtitle')}
 					</p>
 				</div>
-
 				<ContactForm />
 			</div>
 		</div>

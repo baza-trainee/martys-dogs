@@ -95,8 +95,6 @@
 
 
 .inputBox {
-  min-height: 106px;
-
   @include tablet {
     min-height: 86px;
   }
