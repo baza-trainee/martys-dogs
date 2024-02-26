@@ -9,31 +9,37 @@ import { fetchTails } from '../../services/fetchAdminTails';
 import TailsList from './TailsList';
 import TailForm from './TailForm';
 import { FaRegPlusSquare } from 'react-icons/fa';
+import { useAuthContext } from '../../context/useGlobalContext';
 
 
-export interface Photo {
+/*export interface Photo {
 	id: string;
 	name: string;
 	url: string;
 	category: string;
-}
+}*/
 
 export interface TailsListData {
 	id: number;
 	name: string;
-	name_en: string;
+	name_en?: string;
 	ready_for_adoption: boolean;
 	gender: string;
-	gender_en: string;
+	gender_en?: string;
 	age: string;
-	age_en: string;
-	sterilization: boolean;
-	vaccination_parasite_treatment: boolean;
+	age_en?: string;
+	sterilization?: boolean;
+	vaccination_parasite_treatment?: boolean;
 	size: string;
-	size_en: string;
+	size_en?: string;
 	description: string;
-	description_en: string;
-	photo: Photo;
+	description_en?: string;
+	photo?: {
+		id: string;
+		name: string;
+		url: string;
+		category: string;
+	};
 }
 
 
@@ -43,10 +49,13 @@ export type AdminTailsData = TailsListData[];
 const AdminTails = () => {
 	const [showForm, setShowForm] = useState(false);
 	const location = useLocation();
+	const {token} = useAuthContext();
+
 	const data = useQuery<AdminTailsData>({
 		queryKey: ['tailslist'],
-		queryFn: fetchTails,
+		queryFn:() => typeof token === 'string' ? fetchTails(token) : Promise.resolve([]),
 		retry: 1,
+		enabled: !!token
 	});
 
 	useEffect(() => {
@@ -57,6 +66,8 @@ const AdminTails = () => {
 	const handleShowForm = (formStatus: boolean) => {
 		setShowForm(formStatus);
 	};
+
+
 	return (
 		<div
 			className={styles.container}>

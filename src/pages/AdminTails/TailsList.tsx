@@ -110,7 +110,7 @@ const TailsList: React.FC<TailsListProps> = ({ data }) => {
 
 	return (
 		<section>
-			here tails
+
 			{isPending ? (
 					<div className={styles.container}>
 						<div className={styles.loading}></div>

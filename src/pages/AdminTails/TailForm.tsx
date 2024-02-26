@@ -48,8 +48,6 @@ const TailForm: React.FC<TailFormProps> = ({changeShowForm}) => {
 		gender_en: '',
 		age: '',
 		age_en: '',
-		sterilization: false,
-		vaccination_parasite_treatment: false,
 		size: '',
 		size_en: '',
 		description: '',
@@ -59,12 +57,6 @@ const TailForm: React.FC<TailFormProps> = ({changeShowForm}) => {
 	const [touched, setTouched] = useState<Record<string, boolean>>({
 		name: false,
 		name_en: false,
-		gender: false,
-		gender_en: false,
-		age: false,
-		age_en: false,
-		size: false,
-		size_en: false,
 		description: false,
 		description_en: false,
 	});
@@ -242,8 +234,7 @@ const handleShowFormStatus = () => {
 								id='name'
 								onChange={(e) => handleChange('name', e.target.value)}
 								name="name"
-
-
+								maxLength={15}
 								placeholder={`Вкажіть ім'я Хвостика`}
 								className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
 								type="text"
@@ -268,6 +259,7 @@ const handleShowFormStatus = () => {
 							   placeholder={`Введіть опис Хвостика`}
 							   className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
 							   type="text"
+								  maxLength={381}
 							   value={formData.description}/>
 							{errors.name && <div className={styles.errorMessage}>{errors.name}</div>}
 						</div>
@@ -439,39 +431,7 @@ const handleShowFormStatus = () => {
 						</label>
 					</div>
 
-					<div className={styles.catalog_checkbox_box}>
-						<input
-							type="checkbox"
-							id="sterilization"
-							name="sterilization"
-							checked={formData.sterilization}
-							onChange={(e) => handleChange('sterilization', e.target.checked)}
-							className={styles.catalog_checkbox}
-						/>
-						<label
-							htmlFor="sterilization"
-							className={styles.catalog_checkbox_label}
-						>
-							Стерилізація
-						</label>
-					</div>
 
-					<div className={styles.catalog_checkbox_box}>
-						<input
-							type="checkbox"
-							id="vaccination_parasite_treatment"
-							name="vaccination_parasite_treatment"
-							checked={formData.vaccination_parasite_treatment}
-							onChange={(e) => handleChange('vaccination_parasite_treatment', e.target.checked)}
-							className={styles.catalog_checkbox}
-						/>
-						<label
-							htmlFor="vaccination_parasite_treatment"
-							className={styles.catalog_checkbox_label}
-						>
-							Вакцинація/обробка від паразитів
-						</label>
-					</div>
 
 				</div>
 
