@@ -205,11 +205,10 @@ const AddPartner: React.FC = () => {
 						Скасувати
 					</button>
 				</div>
-				{isSubmitting && <Loader backgroundColor='#dbdbdb' />}
+				{isSubmitting && <Loader />}
 				{errorAlert && (
 					<ErrorAlert
 						errorMessage='Логотип не додано. Перезавантажте, будь ласка, сторінку.'
-						backgroundColor='#dbdbdb'
 					/>
 				)}
 			</form>

@@ -6,8 +6,7 @@
 	flex-direction: column;
 	gap: 32px;
 	padding: 15px;
-	width: 100vw;
-	background-color: $color-gray-40;
+	width: 100%;
 
 	.title {
 		margin-right: auto;
@@ -66,7 +65,7 @@
 				background: $color-gray-40;
 				color: $color-gray-80;
 			}
-		}		
+		}
 	}
 
 	.logoContainer {
@@ -78,15 +77,17 @@
 
 		.logo {
 			margin: 10px;
-			background-color: $color-main-bg;
+
 			display: flex;
 			flex-direction: column;
 			gap: 20px;
 			align-content: space-between;
+			box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+			background-color: $color-main-bg;
 			transition: all 0.3s ease-in-out;
+
 			&:hover {
 				background-color: $color-main-blue-light;
-				box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
 			}
 
 			img {
@@ -118,5 +119,46 @@
 		}
 	}
 
+	.pagination {
+		display: flex;
+		justify-content: center;
+		margin-top: 20px;
 
+		button {
+			display: flex;
+			align-items: center;
+			padding: 16px 24px;
+			margin: 0 4px;
+			font-size: 16px;
+			cursor: pointer;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			background-color: #fff;
+
+			&:disabled {
+				cursor: not-allowed;
+				opacity: 0.5;
+			}
+			
+			&:hover {
+				background-color: $color-gray-10;
+			}
+			&:active {
+				background-color: $color-gray-20;
+			}
+		}
+
+		span {display: flex;
+			align-items: center;
+
+			padding: 8px 12px;
+			margin: 0 4px;
+			font-size: 16px;
+			border: 1px solid $color-accent;
+			border-radius: 4px;
+			color:  $color-accent;
+			background-color: #fff;
+		}
+	}
+	
 }

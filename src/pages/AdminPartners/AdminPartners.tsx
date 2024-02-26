@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './AdminPartners.module.scss';
 import { useQuery } from '@tanstack/react-query';
-import { FaRegPlusSquare, FaTrash } from 'react-icons/fa';
+import { FaRegPlusSquare, FaTrash, FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 import {
 	Loader,
 	ErrorAlert,
@@ -29,7 +29,10 @@ const AdminPartners: React.FC = () => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [errorAlert, setErrorAlert] = useState(false);
 	const { token } = useAuthContext();
-		//get items
+	const [currentPage, setCurrentPage] = useState(1);
+	const pageSize = 4;
+
+	//get items
 	const fetchDataQuery = useQuery<Partner[]>({
 		queryKey: ['partners'],
 		queryFn: () =>
@@ -41,6 +44,7 @@ const AdminPartners: React.FC = () => {
 	});
 
 	const { data: partners, isPending, isError, error } = fetchDataQuery;
+
 	//delete item
 	const queryClient = useQueryClient();
 	const deletePartnerMutation = useMutation({
@@ -70,19 +74,20 @@ const AdminPartners: React.FC = () => {
 		deletePartnerMutation.mutate(id);
 	};
 
-	console.log(partners);
+	//pagination
+	const handlePageChange = (newPage: number) => {
+		setCurrentPage(newPage);
+	};
+	const startIndex = (currentPage - 1) * pageSize;
+	const endIndex = startIndex + pageSize;
+	const displayedPartners = partners?.slice(startIndex, endIndex);
 
 	if (isPending) {
-		return <Loader backgroundColor='#dbdbdb' />;
+		return <Loader />;
 	}
 
 	if (isError) {
-		return (
-			<ErrorAlert
-				errorMessage={error?.message}
-				backgroundColor='#dbdbdb'
-			/>
-		);
+		return <ErrorAlert errorMessage={error?.message} />;
 	}
 
 	return (
@@ -98,14 +103,11 @@ const AdminPartners: React.FC = () => {
 				</Link>
 			</div>
 			<div className={styles.logoContainer}>
-			{errorAlert && (
-				<ErrorAlert
-					errorMessage='Логотип не видалено. Перезавантажте, будь ласка, сторінку.'
-					backgroundColor='#dbdbdb'
-				/>
-			)}
-			{isSubmitting && <Loader backgroundColor='#dbdbdb' />}
-				{partners?.map((partner) => (
+				{errorAlert && (
+					<ErrorAlert errorMessage='Логотип не видалено. Перезавантажте, будь ласка, сторінку.' />
+				)}
+				{isSubmitting && <Loader />}
+				{displayedPartners?.map((partner) => (
 					<div key={partner.id} className={styles.logo}>
 						<img src={partner.logo.url} alt={`${partner.name}`} />
 						<div className={styles.logoActions}>
@@ -119,6 +121,21 @@ const AdminPartners: React.FC = () => {
 						</div>
 					</div>
 				))}
+			</div>
+			<div className={styles.pagination}>
+				<button
+					disabled={currentPage === 1}
+					onClick={() => handlePageChange(currentPage - 1)}
+				>
+					<FaChevronLeft/>
+				</button>
+				<span> Сторінка {currentPage}</span>
+				<button
+					disabled={!partners || endIndex >= partners.length}
+					onClick={() => handlePageChange(currentPage + 1)}
+				>
+					<FaChevronRight/>
+				</button>
 			</div>
 		</div>
 	);
