@@ -56,7 +56,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 40px;
-gap: 20px;
+  gap: 20px;
   @media screen and (max-width: 1279px) {
     margin-bottom: 32px;
   }
@@ -119,6 +119,7 @@ gap: 20px;
     margin: 0 18px;
   }
 }
+
 .catalog_checkbox {
   transform: scale(1.8);
   margin-right: 8px;
@@ -128,10 +129,11 @@ gap: 20px;
   padding: 4px 0;
 
 }
+
 .input {
   width: 100%;
   border-style: none;
-  //border: 1px solid $color-gray-0;
+font-size: 20px;
   border: 1px solid $color-main-blue-light;
   outline-color: $color-main-blue-light;
   outline: none;
@@ -143,11 +145,11 @@ gap: 20px;
   background: $color-gray-0;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.04) inset;
   padding: 8px 16px;
-height: 53px;
+  height: 53px;
 
   &::placeholder {
     color: $color-gray-60;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 500;
     line-height: 22.4px;
   }
@@ -209,8 +211,6 @@ height: 53px;
 }
 
 
-
-
 .label {
   color: $color-gray-100;
   font-size: 16px;
@@ -229,4 +229,15 @@ height: 53px;
   font-size: 14px;
   font-weight: 400;
   line-height: 19.6px;
+}
+
+.submit_buttons_container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.submit_buttons_box {
+  width: 600px;
+  display: flex;
+  gap: 80px;
 }

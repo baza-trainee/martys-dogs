@@ -11,6 +11,7 @@ import Button from '../../layout/Button/Button';
 
 interface TailsListProps {
 	data: UseQueryResult<AdminTailsData, Error>;
+	changeShowForm: (a: boolean, b: string, c: number) => void;
 }
 
 interface CustomStyles {
@@ -22,23 +23,14 @@ interface CustomStyles {
 }
 
 
-const TailsList: React.FC<TailsListProps> = ({ data }) => {
-	const [cards, setCards] = useState<TailsListData[]>([]);
+const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, changeShowForm }) => {
 	const [page, setPage] = useState<number>(1);
 	const [countPage, setCountPage] = useState<number>(1);
 	const cardsInPage = 6;
-	const { data: tails, isPending, isError } = data;
-
 
 	useEffect(() => {
-		if (tails) {
-			setCards(tails);
-		}
 
-	}, [tails]);
-
-	useEffect(() => {
-		setCountPage(Math.ceil(cards.length / cardsInPage));
+		setCountPage(Math.ceil(cards?.length / cardsInPage));
 	}, [cards, cardsInPage]);
 
 
@@ -54,6 +46,14 @@ const TailsList: React.FC<TailsListProps> = ({ data }) => {
 		}
 	};
 
+const handleEdit = (id) => {
+	changeShowForm(true, "edit", id);
+};
+
+	const handleDelete = () => {
+		console.log('Delete');
+
+	};
 
 	const customStyles: CustomStyles = {
 		control: (provided, state) => ({
@@ -152,7 +152,7 @@ const TailsList: React.FC<TailsListProps> = ({ data }) => {
 
 											<div className={styles.btnBox}>
 												<Button
-													onClick={() => console.log('edit')}
+													onClick={() => handleEdit(tail.id)}
 													type={'button'}
 
 													btnClasses={'primary'}  children={<FaEdit />}/>

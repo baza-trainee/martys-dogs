@@ -5,6 +5,8 @@ import Button from '../../layout/Button/Button';
 import { useEffect, useState } from 'react';
 import ArrowIconUp from '../../assets/dropdown_arrow_up.svg';
 import ArrowIconDown from '../../assets/dropdown_arrow_down.svg';
+import { IAddNews } from '../../services/adminNews';
+import { FaUpload } from 'react-icons/fa';
 
 interface OptionType {
 	value: string;
@@ -12,21 +14,25 @@ interface OptionType {
 }
 
 type FormData = {
-	name?: string;
+	id?: number;
+	name: string;
 	name_en?: string;
-	ready_for_adoption?: boolean;
-	gender?: string;
+	ready_for_adoption: boolean;
+	gender: string;
 	gender_en?: string;
-	age?: string;
+	age: string;
 	age_en?: string;
-	sterilization?: boolean;
-	vaccination_parasite_treatment?: boolean;
-	size?: string;
+	size: string;
 	size_en?: string;
-	description?: string;
+	description: string;
 	description_en?: string;
-	// photo: Photo; ?????
-} & { [key: string]: string | boolean };
+	photo?: {
+		id: string;
+		name: string;
+		url: string;
+		category: string;
+	};
+}
 
 interface CustomStyles {
 	control?: (provided: any, state: any) => any;
@@ -37,9 +43,14 @@ interface CustomStyles {
 }
 
 interface TailFormProps {
-	changeShowForm: (b: boolean) => void;
+	changeShowForm: (a: boolean, b: string) => void;
+	formType: string;
 }
-const TailForm: React.FC<TailFormProps> = ({changeShowForm}) => {
+
+const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, dogId }) => {
+
+	console.log(cards);
+	console.log(dogId);
 	const [formData, setFormData] = useState<FormData>({
 		name: '',
 		name_en: '',
@@ -59,86 +70,46 @@ const TailForm: React.FC<TailFormProps> = ({changeShowForm}) => {
 		name_en: false,
 		description: false,
 		description_en: false,
+		age: false,
+		age_en: false,
 	});
 	const [errors, setErrors] = useState<Record<string, string>>({});
 
-	const nameRegex = /^[A-Za-zА-Яа-яҐґЄєІіЇї\s'`’ʼ-]*$/;
+	const nameRegex = /^[А-Яа-яҐґЄєІіЇї\s'`’ʼ-]*$/;
+	const nameEngRegex = /^[A-Za-z\s'`’ʼ-]*$/;
 
-/*	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-		const { name, value } = e.target;
-		setFormData((prevData) => ({ ...prevData, [name]: value }));
-		setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
-		setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
-	};*/
 
-/*	const validateName = () => {
-		if (touched.name && formData.name.trim().length < 2) {
-			setErrors((prevErrors) => ({ ...prevErrors, name: t('contactModal.name_length_error') }));
-		} else if (touched.name && !nameRegex.test(formData.name)) {
-			setErrors((prevErrors) => ({
-				...prevErrors,
-				name: t('contactModal.name_character_error'),
-			}));
-		} else {
-			setErrors((prevErrors) => ({ ...prevErrors, name: '' }));
+	useEffect(() => {
+		if (formType === 'edit' && cards.length > 0) {
+			const editedCard = cards.find(card => card.id === dogId);
+			if (editedCard) {
+				setFormData({
+					name: editedCard.name || '',
+					name_en: editedCard.name_en || '',
+					ready_for_adoption: editedCard.ready_for_adoption || false,
+					gender: editedCard.gender || '',
+					gender_en: editedCard.gender_en || '',
+					age: editedCard.age || '',
+					age_en: editedCard.age_en || '',
+					size: editedCard.size || '',
+					size_en: editedCard.size_en || '',
+					description: editedCard.description || '',
+					description_en: editedCard.description_en || '',
+				});
+			}
 		}
-	};*/
-
-
-/*	useEffect(() => {
-		validateName();
-
-	}, [formData.name]);*/
-
-	const handleChange = (field: keyof FormData, value: string | boolean) => {
-		setFormData((prevData) => ({
-			...prevData,
-			[field]: value,
-		}));
-		setErrors((prevErrors) => ({ ...prevErrors, [field]: '' }));
-		setTouched((prevTouched) => ({ ...prevTouched, [field]: true }));
-	};
-
-
-
-	const handleSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
-		// validateName();
-
-	/*	setFormData({
-			name: '',
-			phoneNumber: '',
-			comment: '',
-		});*/
-	/*	setTouched({
-			name: false,
-			phoneNumber: false,
-			comment: false,
-		});*/
-		// activateModal('adoption');
-		console.log(formData);
-		changeShowForm(false);
-	};
-const handleShowFormStatus = () => {
-	changeShowForm(false);
-	console.log('Закрити форму редагування')
-}
-/*	const isSubmitDisabled = () => {
-		return !!Object.values(errors).find((error) => error !== '') || !formData.name;
-	};*/
+	}, [formType, cards, dogId]);
 
 	const optionsGenderUA: OptionType[] = [
+		{ value: '', label: 'Оберіть стать' },
 		{ value: 'хлопчик', label: 'Хлопчик' },
 		{ value: 'дівчинка', label: 'Дівчинка' },
 	];
 
-	const optionsAgeUA: OptionType[] = [
-		{ value: 'щеня', label: 'Щеня' },
-		{ value: 'молода собака', label: 'Молода собака' },
-		{ value: 'доросла собака', label: 'Доросла собака' },
-	];
+
 
 	const optionsSizeUA: OptionType[] = [
+		{ value: '', label: 'Оберіть розмір' },
 		{ value: 'маленький', label: 'Маленький' },
 		{ value: 'середній', label: 'Середній' },
 		{ value: 'великий', label: 'Великий' },
@@ -146,22 +117,25 @@ const handleShowFormStatus = () => {
 
 
 	const optionsGenderEN: OptionType[] = [
+		{ value: '', label: 'Оберіть стать' },
 		{ value: 'boy', label: 'Boy' },
 		{ value: 'girl', label: 'Girl' },
 	];
 
-	const optionsAgeEN: OptionType[] = [
-		{ value: 'puppy', label: 'Puppy' },
-		{ value: 'young dog', label: 'Young dog' },
-		{ value: 'adult dog', label: 'Adult dog' },
-	];
 
 	const optionsSizeEN: OptionType[] = [
+		{ value: '', label: 'Оберіть розмір' },
 		{ value: 'small', label: 'Small' },
 		{ value: 'medium', label: 'Medium' },
 		{ value: 'large', label: 'Large' },
 	];
 
+	const optionsAgeEN: OptionType[] = [
+		{ value: '', label: 'Оберіть розмір' },
+		{ value: 'small', label: 'Small' },
+		{ value: 'medium', label: 'Medium' },
+		{ value: 'large', label: 'Large' },
+	];
 
 	const customStyles: CustomStyles = {
 		control: (provided, state) => ({
@@ -216,6 +190,69 @@ const handleShowFormStatus = () => {
 	};
 
 
+	/*	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+			const { name, value } = e.target;
+			setFormData((prevData) => ({ ...prevData, [name]: value }));
+			setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
+			setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
+		};*/
+
+	/*	const validateName = () => {
+			if (touched.name && formData.name.trim().length < 2) {
+				setErrors((prevErrors) => ({ ...prevErrors, name: t('contactModal.name_length_error') }));
+			} else if (touched.name && !nameRegex.test(formData.name)) {
+				setErrors((prevErrors) => ({
+					...prevErrors,
+					name: t('contactModal.name_character_error'),
+				}));
+			} else {
+				setErrors((prevErrors) => ({ ...prevErrors, name: '' }));
+			}
+		};*/
+
+
+	/*	useEffect(() => {
+			validateName();
+
+		}, [formData.name]);*/
+
+	const handleChange = (field: keyof FormData, value: string | boolean) => {
+		setFormData((prevData) => ({
+			...prevData,
+			[field]: value,
+		}));
+		setErrors((prevErrors) => ({ ...prevErrors, [field]: '' }));
+		setTouched((prevTouched) => ({ ...prevTouched, [field]: true }));
+	};
+
+
+	const handleSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+		// validateName();
+
+		/*	setFormData({
+				name: '',
+				phoneNumber: '',
+				comment: '',
+			});*/
+		/*	setTouched({
+				name: false,
+				phoneNumber: false,
+				comment: false,
+			});*/
+		// activateModal('adoption');
+		console.log(formData);
+		changeShowForm(false, '');
+	};
+
+	const handleShowFormStatus = () => {
+		changeShowForm(false, '');
+		console.log('Закрити форму редагування');
+	};
+	/*	const isSubmitDisabled = () => {
+			return !!Object.values(errors).find((error) => error !== '') || !formData.name;
+		};*/
+
 	return (
 		<form onSubmit={handleSubmit}>
 			<div className={styles.catalog_filter}>
@@ -250,17 +287,17 @@ const handleShowFormStatus = () => {
 
 					<div className={styles.inputBox}>
 						<label htmlFor="description"
-							   className={ styles.catalog_select_label}>
+							   className={styles.catalog_select_label}>
 							Опис українською 🇺🇦:
 						</label>
 						<div className={styles.inputWrapper}>
 						<textarea id='description'
-							   onChange={(e) => handleChange('description', e.target.value)}
-							   placeholder={`Введіть опис Хвостика`}
-							   className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
-							   type="text"
+								  onChange={(e) => handleChange('description', e.target.value)}
+								  placeholder={`Введіть опис Хвостика`}
+								  className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
+								  type="text"
 								  maxLength={381}
-							   value={formData.description}/>
+								  value={formData.description} />
 							{errors.name && <div className={styles.errorMessage}>{errors.name}</div>}
 						</div>
 					</div>
@@ -270,32 +307,32 @@ const handleShowFormStatus = () => {
 
 					<div className={styles.inputBoxName}>
 						<label htmlFor="name_en"
-							   className={ styles.catalog_select_label}
+							   className={styles.catalog_select_label}
 						>
 							Ім'я англійською:
 						</label>
 						<div className={styles.inputWrapper}>
-						<input id='name_en' onChange={(e) => handleChange('name_en', e.target.value)}
-							   placeholder={`Вкажіть ім'я Хвостика`}
-							   className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
-							   type="text"
-							   value={formData.name_en}/>
+							<input id='name_en' onChange={(e) => handleChange('name_en', e.target.value)}
+								   placeholder={`Вкажіть ім'я Хвостика`}
+								   className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
+								   type="text"
+								   value={formData.name_en} />
 							{errors.name && <div className={styles.errorMessage}>{errors.name}</div>}
 						</div>
 					</div>
 
-					<div className={styles.inputBox} >
+					<div className={styles.inputBox}>
 						<label htmlFor="description_en"
-							   className={ styles.catalog_select_label}>
+							   className={styles.catalog_select_label}>
 							Опис англійською:
 						</label>
 						<div className={styles.inputWrapper}>
 						<textarea id='description_en'
-							   onChange={(e) => handleChange('description_en', e.target.value)}
-							   placeholder={`Вкажіть опис Хвостика`}
-							   className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
-							   type="text"
-							   value={formData.description_en}/>
+								  onChange={(e) => handleChange('description_en', e.target.value)}
+								  placeholder={`Вкажіть опис Хвостика`}
+								  className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
+								  type="text"
+								  value={formData.description_en} />
 							{errors.name && <div className={styles.errorMessage}>{errors.name}</div>}
 						</div>
 					</div>
@@ -322,7 +359,7 @@ const handleShowFormStatus = () => {
 					<div
 						className={styles.catalog_select_container}
 					>
-						<label
+						{/*<label
 
 							className={styles.catalog_select_label}>
 							Вік українською 🇺🇦:
@@ -334,7 +371,31 @@ const handleShowFormStatus = () => {
 							value={optionsAgeUA.find((opt) => opt.value === formData.age)}
 							onChange={(selectedOption) => handleChange('age', selectedOption?.value || '')}
 							styles={customStyles}
-						/>
+						/>*/}
+
+							<label
+								htmlFor="age"
+								className={errors.age ? styles.labelError : styles.catalog_select_label}
+							>
+								Вік українською 🇺🇦:
+							</label>
+							<div className={styles.inputWrapper}>
+								<input
+									id='age'
+									onChange={(e) => handleChange('age', e.target.value)}
+									name="age"
+									maxLength={15}
+									placeholder={`Вкажіть вік Хвостика`}
+									className={errors.age ? `${styles.input} ${styles.inputError}` : styles.input}
+									type="text"
+									value={formData.age}
+
+
+								/>
+
+								{errors.age && <div className={styles.errorMessage}>{errors.age}</div>}
+							</div>
+
 					</div>
 
 					<div
@@ -369,7 +430,7 @@ const handleShowFormStatus = () => {
 						<Select
 							options={optionsGenderEN}
 							placeholder={'Оберіть стать'}
-							value={optionsGenderEN.find((opt) => opt.value === formData.gender)}
+							value={optionsGenderEN.find((opt) => opt.value === formData.gender_en)}
 							onChange={(selectedOption) => handleChange('gender', selectedOption?.value || '')}
 							styles={customStyles}
 						/>
@@ -378,7 +439,7 @@ const handleShowFormStatus = () => {
 					<div
 						className={styles.catalog_select_container}
 					>
-						<label
+					{/*	<label
 
 							className={styles.catalog_select_label}>
 							Вік англійською:
@@ -387,10 +448,32 @@ const handleShowFormStatus = () => {
 
 							options={optionsAgeEN}
 							placeholder={'Оберіть вік'}
-							value={optionsAgeEN.find((opt) => opt.value === formData.age)}
+							value={optionsAgeEN.find((opt) => opt.value === formData.age_en)}
 							onChange={(selectedOption) => handleChange('age', selectedOption?.value || '')}
 							styles={customStyles}
-						/>
+						/>*/}
+						<label
+							htmlFor="age_en"
+							className={errors.age_en ? styles.labelError : styles.catalog_select_label}
+						>
+							Вік англійською:
+						</label>
+						<div className={styles.inputWrapper}>
+							<input
+								id='age_en'
+								onChange={(e) => handleChange('age_en', e.target.value)}
+								name="age_en"
+								maxLength={15}
+								placeholder={`Вкажіть вік Хвостика`}
+								className={errors.age_en ? `${styles.input} ${styles.inputError}` : styles.input}
+								type="text"
+								value={formData.age_en}
+
+
+							/>
+
+							{errors.age && <div className={styles.errorMessage}>{errors.age}</div>}
+						</div>
 					</div>
 
 					<div
@@ -404,10 +487,12 @@ const handleShowFormStatus = () => {
 						<Select
 							options={optionsSizeEN}
 							placeholder={'Оберіть розмір'}
-							value={optionsSizeEN.find((opt) => opt.value === formData.size)}
+							value={optionsSizeEN.find((opt) => opt.value === formData.size_en)}
 							onChange={(selectedOption) => handleChange('size', selectedOption?.value || '')}
 							styles={customStyles}
 						/>
+
+
 					</div>
 				</div>
 
@@ -432,41 +517,38 @@ const handleShowFormStatus = () => {
 					</div>
 
 
-
 				</div>
 
 				<div>
-					<h2>Завантажити фото</h2>
+					<Button
+						onClick={() => console.log('завантажити фото')}
+						type={'button'}
+						btnClasses={'filterPC'} name={'Завантажити фото'} children={<FaUpload />} />
+
 				</div>
-				<Button
-					name={'Зберегти'}
-					btnClasses={'filterMob'}
-					type="submit"
-					// disabled={isSubmitDisabled()}
-				/>
-				<Button
-					name={'Відмінити'}
-					btnClasses={'filterMob'}
-					type="button"
-					onClick={handleShowFormStatus}
-				/>
+
 
 			</div>
 
 
-			<Button
-				name={'Зберегти'}
-				btnClasses={'filterPC'}
-				type="submit"
-				// disabled={isSubmitDisabled()}
-			/>
+			<div className={styles.submit_buttons_container}>
+				<div className={styles.submit_buttons_box}>
+					<Button
+						name={'Зберегти'}
+						btnClasses={'primary'}
+						type="submit"
+						// disabled={isSubmitDisabled()}
+					/>
 
-			<Button
-				name={'Відмінити'}
-				btnClasses={'filterPC'}
-				type="button"
-				onClick={handleShowFormStatus}
-			/>
+					<Button
+						name={'Відмінити'}
+						btnClasses={'secondary'}
+						type="button"
+						onClick={handleShowFormStatus}
+					/>
+				</div>
+
+			</div>
 		</form>
 	);
 };

@@ -48,15 +48,9 @@ export const fetchTails = async (token: string) => {
 
 
 
-export interface Photo {
-	id: string;
-	name: string;
-	url: string;
-	category: string;
-}
 
 export interface FormDogData {
-	id: number;
+	id?: string;
 	name: string;
 	name_en?: string;
 	ready_for_adoption: boolean;
@@ -70,12 +64,7 @@ export interface FormDogData {
 	size_en?: string;
 	description: string;
 	description_en?: string;
-	photo?: {
-		id: string;
-		name: string;
-		url: string;
-		category: string;
-	};
+	photo?: File
 }
 
 export const setFormData = (formDogData: FormDogData) => {
@@ -83,10 +72,12 @@ export const setFormData = (formDogData: FormDogData) => {
 
 	Object.keys(formDogData).forEach(key => {
 		const value = formDogData[key as keyof FormDogData];
-		if (value === null) {
-			throw new Error(`${value} is null`);
+		if (key === 'photo') {
+			newFormData.append(key, value);
+		} else if (value !== undefined) {
+			newFormData.append(key, value.toString());
 		}
-		newFormData.append(key, value.toString());
+		// newFormData.append(key, value.toString());
 	});
 
 	return newFormData;

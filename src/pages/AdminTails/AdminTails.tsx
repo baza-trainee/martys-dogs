@@ -47,7 +47,9 @@ export type AdminTailsData = TailsListData[];
 
 
 const AdminTails = () => {
-	const [showForm, setShowForm] = useState(false);
+	const [showForm, setShowForm] = useState<boolean>(false);
+	const [formType, setFormType] = useState<string>('');
+	const [dogId, setDogId] = useState<undefined | number>(null);
 	const location = useLocation();
 	const {token} = useAuthContext();
 
@@ -58,13 +60,25 @@ const AdminTails = () => {
 		enabled: !!token
 	});
 
+	const [cards, setCards] = useState<TailsListData[]>([]);
+	const { data: tails, isPending, isError } = data;
+
+
 	useEffect(() => {
 		location.pathname === '/' && !location.hash ? scrollOnTop() : null;
 	}, [location]);
 
+	useEffect(() => {
+		if (tails) {
+			setCards(tails);
+		}
 
-	const handleShowForm = (formStatus: boolean) => {
+	}, [tails]);
+
+	const handleShowForm = (formStatus: boolean, type: string, id?: number) => {
 		setShowForm(formStatus);
+		setFormType(type);
+		setDogId(id);
 	};
 
 
@@ -80,16 +94,16 @@ const AdminTails = () => {
 			<div className={styles.buttonsWrapper}>
 				<div>
 					<Button
-						onClick={handleShowForm}
+						onClick={() => handleShowForm(true, "add")}
 						type={'button'}
 						btnClasses={'add'} name={'Додати Хвостика'} children={<FaRegPlusSquare />} />
 
 				</div>
 			</div>
 
-			{showForm && (<TailForm changeShowForm={handleShowForm}/>)}
+			{showForm && (<TailForm cards={cards} dogId={dogId} formType={formType} changeShowForm={handleShowForm}/>)}
 
-			<TailsList data={data} />
+			<TailsList  cards={cards} isPending={isPending} isError={isError} changeShowForm={handleShowForm} data={data} />
 
 
 		</div>
