@@ -27,7 +27,7 @@ export const updateMessageStatus = async (
 			{ status: newStatus },
 			{
 				headers: {
-					Authorization: token,
+					Authorization: `Bearer ` + token,
 				},
 			},
 		);
