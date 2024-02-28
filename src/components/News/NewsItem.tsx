@@ -18,7 +18,7 @@ export interface NewsItemProps {
 	children?: React.ReactNode;
 	photo: Photo;
 	needTranslate?:boolean;
-	inAdmin: boolean;
+	inAdmin?: boolean;
 }
 
 const NewsItem: React.FC<NewsItemProps> = ({title, post_at,  sub_text, photo, needTranslate, children, inAdmin}) => {
