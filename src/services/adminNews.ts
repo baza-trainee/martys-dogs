@@ -29,6 +29,7 @@ export const fetchNews = async (token: string) => {
 	try {
 		const response = await fetch(NEWS, {headers : {
 			'Content-Type': 'multipart/form-data; boundary=--',
+			'Accept-Language': 'uk-UA',
 			Authorization: `Bearer ${token}`,
 		} });
 		if (!response.ok) {
@@ -49,6 +50,7 @@ export const addNews = async (addNewsInfo: {newsItem: IAddNews, token:string}) =
 					method: 'POST',
 					headers : {
 						'Content-Type': 'multipart/form-data; boundary=--',
+						'Accept-Language': 'uk-UA',
 						Authorization: `Bearer ${token}`,
 					},
 					body:  setFormData(newsItem),
@@ -72,6 +74,7 @@ export const changeNews = async (changeNewsInfo:{newsItem: IAddNews, id: string,
 			method: 'PUT',
 			headers : {
 				'Content-Type': 'multipart/form-data; boundary=--',
+				'Accept-Language': 'uk-UA',
 				Authorization: `Bearer ${token}`,
 			},
 			body: setFormData(newsItem),

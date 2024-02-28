@@ -45,8 +45,11 @@ const AddEditNews: React.FC = () => {
 		enabled: !!token,
 	});
 
+	const newsToEdit = news?.find((item) => item.id === Number(newsId));
 	useEffect(() => {
-		const newsToEdit = news?.find((item) => item.id === Number(newsId));
+		// const newsToEdit = news?.find((item) => item.id === Number(newsId));
+		console.log(newsToEdit)
+		console.log(newsToEdit?.photo)
 		if (newsToEdit) {
 				const fields: (keyof IAddNews)[] = ['url', 'title', 'title_en', 'sub_text', 'sub_text_en', 'post_at'];
 				fields.forEach((field) => {
@@ -55,19 +58,17 @@ const AddEditNews: React.FC = () => {
 					}
 			});
 		}
-}, [news, newsId, setValue]);
+}, [news, newsId, setValue, newsToEdit]);
 
 const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 	if(token){const uploadedImage = data?.photo?.[0];
 			const newsDate = new Date();
-			const addedNews = {
+			const addedNews =  {
 				...data,
 				photo: uploadedImage,
-				// post_at: newsDate,
 				update_at: newsDate,
 		}
 
-		console.log(addedNews)
 		if (isAddMode) {
 			mutate({ newsItem: addedNews, id: '', token });
 		} else {
@@ -96,13 +97,54 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 	return (
 		<div className={styles.container}>
 			<h3 className={styles.title}>{isAddMode ? 'Для додавання новини необхідно заповнити всі поля' : 'Відредагуйте необхідні поля'}</h3>
+			{!isAddMode ? <img  className={styles.photo} src={newsToEdit?.photo.url}/> : null}
 			<form
 				className={styles.form}
 				onSubmit={handleSubmit(onSubmitHandler)}
 			>
-				<UploadImageInput
+				<UploadImageInput isAddMode={isAddMode}
+  register={{
+    ...register('photo', {
+      ...(isAddMode ?
+        {
+          required: 'Файл з фото не обрано',
+          validate: {
+            validImageFormat: (value: FileList | null) => {
+              if (!value) return true;
+              const supportedImageFormats = [
+                'image/jpeg',
+                'image/png',
+                'image/webp',
+              ];
+              return (
+                supportedImageFormats.includes(value?.[0].type) ||
+                'Виберіть дійсний файл зображення (JPEG, PNG або WebP)'
+              );
+            },
+            validImageSize: (value: FileList | null) => {
+              if (!value) return true;
+              const maxSize = 5 * 1024 * 1024; // 5MB
+              return (
+                value?.[0].size <= maxSize ||
+                `Розмір файлу повинен бути менше або рівний ${
+                  maxSize / (1024 * 1024)
+                } MB`
+              );
+            },
+          }
+        }
+        :
+        {}
+      ),
+    }),
+  }}
+  watch={watch}
+  errorMessage={errors['photo']?.message}
+/>
+				{/* <UploadImageInput
 					register={{
 						...register('photo', {
+							// ...(isAddMode ? { required: 'Файл з фото не обрано' } : {}),
 							required: 'Файл з фото не обрано',
 							validate: {
 								validImageFormat: (value: FileList | null) => {
@@ -134,7 +176,7 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 					}}
 					watch={watch}
 					errorMessage={errors['photo']?.message}
-				/>
+				/> */}
 	{/* <HookFormInput
 					label={'Дата новини'}
 					register={{

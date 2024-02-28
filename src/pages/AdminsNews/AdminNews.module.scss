@@ -2,12 +2,11 @@
 @import '../../scss/mixins';
 
 .container {
-	padding: 15px;
+	padding: 35px;
 	width: 100%;
 	gap: 32px;
 	display: flex;
 	flex-direction: column;
-	// background-color: $color-gray-40
 }
 
 .title {
@@ -27,13 +26,9 @@
 	@include tablet {
 		grid-template: 1fr / repeat(2, 1fr);
 		column-gap: 20px;
+		row-gap: 40px;
 	}
 
-	@include small-desktop {
-		display: grid;
-		grid-template: 1fr / repeat(4, 1fr);
-		column-gap: 20px;
-	}
 }
 
 .loading {

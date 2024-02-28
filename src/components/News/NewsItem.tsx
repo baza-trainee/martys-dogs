@@ -18,9 +18,10 @@ export interface NewsItemProps {
 	children?: React.ReactNode;
 	photo: Photo;
 	needTranslate?:boolean;
+	inAdmin?: boolean;
 }
 
-const NewsItem: React.FC<NewsItemProps> = ({title, post_at,  sub_text, photo, needTranslate, children}) => {
+const NewsItem: React.FC<NewsItemProps> = ({title, post_at,  sub_text, photo, needTranslate, children, inAdmin}) => {
 
 	const {i18n } = useTranslation();
 
@@ -53,13 +54,11 @@ const NewsItem: React.FC<NewsItemProps> = ({title, post_at,  sub_text, photo, ne
 		} else {
 			return stringDate;
 		}
-// return  ((i18n.language === 'ua') && needTranslate ) ? stringDate :  engDate
 	};
 
-console.log(getDateName(post_at))
 
 	return (
-		<li className={styles.item}>
+		<li className={!inAdmin ? styles.item : styles.item_admin} >
 			<div className={styles.thumb}>
 				{ <img
 					src={photo.url}

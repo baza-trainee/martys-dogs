@@ -20,9 +20,6 @@ const AdminNews: React.FC = () => {
 		enabled: !!token,
 	});
 
-
-	console.log(news)
-
 	if (isPending) {
 		return (
 			<Loader/>
@@ -43,7 +40,7 @@ const AdminNews: React.FC = () => {
 			<AddButton path='news_add' text='новину' />
 			<ul className={styles.news}>
 				{news.map((item: NewsItemProps) => (
-					<AdminNewsItem key={item.id} {...item} />
+					<AdminNewsItem key={item.id} {...item} inAdmin/>
 				))}
 			</ul>
 		</div>
