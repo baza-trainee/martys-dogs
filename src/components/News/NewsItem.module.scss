@@ -23,6 +23,32 @@
 	}
 }
 
+.item_admin{
+	composes: item;
+	padding: 5px;
+&:hover {
+	transition: all 0.3s ease-in-out;
+		background-color: $color-main-blue-light;
+		box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+	}
+
+	@include tablet {
+		max-width: 352px;
+	}
+
+	@include small-desktop {
+		max-width: 265px;
+	}
+
+	@include large-desktop {
+		max-width: 305px;
+	}
+
+	@include full-desktop {
+		max-width: 425px;
+	}
+}
+
 .thumb {
 	width: 353px;
 	height: 230px;
