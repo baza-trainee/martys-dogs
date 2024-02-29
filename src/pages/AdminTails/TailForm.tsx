@@ -5,7 +5,6 @@ import Button from '../../layout/Button/Button';
 import { useEffect, useState } from 'react';
 import ArrowIconUp from '../../assets/dropdown_arrow_up.svg';
 import ArrowIconDown from '../../assets/dropdown_arrow_down.svg';
-import { IAddNews } from '../../services/adminNews';
 import { FaUpload } from 'react-icons/fa';
 
 interface OptionType {
@@ -53,16 +52,11 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 	console.log(dogId);
 	const [formData, setFormData] = useState<FormData>({
 		name: '',
-		name_en: '',
 		ready_for_adoption: false,
 		gender: '',
-		gender_en: '',
-		age: '',
-		age_en: '',
 		size: '',
-		size_en: '',
+		age: '',
 		description: '',
-		description_en: '',
 	});
 
 	const [touched, setTouched] = useState<Record<string, boolean>>({
@@ -72,29 +66,42 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 		description_en: false,
 		age: false,
 		age_en: false,
+		gender: false,
+		size: false,
 	});
 	const [errors, setErrors] = useState<Record<string, string>>({});
 
 	const nameRegex = /^[А-Яа-яҐґЄєІіЇї\s'`’ʼ-]*$/;
-	const nameEngRegex = /^[A-Za-z\s'`’ʼ-]*$/;
+	const nameEnRegex = /^[A-Za-z\s'`’ʼ-]*$/;
+	const ageRegex = /^[0-9]+[\s,.]*[0-9]*[\s]*[А-Яа-яҐґЄєІіЇї]+$/;
+	const ageEnRegex = /^[0-9]+[\s,.]*[0-9]*[\s]*[A-za-z]+$/;
+	const descriptionRegex = /^[^a-zA-Z]+$/;
+	const descriptionEnRegex = /^[^\u0400-\u04FF]+$/;
 
+
+	useEffect(() => {
+		validateName();
+		validateDescription();
+		validateAge();
+		validateSelects();
+	}, [formData]);
 
 	useEffect(() => {
 		if (formType === 'edit' && cards.length > 0) {
 			const editedCard = cards.find(card => card.id === dogId);
 			if (editedCard) {
 				setFormData({
-					name: editedCard.name || '',
-					name_en: editedCard.name_en || '',
-					ready_for_adoption: editedCard.ready_for_adoption || false,
-					gender: editedCard.gender || '',
-					gender_en: editedCard.gender_en || '',
-					age: editedCard.age || '',
-					age_en: editedCard.age_en || '',
-					size: editedCard.size || '',
-					size_en: editedCard.size_en || '',
-					description: editedCard.description || '',
-					description_en: editedCard.description_en || '',
+					name: editedCard.name,
+					name_en: editedCard.name_en,
+					ready_for_adoption: editedCard.ready_for_adoption,
+					gender: editedCard.gender,
+					gender_en: editedCard.gender_en,
+					age: editedCard.age,
+					age_en: editedCard.age_en,
+					size: editedCard.size,
+					size_en: editedCard.size_en,
+					description: editedCard.description,
+					description_en: editedCard.description_en,
 				});
 			}
 		}
@@ -105,7 +112,6 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 		{ value: 'хлопчик', label: 'Хлопчик' },
 		{ value: 'дівчинка', label: 'Дівчинка' },
 	];
-
 
 
 	const optionsSizeUA: OptionType[] = [
@@ -130,12 +136,6 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 		{ value: 'large', label: 'Large' },
 	];
 
-	const optionsAgeEN: OptionType[] = [
-		{ value: '', label: 'Оберіть розмір' },
-		{ value: 'small', label: 'Small' },
-		{ value: 'medium', label: 'Medium' },
-		{ value: 'large', label: 'Large' },
-	];
 
 	const customStyles: CustomStyles = {
 		control: (provided, state) => ({
@@ -190,31 +190,114 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 	};
 
 
-	/*	const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-			const { name, value } = e.target;
-			setFormData((prevData) => ({ ...prevData, [name]: value }));
-			setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));
-			setTouched((prevTouched) => ({ ...prevTouched, [name]: true }));
-		};*/
-
-	/*	const validateName = () => {
-			if (touched.name && formData.name.trim().length < 2) {
-				setErrors((prevErrors) => ({ ...prevErrors, name: t('contactModal.name_length_error') }));
-			} else if (touched.name && !nameRegex.test(formData.name)) {
+	const validateName = () => {
+		if (touched.name) {
+			if (formData.name.trim().length < 2) {
+				setErrors((prevErrors) => ({ ...prevErrors, name: 'Введіть щонайменше 2 символи' }));
+			} else if (!nameRegex.test(formData.name)) {
 				setErrors((prevErrors) => ({
 					...prevErrors,
-					name: t('contactModal.name_character_error'),
+					name: 'Дозволена кирилиця, пробіл, дефіс, апостроф',
 				}));
 			} else {
 				setErrors((prevErrors) => ({ ...prevErrors, name: '' }));
 			}
-		};*/
+		}
+
+		if (touched.name_en) {
+			if (formData.name_en !== undefined && !nameEnRegex.test(formData.name_en)) {
+				setErrors((prevErrors) => ({
+					...prevErrors,
+					name_en: 'Дозволена латиниця, пробіл, дефіс, апостроф',
+				}));
+			} else {
+				setErrors((prevErrors) => ({ ...prevErrors, name_en: '' }));
+			}
+		}
+
+	};
 
 
-	/*	useEffect(() => {
-			validateName();
+	const validateDescription = () => {
+		if (touched.description) {
+			if (formData.description.trim().length < 10) {
+				setErrors((prevErrors) => ({ ...prevErrors, description: 'Введіть щонайменше 10 символів' }));
+			} else if (!descriptionRegex.test(formData.description)) {
+				setErrors((prevErrors) => ({
+					...prevErrors,
+					description: 'Дозволена кирилиця, цифри та будь-які символи',
+				}));
+			} else {
+				setErrors((prevErrors) => ({ ...prevErrors, description: '' }));
+			}
+		}
 
-		}, [formData.name]);*/
+
+		if (touched.description_en) {
+			if (formData.description_en !== undefined && !descriptionEnRegex.test(formData.description_en)) {
+				setErrors((prevErrors) => ({
+					...prevErrors,
+					description_en: 'Дозволена латиниця, цифри та будь-які символи',
+				}));
+			} else {
+				setErrors((prevErrors) => ({ ...prevErrors, description_en: '' }));
+			}
+		}
+
+	};
+
+	const validateAge = () => {
+		if (touched.age) {
+			if (formData.age.trim().length < 5) {
+				setErrors((prevErrors) => ({ ...prevErrors, age: 'Введіть щонайменше 5 символів' }));
+			} else if (!ageRegex.test(formData.age)) {
+				setErrors((prevErrors) => ({
+					...prevErrors,
+					age: 'Почніть з цифри, а далі можна ввести кирилицю, крапку, кому',
+				}));
+			} else {
+				setErrors((prevErrors) => ({ ...prevErrors, age: '' }));
+			}
+		}
+
+
+		if (touched.age_en) {
+			if (formData.age_en !== undefined && !ageEnRegex.test(formData.age_en)) {
+				setErrors((prevErrors) => ({
+					...prevErrors,
+					age_en: 'Почніть з цифри, а далі можна ввести латиницю, крапку, кому',
+				}));
+			} else {
+				setErrors((prevErrors) => ({ ...prevErrors, age_en: '' }));
+			}
+		}
+
+	};
+
+	const validateSelects = () => {
+		if (touched.gender) {
+			if (formData.gender === '') {
+				setErrors((prevErrors) => ({
+					...prevErrors,
+					gender: `Значення є обов'язковим`,
+				}));
+			} else {
+				setErrors((prevErrors) => ({ ...prevErrors, gender: '' }));
+			}
+		}
+
+		if (touched.size) {
+			if (formData.size === '') {
+				setErrors((prevErrors) => ({
+					...prevErrors,
+					size: `Значення є обов'язковим`,
+				}));
+			} else {
+				setErrors((prevErrors) => ({ ...prevErrors, size: '' }));
+			}
+		}
+
+	};
 
 	const handleChange = (field: keyof FormData, value: string | boolean) => {
 		setFormData((prevData) => ({
@@ -228,19 +311,7 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		// validateName();
 
-		/*	setFormData({
-				name: '',
-				phoneNumber: '',
-				comment: '',
-			});*/
-		/*	setTouched({
-				name: false,
-				phoneNumber: false,
-				comment: false,
-			});*/
-		// activateModal('adoption');
 		console.log(formData);
 		changeShowForm(false, '');
 	};
@@ -249,9 +320,9 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 		changeShowForm(false, '');
 		console.log('Закрити форму редагування');
 	};
-	/*	const isSubmitDisabled = () => {
-			return !!Object.values(errors).find((error) => error !== '') || !formData.name;
-		};*/
+	const isSubmitDisabled = () => {
+		return !!Object.values(errors).find((error) => error !== '') || !formData.gender || !formData.size;
+	};
 
 	return (
 		<form onSubmit={handleSubmit}>
@@ -264,13 +335,14 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 							htmlFor="name"
 							className={errors.name ? styles.labelError : styles.catalog_select_label}
 						>
-							Ім'я українською 🇺🇦:
+							Ім'я українською* 🇺🇦:
 						</label>
 						<div className={styles.inputWrapper}>
 							<input
 								id='name'
 								onChange={(e) => handleChange('name', e.target.value)}
 								name="name"
+								required
 								maxLength={15}
 								placeholder={`Вкажіть ім'я Хвостика`}
 								className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
@@ -288,17 +360,18 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 					<div className={styles.inputBox}>
 						<label htmlFor="description"
 							   className={styles.catalog_select_label}>
-							Опис українською 🇺🇦:
+							Опис українською* 🇺🇦:
 						</label>
 						<div className={styles.inputWrapper}>
 						<textarea id='description'
 								  onChange={(e) => handleChange('description', e.target.value)}
 								  placeholder={`Введіть опис Хвостика`}
-								  className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
-								  type="text"
+								  className={errors.description ? `${styles.input} ${styles.inputError}` : styles.input}
+
+								  required
 								  maxLength={381}
 								  value={formData.description} />
-							{errors.name && <div className={styles.errorMessage}>{errors.name}</div>}
+							{errors.description && <div className={styles.errorMessage}>{errors.description}</div>}
 						</div>
 					</div>
 				</div>
@@ -314,10 +387,10 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 						<div className={styles.inputWrapper}>
 							<input id='name_en' onChange={(e) => handleChange('name_en', e.target.value)}
 								   placeholder={`Вкажіть ім'я Хвостика`}
-								   className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
+								   className={errors.name_en ? `${styles.input} ${styles.inputError}` : styles.input}
 								   type="text"
 								   value={formData.name_en} />
-							{errors.name && <div className={styles.errorMessage}>{errors.name}</div>}
+							{errors.name_en && <div className={styles.errorMessage}>{errors.name_en}</div>}
 						</div>
 					</div>
 
@@ -330,10 +403,11 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 						<textarea id='description_en'
 								  onChange={(e) => handleChange('description_en', e.target.value)}
 								  placeholder={`Вкажіть опис Хвостика`}
-								  className={errors.name ? `${styles.input} ${styles.inputError}` : styles.input}
-								  type="text"
+								  className={errors.description_en ? `${styles.input} ${styles.inputError}` : styles.input}
+
 								  value={formData.description_en} />
-							{errors.name && <div className={styles.errorMessage}>{errors.name}</div>}
+							{errors.description_en &&
+							<div className={styles.errorMessage}>{errors.description_en}</div>}
 						</div>
 					</div>
 				</div>
@@ -344,57 +418,43 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 
 						<label
 							className={styles.catalog_select_label}>
-							Cтать українською 🇺🇦:
+							Cтать українською* 🇺🇦:
 						</label>
 						<Select
 
 							options={optionsGenderUA}
 							placeholder={'Оберіть стать'}
 							value={optionsGenderUA.find((opt) => opt.value === formData.gender)}
-							onChange={(selectedOption) => handleChange('gender', selectedOption?.value || '')}
+							onChange={(selectedOption) => handleChange('gender', selectedOption?.value)}
 							styles={customStyles}
 						/>
+						{errors.gender && <div className={styles.errorMessage}>{errors.gender}</div>}
 					</div>
 
 					<div
 						className={styles.catalog_select_container}
 					>
-						{/*<label
-
-							className={styles.catalog_select_label}>
-							Вік українською 🇺🇦:
+						<label
+							htmlFor="age"
+							className={errors.age ? styles.labelError : styles.catalog_select_label}
+						>
+							Вік українською* 🇺🇦:
 						</label>
-						<Select
+						<div className={styles.inputWrapper}>
+							<input
+								id='age'
+								onChange={(e) => handleChange('age', e.target.value)}
+								name="age"
+								required
+								maxLength={15}
+								placeholder={`Вкажіть вік Хвостика`}
+								className={errors.age ? `${styles.input} ${styles.inputError}` : styles.input}
+								type="text"
+								value={formData.age}
+							/>
 
-							options={optionsAgeUA}
-							placeholder={'Оберіть вік'}
-							value={optionsAgeUA.find((opt) => opt.value === formData.age)}
-							onChange={(selectedOption) => handleChange('age', selectedOption?.value || '')}
-							styles={customStyles}
-						/>*/}
-
-							<label
-								htmlFor="age"
-								className={errors.age ? styles.labelError : styles.catalog_select_label}
-							>
-								Вік українською 🇺🇦:
-							</label>
-							<div className={styles.inputWrapper}>
-								<input
-									id='age'
-									onChange={(e) => handleChange('age', e.target.value)}
-									name="age"
-									maxLength={15}
-									placeholder={`Вкажіть вік Хвостика`}
-									className={errors.age ? `${styles.input} ${styles.inputError}` : styles.input}
-									type="text"
-									value={formData.age}
-
-
-								/>
-
-								{errors.age && <div className={styles.errorMessage}>{errors.age}</div>}
-							</div>
+							{errors.age && <div className={styles.errorMessage}>{errors.age}</div>}
+						</div>
 
 					</div>
 
@@ -404,15 +464,16 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 						<label
 
 							className={styles.catalog_select_label}>
-							Розмір українською 🇺🇦:
+							Розмір українською* 🇺🇦:
 						</label>
 						<Select
 							options={optionsSizeUA}
 							placeholder={'Оберіть розмір'}
 							value={optionsSizeUA.find((opt) => opt.value === formData.size)}
-							onChange={(selectedOption) => handleChange('size', selectedOption?.value || '')}
+							onChange={(selectedOption) => handleChange('size', selectedOption?.value)}
 							styles={customStyles}
 						/>
+						{errors.size && <div className={styles.errorMessage}>{errors.size}</div>}
 					</div>
 				</div>
 
@@ -431,7 +492,7 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 							options={optionsGenderEN}
 							placeholder={'Оберіть стать'}
 							value={optionsGenderEN.find((opt) => opt.value === formData.gender_en)}
-							onChange={(selectedOption) => handleChange('gender', selectedOption?.value || '')}
+							onChange={(selectedOption) => handleChange('gender', selectedOption?.value)}
 							styles={customStyles}
 						/>
 					</div>
@@ -439,19 +500,6 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 					<div
 						className={styles.catalog_select_container}
 					>
-					{/*	<label
-
-							className={styles.catalog_select_label}>
-							Вік англійською:
-						</label>
-						<Select
-
-							options={optionsAgeEN}
-							placeholder={'Оберіть вік'}
-							value={optionsAgeEN.find((opt) => opt.value === formData.age_en)}
-							onChange={(selectedOption) => handleChange('age', selectedOption?.value || '')}
-							styles={customStyles}
-						/>*/}
 						<label
 							htmlFor="age_en"
 							className={errors.age_en ? styles.labelError : styles.catalog_select_label}
@@ -472,7 +520,7 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 
 							/>
 
-							{errors.age && <div className={styles.errorMessage}>{errors.age}</div>}
+							{errors.age_en && <div className={styles.errorMessage}>{errors.age_en}</div>}
 						</div>
 					</div>
 
@@ -488,7 +536,7 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 							options={optionsSizeEN}
 							placeholder={'Оберіть розмір'}
 							value={optionsSizeEN.find((opt) => opt.value === formData.size_en)}
-							onChange={(selectedOption) => handleChange('size', selectedOption?.value || '')}
+							onChange={(selectedOption) => handleChange('size', selectedOption?.value)}
 							styles={customStyles}
 						/>
 
@@ -523,7 +571,7 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 					<Button
 						onClick={() => console.log('завантажити фото')}
 						type={'button'}
-						btnClasses={'filterPC'} name={'Завантажити фото'} children={<FaUpload />} />
+						btnClasses={'filterPC'} name={'Завантажити зображення'} children={<FaUpload />} />
 
 				</div>
 
@@ -537,7 +585,7 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 						name={'Зберегти'}
 						btnClasses={'primary'}
 						type="submit"
-						// disabled={isSubmitDisabled()}
+						disabled={isSubmitDisabled()}
 					/>
 
 					<Button
