@@ -101,7 +101,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  //margin-bottom: 32px;
+  margin-bottom: 20px;
 
   @include small_desktop {
     flex-direction: row;
@@ -133,10 +133,9 @@
 .input {
   width: 100%;
   border-style: none;
-font-size: 20px;
+  font-size: 20px;
   border: 1px solid $color-main-blue-light;
   outline-color: $color-main-blue-light;
-  outline: none;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -240,4 +239,91 @@ font-size: 20px;
   width: 600px;
   display: flex;
   gap: 80px;
+}
+
+
+.uploadInput {
+  border-radius: 30px;
+  display: inline-flex;
+  height: 52px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+  width: auto;
+  background: $color-gray-0;
+  border-style: none;
+  border: 1px solid $color-accent;
+  color: $color-accent;
+  padding: 12px 32px;
+  font-size: 24px;
+  white-space: nowrap;
+  cursor: pointer;
+
+
+  @include hover {
+    transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+    &:hover {
+      border-color: $color-main-blue-dark;
+      color: $color-main-blue-dark;
+    }
+  }
+
+
+  &:focus-visible {
+    outline: none;
+    border-color: $color-main-blue-dark;
+  }
+
+  &:active {
+    border-color: $color-gray-100;
+    color: $color-gray-100;
+  }
+
+  &:disabled {
+    border-color: $color-gray-60;
+    background: transparent;
+    color: $color-gray-60;
+
+    svg {
+      fill: $color-gray-60;
+    }
+
+    @include hover {
+      &:hover {
+        color: $color-gray-60;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1279px) {
+    display: none;
+  }
+}
+
+.uploadError {
+  border-color: $color-system-error;
+  color: $color-system-error;
+  //outline-color: $color-system-error;
+
+  @include hover {
+    &:hover {
+      border-color: #A00202;
+      color: #A00202;
+    }
+  }
+
+  &:focus-visible {
+    border-color: #840000;
+    color: #840000;
+  }
+
+  //pressed
+  &:active {
+    border-color: #840000;
+    color: #840000;
+  }
 }

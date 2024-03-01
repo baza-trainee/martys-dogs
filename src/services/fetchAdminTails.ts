@@ -64,7 +64,7 @@ export interface FormDogData {
 	size_en?: string;
 	description: string;
 	description_en?: string;
-	photo?: File
+	photo?: File;
 }
 
 export const setFormData = (formDogData: FormDogData) => {
