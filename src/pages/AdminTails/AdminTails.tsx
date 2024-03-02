@@ -12,13 +12,6 @@ import { FaRegPlusSquare } from 'react-icons/fa';
 import { useAuthContext } from '../../context/useGlobalContext';
 
 
-/*export interface Photo {
-	id: string;
-	name: string;
-	url: string;
-	category: string;
-}*/
-
 export interface TailsListData {
 	id: number;
 	name: string;
@@ -51,13 +44,13 @@ const AdminTails = () => {
 	const [formType, setFormType] = useState<string>('');
 	const [dogId, setDogId] = useState<undefined | number>(null);
 	const location = useLocation();
-	const {token} = useAuthContext();
+	const { token } = useAuthContext();
 
 	const data = useQuery<AdminTailsData>({
 		queryKey: ['tailslist'],
-		queryFn:() => typeof token === 'string' ? fetchTails(token) : Promise.resolve([]),
+		queryFn: () => typeof token === 'string' ? fetchTails(token) : Promise.resolve([]),
 		retry: 1,
-		enabled: !!token
+		enabled: !!token,
 	});
 
 	const [cards, setCards] = useState<TailsListData[]>([]);
@@ -79,6 +72,7 @@ const AdminTails = () => {
 		setShowForm(formStatus);
 		setFormType(type);
 		setDogId(id);
+		scrollOnTop();
 	};
 
 
@@ -91,19 +85,27 @@ const AdminTails = () => {
 				</h2>
 			</div>
 
-			<div className={styles.buttonsWrapper}>
-				<div>
-					<Button
-						onClick={() => handleShowForm(true, "add")}
-						type={'button'}
-						btnClasses={'add'} name={'Додати Хвостика'} children={<FaRegPlusSquare />} />
 
-				</div>
+			<div>
+				{showForm ? (
+						<TailForm cards={cards} dogId={dogId} formType={formType} changeShowForm={handleShowForm} />)
+					: (
+						<div className={styles.buttonsWrapper}>
+							<div>
+								<Button
+									onClick={() => handleShowForm(true, 'add')}
+									type={'button'}
+									btnClasses={'add'} name={'Додати Хвостика'} children={<FaRegPlusSquare />} />
+							</div>
+						</div>
+					)}
+
+
 			</div>
 
-			{showForm && (<TailForm cards={cards} dogId={dogId} formType={formType} changeShowForm={handleShowForm}/>)}
 
-			<TailsList  cards={cards} isPending={isPending} isError={isError} changeShowForm={handleShowForm} data={data} />
+			<TailsList cards={cards} isPending={isPending} isError={isError} changeShowForm={handleShowForm}
+					   data={data} />
 
 
 		</div>

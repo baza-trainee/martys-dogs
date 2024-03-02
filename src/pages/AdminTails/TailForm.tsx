@@ -3,14 +3,11 @@ import styles from '../../pages/AdminTails/TailForm.module.scss';
 import Select from 'react-select';
 import Button from '../../layout/Button/Button';
 import { useEffect, useState } from 'react';
-import ArrowIconUp from '../../assets/dropdown_arrow_up.svg';
-import ArrowIconDown from '../../assets/dropdown_arrow_down.svg';
 import { FaUpload } from 'react-icons/fa';
+import * as options from './optionsInfo'  ;
+import { AdminTailsData } from './AdminTails';
+import* as val from './validationSchema';
 
-interface OptionType {
-	value: string;
-	label: string;
-}
 
 type FormData = {
 	id?: number;
@@ -25,26 +22,22 @@ type FormData = {
 	size_en?: string;
 	description: string;
 	description_en?: string;
-	photo?: File;
+	photo?: FileList;
 }
 
-interface CustomStyles {
-	control?: (provided: any, state: any) => any;
-	dropdownIndicator?: (provided: any) => any;
-	indicatorSeparator?: () => any;
-	menu?: (provided: any) => any;
-	option?: (provided: any) => any;
-}
 
 interface TailFormProps {
 	changeShowForm: (a: boolean, b: string) => void;
 	formType: string;
+	dogId: number;
+	cards: AdminTailsData[];
 }
 
 const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, dogId }) => {
 
 		console.log(cards);
-		console.log(`dogId: ` + dogId);
+		console.log(`dogId: ` + dogId + ` is` + typeof dogId);
+
 		const [formData, setFormData] = useState<FormData>({
 			name: '',
 			ready_for_adoption: false,
@@ -67,259 +60,47 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 		});
 		const [errors, setErrors] = useState<Record<string, string>>({});
 
-		const nameRegex = /^[А-Яа-яҐґЄєІіЇї\s'`’ʼ-]*$/;
-		const nameEnRegex = /^[A-Za-z\s'`’ʼ-]*$/;
-		const ageRegex = /^[0-9]+[\s,.]*[0-9]*[\s]*[А-Яа-яҐґЄєІіЇї]+$/;
-		const ageEnRegex = /^[0-9]+[\s,.]*[0-9]*[\s]*[A-za-z]+$/;
-		const descriptionRegex = /^[^a-zA-Z]+$/;
-		const descriptionEnRegex = /^[^\u0400-\u04FF]+$/;
+
 
 
 		useEffect(() => {
-			validateName();
-			validateDescription();
-			validateAge();
-			validateSelects();
-			validateFile();
-		}, [formData]);
+			val.validateName(formData, touched, setErrors);
+			val.validateDescription(formData, touched, setErrors);
+			val.validateAge(formData, touched, setErrors);
+			val.validateSelects(formData, touched, setErrors);
+			val.validateFile(formData, touched, setErrors);
+		}, [formData, touched, setErrors]);
 
 		useEffect(() => {
 			if (formType === 'edit' && cards.length > 0) {
 				const editedCard = cards.find(card => card.id === dogId);
 				if (editedCard) {
-					setFormData({
-						name: editedCard.name,
-						name_en: editedCard.name_en,
-						ready_for_adoption: editedCard.ready_for_adoption,
-						gender: editedCard.gender,
-						gender_en: editedCard.gender_en,
-						age: editedCard.age,
-						age_en: editedCard.age_en,
-						size: editedCard.size,
-						size_en: editedCard.size_en,
-						description: editedCard.description,
-						description_en: editedCard.description_en,
-					});
+						setFormData({
+							name: editedCard.name,
+							name_en: editedCard.name_en,
+							ready_for_adoption: editedCard.ready_for_adoption,
+							gender: editedCard.gender,
+							gender_en: editedCard.gender_en,
+							age: editedCard.age,
+							age_en: editedCard.age_en,
+							size: editedCard.size,
+							size_en: editedCard.size_en,
+							description: editedCard.description,
+							description_en: editedCard.description_en,
+							photo: editedCard.photo
+						});
+				/*	for (const key in formData) {
+						if (editedCard.hasOwnProperty(key)) {
+							setFormData(prevData => ({
+								...prevData,
+								[key]: editedCard[key],
+							}));
+						}
+					}*/
+					console.log(formData)
 				}
 			}
 		}, [formType, cards, dogId]);
-
-		const optionsGenderUA: OptionType[] = [
-			{ value: '', label: 'Оберіть стать' },
-			{ value: 'хлопчик', label: 'Хлопчик' },
-			{ value: 'дівчинка', label: 'Дівчинка' },
-		];
-
-
-		const optionsSizeUA: OptionType[] = [
-			{ value: '', label: 'Оберіть розмір' },
-			{ value: 'маленький', label: 'Маленький' },
-			{ value: 'середній', label: 'Середній' },
-			{ value: 'великий', label: 'Великий' },
-		];
-
-
-		const optionsGenderEN: OptionType[] = [
-			{ value: '', label: 'Оберіть стать' },
-			{ value: 'boy', label: 'Boy' },
-			{ value: 'girl', label: 'Girl' },
-		];
-
-
-		const optionsSizeEN: OptionType[] = [
-			{ value: '', label: 'Оберіть розмір' },
-			{ value: 'small', label: 'Small' },
-			{ value: 'medium', label: 'Medium' },
-			{ value: 'large', label: 'Large' },
-		];
-
-
-		const customStyles: CustomStyles = {
-			control: (provided, state) => ({
-				...provided,
-				padding: '6px 16px',
-				borderRadius: '40px',
-				borderColor: '#b6e1f2',
-				color: '#858585',
-				fontSize: '20px',
-				fontWeight: 500,
-				cursor: 'pointer',
-				position: 'relative',
-				'&:hover': {
-					borderColor: '#b6e1f2',
-				},
-				'&:before': {
-					content: '""',
-					backgroundImage: state.menuIsOpen ? `url(${ArrowIconUp})` : `url(${ArrowIconDown})`,
-					backgroundRepeat: 'no-repeat',
-					backgroundPosition: 'center',
-					backgroundSize: '24px 24px',
-					width: '24px',
-					height: '24px',
-					position: 'absolute',
-					right: '8px',
-					top: '50%',
-					transform: 'translateY(-50%)',
-				},
-			}),
-			indicatorSeparator: () => ({
-				display: 'none',
-			}),
-			dropdownIndicator: (provided) => ({
-				...provided,
-				display: 'none',
-			}),
-			menu: (provided) => ({
-				...provided,
-				borderRadius: '24px',
-				boxShadow: '0 0 0 1px #b6e1f2',
-			}),
-			option: (provided) => ({
-				...provided,
-				backgroundColor: 'white',
-				cursor: 'pointer',
-				color: '#0D0031',
-				borderRadius: '24px',
-				'&:hover': {
-					color: '#009cd9',
-				},
-			}),
-		};
-
-
-		const validateName = () => {
-			if (touched.name) {
-				if (formData.name.trim().length < 2) {
-					setErrors((prevErrors) => ({ ...prevErrors, name: 'Введіть щонайменше 2 символи' }));
-				} else if (!nameRegex.test(formData.name)) {
-					setErrors((prevErrors) => ({
-						...prevErrors,
-						name: 'Дозволена кирилиця, пробіл, дефіс, апостроф',
-					}));
-				} else {
-					setErrors((prevErrors) => ({ ...prevErrors, name: '' }));
-				}
-			}
-
-			if (touched.name_en) {
-				if (formData.name_en !== undefined && !nameEnRegex.test(formData.name_en)) {
-					setErrors((prevErrors) => ({
-						...prevErrors,
-						name_en: 'Дозволена латиниця, пробіл, дефіс, апостроф',
-					}));
-				} else {
-					setErrors((prevErrors) => ({ ...prevErrors, name_en: '' }));
-				}
-			}
-
-		};
-
-
-		const validateDescription = () => {
-			if (touched.description) {
-				if (formData.description.trim().length < 10) {
-					setErrors((prevErrors) => ({ ...prevErrors, description: 'Введіть щонайменше 10 символів' }));
-				} else if (!descriptionRegex.test(formData.description)) {
-					setErrors((prevErrors) => ({
-						...prevErrors,
-						description: 'Дозволена кирилиця, цифри та будь-які символи',
-					}));
-				} else {
-					setErrors((prevErrors) => ({ ...prevErrors, description: '' }));
-				}
-			}
-
-
-			if (touched.description_en) {
-				if (formData.description_en !== undefined && !descriptionEnRegex.test(formData.description_en)) {
-					setErrors((prevErrors) => ({
-						...prevErrors,
-						description_en: 'Дозволена латиниця, цифри та будь-які символи',
-					}));
-				} else {
-					setErrors((prevErrors) => ({ ...prevErrors, description_en: '' }));
-				}
-			}
-
-		};
-
-		const validateAge = () => {
-			if (touched.age) {
-				if (formData.age.trim().length < 5) {
-					setErrors((prevErrors) => ({ ...prevErrors, age: 'Введіть щонайменше 5 символів' }));
-				} else if (!ageRegex.test(formData.age.trim())) {
-					setErrors((prevErrors) => ({
-						...prevErrors,
-						age: 'Почніть з цифри, а далі можна ввести кирилицю, крапку, кому',
-					}));
-				} else {
-					setErrors((prevErrors) => ({ ...prevErrors, age: '' }));
-				}
-			}
-
-
-			if (touched.age_en) {
-				if (formData.age_en !== undefined && !ageEnRegex.test(formData.age_en)) {
-					setErrors((prevErrors) => ({
-						...prevErrors,
-						age_en: 'Почніть з цифри, а далі можна ввести латиницю, крапку, кому',
-					}));
-				} else {
-					setErrors((prevErrors) => ({ ...prevErrors, age_en: '' }));
-				}
-			}
-
-		};
-
-
-		const validateSelects = () => {
-			if (touched.gender) {
-				if (formData.gender === '') {
-					setErrors((prevErrors) => ({
-						...prevErrors,
-						gender: `Значення є обов'язковим`,
-					}));
-				} else {
-					setErrors((prevErrors) => ({ ...prevErrors, gender: '' }));
-				}
-			}
-
-			if (touched.size) {
-				if (formData.size === '') {
-					setErrors((prevErrors) => ({
-						...prevErrors,
-						size: `Значення є обов'язковим`,
-					}));
-				} else {
-					setErrors((prevErrors) => ({ ...prevErrors, size: '' }));
-				}
-			}
-
-		};
-
-		const validateFile = () => {
-			const maxSize = 5 * 1024 * 1024; // 5MB
-			const supportedImageFormats = ['image/jpeg', 'image/png', 'image/webp'];
-			const file = formData.photo;
-
-			if (touched.photo) {
-				if (file && file.size > maxSize) {
-					console.log(`file.size ${file.size}`);
-					setErrors((prevErrors) => ({
-						...prevErrors,
-						photo: `Максимальний розмір 5MB`,
-					}));
-				} else if (file && !supportedImageFormats.includes(file.type)) {
-					console.log(`file.type ${file.type}`);
-					setErrors((prevErrors) => ({
-						...prevErrors,
-						photo: `Оберіть зображення формату jpeg, png, webp`,
-					}));
-				} else {
-					setErrors((prevErrors) => ({ ...prevErrors, photo: '' }));
-				}
-			}
-		};
 
 
 		const handleChange = (field: keyof FormData, value: string | boolean | FileList | null) => {
@@ -339,10 +120,8 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 			setTouched((prevTouched) => ({ ...prevTouched, [field]: true }));
 		};
 
-
 		const handleSubmit = (e: React.FormEvent) => {
 			e.preventDefault();
-
 			console.log(formData);
 			changeShowForm(false, '');
 		};
@@ -351,6 +130,7 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 			changeShowForm(false, '');
 			console.log('Закрити форму редагування');
 		};
+
 		const isSubmitDisabled = () => {
 			return !!Object.values(errors).find((error) => error !== '') || !formData.name || !formData.description || !formData.gender || !formData.age || !formData.size || !formData.photo;
 		};
@@ -454,11 +234,11 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 							</label>
 							<Select
 
-								options={optionsGenderUA}
+								options={options.optionsGenderUA}
 								placeholder={'Оберіть стать'}
-								value={optionsGenderUA.find((opt) => opt.value === formData.gender)}
+								value={options.optionsGenderUA.find((opt) => opt.value === formData.gender)}
 								onChange={(selectedOption) => handleChange('gender', selectedOption?.value)}
-								styles={customStyles}
+								styles={options.customStyles}
 							/>
 							{errors.gender && <div className={styles.errorMessage}>{errors.gender}</div>}
 						</div>
@@ -499,11 +279,11 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 								Розмір українською* 🇺🇦:
 							</label>
 							<Select
-								options={optionsSizeUA}
+								options={options.optionsSizeUA}
 								placeholder={'Оберіть розмір'}
-								value={optionsSizeUA.find((opt) => opt.value === formData.size)}
+								value={options.optionsSizeUA.find((opt) => opt.value === formData.size)}
 								onChange={(selectedOption) => handleChange('size', selectedOption?.value)}
-								styles={customStyles}
+								styles={options.customStyles}
 							/>
 							{errors.size && <div className={styles.errorMessage}>{errors.size}</div>}
 						</div>
@@ -521,11 +301,11 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 								Стать англійською:
 							</label>
 							<Select
-								options={optionsGenderEN}
+								options={options.optionsGenderEN}
 								placeholder={'Оберіть стать'}
-								value={optionsGenderEN.find((opt) => opt.value === formData.gender_en)}
+								value={options.optionsGenderEN.find((opt) => opt.value === formData.gender_en)}
 								onChange={(selectedOption) => handleChange('gender', selectedOption?.value)}
-								styles={customStyles}
+								styles={options.customStyles}
 							/>
 						</div>
 
@@ -565,11 +345,11 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 								Розмір англійською:
 							</label>
 							<Select
-								options={optionsSizeEN}
+								options={options.optionsSizeEN}
 								placeholder={'Оберіть розмір'}
-								value={optionsSizeEN.find((opt) => opt.value === formData.size_en)}
+								value={options.optionsSizeEN.find((opt) => opt.value === formData.size_en)}
 								onChange={(selectedOption) => handleChange('size', selectedOption?.value)}
-								styles={customStyles}
+								styles={options.customStyles}
 							/>
 
 
@@ -606,6 +386,8 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 								   className={errors.photo ? `${styles.uploadInput} ${styles.uploadError}` : styles.uploadInput}
 							>
 								{formData.photo?.name || 'Завантажте зображення'}
+								{/*{formData.photo && formData.photo.length > 0 && formData.photo[0] ? formData.photo[0].name : 'Завантажте зображення'}*/}
+								{console.log(formData.photo)}
 								<FaUpload />
 							</label>
 							<div className={styles.inputWrapper}>
