@@ -1,7 +1,8 @@
 import ReactPlayer from 'react-player/youtube';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 import { FaPaw } from 'react-icons/fa6';
-
+import Loader from '../CommonUI/LoaderAndError/LoaderAndError';
 import playButtonImg from '../../assets/video_main/Play.svg';
 import style from './VideoAboutShelter.module.scss'
 
@@ -9,6 +10,11 @@ import style from './VideoAboutShelter.module.scss'
 const VideoAboutShelter = () => {
   const { t } = useTranslation();
 
+  const [isLoading,setIsLoading] = useState(true)
+  const onHandleClick = () => {
+  setIsLoading(false)
+}
+  
   return (
     <section className={style.section}>
       <div className={style.caption__container}>
@@ -19,17 +25,19 @@ const VideoAboutShelter = () => {
         </div>
       </div>
       <div className={style.wrapper}>
-      <div className={style.container}>
-      <ReactPlayer
+        
+        <div className={style.container}>
+          {isLoading && <div className={style.loader}><Loader/></div>}
+      { <ReactPlayer
         className={style.react__player}
         width='100%'
         height='100%'
         url={['https://youtu.be/cG1KwA9tH9I?si=AAhUGEr1N66rpF0N']}
-
-          light={<div className={style.image}></div>}
+        onReady={onHandleClick}
+        light={<div className={style.image}></div>}
         playIcon={<img src={playButtonImg} alt='Play icon' className={style.play__icon } />}
         playing={true}
-        />
+        />}
         </div>
         </div>
     </section>
