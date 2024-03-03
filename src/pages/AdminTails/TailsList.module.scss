@@ -13,6 +13,23 @@
 
 .catalog_list_card {
   margin-bottom: 20px;
+
+  width: 342px;
+
+  @include small_desktop {
+    width: 347px;
+  }
+
+  @include large_desktop {
+    width: 400px;
+
+  }
+
+  @include full_desktop {
+    width: 415px;
+  }
+
+
 }
 
 .catalog_pagination {

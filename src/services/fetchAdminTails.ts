@@ -1,28 +1,23 @@
 export const TAILS = 'https://matys-dogs2.onrender.com/dog_card';
 
-const headers = {
-	Authorization:
-		/*'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4OTQ4OTk0LCJpYXQiOjE3MDYzNTY5OTQsImp0aSI6IjUyMWZlZDAyNDRjMTQ4NmViNzQyOWFjNjRmZGZlYzY4IiwidXNlcl9pZCI6MTl9.3-PXaKeYiNrsmDdft0eYAdV5rGLsSAEqKCH7dHQJ6EM',*/
-
-
-		'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4OTc4Njc2LCJpYXQiOjE3MDc3NjkwNzYsImp0aSI6ImExZjZjODQ5ZWVjZTRkODhhYzBkNzJmYjFjN2NkN2I3IiwidXNlcl9pZCI6MX0.PgM1tmuFTqPhA6WxQgHZ3xyeAAvErxpdtJxqz69EYGg'
-};
-
-
-/*
-export const fetchTails = async () => {
-	try {
-		const response = await fetch(TAILS, { headers });
-		if (!response.ok) {
-			throw new Error('Data Tails loading error');
-		}
-		const data = await response.json();
-		return data;
-	} catch (error) {
-		console.error(error);
-		throw error;
-	}
-};*/
+//CHANGE FROM STRING TO NUMBER ID WHEN BACKEND WILL BE READY
+export interface FormDogData {
+	id?: string;
+	name: string;
+	name_en?: string;
+	ready_for_adoption: boolean;
+	gender: string;
+	gender_en?: string;
+	age: string;
+	age_en?: string;
+	sterilization?: boolean;
+	vaccination_parasite_treatment?: boolean;
+	size: string;
+	size_en?: string;
+	description: string;
+	description_en?: string;
+	photo?: File;
+}
 
 export const fetchTails = async (token: string) => {
 	try {
@@ -48,25 +43,6 @@ export const fetchTails = async (token: string) => {
 
 
 
-
-export interface FormDogData {
-	id?: string;
-	name: string;
-	name_en?: string;
-	ready_for_adoption: boolean;
-	gender: string;
-	gender_en?: string;
-	age: string;
-	age_en?: string;
-	sterilization?: boolean;
-	vaccination_parasite_treatment?: boolean;
-	size: string;
-	size_en?: string;
-	description: string;
-	description_en?: string;
-	photo?: File;
-}
-
 export const setFormData = (formDogData: FormDogData) => {
 	const newFormData = new FormData();
 
@@ -84,7 +60,7 @@ export const setFormData = (formDogData: FormDogData) => {
 
 };
 
-export const addTails = async (addTailsInfo : {formDogData: FormDogData, token: string}) => {
+export const addTail = async (addTailsInfo : {formDogData: FormDogData, token: string}) => {
 	const {formDogData, token} = addTailsInfo;
 	try {
 		const response = await fetch(TAILS,
@@ -98,7 +74,7 @@ export const addTails = async (addTailsInfo : {formDogData: FormDogData, token: 
 			});
 
 		if (!response.ok) {
-			throw new Error('Data loading error');
+			throw new Error('addTail error');
 		}
 
 		const data = await response.json();
@@ -106,6 +82,31 @@ export const addTails = async (addTailsInfo : {formDogData: FormDogData, token: 
 
 	} catch (error) {
 		console.error(error);
+		throw error;
+	}
+};
+
+export const deleteTail = async (deleteTail: {tailId: string, token: string}) => {
+	const { tailId, token } = deleteTail;
+
+	try {
+		const response = await fetch(`${TAILS}/${tailId}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'multipart/form-data; boundary=--',
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		if (!response.ok) {
+			throw new Error('Delete request failed');
+		}
+
+		const data = await response.json();
+
+		return data;
+	} catch (error) {
+		console.error('deleteTail Error:', error);
 		throw error;
 	}
 };

@@ -259,11 +259,13 @@
   border: 1px solid $color-accent;
   color: $color-accent;
   padding: 12px 32px;
-  font-size: 24px;
+  font-size: 20px;
   white-space: nowrap;
   cursor: pointer;
 
-
+@include small_desktop {
+  font-size: 24px;
+}
   @include hover {
     transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
     &:hover {
@@ -299,9 +301,9 @@
     }
   }
 
-  @media screen and (max-width: 1279px) {
+/*  @media screen and (max-width: 1279px) {
     display: none;
-  }
+  }*/
 }
 
 .uploadError {

@@ -6,10 +6,11 @@ import { useEffect, useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
 import * as options from './optionsInfo'  ;
 import { AdminTailsData } from './AdminTails';
-import* as val from './validationSchema';
+import * as val from './validationSchema';
+import { MiniErrorAlert, MiniLoader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 
 
-type FormData = {
+export type FormData = {
 	id?: number;
 	name: string;
 	name_en?: string;
@@ -22,18 +23,19 @@ type FormData = {
 	size_en?: string;
 	description: string;
 	description_en?: string;
-	photo?: FileList;
+	photo?: File;
 }
 
 
 interface TailFormProps {
 	changeShowForm: (a: boolean, b: string) => void;
+	changeErrLoader: (error: string, loaderStatus: boolean) => void;
 	formType: string;
 	dogId: number;
 	cards: AdminTailsData[];
 }
 
-const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, dogId }) => {
+const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, formType, cards, dogId }) => {
 
 		console.log(cards);
 		console.log(`dogId: ` + dogId + ` is` + typeof dogId);
@@ -61,8 +63,6 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 		const [errors, setErrors] = useState<Record<string, string>>({});
 
 
-
-
 		useEffect(() => {
 			val.validateName(formData, touched, setErrors);
 			val.validateDescription(formData, touched, setErrors);
@@ -75,29 +75,29 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 			if (formType === 'edit' && cards.length > 0) {
 				const editedCard = cards.find(card => card.id === dogId);
 				if (editedCard) {
-						setFormData({
-							name: editedCard.name,
-							name_en: editedCard.name_en,
-							ready_for_adoption: editedCard.ready_for_adoption,
-							gender: editedCard.gender,
-							gender_en: editedCard.gender_en,
-							age: editedCard.age,
-							age_en: editedCard.age_en,
-							size: editedCard.size,
-							size_en: editedCard.size_en,
-							description: editedCard.description,
-							description_en: editedCard.description_en,
-							photo: editedCard.photo
-						});
-				/*	for (const key in formData) {
-						if (editedCard.hasOwnProperty(key)) {
-							setFormData(prevData => ({
-								...prevData,
-								[key]: editedCard[key],
-							}));
-						}
-					}*/
-					console.log(formData)
+					setFormData({
+						name: editedCard.name,
+						name_en: editedCard.name_en,
+						ready_for_adoption: editedCard.ready_for_adoption,
+						gender: editedCard.gender,
+						gender_en: editedCard.gender_en,
+						age: editedCard.age,
+						age_en: editedCard.age_en,
+						size: editedCard.size,
+						size_en: editedCard.size_en,
+						description: editedCard.description,
+						description_en: editedCard.description_en,
+						photo: editedCard.photo,
+					});
+					/*	for (const key in formData) {
+							if (editedCard.hasOwnProperty(key)) {
+								setFormData(prevData => ({
+									...prevData,
+									[key]: editedCard[key],
+								}));
+							}
+						}*/
+					console.log(formData);
 				}
 			}
 		}, [formType, cards, dogId]);
@@ -123,6 +123,9 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 		const handleSubmit = (e: React.FormEvent) => {
 			e.preventDefault();
 			console.log(formData);
+			/*	setShowLoader(true);
+				setShowError('');*/
+			//if ok:
 			changeShowForm(false, '');
 		};
 
@@ -425,6 +428,11 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, formType, cards, do
 					</div>
 
 				</div>
+	{/*			<MiniLoader />
+				<MiniErrorAlert errorMessage={'eror rolkj'} backgroundColor="rgba(255, 0, 0, 0.3)" />*/}
+
+{/*				{showLoader && <MiniLoader />}
+				{showError && <MiniErrorAlert errorMessage={showError} backgroundColor="rgba(255, 0, 0, 0.3)" />}*/}
 			</form>
 		);
 	}

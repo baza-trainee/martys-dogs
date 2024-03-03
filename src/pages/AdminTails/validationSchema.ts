@@ -1,3 +1,12 @@
+/*
+import FormData from 'TailForm.module.scss';
+type touched = Record<string, boolean>;
+type Errors = Record<string, string>;
+type SetErrorsFunction = Dispatch<SetStateAction<Errors>>;
+
+
+*/
+
 const nameRegex = /^[А-Яа-яҐґЄєІіЇї\s'`’ʼ-]*$/;
 const nameEnRegex = /^[A-Za-z\s'`’ʼ-]*$/;
 const ageRegex = /^[0-9]+[\s,.]*[0-9]*[\s]*[А-Яа-яҐґЄєІіЇї]+$/;
@@ -6,6 +15,7 @@ const descriptionRegex = /^[^a-zA-Z]+$/;
 const descriptionEnRegex = /^[^\u0400-\u04FF]+$/;
 
 export const validateName = (formData, touched, setErrors) => {
+
 	if (touched.name) {
 		if (formData.name.trim().length < 2) {
 			setErrors((prevErrors) => ({ ...prevErrors, name: 'Введіть щонайменше 2 символи' }));

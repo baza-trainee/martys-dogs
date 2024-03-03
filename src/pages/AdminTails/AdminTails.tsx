@@ -2,15 +2,15 @@ import styles from '../AdminPhotos/AdminPhotos.module.scss';
 import Button from '../../layout/Button/Button';
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { scrollOnTop } from '../../services/scrollTo';
-import { fetchTails } from '../../services/fetchAdminTails';
 import TailsList from './TailsList';
 import TailForm from './TailForm';
 import { FaRegPlusSquare } from 'react-icons/fa';
 import { useAuthContext } from '../../context/useGlobalContext';
-
+import { queryClient } from '../../App';
+import { fetchTails, addTail, deleteTail } from '../../services/fetchAdminTails';
 
 export interface TailsListData {
 	id: number;
@@ -40,22 +40,35 @@ export type AdminTailsData = TailsListData[];
 
 
 const AdminTails = () => {
+	const [showLoader, setShowLoader] = useState<boolean>(false);
+	const [showError, setShowError] = useState<string>('');
 	const [showForm, setShowForm] = useState<boolean>(false);
 	const [formType, setFormType] = useState<string>('');
 	const [dogId, setDogId] = useState<undefined | number>(null);
 	const location = useLocation();
 	const { token } = useAuthContext();
+	const [cards, setCards] = useState<TailsListData[]>([]);
+	// const { data: tails, isPending, isError } = data;
 
-	const data = useQuery<AdminTailsData>({
+	const { data: tails, isPending, isError } = useQuery<AdminTailsData>({
 		queryKey: ['tailslist'],
 		queryFn: () => typeof token === 'string' ? fetchTails(token) : Promise.resolve([]),
 		retry: 1,
 		enabled: !!token,
 	});
-
-	const [cards, setCards] = useState<TailsListData[]>([]);
-	const { data: tails, isPending, isError } = data;
-
+	const { mutate: deleteMutate } = useMutation({
+		mutationFn: deleteTail,
+		onSuccess: () => {
+			setShowLoader(false);
+			setShowError('');
+			console.log('succesfully deleted' + id)
+			queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
+		},
+		onError: () => {
+			setShowLoader(false);
+			setShowError('Видалення не вдалося, перезавантажте сторінку');
+		}
+	});
 
 	useEffect(() => {
 		location.pathname === '/' && !location.hash ? scrollOnTop() : null;
@@ -66,7 +79,8 @@ const AdminTails = () => {
 			setCards(tails);
 		}
 
-	}, [tails]);
+	}, [tails, deleteMutate]);
+
 
 	const handleShowForm = (formStatus: boolean, type: string, id?: number) => {
 		setShowForm(formStatus);
@@ -74,6 +88,25 @@ const AdminTails = () => {
 		setDogId(id);
 		scrollOnTop();
 	};
+
+const handleErrLoader = (error: string, loaderStatus: boolean) => {
+	setShowLoader(loaderStatus);
+	setShowError(error);
+};
+
+	const handleDeleteTail = async (id: number) => {
+		console.log('Delete ' + id);
+		setDogId(id);
+		if (token) {
+			setShowLoader(true);
+			//DELETE TO STRING METHOD WHEN BACKEND WILL BE READY
+			deleteMutate({ tailId: id.toString(), token });
+
+		}
+
+
+	};
+
 
 
 	return (
@@ -88,7 +121,8 @@ const AdminTails = () => {
 
 			<div>
 				{showForm ? (
-						<TailForm cards={cards} dogId={dogId} formType={formType} changeShowForm={handleShowForm} />)
+						<TailForm cards={cards} dogId={dogId} formType={formType} changeShowForm={handleShowForm} changeErrLoader={handleErrLoader}
+						/>)
 					: (
 						<div className={styles.buttonsWrapper}>
 							<div>
@@ -104,8 +138,8 @@ const AdminTails = () => {
 			</div>
 
 
-			<TailsList cards={cards} isPending={isPending} isError={isError} changeShowForm={handleShowForm}
-					   data={data} />
+			<TailsList dogId={dogId} showLoader={showLoader} showError={showError} handleDeleteTail={handleDeleteTail} cards={cards} isPending={isPending} isError={isError} changeShowForm={handleShowForm}
+					   />
 
 
 		</div>

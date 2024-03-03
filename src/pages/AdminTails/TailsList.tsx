@@ -2,25 +2,29 @@ import * as React from 'react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 
-import { UseQueryResult } from '@tanstack/react-query';
-import { AdminTailsData } from './AdminTails';
+// import { UseQueryResult } from '@tanstack/react-query';
+// import { AdminTailsData } from './AdminTails';
 import styles from '../../pages/AdminTails/TailsList.module.scss';
 import Tail from '../../components/Tail/Tail';
 import Button from '../../layout/Button/Button';
+import { MiniErrorAlert, MiniLoader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 
 interface TailsListProps {
-	data: UseQueryResult<AdminTailsData, Error>;
+	// data: UseQueryResult<AdminTailsData, Error>;
 	changeShowForm: (a: boolean, b: string, c: number) => void;
+	handleDeleteTail: (id: number) => void;
+	showLoader: boolean;
+	showError: string;
+	dogId: number;
 }
 
 
-const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, changeShowForm }) => {
+const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, changeShowForm, handleDeleteTail, showLoader, showError , dogId}) => {
 	const [page, setPage] = useState<number>(1);
 	const [countPage, setCountPage] = useState<number>(1);
 	const cardsInPage = 6;
 
 	useEffect(() => {
-
 		setCountPage(Math.ceil(cards?.length / cardsInPage));
 	}, [cards, cardsInPage]);
 
@@ -37,13 +41,8 @@ const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, change
 		}
 	};
 
-const handleEdit = (id) => {
-	changeShowForm(true, "edit", id);
-};
-
-	const handleDelete = () => {
-		console.log('Delete');
-
+	const handleEditTail = (id) => {
+		changeShowForm(true, 'edit', id);
 	};
 
 
@@ -58,8 +57,8 @@ const handleEdit = (id) => {
 				: isError ? (
 						<div className={styles.container}>
 							<div className={styles.alert}>
-							Щось пішло не так. Дані не завантажено.
-								</div>
+								Щось пішло не так. Дані не завантажено.
+							</div>
 
 						</div>
 					)
@@ -78,23 +77,26 @@ const handleEdit = (id) => {
 										className={styles.catalog_list_card}
 									>
 										<Tail disabled={true}
-											{...tail}
+											  {...tail}
 										/>
-
+										{ dogId === tail.id && showLoader && <MiniLoader />}
+										{dogId === tail.id && showError && <MiniErrorAlert errorMessage={showError}
+																	  backgroundColor="rgba(255, 0, 0, 0.3)" />}
 										<div className={styles.btnContainer}>
 											<div className={styles.btnBox}>
+
 												<Button
-													onClick={handleDelete}
+													onClick={() => handleDeleteTail(tail.id)}
 													type={'button'}
-													btnClasses={'delete'}  children={<FaTrash  className={styles.deleteIcon}/>}/>
+													btnClasses={'delete'}
+													children={<FaTrash className={styles.deleteIcon} />} />
 											</div>
 
 											<div className={styles.btnBox}>
 												<Button
-													onClick={() => handleEdit(tail.id)}
+													onClick={() => handleEditTail(tail.id)}
 													type={'button'}
-
-													btnClasses={'primary'}  children={<FaEdit />}/>
+													btnClasses={'primary'} children={<FaEdit />} />
 											</div>
 
 										</div>
