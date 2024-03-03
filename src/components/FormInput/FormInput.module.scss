@@ -6,6 +6,11 @@
 	display: block;
 	font-size: 1rem;
 	margin-bottom: 0.25rem;
+
+	&::after {
+		content: " *";
+		color: #ff0000;
+	}
 }
 
 .text {
