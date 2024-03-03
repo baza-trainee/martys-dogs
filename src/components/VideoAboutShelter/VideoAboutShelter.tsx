@@ -10,10 +10,17 @@ import style from './VideoAboutShelter.module.scss'
 const VideoAboutShelter = () => {
   const { t } = useTranslation();
 
-  const [isLoading,setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error,setError] = useState(false)
+  
   const onHandleClick = () => {
-  setIsLoading(false)
-}
+    setIsLoading(false);
+  }
+  
+  const onHandleError = () => {
+    setError(true);
+    setIsLoading(false)
+  }
   
   return (
     <section className={style.section}>
@@ -27,13 +34,15 @@ const VideoAboutShelter = () => {
       <div className={style.wrapper}>
         
         <div className={style.container}>
-          {isLoading && <div className={style.loader}><Loader/></div>}
+          {isLoading && <div className={style.loader}><Loader /></div>}
+          {error && <p className={`${style.error__text} ${style.caption}`}>{t('aboutVideo.error') }</p>}
       { <ReactPlayer
         className={style.react__player}
         width='100%'
         height='100%'
         url={['https://youtu.be/cG1KwA9tH9I?si=AAhUGEr1N66rpF0N']}
         onReady={onHandleClick}
+        onError={onHandleError}
         light={<div className={style.image}></div>}
         playIcon={<img src={playButtonImg} alt='Play icon' className={style.play__icon } />}
         playing={true}

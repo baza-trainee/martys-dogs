@@ -9,36 +9,45 @@
   margin: 0 auto;
 
   @include tablet {
-    // min-height:807px;
     padding: 80px 32px;
   }
 
   @include small_desktop{
-    // min-height: 927px;
     padding: 100px;
   }
 
-  @include full_desktop{
-    // min-height: 1003px;
-  }
+  
 }
 
 .caption__container{
   display: flex;
   gap:16px;
   justify-content: space-between;
+  align-items: center;
   
   @include tablet {
     gap:64px;
   }
-  
-
 }
 
 .caption{
   width:75%;
   line-height: 1.2;
   font-weight: 800;
+  font-size: 28px;
+  color:$color-gray-100;
+
+  @include tablet{
+    width: 80%;
+  }
+
+  @include small-desktop{
+    font-size: 52px;
+  }
+
+  @include full_desktop{
+    width:82.5%;
+  }
 }
 .wrapper{
   @include full_desktop{
@@ -188,4 +197,13 @@
   top:50%;
   left:50%;
   transform: translate(-50%, -50%);
+}
+
+.error__text{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  font-weight: 100;
+  color:$color-main-blue-dark;
 }
