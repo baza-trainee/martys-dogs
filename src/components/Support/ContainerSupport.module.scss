@@ -14,9 +14,12 @@
 
   @include small_desktop {
     min-width: calc((100% - 20px)/2);
-    height: 519px;
+    height: 575px;
     padding: 40px;
-   
+  }
+
+  @include large_desktop{
+    height: 547px;
   }
 }
 
@@ -46,6 +49,14 @@
 .financial{
   gap:32px;
   background-color: $color-main-blue-light;
+
+  @include small_desktop{
+    padding: 65px 40px;
+  }
+
+  @include large_desktop{
+    padding: 51px 40px;
+  }
 }
 
 .nonfinancial{
