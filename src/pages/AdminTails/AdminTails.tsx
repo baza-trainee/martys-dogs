@@ -47,27 +47,30 @@ const AdminTails = () => {
 	const [dogId, setDogId] = useState<undefined | number>(null);
 	const location = useLocation();
 	const { token } = useAuthContext();
-	const [cards, setCards] = useState<TailsListData[]>([]);
+	const [cards, setCards] = useState<AdminTailsData[]>([]);
 	// const { data: tails, isPending, isError } = data;
 
 	const { data: tails, isPending, isError } = useQuery<AdminTailsData>({
 		queryKey: ['tailslist'],
 		queryFn: () => typeof token === 'string' ? fetchTails(token) : Promise.resolve([]),
 		retry: 1,
+		refetchInterval: 600000,
 		enabled: !!token,
 	});
 	const { mutate: deleteMutate } = useMutation({
 		mutationFn: deleteTail,
-		onSuccess: () => {
+		onSuccess: (data, variables) => {
+
 			setShowLoader(false);
 			setShowError('');
-			console.log('succesfully deleted' + id)
 			queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
+			setCards(prevCards => prevCards.filter(tail => tail.id !== variables.tailId));
+			console.log('succesfully deleted' + id);
 		},
 		onError: () => {
 			setShowLoader(false);
 			setShowError('Видалення не вдалося, перезавантажте сторінку');
-		}
+		},
 	});
 
 	useEffect(() => {
@@ -79,7 +82,7 @@ const AdminTails = () => {
 			setCards(tails);
 		}
 
-	}, [tails, deleteMutate]);
+	}, [tails]);
 
 
 	const handleShowForm = (formStatus: boolean, type: string, id?: number) => {
@@ -89,24 +92,22 @@ const AdminTails = () => {
 		scrollOnTop();
 	};
 
-const handleErrLoader = (error: string, loaderStatus: boolean) => {
-	setShowLoader(loaderStatus);
-	setShowError(error);
-};
+	const handleErrLoader = (error: string, loaderStatus: boolean) => {
+		setShowLoader(loaderStatus);
+		setShowError(error);
+	};
 
 	const handleDeleteTail = async (id: number) => {
 		console.log('Delete ' + id);
 		setDogId(id);
 		if (token) {
 			setShowLoader(true);
-			//DELETE TO STRING METHOD WHEN BACKEND WILL BE READY
-			deleteMutate({ tailId: id.toString(), token });
-
+			await deleteMutate({ tailId: id, token });
+			return cards ;
 		}
-
+		setShowForm(false);
 
 	};
-
 
 
 	return (
@@ -121,7 +122,8 @@ const handleErrLoader = (error: string, loaderStatus: boolean) => {
 
 			<div>
 				{showForm ? (
-						<TailForm cards={cards} dogId={dogId} formType={formType} changeShowForm={handleShowForm} changeErrLoader={handleErrLoader}
+						<TailForm   cards={cards} dogId={dogId} formType={formType} changeShowForm={handleShowForm}
+								  changeErrLoader={handleErrLoader}
 						/>)
 					: (
 						<div className={styles.buttonsWrapper}>
@@ -138,8 +140,9 @@ const handleErrLoader = (error: string, loaderStatus: boolean) => {
 			</div>
 
 
-			<TailsList dogId={dogId} showLoader={showLoader} showError={showError} handleDeleteTail={handleDeleteTail} cards={cards} isPending={isPending} isError={isError} changeShowForm={handleShowForm}
-					   />
+			<TailsList   dogId={dogId} showLoader={showLoader} showError={showError} handleDeleteTail={handleDeleteTail}
+					   cards={cards} isPending={isPending} isError={isError} changeShowForm={handleShowForm}
+			/>
 
 
 		</div>

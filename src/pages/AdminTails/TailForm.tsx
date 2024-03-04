@@ -38,7 +38,7 @@ interface TailFormProps {
 const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, formType, cards, dogId }) => {
 
 		console.log(cards);
-		console.log(`dogId: ` + dogId + ` is` + typeof dogId);
+		console.log(`dogId: ` + dogId + ` is ` + typeof dogId);
 
 		const [formData, setFormData] = useState<FormData>({
 			name: '',
@@ -76,27 +76,19 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, fo
 				const editedCard = cards.find(card => card.id === dogId);
 				if (editedCard) {
 					setFormData({
-						name: editedCard.name,
+						name: editedCard.name ,
 						name_en: editedCard.name_en,
-						ready_for_adoption: editedCard.ready_for_adoption,
-						gender: editedCard.gender,
-						gender_en: editedCard.gender_en,
+						ready_for_adoption: editedCard.ready_for_adoption ,
+						gender: editedCard.gender ,
+						gender_en: editedCard.gender_en ,
 						age: editedCard.age,
-						age_en: editedCard.age_en,
-						size: editedCard.size,
-						size_en: editedCard.size_en,
-						description: editedCard.description,
-						description_en: editedCard.description_en,
-						photo: editedCard.photo,
+						age_en: editedCard.age_en ,
+						size: editedCard.size ,
+						size_en: editedCard.size_en ,
+						description: editedCard.description ,
+						description_en: editedCard.description_en ,
+						photo: editedCard.photo ,
 					});
-					/*	for (const key in formData) {
-							if (editedCard.hasOwnProperty(key)) {
-								setFormData(prevData => ({
-									...prevData,
-									[key]: editedCard[key],
-								}));
-							}
-						}*/
 					console.log(formData);
 				}
 			}
@@ -307,7 +299,7 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, fo
 								options={options.optionsGenderEN}
 								placeholder={'Оберіть стать'}
 								value={options.optionsGenderEN.find((opt) => opt.value === formData.gender_en)}
-								onChange={(selectedOption) => handleChange('gender', selectedOption?.value)}
+								onChange={(selectedOption) => handleChange('gender_en', selectedOption?.value)}
 								styles={options.customStyles}
 							/>
 						</div>
@@ -331,8 +323,6 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, fo
 									className={errors.age_en ? `${styles.input} ${styles.inputError}` : styles.input}
 									type="text"
 									value={formData.age_en}
-
-
 								/>
 
 								{errors.age_en && <div className={styles.errorMessage}>{errors.age_en}</div>}
@@ -388,8 +378,7 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, fo
 							<label htmlFor="photo"
 								   className={errors.photo ? `${styles.uploadInput} ${styles.uploadError}` : styles.uploadInput}
 							>
-								{formData.photo?.name || 'Завантажте зображення'}
-								{/*{formData.photo && formData.photo.length > 0 && formData.photo[0] ? formData.photo[0].name : 'Завантажте зображення'}*/}
+								{formData.photo?.name.slice(0, 21) || 'Завантажте зображення'}
 								{console.log(formData.photo)}
 								<FaUpload />
 							</label>

@@ -1,8 +1,8 @@
 export const TAILS = 'https://matys-dogs2.onrender.com/dog_card';
 
-//CHANGE FROM STRING TO NUMBER ID WHEN BACKEND WILL BE READY
+
 export interface FormDogData {
-	id?: string;
+	id?: number;
 	name: string;
 	name_en?: string;
 	ready_for_adoption: boolean;
@@ -86,7 +86,7 @@ export const addTail = async (addTailsInfo : {formDogData: FormDogData, token: s
 	}
 };
 
-export const deleteTail = async (deleteTail: {tailId: string, token: string}) => {
+export const deleteTail = async (deleteTail: {tailId: number, token: string}) => {
 	const { tailId, token } = deleteTail;
 
 	try {

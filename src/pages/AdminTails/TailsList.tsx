@@ -8,9 +8,12 @@ import styles from '../../pages/AdminTails/TailsList.module.scss';
 import Tail from '../../components/Tail/Tail';
 import Button from '../../layout/Button/Button';
 import { MiniErrorAlert, MiniLoader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { AdminTailsData } from './AdminTails';
 
 interface TailsListProps {
-	// data: UseQueryResult<AdminTailsData, Error>;
+	cards: AdminTailsData[];
+	isPending: boolean;
+	isError: boolean;
 	changeShowForm: (a: boolean, b: string, c: number) => void;
 	handleDeleteTail: (id: number) => void;
 	showLoader: boolean;
@@ -19,7 +22,7 @@ interface TailsListProps {
 }
 
 
-const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, changeShowForm, handleDeleteTail, showLoader, showError , dogId}) => {
+const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, changeShowForm, handleDeleteTail, showLoader, showError, dogId }) => {
 	const [page, setPage] = useState<number>(1);
 	const [countPage, setCountPage] = useState<number>(1);
 	const cardsInPage = 6;
@@ -57,7 +60,7 @@ const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, change
 				: isError ? (
 						<div className={styles.container}>
 							<div className={styles.alert}>
-								Щось пішло не так. Дані не завантажено.
+								Щось пішло не так. Дані не завантажено. Спробуйте пізніше.
 							</div>
 
 						</div>
@@ -65,13 +68,8 @@ const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, change
 					: (
 
 						<>
-							<div
-								className={styles.catalog_list}
-							>
-
+							<div className={styles.catalog_list}>
 								{cards?.slice((cardsInPage * page) - cardsInPage, cardsInPage * page).map((tail) => (
-
-
 									<div
 										key={tail.id}
 										className={styles.catalog_list_card}
@@ -79,9 +77,9 @@ const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, change
 										<Tail disabled={true}
 											  {...tail}
 										/>
-										{ dogId === tail.id && showLoader && <MiniLoader />}
+										{dogId === tail.id && showLoader && <MiniLoader />}
 										{dogId === tail.id && showError && <MiniErrorAlert errorMessage={showError}
-																	  backgroundColor="rgba(255, 0, 0, 0.3)" />}
+																						   backgroundColor="rgba(255, 0, 0, 0.3)" />}
 										<div className={styles.btnContainer}>
 											<div className={styles.btnBox}>
 
