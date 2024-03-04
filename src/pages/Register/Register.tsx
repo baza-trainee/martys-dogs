@@ -37,14 +37,14 @@ const Register: FC = () => {
 			errors.last_name = "Прізвище обов'язкове";
 		}
 		if (!user.email.trim()) {
-			errors.email = "Email обов'язковий";
+			errors.email = "Електронна пошта обов'язкова";
 		} else if (!/\S+@\S+\.\S+/.test(user.email)) {
 			errors.email = 'Введіть правильну адресу електронної пошти';
 		}
 		if (!user.password.trim()) {
 			errors.password = "Пароль обов'язковий";
-		} else if (user.password.length < 8) {
-			errors.password = 'Пароль повинен містити принаймні 8 символів';
+		} else if (user.password.length < 8 || user.password.length > 12) {
+			errors.password = 'Пароль повинен містити від 8 до 12символів';
 		}
 		if (user.password !== user.confirmPassword) {
 			errors.confirmPassword = 'Паролі не співпадають';
