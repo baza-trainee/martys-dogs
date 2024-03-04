@@ -1,5 +1,4 @@
-import { LandingData } from '../pages/Landing/Landing';
-import { OurTailsData } from '../pages/OurTails/OurTails';
+import { DogCard, LandingData } from '../pages/Landing/Landing';
 
 const HOME = 'https://matys-dogs2.onrender.com';
 const ABOUT = 'https://matys-dogs2.onrender.com/about-us';
@@ -92,7 +91,7 @@ export const fetchAbout = async () => {
 	}
 };
 
-export const fetchCatalog = async ({ queryKey }: { queryKey: [string, string, { filter: string }] }): Promise<OurTailsData> => {
+export const fetchCatalog = async ({ queryKey }: { queryKey: [string, string, { filter: string }] }): Promise<DogCard[]> => {
 	const [, language, { filter: filterTerms }] = queryKey;
 	let url = CATALOG;
 

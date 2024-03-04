@@ -20,7 +20,7 @@
 	td {
 		padding: 20px;
 		border: 1px solid $color-main-blue-dark;
-		max-width: 500px;
+		// max-width: 500px;
 	}
 
 	th {
@@ -48,17 +48,33 @@
 	}
 }
 
+.green {
+	padding: 5px 10px;
+	width: 120px;
+	color: $color-gray-0;
+	font-size: 16px;
+	background-color: #14B8A6;
+	border-radius: 40px;
+	transition: all 0.3s ease;
+	width: 100%;
+	&:hover {
+		background: #0D9488;
+		color: $color-gray-0;
+	}
+}
+
 .red {
 	padding: 5px 10px;
 	width: 120px;
 	color: $color-gray-0;
 	font-size: 16px;
-	background-color: #f495a9;
+	margin-top: 10px;
+	background-color: #F43F5E;
 	border-radius: 40px;
 	transition: all 0.3s ease;
 	width: 100%;
 	&:hover {
-		background: #fb6082;
+		background: #E11D48;
 		color: $color-gray-0;
 	}
 }

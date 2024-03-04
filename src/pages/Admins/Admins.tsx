@@ -1,3 +1,4 @@
+import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 
 import styles from './Admins.module.scss';
@@ -21,7 +22,7 @@ const Admins = () => {
 	const { token } = useAuthContext();
 	// const token =
 	// 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4OTc4Njc2LCJpYXQiOjE3MDc3NjkwNzYsImp0aSI6ImExZjZjODQ5ZWVjZTRkODhhYzBkNzJmYjFjN2NkN2I3IiwidXNlcl9pZCI6MX0.PgM1tmuFTqPhA6WxQgHZ3xyeAAvErxpdtJxqz69EYGg';
-	
+
 	const [admins, setAdmins] = useState<Admin[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<null | unknown>(null);
@@ -52,14 +53,20 @@ const Admins = () => {
 	}
 
 	if (error) {
+		let errorMessage;
+		if (error && (error as AxiosError)?.response?.status === 403) {
+			errorMessage = 'У вас нема дозволу робити цю дію';
+		} else {
+			errorMessage = 'Не вдалося завантажити дані';
+		}
 		return (
 			<div className={styles.container}>
-				<ErrorAlert errorMessage={JSON.stringify(error)} />
+				<ErrorAlert errorMessage={errorMessage} />
 			</div>
 		);
 	}
-	
-		// console.log(admins);
+
+	// console.log(admins);
 
 	const handleToggleStatus = async (adminId: number) => {
 		try {

@@ -12,6 +12,7 @@ export const getAdmins = async (token: string) => {
 		return data;
 	} catch (error) {
 		console.error(error);
+		throw error;
 	}
 };
 
