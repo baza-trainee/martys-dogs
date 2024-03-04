@@ -37,7 +37,7 @@ export interface FormUserData {
 export const setFormData = (formUserData: FormUserData) => {
 	const newFormData = new FormData();
 
-	Object.keys(formUserData).forEach(key => {
+	Object.keys(formUserData).forEach((key) => {
 		const value = formUserData[key as keyof FormUserData];
 		if (value === null) {
 			throw new Error(`id_dog is null`);
@@ -46,19 +46,17 @@ export const setFormData = (formUserData: FormUserData) => {
 	});
 
 	return newFormData;
-
 };
 
 export const sendFormData = async (formUserData: FormUserData) => {
 	try {
-		const response = await fetch(FORM_CALLBACK,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'multipart/form-data; boundary=--',
-				},
-				body: setFormData(formUserData) as FormData,
-			});
+		const response = await fetch(FORM_CALLBACK, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'multipart/form-data; boundary=--',
+			},
+			body: setFormData(formUserData) as FormData,
+		});
 
 		if (!response.ok) {
 			throw new Error('Data loading error');
@@ -66,7 +64,6 @@ export const sendFormData = async (formUserData: FormUserData) => {
 
 		const data = await response.json();
 		return data;
-
 	} catch (error) {
 		console.error(error);
 		throw error;
@@ -74,7 +71,6 @@ export const sendFormData = async (formUserData: FormUserData) => {
 };
 
 export const fetchAbout = async () => {
-
 	try {
 		const response = await fetch(ABOUT);
 
@@ -84,14 +80,17 @@ export const fetchAbout = async () => {
 
 		const data = await response.json();
 		return data;
-
 	} catch (error) {
 		console.error('Error while loading data:', error);
 		throw error;
 	}
 };
 
-export const fetchCatalog = async ({ queryKey }: { queryKey: [string, string, { filter: string }] }): Promise<DogCard[]> => {
+export const fetchCatalog = async ({
+	queryKey,
+}: {
+	queryKey: [string, string, { filter: string }];
+}): Promise<DogCard[]> => {
 	const [, language, { filter: filterTerms }] = queryKey;
 	let url = CATALOG;
 
@@ -107,7 +106,7 @@ export const fetchCatalog = async ({ queryKey }: { queryKey: [string, string, { 
 		});
 
 		if (!response.ok) {
-			throw  (`Error while loading data. Status: ${response.status}`);
+			throw `Error while loading data. Status: ${response.status}`;
 		}
 
 		const data = await response.json();
@@ -141,6 +140,18 @@ export const loginUser = async (
 		if (!response.ok) {
 			throw new Error('Login failed');
 		}
+		// if (!response.ok) {
+		// 	let errorMessage = 'Login failed';
+		// 	try {
+		// 		const errorData = await response.json();
+		// 		if (errorData && errorData.description) {
+		// 			errorMessage = errorData.description;
+		// 		}
+		// 	} catch (error) {
+		// 		console.error('Error parsing error response:', error);
+		// 	}
+		// 	throw new Error(errorMessage);
+		// }
 
 		const data = await response.json();
 		return data;
@@ -236,4 +247,3 @@ export const getIsAuth = async (token: string): Promise<getIsAuthResponse> => {
 		throw error;
 	}
 };
-

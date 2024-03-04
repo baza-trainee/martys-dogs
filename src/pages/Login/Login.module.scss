@@ -77,6 +77,21 @@
 	text-transform: capitalize;
 }
 
+.error {
+	color: #ff0000;
+	margin-top: -1rem;
+	margin-bottom: -1rem;
+}
+
+.checkbox {
+	margin-right: 0.5rem;
+	// display: inline-block;
+  // width: 20px;
+  // height: 20px;
+  // background: #fff;
+  // border: 1px solid #ccc;
+}
+
 .input {
 	width: 100%;
 	padding: 0.5rem;
