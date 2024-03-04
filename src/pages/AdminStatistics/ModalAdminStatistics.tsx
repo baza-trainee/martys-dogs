@@ -29,15 +29,15 @@ const ModalAdminStatistics = ({animals,employees,adoptions,onClick,onSubmit}: Mo
       <div className={style.modal}>
 		<form onSubmit={handleSubmit(({animals,employees,adoptions}) => { onSubmit(animals,employees,adoptions) })} className={style.form}>
           <label htmlFor='animals'>Кількість тварин в притулку</label>
-          <input {...register('animals', { required: 'Заповніть, будь-ласка, поле',pattern: /^\d+$/ })} id='animals' />
+          <input {...register('animals', { required: 'Заповніть, будь-ласка, поле',pattern: {value:/^\d+$/,message:'У полі повинні бути тільки цифри' }})} id='animals' />
           <p className={style.error_message}>{ errors.animals?.message}</p>
           
           <label htmlFor='employees'>Кількість працівників</label>
-          <input {...register('employees', { required: 'Заповніть, будь-ласка, поле',pattern: /^\d+$/ })} id='employees' />
+          <input {...register('employees', { required: 'Заповніть, будь-ласка, поле',pattern:  {value:/^\d+$/,message:'У полі повинні бути тільки цифри' } })} id='employees' />
           <p className={style.error_message}>{errors.employees?.message }</p>
 		
           <label htmlFor='adoptions'>Кількість успішних адопцій</label>
-          <input {...register('adoptions', { required: 'Заповніть, будь-ласка, поле',pattern: /^\d+$/ })} id='adoptions' />
+          <input {...register('adoptions', { required: 'Заповніть, будь-ласка, поле',pattern:  {value:/^\d+$/,message:'У полі повинні бути тільки цифри' } })} id='adoptions' />
           <p className={style.error_message}>{errors.adoptions?.message }</p>
 	
           <input type='submit' value='Відправити' className={style.submit } />

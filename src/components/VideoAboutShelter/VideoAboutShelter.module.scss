@@ -93,46 +93,45 @@
     left: 0;
     width:100%;
     height:100%;
-    background-image: url('../../assets/videoAboutShelter/picture-thumbnail-mobile-1x.webp');
-    background-image: -webkit-image-set(url('../../assets/videoAboutShelter/picture-thumbnail-mobile-1x.webp') 1x,
+    
+    // background: linear-gradient(90deg, rgba(255, 255, 255, 0.9) 100%, rgba(255, 255, 255, 0.8729866946778712) 100%);
+    background-image:linear-gradient(180deg, rgba(255, 255, 255, 0.2) 100%, rgba(255, 255, 255, 0.2) 100%),
+     url('../../assets/videoAboutShelter/picture-thumbnail-mobile-1x.webp');
+    background-image:linear-gradient(180deg, rgba(255, 255, 255, 0.2) 100%, rgba(255, 255, 255, 0.2) 100%), -webkit-image-set(url('../../assets/videoAboutShelter/picture-thumbnail-mobile-1x.webp') 1x,
           url('../../assets/videoAboutShelter/picture-thumbnail-mobile-2x.webp') 2x);
-    background-image: image-set(url('../../assets/videoAboutShelter/picture-thumbnail-mobile-1x.webp') 1x,
+    background-image:linear-gradient(180deg, rgba(255, 255, 255, 0.2) 100%, rgba(255, 255, 255, 0.2) 100%), image-set(url('../../assets/videoAboutShelter/picture-thumbnail-mobile-1x.webp') 1x,
           url('../../assets/videoAboutShelter/picture-thumbnail-mobile-2x.webp') 2x);
     background-repeat: no-repeat ;
     background-size: cover;
 
   @include tablet {
-    background-image: url('../../assets/videoAboutShelter/picture-thumbnail-tablet-1x.webp');
-    background-image: -webkit-image-set(url('../../assets/videoAboutShelter/picture-thumbnail-mobile-1x.webp') 1x,
+    background-image:linear-gradient(180deg, rgba(255, 255, 255, 0.2) 100%, rgba(255, 255, 255, 0.2) 100%),
+     url('../../assets/videoAboutShelter/picture-thumbnail-tablet-1x.webp');
+    background-image:linear-gradient(180deg, rgba(255, 255, 255, 0.2) 100%, rgba(255, 255, 255, 0.2) 100%),
+     -webkit-image-set(url('../../assets/videoAboutShelter/picture-thumbnail-mobile-1x.webp') 1x,
           url('../../assets/videoAboutShelter/picture-thumbnail-tablet-2x.webp') 2x);
-    background-image: image-set(url('../../assets/videoAboutShelter/picture-thumbnail-mobile-1x.webp') 1x,
+    background-image:linear-gradient(180deg, rgba(255, 255, 255, 0.2) 100%, rgba(255, 255, 255, 0.2) 100%),
+     image-set(url('../../assets/videoAboutShelter/picture-thumbnail-mobile-1x.webp') 1x,
           url('../../assets/videoAboutShelter/picture-thumbnail-tablet-2x.webp') 2x);
   }
 
   @include small_desktop {
-    background-image: url('../../assets/videoAboutShelter/picture-thumbnail-small-desktop-1x.webp');
-    background-image: -webkit-image-set(url('../../assets/videoAboutShelter/picture-thumbnail-small-desktop-1x.webp') 1x,
+    background-image:linear-gradient(180deg, rgba(255, 255, 255, 0.2) 100%, rgba(255, 255, 255, 0.2) 100%),
+     url('../../assets/videoAboutShelter/picture-thumbnail-small-desktop-1x.webp');
+    background-image:linear-gradient(180deg, rgba(255, 255, 255, 0.2) 100%, rgba(255, 255, 255, 0.2) 100%), -webkit-image-set(url('../../assets/videoAboutShelter/picture-thumbnail-small-desktop-1x.webp') 1x,
            url('../../assets/videoAboutShelter/picture-thumbnail-small-desktop-2x.webp') 2x);
-    background-image: image-set(url('../../assets/videoAboutShelter/picture-thumbnail-small-desktop-1x.webp') 1x,
+    background-image:linear-gradient(180deg, rgba(255, 255, 255, 0.2) 100%, rgba(255, 255, 255, 0.2) 100%), image-set(url('../../assets/videoAboutShelter/picture-thumbnail-small-desktop-1x.webp') 1x,
            url('../../assets/videoAboutShelter/picture-thumbnail-small-desktop-2x.webp') 2x);
-     }
-
-     @include large_desktop {
-          background-image: url('../../assets/videoAboutShelter/picture-thumbnail-large-desktop-1x.webp');
-            background-image: -webkit-image-set(url('../../assets/videoAboutShelter/picture-thumbnail-large-desktop-1x.webp') 1x,
-                url('../../assets/videoAboutShelter/picture-thumbnail-large-desktop-2x.webp') 2x);
-            background-image: image-set(url('../../assets/videoAboutShelter/picture-thumbnail-large-desktop-1x.webp') 1x,
-                url('../../assets/videoAboutShelter/picture-thumbnail-large-desktop-2x.webp') 2x);
      }
 
      @include full_desktop {
         width:1430px;
         left: 50%;
           transform: translateX(-50%);
-                background-image: url('../../assets/videoAboutShelter/picture-thumbnail-full-desktop-1x.webp');
-                  background-image: -webkit-image-set(url('../../assets/videoAboutShelter/picture-thumbnail-full-desktop-1x.webp') 1x,
+                background-image:linear-gradient(180deg, rgba(255, 255, 255, 0.2) 100%, rgba(255, 255, 255, 0.2) 100%), url('../../assets/videoAboutShelter/picture-thumbnail-full-desktop-1x.webp');
+                  background-image:linear-gradient(180deg, rgba(255, 255, 255, 0.2) 100%, rgba(255, 255, 255, 0.2) 100%), -webkit-image-set(url('../../assets/videoAboutShelter/picture-thumbnail-full-desktop-1x.webp') 1x,
                       url('../../assets/videoAboutShelter/picture-thumbnail-full-desktop-2x.webp') 2x);
-                  background-image: image-set(url('../../assets/videoAboutShelter/picture-thumbnail-full-desktop-1x.webp') 1x,
+                  background-image:linear-gradient(180deg, rgba(255, 255, 255, 0.2) 100%, rgba(255, 255, 255, 0.2) 100%), image-set(url('../../assets/videoAboutShelter/picture-thumbnail-full-desktop-1x.webp') 1x,
                       url('../../assets/videoAboutShelter/picture-thumbnail-full-desktop-2x.webp') 2x);
      }
 }
