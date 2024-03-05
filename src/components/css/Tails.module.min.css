@@ -1,0 +1,123 @@
+.tails {
+  max-width: 1920px;
+  margin: auto;
+  padding: 100px;
+}
+@media screen and (max-width: 1259px) {
+  .tails {
+    padding: 80px 32px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .tails {
+    padding: 40px 20px;
+  }
+}
+
+.title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 40px;
+}
+@media screen and (max-width: 767px) {
+  .title {
+    margin-bottom: 24px;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    text-align: start;
+    gap: 16px;
+  }
+}
+
+.letters {
+  font-size: 3.25rem;
+  font-weight: 800;
+}
+@media screen and (max-width: 1279px) {
+  .letters {
+    font-size: 1.75rem;
+  }
+}
+@media screen and (max-width: 767px) {
+  .letters {
+    -ms-flex-item-align: start;
+        align-self: start;
+  }
+}
+
+.subtitle {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 700;
+}
+@media screen and (max-width: 1259px) {
+  .subtitle {
+    font-size: 14px;
+  }
+}
+
+.text {
+  margin-bottom: 40px;
+  max-width: 1285px;
+  font-size: 20px;
+  font-weight: 500;
+}
+@media screen and (max-width: 1259px) {
+  .text {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+}
+
+.link {
+  min-width: 297px;
+}
+@media screen and (max-width: 767px) {
+  .link {
+    width: 100%;
+  }
+}
+
+@-webkit-keyframes spinner {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+.loading {
+  width: 6rem;
+  height: 6rem;
+  border: 5px solid #009cd9;
+  border-radius: 50%;
+  border-top-color: #FFFFFF;
+  -webkit-animation: spinner 0.6s linear infinite;
+          animation: spinner 0.6s linear infinite;
+  margin: 6rem auto;
+}
+
+.container {
+  background-color: #ebf5fb;
+  padding: 6rem;
+}
+
+.alert {
+  text-align: center;
+  font-size: 32px;
+  color: #005c80;
+}/*# sourceMappingURL=Tails.module.min.css.map */

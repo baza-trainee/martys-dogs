@@ -1,0 +1,26 @@
+.photos {
+  max-width: 1920px;
+  margin: auto;
+  padding: 100px;
+}
+@media screen and (max-width: 1279px) {
+  .photos {
+    padding: 40px 32px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .photos {
+    padding: 20px 40px;
+  }
+}
+.photos .image {
+  width: 550px;
+  height: 550px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 30px;
+}
+.photos .title {
+  text-align: start;
+  margin-bottom: 40px;
+}/*# sourceMappingURL=Photos.module.min.css.map */

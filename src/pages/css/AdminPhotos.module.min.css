@@ -1,0 +1,196 @@
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 32px;
+  padding: 15px;
+  width: 100%;
+}
+
+.title {
+  margin-right: auto;
+}
+
+.buttonsWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+  height: 80px;
+  overflow: hidden;
+}
+
+.inputContainer {
+  margin-right: 10px;
+}
+
+.uploadLabel {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.uploadLabel .uploadIcon {
+  margin-right: 8px;
+}
+
+.buttonRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 24px;
+}
+.buttonRow button {
+  cursor: pointer;
+  padding: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 200px;
+  max-height: 55px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: none;
+  border-radius: 40px;
+  color: #FFFFFF;
+  background: #009cd9;
+  text-decoration: none;
+  gap: 8px;
+  font-size: 20px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-transform: translate(0em, 0.2em);
+      -ms-transform: translate(0em, 0.2em);
+          transform: translate(0em, 0.2em);
+  width: 100%;
+}
+.buttonRow button:hover {
+  background: #005c80;
+}
+.buttonRow button:focus {
+  outline: none;
+  -webkit-box-shadow: 0 0 5px 2px #009cd9;
+          box-shadow: 0 0 5px 2px #009cd9;
+}
+.buttonRow button:active {
+  background-color: #0D0031;
+  -webkit-transform: scale(0.95);
+      -ms-transform: scale(0.95);
+          transform: scale(0.95);
+}
+.buttonRow button:disabled {
+  cursor: not-allowed;
+  background: #DBDBDB;
+  color: #4D4D4D;
+}
+
+.logoContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  gap: 24px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-width: 100%;
+}
+.logoContainer .logo {
+  margin: 10px;
+  width: 30%;
+  background-color: #ebf5fb;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.logoContainer .logo:hover {
+  background-color: #b6e1f2;
+  -webkit-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+}
+.logoContainer .logo img {
+  width: 100%;
+  height: auto;
+}
+.logoContainer .logo .logoActions {
+  margin-top: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 4px;
+}
+.logoContainer .logo .logoActions .editIcon,
+.logoContainer .logo .logoActions .deleteIcon {
+  margin: 4px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+.logoContainer .logo .logoActions .editIcon:hover,
+.logoContainer .logo .logoActions .deleteIcon:hover {
+  color: #009cd9;
+}
+
+.loadMore {
+  margin: 10px auto;
+}
+.loadMore .loadButton {
+  font-size: 18px;
+  padding: 12px;
+  min-width: 200px;
+  border: 1px solid #009cd9;
+  color: #009cd9;
+  background-color: #ebf5fb;
+  border-radius: 40px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .loadMore .loadButton {
+    width: auto;
+  }
+}/*# sourceMappingURL=AdminPhotos.module.min.css.map */
