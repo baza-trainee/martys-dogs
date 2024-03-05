@@ -36,3 +36,23 @@ export const updateMessageStatus = async (
 		console.error(error);
 	}
 };
+
+export const deleteMessage = async (
+	token: string,
+	messageId: number,
+) => {
+	const url = `https://matys-dogs2.onrender.com/notification-admin/${messageId}`;
+	try {
+		const { data } = await axios.delete(
+			url,
+			{
+				headers: {
+					Authorization: `Bearer ` + token,
+				},
+			},
+		);
+		return data;
+	} catch (error) {
+		console.error(error);
+	}
+};

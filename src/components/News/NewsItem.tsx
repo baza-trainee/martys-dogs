@@ -58,25 +58,44 @@ const NewsItem: React.FC<NewsItemProps> = ({title, post_at,  sub_text, photo, ne
 
 
 	return (
+		// <li className={!inAdmin ? styles.item : styles.item_admin} >
+		// 	<div className={styles.thumb}>
+		// 		{ <img
+		// 			src={photo.url}
+		// 			alt='news-photo'
+		// 			className={styles.photo}
+		// 		/> }
+		// 	</div>
+		// 		<div className={styles.info}>
+		// 		<h3 className={styles.title}>{title}</h3>
+		// 		<div>
+		// 			<p className={styles.date}>{getDateName(post_at)}</p>
+		// 			<p className={styles.text} data-testid='newsItem'>
+		// 				{sub_text}
+		// 			</p>
+		// 			</div>
+		// 	</div>
+		// 	{children}
+		// </li>
 		<li className={!inAdmin ? styles.item : styles.item_admin} >
-			<div className={styles.thumb}>
-				{ <img
-					src={photo.url}
-					alt='news-photo'
-					className={styles.photo}
-				/> }
-			</div>
-				<div className={styles.info}>
-				<h3 className={styles.title}>{title}</h3>
-				<div>
-					<p className={styles.date}>{getDateName(post_at)}</p>
-					<p className={styles.text} data-testid='newsItem'>
-						{sub_text}
-					</p>
-					</div>
-			</div>
-			{children}
-		</li>
+		<div className={styles.thumb}>
+			{ <img
+				src={photo.url}
+				alt='news-photo'
+				className={styles.photo}
+			/> }
+		</div>
+			<div className={styles.info}>
+			<span className={styles.date}>{getDateName(post_at)}</span>
+			<h3 className={styles.title}>{title}</h3>
+			<p className={styles.text} data-testid='newsItem'>
+					{sub_text}
+				</p>
+			<div>
+				</div>
+		</div>
+		{children}
+	</li>
 	);
 };
 

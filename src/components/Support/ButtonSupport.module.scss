@@ -6,21 +6,22 @@
 	justify-content: center;
 
 	width: 100%;
-	padding: 16px 24px;
+	padding: 12px 24px;
 
 	border: 2px solid #c8e8f5;
+	
 	background-color: #c8e8f5;
   transition: all 0.3s ease-in-out;
 	border-radius: 40px;
-	// outline-color: transparent;
-	// border:none
+
 }
 
 .button:active,
 .button:focus,
 .button:hover {
 	border: 2px solid $color-main-blue-dark;
-	// outline-color:$color-main-blue-dark;
+	transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+
 }
 
 .image {

@@ -1,4 +1,5 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import axios, { AxiosError } from 'axios';
+import { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
 import { Form, Link, useNavigate } from 'react-router-dom';
 
 import FormInput from '../../components/FormInput/FormInput';
@@ -6,7 +7,7 @@ import styles from './Register.module.scss';
 import { IUser, registerUser } from '../../services/register';
 import { useAuthContext } from '../../context/useGlobalContext';
 
-const Register: React.FC = () => {
+const Register: FC = () => {
 	const navigate = useNavigate();
 	const [user, setUser] = useState<IUser>({
 		first_name: '',
@@ -17,6 +18,7 @@ const Register: React.FC = () => {
 	});
 
 	const [errors, setErrors] = useState<Partial<IUser>>({});
+	const [errorMessage, setErrorMessage] = useState<string>('');
 	const { isLoggedIn } = useAuthContext();
 
 	useEffect(() => {
@@ -35,26 +37,26 @@ const Register: React.FC = () => {
 			errors.last_name = "Прізвище обов'язкове";
 		}
 		if (!user.email.trim()) {
-			errors.email = "Email обов'язковий";
+			errors.email = "Електронна пошта обов'язкова";
 		} else if (!/\S+@\S+\.\S+/.test(user.email)) {
 			errors.email = 'Введіть правильну адресу електронної пошти';
 		}
 		if (!user.password.trim()) {
 			errors.password = "Пароль обов'язковий";
-		} else if (user.password.length < 8) {
-			errors.password = 'Пароль повинен містити принаймні 8 символів';
+		} else if (user.password.length < 8 || user.password.length > 12) {
+			errors.password = 'Пароль повинен містити від 8 до 12символів';
 		}
 		if (user.password !== user.confirmPassword) {
 			errors.confirmPassword = 'Паролі не співпадають';
-		} 
-		// else if (
-		// 	!/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(
-		// 		user.password,
-		// 	)
-		// ) {
-		// 	errors.password =
-		// 		'Пароль повинен містити принаймні одну велику літеру, одну маленьку літеру, одну цифру і один спеціальний символ';
-		// }
+		} else if (
+			// !/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(
+			!/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!-_)(.,]).{8,12}$/.test(
+				user.password,
+			)
+		) {
+			errors.password =
+				'Пароль повинен містити принаймні одну велику літеру, одну маленьку літеру, одну цифру і один спеціальний символ';
+		}
 
 		setErrors(errors);
 		return Object.keys(errors).length === 0;
@@ -68,10 +70,14 @@ const Register: React.FC = () => {
 				await registerUser(user);
 				navigate('/');
 			} catch (error: unknown) {
-				console.error(
-					'Помилка під час реєстрації:',
-					(error as Error).message,
-				);
+				if (axios.isAxiosError(error)) {
+					const axiosError = error as AxiosError;
+					if (axiosError.response?.status === 400) {
+						setErrorMessage('Така пошта вже зареєстрована');
+					} else {
+						setErrorMessage('Помилка під час реєстрації');
+					}
+				}
 			}
 		}
 	};
@@ -130,6 +136,7 @@ const Register: React.FC = () => {
 					onChange={handleChange}
 					errorMessage={errors.confirmPassword}
 				/>
+				{errorMessage && <p className={styles.error}>{errorMessage}</p>}
 				<button className={styles.button} type='submit'>
 					Зареєструватися
 				</button>

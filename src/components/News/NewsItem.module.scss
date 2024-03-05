@@ -49,6 +49,85 @@
 	}
 }
 
+// .thumb {
+// 	width: 353px;
+// 	height: 230px;
+// 	border-radius: 24px;
+// 	overflow: hidden;
+
+// 	@include tablet {
+// 		width: 342px;
+// 	}
+
+// 	@include small-desktop {
+// 		width: 255px;
+// 	}
+
+// 	@include large-desktop {
+// 		width: 295px;
+// 	}
+
+// 	@include full-desktop {
+// 		width: 415px;
+// 	}
+// }
+
+// .photo {
+// 	width: 100%;
+// 	height: 230px;
+// 	object-fit: cover;
+// }
+
+// .title {
+// 	font-size: 26px;
+// 	font-weight: 800;
+// 	line-height: 1.2;
+// 	color: $color-gray-80;
+// 	margin-bottom: 4px;
+// }
+
+// .date {
+// 	font-size: 20px;
+// 	font-weight: 400;
+// 	line-height: 1.4;
+// 	color: $color-gray-60;
+// 	margin-bottom: 8px;
+// }
+
+// .text {
+// 	color: $color-gray-80;
+// 	font-weight: 500;
+// 	line-height: 1.4;
+// 	overflow: hidden;
+// 		-webkit-line-clamp: 2;
+// 		display: -webkit-box;
+// 		-webkit-box-orient: vertical;
+
+// 	@include tablet {
+// 		max-height: 90px;
+// 		overflow: hidden;
+// 		-webkit-line-clamp: 3;
+// 		display: -webkit-box;
+// 		-webkit-box-orient: vertical;
+// 	}
+// 	@include small-desktop {
+// 		overflow: hidden;
+// 		-webkit-line-clamp: 3;
+// 		display: -webkit-box;
+// 		-webkit-box-orient: vertical;
+// 	}
+// }
+
+// .info {
+// 	margin: 16px 0;
+// 	display: flex;
+// 	flex-direction: column;
+// 	justify-content: space-between;
+// 	@include small-desktop {
+// 		overflow: hidden;
+// 	}
+// }
+
 .thumb {
 	width: 353px;
 	height: 230px;
@@ -79,6 +158,7 @@
 }
 
 .title {
+	display: block;
 	font-size: 26px;
 	font-weight: 800;
 	line-height: 1.2;
@@ -87,6 +167,7 @@
 }
 
 .date {
+	display: block;
 	font-size: 20px;
 	font-weight: 400;
 	line-height: 1.4;
@@ -95,35 +176,23 @@
 }
 
 .text {
-	color: $color-gray-80;
-	font-weight: 500;
-	line-height: 1.4;
-	overflow: hidden;
-		-webkit-line-clamp: 2;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
+	display: block;
+  color: $color-gray-80;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.4;
+  max-height: 90px;
 
 	@include tablet {
 		max-height: 90px;
-		overflow: hidden;
-		-webkit-line-clamp: 3;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
-	}
-	@include small-desktop {
-		overflow: hidden;
-		-webkit-line-clamp: 3;
-		display: -webkit-box;
-		-webkit-box-orient: vertical;
 	}
 }
 
 .info {
+	max-height: 200px;
 	margin: 16px 0;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	@include small-desktop {
-		overflow: hidden;
-	}
+  overflow-y: hidden;
+	display: -webkit-box;
+	-webkit-line-clamp: 6;
+	-webkit-box-orient: vertical;
 }
