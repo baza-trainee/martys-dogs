@@ -1,0 +1,189 @@
+.tails {
+  background-color: #b6e1f2;
+}
+
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-width: 1920px;
+  margin: 0 auto;
+  overflow: hidden;
+  gap: 20px;
+}
+@media screen and (max-width: 1279px) {
+  .container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    gap: 50px;
+  }
+}
+
+.content {
+  padding-left: 100px;
+  min-width: 700px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10px;
+}
+@media screen and (max-width: 1439px) {
+  .content {
+    min-width: 500px;
+  }
+}
+@media screen and (max-width: 1279px) {
+  .content {
+    padding: 80px 32px 0 32px;
+    min-width: 280px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .content {
+    padding: 40px 20px 0 20px;
+  }
+}
+
+.title {
+  line-height: 120%;
+  font-weight: 900;
+  color: #0D0031;
+}
+
+.text {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #005c80;
+}
+@media screen and (max-width: 1279px) {
+  .text {
+    font-size: 0.875rem;
+  }
+}
+
+.dog {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+@media screen and (max-width: 1279px) {
+  .dog {
+    margin-right: -70px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .dog {
+    margin-right: 0;
+  }
+}
+
+.tailA {
+  position: absolute;
+  bottom: 80px;
+  left: 20px;
+  padding: 24px;
+  background-color: #005c80;
+  max-width: 230px;
+  border-radius: 24px 0 24px 24px;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+@media screen and (max-width: 1919px) {
+  .tailA {
+    bottom: 30px;
+    left: 10px;
+  }
+}
+@media screen and (max-width: 1439px) {
+  .tailA {
+    bottom: 40px;
+    left: 10px;
+  }
+}
+@media screen and (max-width: 1279px) {
+  .tailA {
+    bottom: 80px;
+    left: 20px;
+  }
+}
+@media screen and (max-width: 1023px) {
+  .tailA {
+    max-width: 210px;
+    padding: 20px;
+    bottom: 60px;
+    left: 20px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .tailA {
+    display: none;
+  }
+}
+
+.tailB {
+  position: absolute;
+  bottom: 200px;
+  right: 250px;
+  padding: 24px;
+  background-color: #005c80;
+  max-width: 250px;
+  border-radius: 24px 0 24px 24px;
+  color: #FFFFFF;
+  font-weight: 500;
+}
+@media screen and (max-width: 1919px) {
+  .tailB {
+    bottom: 150px;
+    right: 200px;
+  }
+}
+@media screen and (max-width: 1439px) {
+  .tailB {
+    bottom: 150px;
+    right: 200px;
+  }
+}
+@media screen and (max-width: 1279px) {
+  .tailB {
+    bottom: 200px;
+    right: 250px;
+  }
+}
+@media screen and (max-width: 1023px) {
+  .tailB {
+    max-width: 210px;
+    padding: 20px;
+    bottom: 150px;
+    right: 200px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .tailB {
+    display: none;
+  }
+}
+
+.arrow {
+  position: absolute;
+  top: -23px;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 24px 24px 0 0;
+  border-color: transparent #005c80 transparent transparent;
+}/*# sourceMappingURL=HeroOurTails.module.min.css.map */

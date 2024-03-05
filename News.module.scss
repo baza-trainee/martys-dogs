@@ -1,0 +1,149 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.background {
+	background-color: $color-main-bg;
+}
+
+.section {
+	background-color: $color-main-bg;
+}
+
+.wrapper {
+	max-width: 1920px;
+	margin: 0 auto;
+	padding: 40px 20px;
+
+	@include tablet {
+		padding-top: 80px;
+		padding-bottom: 52px;
+		padding-left: 32px;
+		padding-right: 32px;
+	}
+
+	@include small-desktop {
+		padding: 100px;
+	}
+}
+
+.title {
+	margin-bottom: 24px;
+	font-size: 28px;
+	font-weight: 800;
+	line-height: 1.2;
+	color: $color-gray-100;
+
+	@include tablet {
+		margin-bottom: 40px;
+	}
+
+	@include small-desktop {
+		font-size: 52px;
+	}
+}
+
+.news {
+	display: grid;
+	justify-items: center;
+	gap: 20px;
+	@include tablet {
+		grid-template: 1fr / repeat(2, 1fr);
+		column-gap: 20px;
+	}
+
+	@include small-desktop {
+		display: grid;
+		grid-template: 1fr / repeat(4, 1fr);
+		column-gap: 20px;
+	}
+}
+
+// .news_admin{
+// 	composes: news;
+// 	@include small-desktop {
+// 		display: grid;
+// 		grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+// 		column-gap: 20px;
+// 	}
+
+// }
+
+.loading {
+	width: 6rem;
+	height: 6rem;
+	border: 5px solid #009cd9;
+	border-radius: 50%;
+	border-top-color: #fff;
+	animation: spinner 0.6s linear infinite;
+	margin: 6rem auto;
+}
+
+.container {
+	background-color: #ebf5fb;
+	padding: 6rem;
+}
+
+.alert {
+	text-align: center;
+	font-size: 32px;
+	color: #005c80;
+}
+
+.button {
+  border-radius: 30px;
+  display: block;
+  height: 52px;
+  padding: 12px 24px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 28px;
+  border-style: none;
+	text-align: center;
+  transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+  width: 100%;
+  cursor: pointer;
+
+  &:hover {
+    transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+  }
+
+  &:disabled {
+    color: $color-gray-60;
+
+    svg {
+      fill: $color-gray-60;
+    }
+  }
+}
+
+
+.primary {
+	composes: button;
+  background: $color-accent;
+  color: $color-gray-10;
+
+  @include hover {
+    &:hover {
+      background: $color-main-blue-dark;
+    }
+  }
+
+  &:focus-visible  {
+    outline: none;
+    border: 1px solid $color-main-blue-dark;
+  }
+
+  //pressed
+  &:active {
+    background: $color-gray-100;
+  }
+
+  &:disabled {
+    background: $color-gray-20;
+  }
+
+}
