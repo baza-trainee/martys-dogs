@@ -14,6 +14,7 @@ import AdminStatistics from './pages/AdminStatistics/AdminStatistics';
 import Admins from './pages/Admins/Admins';
 import Contacts from './pages/Contacts/Contacts';
 import Error from './pages/Error/Error';
+import ForgottenPassword from './pages/ForgottenPassword/ForgottenPassword'
 import HomeLayout from './layout/HomeLayout/HomeLayout';
 import Landing from './pages/Landing/Landing';
 import Login from './pages/Login/Login';
@@ -58,6 +59,14 @@ const router = createBrowserRouter([
 		path: 'login',
 		element: <Login />,
 	},
+	{
+		path: 'forgotten-password',
+		element: <ForgottenPassword />,
+	},
+	// {
+	// 	path: 'login',
+	// 	element: <Login />,
+	// },
 	{
 		path: 'register',
 		element: <Register />,

@@ -63,6 +63,7 @@ const Login: FC = () => {
 					type='email'
 					value={email}
 					onChange={handleChangeEmail}
+					placeholder='Email'
 				/>
 				<FormInput
 					label='Пароль'
@@ -71,6 +72,7 @@ const Login: FC = () => {
 					name='password'
 					value={password}
 					onChange={handleChangePassword}
+					placeholder='Password'
 				/>
 				<label>
 					<input
@@ -89,6 +91,12 @@ const Login: FC = () => {
 				>
 					Увійти
 				</button>
+				<p className={styles.text}>
+					Забули пароль?
+					<Link to='/forgotten-password' className={styles.link}>
+					Відновлення
+					</Link>
+				</p>
 				<p className={styles.text}>
 					Ще не є адміном?
 					<Link to='/register' className={styles.link}>
