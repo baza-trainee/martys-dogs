@@ -20,6 +20,7 @@ import Landing from './pages/Landing/Landing';
 import Login from './pages/Login/Login';
 import OurTails from './pages/OurTails/OurTails';
 import Register from './pages/Register/Register';
+import ResetPassword from './pages/ResetPassword/ResetPassword'
 import { AuthProvider } from './context/AuthContext';
 import { ModalProvider } from './context/ModalContext';
 
@@ -60,13 +61,13 @@ const router = createBrowserRouter([
 		element: <Login />,
 	},
 	{
-		path: 'forgotten-password',
+		path: 'forgotten',
 		element: <ForgottenPassword />,
 	},
-	// {
-	// 	path: 'login',
-	// 	element: <Login />,
-	// },
+	{
+		path: 'reset/:token',
+		element: <ResetPassword />,
+	},
 	{
 		path: 'register',
 		element: <Register />,

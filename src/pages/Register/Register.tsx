@@ -44,7 +44,7 @@ const Register: FC = () => {
 		if (!user.password.trim()) {
 			errors.password = "Пароль обов'язковий";
 		} else if (user.password.length < 8 || user.password.length > 12) {
-			errors.password = 'Пароль повинен містити від 8 до 12символів';
+			errors.password = 'Пароль повинен містити від 8 до 12 символів';
 		}
 		if (user.password !== user.confirmPassword) {
 			errors.confirmPassword = 'Паролі не співпадають';
