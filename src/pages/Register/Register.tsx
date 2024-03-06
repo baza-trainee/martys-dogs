@@ -44,7 +44,7 @@ const Register: FC = () => {
 		if (!user.password.trim()) {
 			errors.password = "Пароль обов'язковий";
 		} else if (user.password.length < 8 || user.password.length > 12) {
-			errors.password = 'Пароль повинен містити від 8 до 12символів';
+			errors.password = 'Пароль повинен містити від 8 до 12 символів';
 		}
 		if (user.password !== user.confirmPassword) {
 			errors.confirmPassword = 'Паролі не співпадають';
@@ -99,6 +99,7 @@ const Register: FC = () => {
 					value={user.first_name}
 					onChange={handleChange}
 					errorMessage={errors.first_name}
+					placeholder='Name'
 				/>
 				<FormInput
 					label='Прізвище'
@@ -108,6 +109,7 @@ const Register: FC = () => {
 					value={user.last_name}
 					onChange={handleChange}
 					errorMessage={errors.last_name}
+					placeholder='Surname'
 				/>
 				<FormInput
 					label='Електронна пошта'
@@ -117,6 +119,7 @@ const Register: FC = () => {
 					value={user.email}
 					onChange={handleChange}
 					errorMessage={errors.email}
+					placeholder='Email'
 				/>
 				<FormInput
 					label='Пароль'
@@ -126,6 +129,7 @@ const Register: FC = () => {
 					value={user.password}
 					onChange={handleChange}
 					errorMessage={errors.password}
+					placeholder='Password'
 				/>
 				<FormInput
 					label='Підтвердження паролю'
@@ -135,6 +139,7 @@ const Register: FC = () => {
 					value={user.confirmPassword}
 					onChange={handleChange}
 					errorMessage={errors.confirmPassword}
+					placeholder='Confirm password'
 				/>
 				{errorMessage && <p className={styles.error}>{errorMessage}</p>}
 				<button className={styles.button} type='submit'>

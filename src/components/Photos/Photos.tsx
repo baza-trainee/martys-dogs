@@ -20,12 +20,12 @@ interface Pagination {
 
 const breakpoints = {
 	1920: {
-		slidesPerView: 4,
-		slidesPerGroup: 1,
-	},
-	1280: {
 		slidesPerView: 3,
-		slidesPerGroup: 2,
+		slidesPerGroup: 3,
+	},
+	1440: {
+		slidesPerView: 3,
+		slidesPerGroup: 3,
 	},
 	768: {
 		slidesPerView: 2,
@@ -36,8 +36,6 @@ const breakpoints = {
 		slidesPerGroup: 1,
 	},
 };
-
-const numbers = window.innerWidth > 767 ? 8 : 3;
 
 interface PhotosProps {
 	data: UseQueryResult<AboutData[], Error>;
@@ -93,7 +91,7 @@ const Photos: FC<PhotosProps> = ({ data }) => {
 					}}
 					modules={[Pagination, Navigation]}
 				>
-					{images?.slice(0, numbers).map((image) => (
+					{images?.map((image) => (
 						<SwiperSlide key={image.id}>
 							<div>
 								<img
