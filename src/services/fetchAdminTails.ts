@@ -19,30 +19,6 @@ export interface FormDogData {
 	photo?: File;
 }
 
-export const fetchTails = async (token: string) => {
-	try {
-		const response = await fetch(TAILS, {headers : {
-				'Content-Type': 'multipart/form-data; boundary=--',
-				Authorization: `Bearer ${token}`,
-			} });
-
-		if (!response.ok) {
-			throw new Error('Data Tails loading error');
-		}
-		if (response.status === 200) {
-			console.log(response);
-
-		}
-		const data = await response.json();
-		return data;
-	} catch (error) {
-		console.error(error);
-		throw error;
-	}
-};
-
-
-
 export const setFormData = (formDogData: FormDogData) => {
 	const newFormData = new FormData();
 
@@ -60,8 +36,33 @@ export const setFormData = (formDogData: FormDogData) => {
 
 };
 
-export const addTail = async (addTailsInfo : {formDogData: FormDogData, token: string}) => {
-	const {formDogData, token} = addTailsInfo;
+export const fetchTails = async (token: string) => {
+	try {
+		const response = await fetch(TAILS, {
+			headers: {
+				'Content-Type': 'multipart/form-data; boundary=--',
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		if (!response.ok) {
+			throw new Error('Data Tails loading error');
+		}
+		if (response.status === 200) {
+			console.log(response);
+
+		}
+		const data = await response.json();
+		return data;
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
+};
+
+
+export const addTail = async (addTailsInfo: { formDogData: FormDogData, token: string }) => {
+	const { formDogData, token } = addTailsInfo;
 	try {
 		const response = await fetch(TAILS,
 			{
@@ -86,7 +87,34 @@ export const addTail = async (addTailsInfo : {formDogData: FormDogData, token: s
 	}
 };
 
-export const deleteTail = async (deleteTail: {tailId: number, token: string}) => {
+export const changeTail = async (changeTailsInfo: { formDogData: FormDogData, tailId: number, token: string }) => {
+	const { formDogData, tailId, token } = changeTailsInfo;
+
+	try {
+		const response = await fetch(`${TAILS}/${tailId}`, {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'multipart/form-data; boundary=--',
+				Authorization: `Bearer ${token}`,
+			},
+			body: setFormData(formDogData) as FormData,
+		});
+
+		if (!response.ok) {
+			throw new Error('Change tail request failed');
+		}
+
+		const data = await response.json();
+		return data;
+
+	} catch (error) {
+		console.error(error);
+		throw error;
+	}
+};
+
+
+export const deleteTail = async (deleteTail: { tailId: number, token: string }) => {
 	const { tailId, token } = deleteTail;
 
 	try {

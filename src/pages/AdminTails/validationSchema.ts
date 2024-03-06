@@ -87,7 +87,7 @@ export const validateAge = (formData, touched, setErrors) => {
 
 
 	if (touched.age_en) {
-		if (formData.age_en !== undefined && !ageEnRegex.test(formData.age_en)) {
+		if (formData.age_en !== undefined && !ageEnRegex.test(formData.age_en.trim())) {
 			setErrors((prevErrors) => ({
 				...prevErrors,
 				age_en: 'Почніть з цифри, а далі можна ввести латиницю, крапку, кому',

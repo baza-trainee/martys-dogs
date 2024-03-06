@@ -10,7 +10,8 @@ import TailForm from './TailForm';
 import { FaRegPlusSquare } from 'react-icons/fa';
 import { useAuthContext } from '../../context/useGlobalContext';
 import { queryClient } from '../../App';
-import { fetchTails, addTail, deleteTail } from '../../services/fetchAdminTails';
+import { fetchTails, addTail, changeTail, deleteTail } from '../../services/fetchAdminTails';
+import { validateAge } from './validationSchema';
 
 export interface TailsListData {
 	id: number;
@@ -48,7 +49,7 @@ const AdminTails = () => {
 	const location = useLocation();
 	const { token } = useAuthContext();
 	const [cards, setCards] = useState<AdminTailsData[]>([]);
-	// const { data: tails, isPending, isError } = data;
+
 
 	const { data: tails, isPending, isError } = useQuery<AdminTailsData>({
 		queryKey: ['tailslist'],
@@ -57,19 +58,55 @@ const AdminTails = () => {
 		refetchInterval: 600000,
 		enabled: !!token,
 	});
+
 	const { mutate: deleteMutate } = useMutation({
 		mutationFn: deleteTail,
+		// variables are arguments that were passed to mutation
 		onSuccess: (data, variables) => {
-
 			setShowLoader(false);
 			setShowError('');
 			queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
 			setCards(prevCards => prevCards.filter(tail => tail.id !== variables.tailId));
-			console.log('succesfully deleted' + id);
+			console.log('successfully deleted' + id);
 		},
 		onError: () => {
 			setShowLoader(false);
 			setShowError('Видалення не вдалося, перезавантажте сторінку');
+		},
+	});
+
+	const { mutate: addMutate } = useMutation({
+		mutationFn: addTail,
+		onSuccess: (data) => {
+			setShowLoader(false);
+			setShowError('');
+			queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
+			// setCards(prevState => [...prevState, data]);
+			console.log('successfully added new dog');
+		},
+		onError: () => {
+			setShowLoader(false);
+			setShowError('Додавання не вдалося, перезавантажте сторінку');
+		},
+	});
+
+	const { mutate: changeMutate } = useMutation({
+		mutationFn: changeTail,
+		onSuccess: (data, variables) => {
+			setShowLoader(false);
+			setShowError('');
+			queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
+		/*	setCards(prevCards => prevCards.map(tail => {
+				if (tail.id === variables.tailId) {
+					return { ...tail, ...variables.formDogData };
+				}
+				return tail;
+			}));*/
+			console.log('successfully changed' + variables.id);
+		},
+		onError: () => {
+			setShowLoader(false);
+			setShowError('Зміна не вдалась, перезавантажте сторінку');
 		},
 	});
 
@@ -92,7 +129,7 @@ const AdminTails = () => {
 		scrollOnTop();
 	};
 
-	const handleErrLoader = (error: string, loaderStatus: boolean) => {
+	const handleErrLoader = (loaderStatus: boolean, error: string) => {
 		setShowLoader(loaderStatus);
 		setShowError(error);
 	};
@@ -103,7 +140,7 @@ const AdminTails = () => {
 		if (token) {
 			setShowLoader(true);
 			await deleteMutate({ tailId: id, token });
-			return cards ;
+			return cards;
 		}
 		setShowForm(false);
 
@@ -122,7 +159,8 @@ const AdminTails = () => {
 
 			<div>
 				{showForm ? (
-						<TailForm   cards={cards} dogId={dogId} formType={formType} changeShowForm={handleShowForm}
+						<TailForm  updateCards={setCards} showLoader={showLoader} showError={showError} cards={cards} dogId={dogId}
+								  formType={formType} changeShowForm={handleShowForm}
 								  changeErrLoader={handleErrLoader}
 						/>)
 					: (
@@ -140,7 +178,7 @@ const AdminTails = () => {
 			</div>
 
 
-			<TailsList   dogId={dogId} showLoader={showLoader} showError={showError} handleDeleteTail={handleDeleteTail}
+			<TailsList dogId={dogId} showLoader={showLoader} showError={showError} handleDeleteTail={handleDeleteTail}
 					   cards={cards} isPending={isPending} isError={isError} changeShowForm={handleShowForm}
 			/>
 

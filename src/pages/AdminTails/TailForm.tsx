@@ -8,6 +8,8 @@ import * as options from './optionsInfo'  ;
 import { AdminTailsData } from './AdminTails';
 import * as val from './validationSchema';
 import { MiniErrorAlert, MiniLoader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { addTail, changeTail } from '../../services/fetchAdminTails';
+import { useAuthContext } from '../../context/useGlobalContext';
 
 
 export type FormData = {
@@ -29,14 +31,16 @@ export type FormData = {
 
 interface TailFormProps {
 	changeShowForm: (a: boolean, b: string) => void;
-	changeErrLoader: (error: string, loaderStatus: boolean) => void;
+	changeErrLoader: (loaderStatus: boolean, error: string) => void;
 	formType: string;
 	dogId: number;
 	cards: AdminTailsData[];
+	showLoader: boolean;
+	showError: string;
 }
 
-const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, formType, cards, dogId }) => {
-
+const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, formType, cards, dogId, showLoader, updateCards }) => {
+		const { token } = useAuthContext();
 		console.log(cards);
 		console.log(`dogId: ` + dogId + ` is ` + typeof dogId);
 
@@ -76,18 +80,19 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, fo
 				const editedCard = cards.find(card => card.id === dogId);
 				if (editedCard) {
 					setFormData({
-						name: editedCard.name ,
-						name_en: editedCard.name_en,
-						ready_for_adoption: editedCard.ready_for_adoption ,
-						gender: editedCard.gender ,
-						gender_en: editedCard.gender_en ,
-						age: editedCard.age,
-						age_en: editedCard.age_en ,
-						size: editedCard.size ,
-						size_en: editedCard.size_en ,
-						description: editedCard.description ,
-						description_en: editedCard.description_en ,
-						photo: editedCard.photo ,
+						id: editedCard.id,
+						name: editedCard.name || '',
+						name_en: editedCard.name_en || '',
+						ready_for_adoption: editedCard.ready_for_adoption || '',
+						gender: editedCard.gender || '',
+						gender_en: editedCard.gender_en || '',
+						age: editedCard.age || '',
+						age_en: editedCard.age_en || '',
+						size: editedCard.size || '',
+						size_en: editedCard.size_en || '',
+						description: editedCard.description || '',
+						description_en: editedCard.description_en || '',
+						photo: editedCard.photo || '',
 					});
 					console.log(formData);
 				}
@@ -112,13 +117,34 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, fo
 			setTouched((prevTouched) => ({ ...prevTouched, [field]: true }));
 		};
 
-		const handleSubmit = (e: React.FormEvent) => {
+		const handleSubmit = async (e: React.FormEvent) => {
 			e.preventDefault();
-			console.log(formData);
-			/*	setShowLoader(true);
-				setShowError('');*/
-			//if ok:
-			changeShowForm(false, '');
+
+			if (token) {
+				if (formType === 'edit' && formData.id !== undefined) {
+					changeErrLoader(true, '');
+					await changeTail({ tailId: formData.id, formDogData: formData, token });
+					changeShowForm(false, '');
+					//to make rerender for showing updates
+					updateCards(prevCards => prevCards.map(tail => {
+						if (tail.id === formData.id) {
+							return { ...tail, ...formData };
+						}
+						return tail;
+					}));
+				} else {
+					changeErrLoader(true, '');
+					const newDog = await addTail({ formDogData: formData, token });
+					changeShowForm(false, '');
+					//to make rerender for showing updates
+					updateCards(prevState => [...prevState, newDog]);
+				}
+
+			} else {
+				console.error('handleSubmit failed because of no Auth token ');
+			}
+
+
 		};
 
 		const handleShowFormStatus = () => {
@@ -341,7 +367,7 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, fo
 								options={options.optionsSizeEN}
 								placeholder={'Оберіть розмір'}
 								value={options.optionsSizeEN.find((opt) => opt.value === formData.size_en)}
-								onChange={(selectedOption) => handleChange('size', selectedOption?.value)}
+								onChange={(selectedOption) => handleChange('size_en', selectedOption?.value)}
 								styles={options.customStyles}
 							/>
 
@@ -417,10 +443,10 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, fo
 					</div>
 
 				</div>
-	{/*			<MiniLoader />
+				{/*			<MiniLoader />
 				<MiniErrorAlert errorMessage={'eror rolkj'} backgroundColor="rgba(255, 0, 0, 0.3)" />*/}
 
-{/*				{showLoader && <MiniLoader />}
+				{/*	{showLoader && <MiniLoader />}
 				{showError && <MiniErrorAlert errorMessage={showError} backgroundColor="rgba(255, 0, 0, 0.3)" />}*/}
 			</form>
 		);
