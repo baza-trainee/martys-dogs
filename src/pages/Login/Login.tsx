@@ -7,8 +7,8 @@ import { useAuthContext } from '../../context/useGlobalContext';
 
 const Login: FC = () => {
 	const navigate = useNavigate();
-	const [email, setEmail] = useState('otos333email@gamil.com');
-	const [password, setPassword] = useState('Admini33$$');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 
 	const { isLoggedIn, login, rememberMe, setRememberMe } = useAuthContext();
@@ -93,7 +93,7 @@ const Login: FC = () => {
 				</button>
 				<p className={styles.text}>
 					Забули пароль?
-					<Link to='/forgotten' className={styles.link}>
+					<Link to='/forgotten-password' className={styles.link}>
 					Відновлення
 					</Link>
 				</p>

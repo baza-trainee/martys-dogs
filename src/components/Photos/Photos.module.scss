@@ -14,10 +14,21 @@
 		height: 550px;
 		object-fit: cover;
 		border-radius: 30px;
+		@media screen and (max-width: 1279px) {
+			height: 450px;
+		}
+		@media screen and (max-width: 767px) {
+			height: 350px;
+		}
 	}
 
 	.title {
 		text-align: start;
 		margin-bottom: 40px;
+		font-size: 3.25rem;
+		font-weight: 800;
+		@media screen and (max-width: 1279px) {
+			font-size: 1.75rem;
+		}
 	}
 }
