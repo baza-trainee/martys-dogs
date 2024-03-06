@@ -1,9 +1,10 @@
-import { FC } from 'react'
+import { FC } from 'react';
 import { UseQueryResult } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 
 import StatisticsItem from './StatisticsItem';
 import style from './Statistics.module.scss';
+import Loader, { ErrorAlert } from '../CommonUI/LoaderAndError/LoaderAndError';
 import { AboutData } from '../../pages/About/About';
 import { Heart, Paws, Person } from '../../assets/statistics';
 
@@ -16,17 +17,16 @@ const Statistics: FC<StatisticsProps> = ({ data }) => {
 	const { t } = useTranslation();
 
 	if (isPending) {
-		return (
-			<div
-				className={`${style.loading__section} ${style.statistics__section}`}
-			>
-				<div className={style.loading}></div>
-			</div>
-		);
+		return <Loader backgroundColor={'#b6e1f2'} />;
 	}
 
 	if (isError) {
-		<div>{error.message}</div>;
+		return (
+			<ErrorAlert
+				errorMessage={error.message}
+				backgroundColor={'#b6e1f2'}
+			/>
+		);
 	}
 
 	return (

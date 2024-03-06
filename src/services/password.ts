@@ -3,7 +3,7 @@ import axios from 'axios';
 const URL = 'https://matys-dogs2.onrender.com';
 
 interface PasswordReminderResponse {
-	message: string;
+  description: string;
 }
 
 export const sendPasswordReminder = async (

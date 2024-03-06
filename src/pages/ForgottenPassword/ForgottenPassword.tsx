@@ -13,6 +13,7 @@ interface ServerResponse {
 const ForgottenPassword: FC = () => {
 	const [email, setEmail] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
+	const [successMessage, setSuccessMessage] = useState('');
 
 	const validateForm = () => {
 		if (!email.trim()) {
@@ -34,6 +35,7 @@ const ForgottenPassword: FC = () => {
 		}
 		try {
 			const result = await sendPasswordReminder(email);
+			setSuccessMessage(result.description);
 			return result;
 		} catch (error) {
 			const axiosError = error as AxiosError<ServerResponse>;
@@ -61,7 +63,8 @@ const ForgottenPassword: FC = () => {
 					onChange={handleChangeEmail}
 					// errorMessage={errorMessage}
 				/>
-				<div className={styles.error}>{errorMessage}</div>
+				{errorMessage && <div className={styles.error}>{errorMessage}</div>}
+				{!errorMessage && <p className={styles.success}>{successMessage}</p>}
 				<button className={styles.button} type='submit'>
 					Відправити
 				</button>

@@ -7,8 +7,8 @@ import { useAuthContext } from '../../context/useGlobalContext';
 
 const Login: FC = () => {
 	const navigate = useNavigate();
-	const [email, setEmail] = useState('otos333email@gamil.com');
-	const [password, setPassword] = useState('Admini33$$');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
 
 	const { isLoggedIn, login, rememberMe, setRememberMe } = useAuthContext();

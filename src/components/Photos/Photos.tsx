@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 
 import styles from './Photos.module.scss';
 import { AboutData } from '../../pages/About/About';
+import Loader, { ErrorAlert } from '../CommonUI/LoaderAndError/LoaderAndError'
 
 interface Pagination {
 	el: string;
@@ -47,18 +48,15 @@ const Photos: FC<PhotosProps> = ({ data }) => {
 	const images = photos?.[0]?.images;
 
 	if (isPending) {
-		return (
-			<div className={styles.container}>
-				<div className={styles.loading}></div>
-			</div>
-		);
+		return <Loader backgroundColor={'#ebf5fb'} />;
 	}
 
 	if (isError) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.alert}>{error.message}</div>
-			</div>
+			<ErrorAlert
+				errorMessage={error.message}
+				backgroundColor={'#ebf5fb'}
+			/>
 		);
 	}
 
