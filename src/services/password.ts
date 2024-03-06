@@ -17,12 +17,14 @@ export const sendPasswordReminder = async (
 };
 
 export const resetPassword = async (
-	token: string,
-	newPassword: string,
+  uidb64: string,
+  token: string,
+  password: string,
+  confirmPassword: string,
 ): Promise<PasswordReminderResponse> => {
 	const response = await axios.post<PasswordReminderResponse>(
-		`${URL}/password-reset`,
-		{ token, newPassword },
+		`${URL}/reset-password/${uidb64}/${token}`,
+		{ password, confirmPassword },
 	);
 	return response.data;
 };

@@ -93,7 +93,7 @@ const Login: FC = () => {
 				</button>
 				<p className={styles.text}>
 					Забули пароль?
-					<Link to='/forgotten' className={styles.link}>
+					<Link to='/forgotten-password' className={styles.link}>
 					Відновлення
 					</Link>
 				</p>

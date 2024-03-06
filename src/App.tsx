@@ -61,11 +61,11 @@ const router = createBrowserRouter([
 		element: <Login />,
 	},
 	{
-		path: 'forgotten',
+		path: 'forgotten-password',
 		element: <ForgottenPassword />,
 	},
 	{
-		path: 'reset/:token',
+		path: 'reset-password/:uidb64/:token',
 		element: <ResetPassword />,
 	},
 	{
