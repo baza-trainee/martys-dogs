@@ -19,10 +19,11 @@ interface TailsListProps {
 	showLoader: boolean;
 	showError: string;
 	dogId: number;
+	formType: string;
 }
 
 
-const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, changeShowForm, handleDeleteTail, showLoader, showError, dogId }) => {
+const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, changeShowForm, handleDeleteTail, showLoader, showError, dogId, formType }) => {
 	const [page, setPage] = useState<number>(1);
 	const [countPage, setCountPage] = useState<number>(1);
 	const cardsInPage = 6;
@@ -77,8 +78,8 @@ const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, change
 										<Tail disabled={true}
 											  {...tail}
 										/>
-										{dogId === tail.id && showLoader && <MiniLoader />}
-										{dogId === tail.id && showError && <MiniErrorAlert errorMessage={showError}
+										{formType === 'delete' && dogId === tail.id && showLoader && <MiniLoader />}
+										{formType === 'delete' && dogId === tail.id && showError && <MiniErrorAlert errorMessage={showError}
 																						   backgroundColor="rgba(255, 0, 0, 0.3)" />}
 										<div className={styles.btnContainer}>
 											<div className={styles.btnBox}>

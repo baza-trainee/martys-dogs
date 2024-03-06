@@ -329,3 +329,23 @@
     color: #840000;
   }
 }
+
+.errLoaderBox {
+  padding: 0 20px;
+
+  @include tablet {
+    padding: 0 50px;
+  }
+
+  @include small_desktop {
+    padding: 0 280px;
+  }
+
+  @include large_desktop {
+    padding: 0 350px;
+  }
+
+  @include full_desktop {
+    padding: 0 500px;
+  }
+}

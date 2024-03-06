@@ -10,6 +10,9 @@ import * as val from './validationSchema';
 import { MiniErrorAlert, MiniLoader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 import { addTail, changeTail } from '../../services/fetchAdminTails';
 import { useAuthContext } from '../../context/useGlobalContext';
+import TailsList from './TailsList';
+import { useMutation } from '@tanstack/react-query';
+import { queryClient } from '../../App';
 
 
 export type FormData = {
@@ -35,11 +38,14 @@ interface TailFormProps {
 	formType: string;
 	dogId: number;
 	cards: AdminTailsData[];
-	showLoader: boolean;
-	showError: string;
+	showLoader?: boolean;
+	showError?: string;
+
 }
 
-const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, formType, cards, dogId, showLoader, updateCards }) => {
+const TailForm: React.FC<TailFormProps> = ({
+											   changeShowForm, changeErrLoader, formType, cards, dogId, showLoader, showError, updateCards,
+										   }) => {
 		const { token } = useAuthContext();
 		console.log(cards);
 		console.log(`dogId: ` + dogId + ` is ` + typeof dogId);
@@ -65,6 +71,37 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, fo
 			photo: false,
 		});
 		const [errors, setErrors] = useState<Record<string, string>>({});
+		const { mutate: addMutate } = useMutation({
+			mutationFn: addTail,
+			onSuccess: (data) => {
+				changeErrLoader(false, '');
+				changeShowForm(false, '');
+				/*	setShowLoader(false);
+					setShowError('');*/
+				queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
+			},
+			onError: () => {
+				changeErrLoader(false, 'Додавання не вдалося, перезавантажте сторінку');
+				/*			setShowLoader(false);
+							setShowError('Додавання не вдалося, перезавантажте сторінку');*/
+			},
+		});
+
+		const { mutate: changeMutate } = useMutation({
+			mutationFn: changeTail,
+			onSuccess: () => {
+				/*	setShowLoader(false);
+					setShowError('');*/
+				changeErrLoader(false, '');
+				changeShowForm(false, '');
+				queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
+			},
+			onError: () => {
+				/*	setShowLoader(false);
+					setShowError('Зміна не вдалась, перезавантажте сторінку');*/
+				changeErrLoader(false, 'Зміна не вдалась, перезавантажте сторінку');
+			},
+		});
 
 
 		useEffect(() => {
@@ -119,23 +156,23 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, fo
 
 		const handleSubmit = async (e: React.FormEvent) => {
 			e.preventDefault();
-
 			if (token) {
+				changeErrLoader(true, '');
 				if (formType === 'edit' && formData.id !== undefined) {
-					changeErrLoader(true, '');
-					await changeTail({ tailId: formData.id, formDogData: formData, token });
-					changeShowForm(false, '');
+					// changeErrLoader(true, '');
+					const changedDog = await changeMutate({ tailId: formData.id, formDogData: formData, token });
+					// changeShowForm(false, '');
 					//to make rerender for showing updates
 					updateCards(prevCards => prevCards.map(tail => {
 						if (tail.id === formData.id) {
-							return { ...tail, ...formData };
+							return { ...tail, ...changedDog };
 						}
 						return tail;
 					}));
 				} else {
-					changeErrLoader(true, '');
-					const newDog = await addTail({ formDogData: formData, token });
-					changeShowForm(false, '');
+					// changeErrLoader(true, '');
+					const newDog = await addMutate({ formDogData: formData, token });
+					// changeShowForm(false, '');
 					//to make rerender for showing updates
 					updateCards(prevState => [...prevState, newDog]);
 				}
@@ -443,11 +480,12 @@ const TailForm: React.FC<TailFormProps> = ({ changeShowForm, changeErrLoader, fo
 					</div>
 
 				</div>
-				{/*			<MiniLoader />
-				<MiniErrorAlert errorMessage={'eror rolkj'} backgroundColor="rgba(255, 0, 0, 0.3)" />*/}
+				<div className={styles.errLoaderBox}>
+					{showLoader && <MiniLoader />}
 
-				{/*	{showLoader && <MiniLoader />}
-				{showError && <MiniErrorAlert errorMessage={showError} backgroundColor="rgba(255, 0, 0, 0.3)" />}*/}
+					{showError && <MiniErrorAlert errorMessage={showError} backgroundColor="rgba(255, 0, 0, 0.3)" />}
+
+				</div>
 			</form>
 		);
 	}

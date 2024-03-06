@@ -67,7 +67,6 @@ const AdminTails = () => {
 			setShowError('');
 			queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
 			setCards(prevCards => prevCards.filter(tail => tail.id !== variables.tailId));
-			console.log('successfully deleted' + id);
 		},
 		onError: () => {
 			setShowLoader(false);
@@ -75,14 +74,12 @@ const AdminTails = () => {
 		},
 	});
 
-	const { mutate: addMutate } = useMutation({
+	/*const { mutate: addMutate } = useMutation({
 		mutationFn: addTail,
 		onSuccess: (data) => {
 			setShowLoader(false);
 			setShowError('');
 			queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
-			// setCards(prevState => [...prevState, data]);
-			console.log('successfully added new dog');
 		},
 		onError: () => {
 			setShowLoader(false);
@@ -90,26 +87,19 @@ const AdminTails = () => {
 		},
 	});
 
-	const { mutate: changeMutate } = useMutation({
+	 const { mutate: changeMutate } = useMutation({
 		mutationFn: changeTail,
-		onSuccess: (data, variables) => {
+		onSuccess: () => {
 			setShowLoader(false);
 			setShowError('');
 			queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
-		/*	setCards(prevCards => prevCards.map(tail => {
-				if (tail.id === variables.tailId) {
-					return { ...tail, ...variables.formDogData };
-				}
-				return tail;
-			}));*/
-			console.log('successfully changed' + variables.id);
 		},
 		onError: () => {
 			setShowLoader(false);
 			setShowError('Зміна не вдалась, перезавантажте сторінку');
 		},
 	});
-
+*/
 	useEffect(() => {
 		location.pathname === '/' && !location.hash ? scrollOnTop() : null;
 	}, [location]);
@@ -143,7 +133,7 @@ const AdminTails = () => {
 			return cards;
 		}
 		setShowForm(false);
-
+		setFormType('delete');
 	};
 
 
@@ -159,7 +149,7 @@ const AdminTails = () => {
 
 			<div>
 				{showForm ? (
-						<TailForm  updateCards={setCards} showLoader={showLoader} showError={showError} cards={cards} dogId={dogId}
+						<TailForm    updateCards={setCards} showLoader={showLoader} showError={showError} cards={cards} dogId={dogId}
 								  formType={formType} changeShowForm={handleShowForm}
 								  changeErrLoader={handleErrLoader}
 						/>)
@@ -178,8 +168,9 @@ const AdminTails = () => {
 			</div>
 
 
-			<TailsList dogId={dogId} showLoader={showLoader} showError={showError} handleDeleteTail={handleDeleteTail}
+			<TailsList  formType={formType} dogId={dogId} showLoader={showLoader} showError={showError} handleDeleteTail={handleDeleteTail}
 					   cards={cards} isPending={isPending} isError={isError} changeShowForm={handleShowForm}
+
 			/>
 
 
