@@ -10,12 +10,14 @@ type UploadImageInputProps = {
 	value?: string;
 	id?: string;
 	errorMessage?: string;
+	isAddMode: boolean;
 };
 
 const UploadImageInput: React.FC<UploadImageInputProps> = ({
 	register,
 	watch,
 	errorMessage,
+	isAddMode
 }) => {
 	return (
 		<div className={styles.wrapper}>
@@ -29,9 +31,11 @@ const UploadImageInput: React.FC<UploadImageInputProps> = ({
 				/>
 				<FaUpload className={styles.icon} />
 				<span className={styles.text}>
-					{watch('photo') && watch('photo').length > 0
+					{/* {watch('photo') && watch('photo').length > 0
 						? watch('photo')[0].name
-						: 'Завантажте зображення'}
+						: 'Завантажте зображення'} */}
+
+{!isAddMode ? `Змініть зображення` : (watch('photo') && watch('photo').length > 0 ? watch('photo')[0].name  : `Завантажте зображення`)}
 				</span>
 			</label>
 			<p className={styles.error}>{errorMessage}</p>

@@ -26,7 +26,7 @@ const createFormData = (data: PartnersStateType): FormData => {
 	  const logoFile = data.logo[0];
 	  formData.append('logo', logoFile, logoFile.name);
 	}
-	if (data.website !== null && data.website.trim() !== '') {
+	if (data.website !== null) {
 		formData.append('website', data.website);
 	  }
 	return formData;
@@ -103,7 +103,7 @@ const AddPartner: React.FC = () => {
 			>
 				<div className={styles.inputRow}>
 					<div className={styles.inputContainer}>
-						<label htmlFor='nameInput'>Назва:</label>
+						<label htmlFor='nameInput'><span className={styles.redAsterisk}>*</span>Назва:</label>
 						<input
 							type='text'
 							id='nameInput'
@@ -126,7 +126,7 @@ const AddPartner: React.FC = () => {
 
 					<div className={styles.inputContainer}>
 						<label htmlFor='logoInput'>
-							Логотип:
+						<span className={styles.redAsterisk}>*</span>Логотип:
 							<p><FaUpload className={styles.icon} />
 							
 								<span className={styles.text}>
@@ -183,6 +183,7 @@ const AddPartner: React.FC = () => {
 							type='text'
 							id='website'
 							{...register('website', {
+								//required: "Веб-сайт обов'язковий",
 								pattern: {
 									value: /^(https?:\/\/)?([\w-]+\.)+[\w]{2,}(\/[\w-]*)*$/,
 									message: 'Введіть дійсний URL веб-сайту',

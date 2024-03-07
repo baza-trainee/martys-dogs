@@ -47,6 +47,7 @@
 
 		.text {
 			text-align: center;
+			margin-top: 0.5rem;
 		}
 
 		.link {
@@ -60,10 +61,14 @@
 			transition: all 0.3s ease-in-out;
 
 			&:hover {
-				text-decoration: underline;
-				text-underline-offset: 2px;
+				// text-decoration: underline;
+				// text-underline-offset: 2px;
 				color: #3668b9;
 			}
 		}
 	}
+}
+
+.error {
+  color: red;
 }

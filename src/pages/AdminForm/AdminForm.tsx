@@ -1,3 +1,4 @@
+import day from 'dayjs';
 import { FC, useEffect, useState } from 'react';
 
 import styles from './AdminForm.module.scss';
@@ -5,6 +6,7 @@ import Loader, {
 	ErrorAlert,
 } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 import {
+	deleteMessage,
 	getMessages,
 	updateMessageStatus,
 } from '../../services/adminsMessages';
@@ -12,6 +14,7 @@ import { useAuthContext } from '../../context/useGlobalContext';
 
 export interface Message {
 	id: number;
+	date: string;
 	id_dog: {
 		name: number;
 	};
@@ -43,7 +46,7 @@ const AdminForm: FC = () => {
 	}, [token]);
 
 	// console.log(messages);
-	
+
 	if (loading) {
 		return (
 			<div className={styles.container}>
@@ -59,8 +62,6 @@ const AdminForm: FC = () => {
 			</div>
 		);
 	}
-
-	// console.log(messages);
 
 	const handleToggleStatus = async (messageId: number) => {
 		try {
@@ -83,6 +84,19 @@ const AdminForm: FC = () => {
 		}
 	};
 
+	const handleDelete = async (messageId: number) => {
+		try {
+			if (token !== null) {
+				await deleteMessage(token, messageId);
+				setMessages((prevMessages) =>
+					prevMessages.filter((message) => message.id !== messageId),
+				);
+			}
+		} catch (error) {
+			console.error(error);
+		}
+	};
+
 	return (
 		<main className={styles.main}>
 			<h2 className={styles.title}>Повідомлення</h2>
@@ -91,9 +105,9 @@ const AdminForm: FC = () => {
 					<tr>
 						<th>Хвостик</th>
 						<th>Телефон</th>
-						<th>Им'я</th>
+						<th>Ім'я</th>
 						<th>Повідомлення</th>
-						<th>Статус</th>
+						<th>Дата</th>
 						<th>Обробка</th>
 					</tr>
 				</thead>
@@ -104,21 +118,25 @@ const AdminForm: FC = () => {
 							<td>{message.phone_number}</td>
 							<td>{message.name}</td>
 							<td>{message.comment}</td>
-							<td>
-								{message.status ? 'Оброблене' : 'Необроблене'}
-							</td>
+							<td>{day(message.date).format('DD.MM.YYYY')}</td>
 							<td>
 								<button
 									onClick={() =>
 										handleToggleStatus(message.id)
 									}
 									className={
-										message.status ? styles.red : styles.btn
+										message.status
+											? styles.green
+											: styles.btn
 									}
 								>
-									{message.status
-										? 'Розархівувати'
-										: 'Обробити'}
+									{message.status ? 'Оброблене' : 'Обробити'}
+								</button>
+								<button
+									onClick={() => handleDelete(message.id)}
+									className={styles.red}
+								>
+									Видалити
 								</button>
 							</td>
 						</tr>

@@ -1,0 +1,128 @@
+.sidebar {
+  min-width: 25rem;
+  background: #EBF5FB;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 1rem;
+  -webkit-box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+          box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  margin-left: -20rem;
+  padding-bottom: 2rem;
+  overflow-y: auto;
+  position: fixed;
+  min-height: 100vh;
+}
+
+.show {
+  margin-left: 0;
+  -webkit-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+}
+
+.header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 1rem;
+  background-color: #B6E1F2;
+}
+
+.container {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.bars {
+  position: absolute;
+  right: 2rem;
+  top: 0;
+  background-color: transparent;
+  font-size: 1.5rem;
+}
+.bars:hover {
+  cursor: pointer;
+  color: #009CD9;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.links {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 2rem;
+}
+
+.links a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  color: black;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.links a svg {
+  margin-right: 1rem;
+}
+.links a:hover {
+  padding-left: 3rem;
+  color: #009cd9;
+  text-decoration: underline;
+  text-underline-offset: 0.25rem;
+}
+.links a .sms {
+  margin-left: 1rem;
+  color: #009cd9;
+}
+
+.button {
+  padding: 0.75rem 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  max-height: 3rem;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #fff;
+  background: #009cd9;
+  text-decoration: none;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  -webkit-transition: background 0.3s ease;
+  transition: background 0.3s ease;
+}
+.button:hover {
+  background: #005c80;
+}/*# sourceMappingURL=Admin.module.min.css.map */

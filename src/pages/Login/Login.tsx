@@ -1,16 +1,21 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FC, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import FormInput from '../../components/FormInput/FormInput';
 import styles from './Login.module.scss';
 import { useAuthContext } from '../../context/useGlobalContext';
 
-const Login: React.FC = () => {
+const Login: FC = () => {
 	const navigate = useNavigate();
-	const [email, setEmail] = useState('otos333email@gamil.com');
-	const [password, setPassword] = useState('Admini33$$');
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 
-	const { isLoggedIn, login } = useAuthContext();
+	const { isLoggedIn, login, rememberMe, setRememberMe } = useAuthContext();
+
+	const handleCheckboxChange = () => {
+		setRememberMe(!rememberMe);
+	};
 
 	useEffect(() => {
 		if (isLoggedIn) {
@@ -24,12 +29,19 @@ const Login: React.FC = () => {
 
 			if (result === 'User login') {
 				navigate('/admin');
-			} else {
-				console.error('Login Error');
 			}
+			// else {
+			// 	console.error('Login Error');
+			// }
 		} catch (error) {
-			console.error('Login Error:', error);
+			setErrorMessage('Невірна пошта або пароль');
 		}
+		// if (error?.response.status === 400 || error?.response.status === 403) {
+		// 	setErrorMessage('Невірна пошта або пароль');
+		// } else {
+		// 	setErrorMessage('Помилка сервера. Спробуйте ще.');
+		// }
+		// }
 	};
 
 	const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
@@ -51,6 +63,7 @@ const Login: React.FC = () => {
 					type='email'
 					value={email}
 					onChange={handleChangeEmail}
+					placeholder='Email'
 				/>
 				<FormInput
 					label='Пароль'
@@ -59,7 +72,18 @@ const Login: React.FC = () => {
 					name='password'
 					value={password}
 					onChange={handleChangePassword}
+					placeholder='Password'
 				/>
+				<label>
+					<input
+						type='checkbox'
+						checked={rememberMe}
+						onChange={handleCheckboxChange}
+						className={styles.checkbox}
+					/>
+					Запам'ятати мене
+				</label>
+				{errorMessage && <p className={styles.error}>{errorMessage}</p>}
 				<button
 					className={styles.button}
 					onClick={handleLogin}
@@ -67,6 +91,12 @@ const Login: React.FC = () => {
 				>
 					Увійти
 				</button>
+				<p className={styles.text}>
+					Забули пароль?
+					<Link to='/forgotten-password' className={styles.link}>
+					Відновлення
+					</Link>
+				</p>
 				<p className={styles.text}>
 					Ще не є адміном?
 					<Link to='/register' className={styles.link}>

@@ -1,5 +1,6 @@
-import { ReactNode, createContext, useState, useEffect } from 'react';
-import { loginUser, getIsAuth } from '../services/fetchData';
+import { FC, ReactNode, createContext, useEffect, useState } from 'react';
+
+import { getIsAuth, loginUser } from '../services/fetchData';
 
 interface AuthContextType {
 	token: string | null;
@@ -7,6 +8,8 @@ interface AuthContextType {
 	isPending: boolean;
 	login: (email: string, password: string) => Promise<string>;
 	logout: () => void;
+	rememberMe: boolean;
+	setRememberMe: (rememberMe: boolean) => void;
 }
 
 interface AuthProviderProps {
@@ -18,16 +21,20 @@ const initialAuthContext = {
 	isLoggedIn: false,
 	isPending: false,
 	login: async () => {
-    return Promise.resolve('');
-  },
+		return Promise.resolve('');
+	},
 	logout: () => {},
+	rememberMe: false,
+	setRememberMe: () => {},
 };
 
 export const AuthContext = createContext<AuthContextType>(initialAuthContext);
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 	const [token, setToken] = useState<string | null>(null);
 	const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+	const [rememberMe, setRememberMe] = useState<boolean>(false);
+
 	const [isPending, setIsPending] = useState<boolean>(false);
 
 	const login = async (email: string, password: string) => {
@@ -38,7 +45,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 			if (access_token) {
 				setToken(access_token);
 				setIsLoggedIn(true);
-				localStorage.setItem('auth-token', access_token);
+				if (rememberMe) {
+					localStorage.setItem('auth-token', access_token);
+				}
 				setIsPending(false);
 				return 'User login';
 			} else {
@@ -56,10 +65,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 	const isAuth = async () => {
 		const localToken = localStorage.getItem('auth-token');
 
-    if (!localToken) {
-      return;
+		if (!localToken) {
+			return;
 		}
-		
+
 		try {
 			setIsPending(true);
 			const { is_authenticated } = await getIsAuth(localToken);
@@ -72,7 +81,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 			setIsPending(false);
 			console.error('isAuth Error:', error);
 		}
-	}
+	};
 
 	const logout = () => {
 		setIsPending(true);
@@ -88,11 +97,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 		isPending,
 		login,
 		logout,
+		rememberMe,
+		setRememberMe,
 	};
 
-	useEffect(() => { 
-    isAuth();
-  }, []);
+	useEffect(() => {
+		isAuth();
+	}, []);
 
 	return (
 		<AuthContext.Provider value={contextValue}>

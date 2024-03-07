@@ -18,9 +18,10 @@ export interface NewsItemProps {
 	children?: React.ReactNode;
 	photo: Photo;
 	needTranslate?:boolean;
+	inAdmin?: boolean;
 }
 
-const NewsItem: React.FC<NewsItemProps> = ({title, post_at,  sub_text, photo, needTranslate, children}) => {
+const NewsItem: React.FC<NewsItemProps> = ({title, post_at,  sub_text, photo, needTranslate, children, inAdmin}) => {
 
 	const {i18n } = useTranslation();
 
@@ -53,31 +54,48 @@ const NewsItem: React.FC<NewsItemProps> = ({title, post_at,  sub_text, photo, ne
 		} else {
 			return stringDate;
 		}
-// return  ((i18n.language === 'ua') && needTranslate ) ? stringDate :  engDate
 	};
 
-console.log(getDateName(post_at))
 
 	return (
-		<li className={styles.item}>
-			<div className={styles.thumb}>
-				{ <img
-					src={photo.url}
-					alt='news-photo'
-					className={styles.photo}
-				/> }
-			</div>
-				<div className={styles.info}>
-				<h3 className={styles.title}>{title}</h3>
-				<div>
-					<p className={styles.date}>{getDateName(post_at)}</p>
-					<p className={styles.text} data-testid='newsItem'>
-						{sub_text}
-					</p>
-					</div>
-			</div>
-			{children}
-		</li>
+		// <li className={!inAdmin ? styles.item : styles.item_admin} >
+		// 	<div className={styles.thumb}>
+		// 		{ <img
+		// 			src={photo.url}
+		// 			alt='news-photo'
+		// 			className={styles.photo}
+		// 		/> }
+		// 	</div>
+		// 		<div className={styles.info}>
+		// 		<h3 className={styles.title}>{title}</h3>
+		// 		<div>
+		// 			<p className={styles.date}>{getDateName(post_at)}</p>
+		// 			<p className={styles.text} data-testid='newsItem'>
+		// 				{sub_text}
+		// 			</p>
+		// 			</div>
+		// 	</div>
+		// 	{children}
+		// </li>
+		<li className={!inAdmin ? styles.item : styles.item_admin} >
+		<div className={styles.thumb}>
+			{ <img
+				src={photo.url}
+				alt='news-photo'
+				className={styles.photo}
+			/> }
+		</div>
+			<div className={styles.info}>
+			<span className={styles.date}>{getDateName(post_at)}</span>
+			<h3 className={styles.title}>{title}</h3>
+			<p className={styles.text} data-testid='newsItem'>
+					{sub_text}
+				</p>
+			<div>
+				</div>
+		</div>
+		{children}
+	</li>
 	);
 };
 

@@ -86,7 +86,9 @@
 	height: 42px;
 	margin-bottom: 24px;
 	background-image: url('../../assets/hero_about/name393.webp');
-	background-size: cover;
+	// background-size: cover;
+	background-repeat: no-repeat;
+	background-size: contain;
 
 	@include tablet {
 		margin-bottom: 56px;

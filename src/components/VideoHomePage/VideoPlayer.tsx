@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import ReactPlayer from 'react-player';
+import { VideoLoader } from '../CommonUI/LoaderAndError/LoaderAndError';
 import styles from './Video.module.scss';
 
 interface Poster {
@@ -33,9 +34,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 		if (!navigator.onLine) {
 			setError(true);
 			setIsLoading(false);
-		}
-
-		else if (navigator.onLine) {
+		} else if (navigator.onLine) {
 			setError(false);
 			setIsLoading(true);
 		}
@@ -98,10 +97,9 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({
 			{showControls && (
 				<>
 					{isLoading && !error && (
-						<div
-							className={styles.loader}
-							data-testid='loader'
-						></div>
+						<div data-testid='loader'>
+							<VideoLoader />
+						</div>
 					)}
 					{error && (
 						<div className={styles.error} data-testid='error'>

@@ -1,0 +1,201 @@
+.container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 32px;
+  padding: 15px;
+  width: 100%;
+}
+.container .title {
+  margin-right: auto;
+}
+.container .buttonsWrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse;
+  gap: 24px;
+}
+@media (min-width: 1280px) {
+  .container .buttonsWrapper {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-bottom: 10px;
+  }
+}
+.container .buttonsWrapper .link {
+  text-decoration: none;
+}
+.container .buttonsWrapper .addButton {
+  padding: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  min-width: 100px;
+  max-height: 55px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: none;
+  border-radius: 40px;
+  color: #FFFFFF;
+  background: #009cd9;
+  text-decoration: none;
+  gap: 8px;
+  font-size: 20px;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  -webkit-transform: translate(0em, 0.2em);
+      -ms-transform: translate(0em, 0.2em);
+          transform: translate(0em, 0.2em);
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .container .buttonsWrapper .addButton {
+    width: auto;
+  }
+}
+.container .buttonsWrapper .addButton:hover {
+  background: #0D0031;
+}
+.container .buttonsWrapper .addButton:focus {
+  outline: none;
+  -webkit-box-shadow: 0 0 5px 2px #009cd9;
+          box-shadow: 0 0 5px 2px #009cd9;
+}
+.container .buttonsWrapper .addButton:active {
+  -webkit-transform: scale(0.95);
+      -ms-transform: scale(0.95);
+          transform: scale(0.95);
+}
+.container .buttonsWrapper .addButton:disabled {
+  cursor: not-allowed;
+  background: #DBDBDB;
+  color: #4D4D4D;
+}
+.container .logoContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  gap: 24px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-width: 100%;
+}
+.container .logoContainer .logo {
+  margin: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 20px;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+  -webkit-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+          box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+  background-color: #ebf5fb;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.container .logoContainer .logo:hover {
+  background-color: #b6e1f2;
+}
+.container .logoContainer .logo img {
+  width: 200px;
+  height: auto;
+}
+.container .logoContainer .logo .logoActions {
+  margin-top: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 4px;
+}
+.container .logoContainer .logo .logoActions .editIcon,
+.container .logoContainer .logo .logoActions .deleteIcon {
+  margin: 4px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+}
+.container .logoContainer .logo .logoActions .editIcon:hover,
+.container .logoContainer .logo .logoActions .deleteIcon:hover {
+  color: #009cd9;
+}
+.container .pagination {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 20px;
+}
+.container .pagination button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 16px 24px;
+  margin: 0 4px;
+  font-size: 16px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+.container .pagination button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.container .pagination button:hover {
+  background-color: #F7F7F7;
+}
+.container .pagination button:active {
+  background-color: #EEEEEE;
+}
+.container .pagination span {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 8px 12px;
+  margin: 0 4px;
+  font-size: 16px;
+  border: 1px solid #009cd9;
+  border-radius: 4px;
+  color: #009cd9;
+  background-color: #fff;
+}/*# sourceMappingURL=AdminPartners.module.min.css.map */

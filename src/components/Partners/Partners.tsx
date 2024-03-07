@@ -33,7 +33,7 @@ const Partners: React.FC<PartnersProps> = ({ data }) => {
 			<ul className={styles.partnersIconContainer}>
 				{responseData?.partners?.map((partner, index) => (
 					<li key={index} className={styles.partnersIcon}>
-						{partner.website !== null ? (
+						{partner.website !== "" && partner.website !== null  ? (
 							<a
 								href={partner.website}
 								target='_blank'
