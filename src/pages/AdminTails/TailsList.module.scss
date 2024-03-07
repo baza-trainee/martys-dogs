@@ -1,0 +1,142 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.catalog_list {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 723px) {
+    justify-content: center;
+  }
+}
+
+.catalog_list_card {
+  margin-bottom: 20px;
+
+  width: 342px;
+
+  @include small_desktop {
+    width: 347px;
+  }
+
+  @include large_desktop {
+    width: 400px;
+
+  }
+
+  @include full_desktop {
+    width: 415px;
+  }
+
+
+}
+
+.catalog_pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  @media screen and (max-width: 1279px) {
+    margin-top: 12px;
+  }
+
+  @media screen and (max-width: 767px) {
+    margin-top: 4px;
+  }
+}
+
+.catalog_pagination_btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: $color-accent;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-gray-10;
+  margin-right: 24px;
+  border: none;
+  transition: all 0.3s ease-in-out;
+
+  &:disabled {
+    background-color: $color-gray-10;
+    color: $color-gray-40;
+  }
+
+  &.active {
+    background-color: $color-accent;
+    color: $color-gray-0;
+
+    &:hover {
+      background-color: $color-accent;
+      color: $color-gray-0;
+    }
+  }
+
+  &:hover {
+    background-color: $color-main-blue-light;
+    color: $color-accent;
+  }
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading {
+  width: 6rem;
+  height: 6rem;
+  border: 5px solid #009cd9;
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spinner 0.6s linear infinite;
+  margin: 6rem auto;
+}
+
+.container {
+  background-color: #ebf5fb;
+
+  padding: 6rem 3rem;
+  width: 100%;
+
+  @include small_desktop {
+    padding: 6rem;
+  }
+}
+
+.alert {
+  text-align: center;
+  font-size: 20px;
+  color: #005c80;
+
+  @include tablet {
+    font-size: 28px;
+  }
+  @include small_desktop {
+    font-size: 32px;
+  }
+
+
+}
+
+.btnContainer {
+  display: flex;
+  margin-top: 10px;
+  justify-content: space-between;
+}
+
+
+.deleteIcon {
+  margin: 4px;
+  font-size: 16.5px;
+}
+
+
+.btnBox {
+  width: 48%;
+}

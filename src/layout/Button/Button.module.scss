@@ -42,7 +42,7 @@
     }
   }
 
-  &:focus-visible  {
+  &:focus-visible {
     outline: none;
     border: 1px solid $color-main-blue-dark;
   }
@@ -83,6 +83,8 @@
 
   &:disabled {
     border-color: $color-gray-60;
+    color: $color-gray-60;
+
   }
 }
 
@@ -103,7 +105,7 @@
   }
 
 
-  &:focus-visible  {
+  &:focus-visible {
     outline: none;
     border-color: $color-main-blue-dark;
   }
@@ -126,8 +128,8 @@
   }
 
   @media screen and (max-width: 1279px) {
-		display: none;
-	}
+    display: none;
+  }
 }
 
 .filterMob {
@@ -148,7 +150,7 @@
   }
 
 
-  &:focus-visible  {
+  &:focus-visible {
     outline: none;
     border-color: $color-main-blue-dark;
   }
@@ -171,6 +173,58 @@
   }
 
   @media screen and (max-width: 1279px) {
-		display: block;
-	}
+    display: block;
+  }
+}
+
+ .add {
+  background: $color-system-green;
+   color: $color-gray-10;
+
+   @include hover {
+     &:hover {
+       background: #04793D;
+     }
+   }
+
+   &:focus-visible {
+     outline: none;
+     border: 1px solid #024C27;
+   }
+
+   //pressed
+   &:active {
+     background: #024C27;
+   }
+
+   &:disabled {
+     background: $color-gray-20;
+   }
+}
+
+
+
+.delete {
+  background: $color-system-error;
+  color: $color-gray-10;
+
+  @include hover {
+    &:hover {
+      background: #A00202;
+    }
+  }
+
+  &:focus-visible {
+    outline: none;
+    border: 1px solid #840000;
+  }
+
+  //pressed
+  &:active {
+    background: #840000;
+  }
+
+  &:disabled {
+    background: $color-gray-20;
+  }
 }

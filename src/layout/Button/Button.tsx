@@ -3,7 +3,7 @@ import * as React from 'react';
 import styles from './Button.module.scss';
 
 interface IButtonProps {
-	name: string;
+	name?: string;
 	btnClasses: string;
 	onClick?: () => void;
 	type?: 'button' | 'submit' | 'reset';
@@ -24,6 +24,7 @@ const Button: React.FC<IButtonProps> = ({
 			className={[styles.button, btnClasses && styles[btnClasses]].join(
 				' ',
 			)}
+
 			disabled={disabled}
 			type={type}
 			onClick={onClick}

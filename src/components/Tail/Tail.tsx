@@ -8,7 +8,11 @@ import { useModalContext } from '../../context/useGlobalContext';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export interface TailProps {
+interface TailDisabledProps {
+	disabled?: boolean;
+}
+
+export interface TailProps extends TailDisabledProps {
 	id: number;
 	name: string;
 	ready_for_adoption: boolean;
@@ -26,6 +30,8 @@ export interface TailProps {
 	};
 }
 
+
+
 const Tail: React.FC<TailProps> = ({
 	id,
 	name,
@@ -37,6 +43,7 @@ const Tail: React.FC<TailProps> = ({
 	size,
 	description,
 	photo,
+	disabled
 }) => {
 	const { t } = useTranslation();
 	const { openModal, activateModal, activeModal } = useModalContext();
@@ -105,6 +112,7 @@ const Tail: React.FC<TailProps> = ({
 							type={'button'}
 							name={t('tail.donate')}
 							onClick={() => scrollToSection('support')}
+							disabled={disabled}
 						></Button>
 					</div>
 					{ready_for_adoption && (
@@ -114,6 +122,7 @@ const Tail: React.FC<TailProps> = ({
 								type={'button'}
 								name={t('tail.adopt')}
 								onClick={handleModal}
+								disabled={disabled}
 							></Button>
 						</div>
 					)}

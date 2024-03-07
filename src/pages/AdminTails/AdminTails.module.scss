@@ -1,0 +1,76 @@
+@import '../../scss/variables';
+@import '../../scss/mixins';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 15px;
+  width: 100%;
+}
+
+.title {
+  margin-right: auto;
+}
+
+.buttonsWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.inputContainer {
+  margin-right: 10px;
+}
+
+.uploadLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-top: 10px;
+
+  .uploadIcon {
+    margin-right: 8px;
+  }
+}
+
+.buttonRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+
+
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: space-around;
+  gap: 24px;
+  flex-wrap: wrap;
+  max-width: 100%;
+
+  .logo {
+    margin: 10px;
+    width: 30%;
+    background-color: $color-main-bg;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-content: space-between;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      background-color: $color-main-blue-light;
+      box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+
+  }
+}
