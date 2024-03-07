@@ -35,11 +35,11 @@ interface TailFormProps {
 	changeShowForm: (a: boolean, b: string) => void;
 	changeErrLoader: (loaderStatus: boolean, error: string) => void;
 	formType: string;
-	cards: AdminTailsData[];
+	cards: AdminTailsData;
 	dogId: number;
 	showLoader?: boolean;
 	showError?: string;
-	updateCards: React.Dispatch<React.SetStateAction<AdminTailsData[]>>;
+	updateCards: React.Dispatch<React.SetStateAction<AdminTailsData>>;
 }
 
 const TailForm: React.FC<TailFormProps> = ({
@@ -49,14 +49,22 @@ const TailForm: React.FC<TailFormProps> = ({
 		console.log(cards);
 		console.log(`dogId: ` + dogId + ` is ` + typeof dogId);
 
-		const [formData, setFormData] = useState<FormData>({
-			name: '',
-			ready_for_adoption: false,
-			gender: '',
-			size: '',
-			age: '',
-			description: '',
-		});
+	const initialFormData: FormData = {
+		id: undefined,
+		name: '',
+		name_en: '',
+		ready_for_adoption: false,
+		gender: '',
+		gender_en: '',
+		age: '',
+		age_en: '',
+		size: '',
+		size_en: '',
+		description: '',
+		description_en: '',
+		photo: undefined,
+	};
+		const [formData, setFormData] = useState<FormData>(initialFormData);
 
 		const [touched, setTouched] = useState<Record<string, boolean>>({
 			name: false,
@@ -111,10 +119,10 @@ const TailForm: React.FC<TailFormProps> = ({
 				const editedCard = cards.find(card => card.id === dogId);
 				if (editedCard) {
 					setFormData({
-						id: editedCard.id,
+						id: editedCard.id ,
 						name: editedCard.name || '',
 						name_en: editedCard.name_en || '',
-						ready_for_adoption: editedCard.ready_for_adoption || '',
+						ready_for_adoption: editedCard.ready_for_adoption || false,
 						gender: editedCard.gender || '',
 						gender_en: editedCard.gender_en || '',
 						age: editedCard.age || '',
@@ -123,8 +131,9 @@ const TailForm: React.FC<TailFormProps> = ({
 						size_en: editedCard.size_en || '',
 						description: editedCard.description || '',
 						description_en: editedCard.description_en || '',
-						photo: editedCard.photo || '',
+						photo: editedCard.photo  ,
 					});
+
 					console.log(formData);
 				}
 			}

@@ -8,7 +8,11 @@ import { useModalContext } from '../../context/useGlobalContext';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export interface TailProps {
+interface TailDisabledProps {
+	disabled?: boolean;
+}
+
+export interface TailProps extends TailDisabledProps {
 	id: number;
 	name: string;
 	ready_for_adoption: boolean;
@@ -25,6 +29,8 @@ export interface TailProps {
 		category: string;
 	};
 }
+
+
 
 const Tail: React.FC<TailProps> = ({
 	id,

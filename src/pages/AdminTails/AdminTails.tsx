@@ -1,6 +1,6 @@
+import * as React from 'react';
 import styles from '../AdminPhotos/AdminPhotos.module.scss';
 import Button from '../../layout/Button/Button';
-import * as React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
@@ -12,8 +12,9 @@ import { useAuthContext } from '../../context/useGlobalContext';
 import { queryClient } from '../../App';
 import { fetchTails, deleteTail } from '../../services/fetchAdminTails';
 
+
 export interface TailsListData {
-	id: number;
+	id?: number;
 	name: string;
 	name_en?: string;
 	ready_for_adoption: boolean;
@@ -21,18 +22,11 @@ export interface TailsListData {
 	gender_en?: string;
 	age: string;
 	age_en?: string;
-	sterilization?: boolean;
-	vaccination_parasite_treatment?: boolean;
 	size: string;
 	size_en?: string;
 	description: string;
 	description_en?: string;
-	photo?: {
-		id: string;
-		name: string;
-		url: string;
-		category: string;
-	};
+	photo?: File;
 }
 
 
@@ -44,10 +38,10 @@ const AdminTails = () => {
 	const [showError, setShowError] = useState<string>('');
 	const [showForm, setShowForm] = useState<boolean>(false);
 	const [formType, setFormType] = useState<string>('');
-	const [dogId, setDogId] = useState<undefined | number>(null);
+	const [dogId, setDogId] = useState<undefined | number | null>(null);
 	const location = useLocation();
 	const { token } = useAuthContext();
-	const [cards, setCards] = useState<AdminTailsData[]>([]);
+	const [cards, setCards] = useState<AdminTailsData>([]);
 
 
 	const { data: tails, isPending, isError } = useQuery<AdminTailsData>({
