@@ -36,34 +36,32 @@ interface TailFormProps {
 	changeErrLoader: (loaderStatus: boolean, error: string) => void;
 	formType: string;
 	cards: AdminTailsData;
-	dogId: number;
+	dogId: number | null;
 	showLoader?: boolean;
 	showError?: string;
 	updateCards: React.Dispatch<React.SetStateAction<AdminTailsData>>;
 }
 
 const TailForm: React.FC<TailFormProps> = ({
-											   changeShowForm, changeErrLoader, formType, cards, dogId, showLoader, showError, updateCards
+											   changeShowForm, changeErrLoader, formType, cards, dogId, showLoader, showError, updateCards,
 										   }) => {
 		const { token } = useAuthContext();
 		console.log(cards);
 		console.log(`dogId: ` + dogId + ` is ` + typeof dogId);
 
-	const initialFormData: FormData = {
-		id: undefined,
-		name: '',
-		name_en: '',
-		ready_for_adoption: false,
-		gender: '',
-		gender_en: '',
-		age: '',
-		age_en: '',
-		size: '',
-		size_en: '',
-		description: '',
-		description_en: '',
-		photo: undefined,
-	};
+		const initialFormData: FormData = {
+			name: '',
+			name_en: '',
+			ready_for_adoption: false,
+			gender: '',
+			gender_en: '',
+			age: '',
+			age_en: '',
+			size: '',
+			size_en: '',
+			description: '',
+			description_en: '',
+		};
 		const [formData, setFormData] = useState<FormData>(initialFormData);
 
 		const [touched, setTouched] = useState<Record<string, boolean>>({
@@ -78,6 +76,7 @@ const TailForm: React.FC<TailFormProps> = ({
 			photo: false,
 		});
 		const [errors, setErrors] = useState<Record<string, string>>({});
+
 		const { mutate: addMutate } = useMutation({
 			mutationFn: addTail,
 			onSuccess: (data) => {
@@ -119,7 +118,7 @@ const TailForm: React.FC<TailFormProps> = ({
 				const editedCard = cards.find(card => card.id === dogId);
 				if (editedCard) {
 					setFormData({
-						id: editedCard.id ,
+						id: editedCard.id,
 						name: editedCard.name || '',
 						name_en: editedCard.name_en || '',
 						ready_for_adoption: editedCard.ready_for_adoption || false,
@@ -131,7 +130,7 @@ const TailForm: React.FC<TailFormProps> = ({
 						size_en: editedCard.size_en || '',
 						description: editedCard.description || '',
 						description_en: editedCard.description_en || '',
-						photo: editedCard.photo  ,
+						photo: editedCard.photo,
 					});
 
 					console.log(formData);
@@ -140,9 +139,9 @@ const TailForm: React.FC<TailFormProps> = ({
 		}, [formType, cards, dogId]);
 
 
-		const handleChange = (field: keyof FormData, value: string | boolean | FileList | null) => {
+		const handleChange = (field: keyof FormData, value: string | boolean | FileList | null | undefined) => {
 			const file = value?.[0];
-			if (field === 'photo') {
+			if (field === 'photo' && file) {
 				setFormData((prevData) => ({
 					...prevData,
 					photo: file,
@@ -171,7 +170,7 @@ const TailForm: React.FC<TailFormProps> = ({
 						return tail;
 					}));
 				} else {
-					 await addMutate({ formDogData: formData, token });
+					await addMutate({ formDogData: formData, token });
 				}
 
 			} else {
@@ -478,9 +477,10 @@ const TailForm: React.FC<TailFormProps> = ({
 
 				</div>
 				<div className={styles.errLoaderBox}>
-					{showLoader && formType !=='delete' ? <MiniLoader /> : null}
+					{showLoader && formType !== 'delete' ? <MiniLoader /> : null}
 
-					{showError  && formType !=='delete' ? <MiniErrorAlert errorMessage={showError} backgroundColor="rgba(255, 0, 0, 0.3)" /> : null}
+					{showError && formType !== 'delete' ?
+						<MiniErrorAlert errorMessage={showError} backgroundColor="rgba(255, 0, 0, 0.3)" /> : null}
 
 				</div>
 			</form>

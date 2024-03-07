@@ -1,4 +1,4 @@
-import * as React from 'react';
+
 import styles from '../AdminPhotos/AdminPhotos.module.scss';
 import Button from '../../layout/Button/Button';
 import { useLocation } from 'react-router-dom';
@@ -38,7 +38,7 @@ const AdminTails = () => {
 	const [showError, setShowError] = useState<string>('');
 	const [showForm, setShowForm] = useState<boolean>(false);
 	const [formType, setFormType] = useState<string>('');
-	const [dogId, setDogId] = useState<undefined | number | null>(null);
+	const [dogId, setDogId] = useState<number | null>(null);
 	const location = useLocation();
 	const { token } = useAuthContext();
 	const [cards, setCards] = useState<AdminTailsData>([]);
@@ -84,7 +84,10 @@ const AdminTails = () => {
 	const handleShowForm = (formStatus: boolean, type: string, id?: number) => {
 		setShowForm(formStatus);
 		setFormType(type);
-		setDogId(id);
+		if(id){
+			setDogId(id);
+		}
+
 		scrollOnTop();
 	};
 
@@ -94,7 +97,6 @@ const AdminTails = () => {
 	};
 
 	const handleDeleteTail = async (id: number) => {
-
 		setDogId(id);
 		if (token) {
 			setShowLoader(true);

@@ -8,14 +8,14 @@ import { MiniErrorAlert, MiniLoader } from '../../components/CommonUI/LoaderAndE
 import { AdminTailsData } from './AdminTails';
 
 interface TailsListProps {
-	cards: AdminTailsData[];
+	cards: AdminTailsData;
 	isPending: boolean;
 	isError: boolean;
 	changeShowForm: (a: boolean, b: string, c: number) => void;
 	handleDeleteTail: (id: number) => void;
 	showLoader: boolean;
 	showError: string;
-	dogId: number;
+	dogId: number | null;
 	formType: string;
 }
 
@@ -75,14 +75,16 @@ const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, change
 										<Tail disabled={true}
 											  {...tail}
 										/>
-										{formType === 'delete'  && showLoader &&  dogId === tail.id  ? <MiniLoader /> : null}
-										{formType === 'delete'  && showError &&  dogId === tail.id ? <MiniErrorAlert errorMessage={showError}
-																						   backgroundColor="rgba(255, 0, 0, 0.3)" /> : null}
+										{formType === 'delete' && showLoader && dogId === tail.id ?
+											<MiniLoader /> : null}
+										{formType === 'delete' && showError && dogId === tail.id ?
+											<MiniErrorAlert errorMessage={showError}
+															backgroundColor="rgba(255, 0, 0, 0.3)" /> : null}
 										<div className={styles.btnContainer}>
 											<div className={styles.btnBox}>
 
 												<Button
-													onClick={() => handleDeleteTail(tail.id)}
+													onClick={() => tail.id !== undefined && handleDeleteTail(tail.id)}
 													type={'button'}
 													btnClasses={'delete'}
 													children={<FaTrash className={styles.deleteIcon} />} />

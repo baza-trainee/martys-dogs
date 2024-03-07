@@ -1,11 +1,10 @@
-/*
-import FormData from 'TailForm.module.scss';
-type touched = Record<string, boolean>;
-type Errors = Record<string, string>;
-type SetErrorsFunction = Dispatch<SetStateAction<Errors>>;
+import { FormData } from './TailForm';
+import * as React from 'react';
 
 
-*/
+type TouchedState = Record<string, boolean>;
+type ErrorsState = Record<string, string>;
+
 
 const nameRegex = /^[А-Яа-яҐґЄєІіЇї\s'`’ʼ-]*$/;
 const nameEnRegex = /^[A-Za-z\s'`’ʼ-]*$/;
@@ -14,7 +13,7 @@ const ageEnRegex = /^[0-9]+[\s,.]*[0-9]*[\s]*[A-za-z]+$/;
 const descriptionRegex = /^[^a-zA-Z]+$/;
 const descriptionEnRegex = /^[^\u0400-\u04FF]+$/;
 
-export const validateName = (formData, touched, setErrors) => {
+export const validateName = (formData: FormData, touched: TouchedState, setErrors: React.Dispatch<React.SetStateAction<ErrorsState>>) => {
 
 	if (touched.name) {
 		if (formData.name.trim().length < 2) {
