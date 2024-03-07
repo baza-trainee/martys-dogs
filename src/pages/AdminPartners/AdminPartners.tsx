@@ -83,7 +83,9 @@ const AdminPartners: React.FC = () => {
 	const displayedPartners = partners?.slice(startIndex, endIndex);
 
 	if (isPending) {
-		return <Loader />;
+		return <div  className={styles.loaderContainer}>
+			<Loader />
+			</div>;
 	}
 
 	if (isError) {

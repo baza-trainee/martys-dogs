@@ -40,6 +40,7 @@
 		@include tablet {
 			justify-content: center;
 			flex-direction: row;
+			padding:0;
 		}
 
 		@include small_desktop {
@@ -52,15 +53,20 @@
 			height: auto;
 
 			@include tablet {
-				margin-bottom: 40px;
+				//margin-bottom: 40px;
 			}
 
 			&:hover {
-				transform: scale(1.2);
+				transform: scale(1.4);
 			}
 
 			.partnersLink {
-				cursor:pointer;
+				cursor: pointer;
+
+				img {
+					width: 160px;
+					height: auto;
+				}
 			}
 		}
 	}

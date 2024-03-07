@@ -58,6 +58,14 @@ export const MiniLoader: React.FC<LoaderProps> = () => {
     );
 };
 
+export const VideoLoader: React.FC<LoaderProps> = () => {
+
+  return (
+    <div className={styles.videoLoaderContainer} >
+      <div className={styles.loader}></div>
+    </div>
+  );
+};
 
 
   

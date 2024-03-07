@@ -76,3 +76,15 @@
 		transform: rotate(1turn);
 	}
 }
+
+
+.videoLoaderContainer {
+	top: 44%;
+	left: 44%;
+	position: absolute;
+	display: inline-block;
+	@include tablet {
+		top: 48%;
+		left: 48%;
+	}		
+}
