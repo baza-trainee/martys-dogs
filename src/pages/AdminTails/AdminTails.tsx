@@ -10,8 +10,7 @@ import TailForm from './TailForm';
 import { FaRegPlusSquare } from 'react-icons/fa';
 import { useAuthContext } from '../../context/useGlobalContext';
 import { queryClient } from '../../App';
-import { fetchTails, addTail, changeTail, deleteTail } from '../../services/fetchAdminTails';
-import { validateAge } from './validationSchema';
+import { fetchTails, deleteTail } from '../../services/fetchAdminTails';
 
 export interface TailsListData {
 	id: number;
@@ -67,6 +66,7 @@ const AdminTails = () => {
 			setShowError('');
 			queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
 			setCards(prevCards => prevCards.filter(tail => tail.id !== variables.tailId));
+			setShowForm(false);
 		},
 		onError: () => {
 			setShowLoader(false);
@@ -74,32 +74,7 @@ const AdminTails = () => {
 		},
 	});
 
-	/*const { mutate: addMutate } = useMutation({
-		mutationFn: addTail,
-		onSuccess: (data) => {
-			setShowLoader(false);
-			setShowError('');
-			queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
-		},
-		onError: () => {
-			setShowLoader(false);
-			setShowError('Додавання не вдалося, перезавантажте сторінку');
-		},
-	});
 
-	 const { mutate: changeMutate } = useMutation({
-		mutationFn: changeTail,
-		onSuccess: () => {
-			setShowLoader(false);
-			setShowError('');
-			queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
-		},
-		onError: () => {
-			setShowLoader(false);
-			setShowError('Зміна не вдалась, перезавантажте сторінку');
-		},
-	});
-*/
 	useEffect(() => {
 		location.pathname === '/' && !location.hash ? scrollOnTop() : null;
 	}, [location]);
@@ -130,10 +105,10 @@ const AdminTails = () => {
 		if (token) {
 			setShowLoader(true);
 			await deleteMutate({ tailId: id, token });
-			return cards;
 		}
-		setShowForm(false);
+
 		setFormType('delete');
+		console.log(formType);
 	};
 
 

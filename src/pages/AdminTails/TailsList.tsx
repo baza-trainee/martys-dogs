@@ -1,9 +1,6 @@
 import * as React from 'react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
-
-// import { UseQueryResult } from '@tanstack/react-query';
-// import { AdminTailsData } from './AdminTails';
 import styles from '../../pages/AdminTails/TailsList.module.scss';
 import Tail from '../../components/Tail/Tail';
 import Button from '../../layout/Button/Button';
@@ -78,9 +75,9 @@ const TailsList: React.FC<TailsListProps> = ({ cards, isPending, isError, change
 										<Tail disabled={true}
 											  {...tail}
 										/>
-										{formType === 'delete' && dogId === tail.id && showLoader && <MiniLoader />}
-										{formType === 'delete' && dogId === tail.id && showError && <MiniErrorAlert errorMessage={showError}
-																						   backgroundColor="rgba(255, 0, 0, 0.3)" />}
+										{formType === 'delete'  && showLoader &&  dogId === tail.id  ? <MiniLoader /> : null}
+										{formType === 'delete'  && showError &&  dogId === tail.id ? <MiniErrorAlert errorMessage={showError}
+																						   backgroundColor="rgba(255, 0, 0, 0.3)" /> : null}
 										<div className={styles.btnContainer}>
 											<div className={styles.btnBox}>
 

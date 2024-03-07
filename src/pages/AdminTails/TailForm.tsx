@@ -10,7 +10,6 @@ import * as val from './validationSchema';
 import { MiniErrorAlert, MiniLoader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 import { addTail, changeTail } from '../../services/fetchAdminTails';
 import { useAuthContext } from '../../context/useGlobalContext';
-import TailsList from './TailsList';
 import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '../../App';
 
@@ -36,15 +35,15 @@ interface TailFormProps {
 	changeShowForm: (a: boolean, b: string) => void;
 	changeErrLoader: (loaderStatus: boolean, error: string) => void;
 	formType: string;
-	dogId: number;
 	cards: AdminTailsData[];
+	dogId: number;
 	showLoader?: boolean;
 	showError?: string;
-
+	updateCards: React.Dispatch<React.SetStateAction<AdminTailsData[]>>;
 }
 
 const TailForm: React.FC<TailFormProps> = ({
-											   changeShowForm, changeErrLoader, formType, cards, dogId, showLoader, showError, updateCards,
+											   changeShowForm, changeErrLoader, formType, cards, dogId, showLoader, showError, updateCards
 										   }) => {
 		const { token } = useAuthContext();
 		console.log(cards);
@@ -76,29 +75,24 @@ const TailForm: React.FC<TailFormProps> = ({
 			onSuccess: (data) => {
 				changeErrLoader(false, '');
 				changeShowForm(false, '');
-				/*	setShowLoader(false);
-					setShowError('');*/
 				queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
+				//to make rerender for showing updates
+				updateCards(prevState => [...prevState, data]);
+				console.log(formData.id);
 			},
 			onError: () => {
 				changeErrLoader(false, 'Додавання не вдалося, перезавантажте сторінку');
-				/*			setShowLoader(false);
-							setShowError('Додавання не вдалося, перезавантажте сторінку');*/
 			},
 		});
 
 		const { mutate: changeMutate } = useMutation({
 			mutationFn: changeTail,
 			onSuccess: () => {
-				/*	setShowLoader(false);
-					setShowError('');*/
 				changeErrLoader(false, '');
 				changeShowForm(false, '');
 				queryClient.invalidateQueries({ queryKey: ['tailslist'], exact: true });
 			},
 			onError: () => {
-				/*	setShowLoader(false);
-					setShowError('Зміна не вдалась, перезавантажте сторінку');*/
 				changeErrLoader(false, 'Зміна не вдалась, перезавантажте сторінку');
 			},
 		});
@@ -159,9 +153,7 @@ const TailForm: React.FC<TailFormProps> = ({
 			if (token) {
 				changeErrLoader(true, '');
 				if (formType === 'edit' && formData.id !== undefined) {
-					// changeErrLoader(true, '');
 					const changedDog = await changeMutate({ tailId: formData.id, formDogData: formData, token });
-					// changeShowForm(false, '');
 					//to make rerender for showing updates
 					updateCards(prevCards => prevCards.map(tail => {
 						if (tail.id === formData.id) {
@@ -170,11 +162,7 @@ const TailForm: React.FC<TailFormProps> = ({
 						return tail;
 					}));
 				} else {
-					// changeErrLoader(true, '');
-					const newDog = await addMutate({ formDogData: formData, token });
-					// changeShowForm(false, '');
-					//to make rerender for showing updates
-					updateCards(prevState => [...prevState, newDog]);
+					 await addMutate({ formDogData: formData, token });
 				}
 
 			} else {
@@ -481,9 +469,9 @@ const TailForm: React.FC<TailFormProps> = ({
 
 				</div>
 				<div className={styles.errLoaderBox}>
-					{showLoader && <MiniLoader />}
+					{showLoader && formType !=='delete' ? <MiniLoader /> : null}
 
-					{showError && <MiniErrorAlert errorMessage={showError} backgroundColor="rgba(255, 0, 0, 0.3)" />}
+					{showError  && formType !=='delete' ? <MiniErrorAlert errorMessage={showError} backgroundColor="rgba(255, 0, 0, 0.3)" /> : null}
 
 				</div>
 			</form>
