@@ -100,13 +100,13 @@ const AdminTails = () => {
 	};
 
 	const handleDeleteTail = async (id: number) => {
-		console.log('Delete ' + id);
+
 		setDogId(id);
 		if (token) {
 			setShowLoader(true);
 			await deleteMutate({ tailId: id, token });
 		}
-
+		console.log('Delete ' + id);
 		setFormType('delete');
 		console.log(formType);
 	};
