@@ -2,7 +2,7 @@
 @import '../../scss/mixins';
 
 .container {
-	padding: 35px;
+	padding: 50px;
 	width: 100%;
 	gap: 32px;
 	display: flex;
@@ -11,8 +11,8 @@
 
 .title {
 	margin-bottom: 24px;
-	font-weight: 800;
-	line-height: 1.2;
+	// font-weight: 800;
+	// line-height: 1.2;
 
 	@include small-desktop {
 		font-size: 42px;
