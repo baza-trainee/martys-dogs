@@ -1,5 +1,5 @@
-import * as React from 'react';
 import Select from 'react-select';
+import { StylesConfig } from 'react-select';
 import { UseQueryResult } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -28,13 +28,13 @@ type FilterParams = {
 	ready_for_adoption?: boolean;
 } & { [key: string]: string | boolean };
 
-interface CustomStyles {
-	control?: (provided: any, state: any) => any;
-	dropdownIndicator?: (provided: any) => any;
-	indicatorSeparator?: () => any;
-	menu?: (provided: any) => any;
-	option?: (provided: any) => any;
-}
+// interface CustomStyles {
+// 	control?: (provided: any, state: any) => any;
+// 	dropdownIndicator?: (provided: any) => any;
+// 	indicatorSeparator?: () => any;
+// 	menu?: (provided: any) => any;
+// 	option?: (provided: any) => any;
+// }
 
 const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 	const [cards, setCards] = useState<DogCard[]>([]);
@@ -100,7 +100,7 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 		},
 	];
 
-	const customStyles: CustomStyles = {
+	const customStyles: StylesConfig<OptionType, false> = {
 		control: (provided, state) => ({
 			...provided,
 			padding: '6px 16px',

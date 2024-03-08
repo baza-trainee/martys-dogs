@@ -45,8 +45,6 @@ const AdminForm: FC = () => {
 		fetchMessages();
 	}, [token]);
 
-	// console.log(messages);
-
 	if (loading) {
 		return (
 			<div className={styles.container}>

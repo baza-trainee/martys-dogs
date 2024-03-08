@@ -1,12 +1,12 @@
 import { FaCakeCandles, FaCheck } from 'react-icons/fa6';
-
-import Button from '../../layout/Button/Button';
 import { GrExpand } from 'react-icons/gr';
-import { scrollToSection } from '../../services/scrollTo';
-import styles from './Tail.module.scss';
-import { useModalContext } from '../../context/useGlobalContext';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import Button from '../../layout/Button/Button';
+import styles from './Tail.module.scss';
+import { scrollToSection } from '../../services/scrollTo';
+import { useModalContext } from '../../context/useGlobalContext';
 
 interface TailDisabledProps {
 	disabled?: boolean;
@@ -18,19 +18,19 @@ export interface TailProps extends TailDisabledProps {
 	ready_for_adoption: boolean;
 	gender: string;
 	age: string;
-	sterilization: boolean;
-	vaccination_parasite_treatment: boolean;
+	sterilization?: boolean;
+	vaccination_parasite_treatment?: boolean;
 	size: string;
 	description: string;
-	photo: {
-		id: string;
-		name: string;
-		url: string;
-		category: string;
-	};
+	photo:
+		| {
+				id: string;
+				name: string;
+				url: string;
+				category: string;
+		}
+		| File;
 }
-
-
 
 const Tail: React.FC<TailProps> = ({
 	id,
@@ -43,7 +43,7 @@ const Tail: React.FC<TailProps> = ({
 	size,
 	description,
 	photo,
-	disabled
+	disabled,
 }) => {
 	const { t } = useTranslation();
 	const { openModal, activateModal, activeModal } = useModalContext();
@@ -57,12 +57,34 @@ const Tail: React.FC<TailProps> = ({
 		console.log(activeModal);
 		openModal();
 		activateModal('contact', id);
-		console.log(`id of dog: ${id}`)
+		console.log(`id of dog: ${id}`);
 	};
 
 	return (
 		<div className={styles.card} onClick={handleClick}>
-			<img src={photo?.url} alt='dog' className={styles.image} />
+			{photo && typeof photo === 'object' ? (
+				<img
+					src={
+						(
+							photo as {
+								id: string;
+								name: string;
+								url: string;
+								category: string;
+							}
+						).url
+					}
+					alt='dog'
+					className={styles.image}
+				/>
+			) : (
+				<img
+					src={URL.createObjectURL(photo as File)}
+					alt='dog'
+					className={styles.image}
+				/>
+			)}
+
 			{ready_for_adoption && (
 				<p className={styles.friend}>{t('tail.ready')}</p>
 			)}

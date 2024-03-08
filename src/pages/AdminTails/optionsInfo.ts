@@ -1,21 +1,11 @@
-import * as React from 'react';
-import Select from 'react-select';
-import ArrowIconUp from '../../assets/dropdown_arrow_up.svg';
+import { StylesConfig } from 'react-select';
+
 import ArrowIconDown from '../../assets/dropdown_arrow_down.svg';
-
-
+import ArrowIconUp from '../../assets/dropdown_arrow_up.svg';
 
 interface OptionType {
 	value: string;
 	label: string;
-}
-
-interface CustomStyles {
-	control?: (provided: any, state: any) => any;
-	dropdownIndicator?: (provided: any) => any;
-	indicatorSeparator?: () => any;
-	menu?: (provided: any) => any;
-	option?: (provided: any) => any;
 }
 
 export const optionsGenderUA: OptionType[] = [
@@ -24,7 +14,6 @@ export const optionsGenderUA: OptionType[] = [
 	{ value: 'дівчинка', label: 'Дівчинка' },
 ];
 
-
 export const optionsSizeUA: OptionType[] = [
 	{ value: '', label: 'Оберіть розмір' },
 	{ value: 'маленький', label: 'Маленький' },
@@ -32,13 +21,11 @@ export const optionsSizeUA: OptionType[] = [
 	{ value: 'великий', label: 'Великий' },
 ];
 
-
 export const optionsGenderEN: OptionType[] = [
 	{ value: '', label: 'Оберіть стать' },
 	{ value: 'boy', label: 'Boy' },
 	{ value: 'girl', label: 'Girl' },
 ];
-
 
 export const optionsSizeEN: OptionType[] = [
 	{ value: '', label: 'Оберіть розмір' },
@@ -47,9 +34,8 @@ export const optionsSizeEN: OptionType[] = [
 	{ value: 'large', label: 'Large' },
 ];
 
-
-export const customStyles: CustomStyles = {
-	control: (provided, state) => ({
+export const customStyles: StylesConfig<OptionType, false> = {
+  control: (provided, state) => ({
 		...provided,
 		padding: '6px 16px',
 		borderRadius: '40px',

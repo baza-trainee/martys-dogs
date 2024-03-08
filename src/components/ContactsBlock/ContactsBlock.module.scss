@@ -119,7 +119,10 @@
 		object-position: 60% 50%;
 	}
 	@media screen and (max-width: 767px) {
-		object-position: 80% 50%;
+		height: 200px;
+		width: 100%;
+		// object-position: 80% 50%;
+		// object-fit: contain;
 	}
 }
 
@@ -132,4 +135,7 @@ a {
 
 .images {
 	flex: 1 1 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

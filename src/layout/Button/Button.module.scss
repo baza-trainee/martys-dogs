@@ -2,229 +2,220 @@
 @use 'src/scss/mixins' as *;
 
 .button {
-  border-radius: 30px;
-  display: inline-flex;
-  height: 52px;
-  padding: 12px 24px;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 28px;
-  border-style: none;
-  transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
-  width: 100%;
-  cursor: pointer;
+	border-radius: 30px;
+	display: inline-flex;
+	height: 52px;
+	padding: 12px 24px;
+	justify-content: center;
+	align-items: center;
+	gap: 8px;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 28px;
+	border-style: none;
+	transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+	width: 100%;
+	cursor: pointer;
 
-  &:hover {
-    transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
-  }
+	&:hover {
+		transition: cubic-bezier(0.4, 0, 0.2, 1) 0.25s;
+	}
 
-  &:disabled {
-    color: $color-gray-60;
+	&:disabled {
+		color: $color-gray-60;
 
-    svg {
-      fill: $color-gray-60;
-    }
-  }
+		svg {
+			fill: $color-gray-60;
+		}
+	}
 }
 
-
 .primary {
-  background: $color-accent;
-  color: $color-gray-10;
+	background: $color-accent;
+	color: $color-gray-10;
 
-  @include hover {
-    &:hover {
-      background: $color-main-blue-dark;
-    }
-  }
+	@include hover {
+		&:hover {
+			background: $color-main-blue-dark;
+		}
+	}
 
-  &:focus-visible {
-    outline: none;
-    border: 1px solid $color-main-blue-dark;
-  }
+	&:focus-visible {
+		outline: none;
+		border: 1px solid $color-main-blue-dark;
+	}
 
-  //pressed
-  &:active {
-    background: $color-gray-100;
-  }
+	//pressed
+	&:active {
+		background: $color-gray-100;
+	}
 
-  &:disabled {
-    background: $color-gray-20;
-  }
-
+	&:disabled {
+		background: $color-gray-20;
+	}
 }
 
 .secondary {
-  border-radius: 30px;
-  border: 1px solid $color-accent;
-  color: $color-accent;
-  background: $color-gray-0;
+	border-radius: 30px;
+	border: 1px solid $color-accent;
+	color: $color-accent;
+	background: $color-gray-0;
 
-  @include hover {
-    &:hover {
-      border-color: $color-main-blue-dark;
-      color: $color-main-blue-dark;
-    }
-  }
+	@include hover {
+		&:hover {
+			border-color: $color-main-blue-dark;
+			color: $color-main-blue-dark;
+		}
+	}
 
-  &:focus-visible {
-    border-color: $color-main-blue-dark;
-  }
+	&:focus-visible {
+		border-color: $color-main-blue-dark;
+	}
 
-  //pressed
-  &:active {
-    border-color: $color-gray-100;
-    color: $color-gray-100;
-  }
+	//pressed
+	&:active {
+		border-color: $color-gray-100;
+		color: $color-gray-100;
+	}
 
-  &:disabled {
-    border-color: $color-gray-60;
-    color: $color-gray-60;
-
-  }
+	&:disabled {
+		border-color: $color-gray-60;
+		color: $color-gray-60;
+	}
 }
 
 .filterPC {
-  width: auto;
-  background: $color-gray-0;
-  border: 1px solid $color-accent;
-  color: $color-accent;
-  padding: 12px 32px;
-  font-size: 24px;
-  white-space: nowrap;
+	width: auto;
+	background: $color-gray-0;
+	border: 1px solid $color-accent;
+	color: $color-accent;
+	padding: 12px 32px;
+	font-size: 24px;
+	white-space: nowrap;
 
-  @include hover {
-    &:hover {
-      border-color: $color-main-blue-dark;
-      color: $color-main-blue-dark;
-    }
-  }
+	@include hover {
+		&:hover {
+			border-color: $color-main-blue-dark;
+			color: $color-main-blue-dark;
+		}
+	}
 
+	&:focus-visible {
+		outline: none;
+		border-color: $color-main-blue-dark;
+	}
 
-  &:focus-visible {
-    outline: none;
-    border-color: $color-main-blue-dark;
-  }
+	&:active {
+		border-color: $color-gray-100;
+		color: $color-gray-100;
+	}
 
-  &:active {
-    border-color: $color-gray-100;
-    color: $color-gray-100;
-  }
+	&:disabled {
+		border-color: $color-gray-60;
+		background: transparent;
 
-  &:disabled {
-    border-color: $color-gray-60;
-    background: transparent;
+		@include hover {
+			&:hover {
+				color: $color-gray-60;
+			}
+		}
+	}
 
-
-    @include hover {
-      &:hover {
-        color: $color-gray-60;
-      }
-    }
-  }
-
-  @media screen and (max-width: 1279px) {
-    display: none;
-  }
+	@media screen and (max-width: 1279px) {
+		display: none;
+	}
 }
 
 .filterMob {
-  width: auto;
-  background: $color-gray-0;
-  border: 1px solid $color-accent;
-  color: $color-accent;
-  padding: 12px 32px;
-  font-size: 24px;
-  white-space: nowrap;
-  display: none;
+	width: auto;
+	background: $color-gray-0;
+	border: 1px solid $color-accent;
+	color: $color-accent;
+	padding: 12px 32px;
+	font-size: 24px;
+	white-space: nowrap;
+	display: none;
 
-  @include hover {
-    &:hover {
-      border-color: $color-main-blue-dark;
-      color: $color-main-blue-dark;
-    }
-  }
+	@include hover {
+		&:hover {
+			border-color: $color-main-blue-dark;
+			color: $color-main-blue-dark;
+		}
+	}
 
+	&:focus-visible {
+		outline: none;
+		border-color: $color-main-blue-dark;
+	}
 
-  &:focus-visible {
-    outline: none;
-    border-color: $color-main-blue-dark;
-  }
+	&:active {
+		border-color: $color-gray-100;
+		color: $color-gray-100;
+	}
 
-  &:active {
-    border-color: $color-gray-100;
-    color: $color-gray-100;
-  }
+	&:disabled {
+		border-color: $color-gray-60;
+		background: transparent;
 
-  &:disabled {
-    border-color: $color-gray-60;
-    background: transparent;
+		@include hover {
+			&:hover {
+				color: $color-gray-60;
+			}
+		}
+	}
 
-
-    @include hover {
-      &:hover {
-        color: $color-gray-60;
-      }
-    }
-  }
-
-  @media screen and (max-width: 1279px) {
-    display: block;
-  }
+	@media screen and (max-width: 1279px) {
+		display: block;
+	}
 }
 
- .add {
-  background: $color-system-green;
-   color: $color-gray-10;
+.add {
+	background: $color-system-green;
+	color: $color-gray-10;
 
-   @include hover {
-     &:hover {
-       background: #04793D;
-     }
-   }
+	@include hover {
+		&:hover {
+			background: #04793d;
+		}
+	}
 
-   &:focus-visible {
-     outline: none;
-     border: 1px solid #024C27;
-   }
+	&:focus-visible {
+		outline: none;
+		border: 1px solid #024c27;
+	}
 
-   //pressed
-   &:active {
-     background: #024C27;
-   }
+	//pressed
+	&:active {
+		background: #024c27;
+	}
 
-   &:disabled {
-     background: $color-gray-20;
-   }
+	&:disabled {
+		background: $color-gray-20;
+	}
 }
-
-
 
 .delete {
-  background: $color-system-error;
-  color: $color-gray-10;
+	background: $color-system-error;
+	color: $color-gray-10;
 
-  @include hover {
-    &:hover {
-      background: #A00202;
-    }
-  }
+	@include hover {
+		&:hover {
+			background: #E11D48
+		}
+	}
 
-  &:focus-visible {
-    outline: none;
-    border: 1px solid #840000;
-  }
+	&:focus-visible {
+		outline: none;
+		border: 1px solid #BE123C;
+	}
 
-  //pressed
-  &:active {
-    background: #840000;
-  }
+	//pressed
+	&:active {
+		background: #BE123C;
+	}
 
-  &:disabled {
-    background: $color-gray-20;
-  }
+	&:disabled {
+		background: $color-gray-20;
+	}
 }

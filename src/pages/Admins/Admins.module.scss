@@ -10,7 +10,7 @@
 .main {
 	// background-color: #dbdbdb;
 	width: 100%;
-	padding: 100px;
+	padding: 50px;
 
 	.table {
 		width: 100%;
@@ -52,12 +52,16 @@
 	width: 120px;
 	color: $color-gray-0;
 	font-size: 16px;
-	background-color: #f495a9;
+	background-color: #F43F5E;
 	border-radius: 40px;
 	transition: all 0.3s ease;
 	width: 100%;
 	&:hover {
-		background: #fb6082;
+		background: #E11D48;
+		color: $color-gray-0;
+	}
+	&:active {
+		background: #BE123C;
 		color: $color-gray-0;
 	}
 }
