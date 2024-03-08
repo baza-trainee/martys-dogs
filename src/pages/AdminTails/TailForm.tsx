@@ -1,5 +1,5 @@
 import Select from 'react-select';
-import { FC, useEffect, useState } from 'react';
+import { FC, FormEvent, useEffect, useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
 
@@ -170,12 +170,12 @@ const TailForm: FC<TailFormProps> = ({
 		setTouched((prevTouched) => ({ ...prevTouched, [field]: true }));
 	};
 
-	const handleSubmit = async (e: React.FormEvent) => {
+	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault();
 		if (token) {
 			changeErrLoader(true, '');
 			if (formType === 'edit' && formData.id !== undefined) {
-				const changedDog = await changeMutate({
+				const changedDog: any = await changeMutate({
 					tailId: formData.id,
 					formDogData: formData,
 					token,
@@ -196,7 +196,6 @@ const TailForm: FC<TailFormProps> = ({
 			console.error('handleSubmit failed because of no Auth token ');
 		}
 	};
-
 	const handleShowFormStatus = () => {
 		changeShowForm(false, '');
 	};
