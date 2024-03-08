@@ -26,12 +26,14 @@ export interface TailsListData {
 	description: string;
 	description_en?: string;
 	// photo?: File;
-	photo: {
-		id: string;
-		name: string;
-		url: string;
-		category: string;
-	};
+	photo:
+		| {
+				id: string;
+				name: string;
+				url: string;
+				category: string;
+		}
+		| File;
 }
 
 export type AdminTailsData = TailsListData[];

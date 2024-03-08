@@ -156,7 +156,7 @@ export const validateFile = (
 	// const file = formData.photo?.[0];
 	if (touched.photo) {
 		if (file && file.size > maxSize) {
-			console.log(`file.size ${file.size}`);
+			// console.log(`file.size ${file.size}`);
 			setErrors((prevErrors) => ({
 				...prevErrors,
 				photo: `Максимальний розмір 5MB`,

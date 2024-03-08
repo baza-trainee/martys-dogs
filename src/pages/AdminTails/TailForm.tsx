@@ -1,6 +1,6 @@
 import Select from 'react-select';
+import { FC, useEffect, useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 
 import * as options from './optionsInfo';
@@ -43,7 +43,7 @@ interface TailFormProps {
 	updateCards: React.Dispatch<React.SetStateAction<AdminTailsData>>;
 }
 
-const TailForm: React.FC<TailFormProps> = ({
+const TailForm: FC<TailFormProps> = ({
 	changeShowForm,
 	changeErrLoader,
 	formType,
@@ -54,8 +54,6 @@ const TailForm: React.FC<TailFormProps> = ({
 	updateCards,
 }) => {
 	const { token } = useAuthContext();
-	console.log(cards);
-	console.log(`dogId: ` + dogId + ` is ` + typeof dogId);
 
 	const initialFormData: FormData = {
 		name: '',
@@ -96,7 +94,6 @@ const TailForm: React.FC<TailFormProps> = ({
 			});
 			//to make rerender for showing updates
 			updateCards((prevState) => [...prevState, data]);
-			console.log(formData.id);
 		},
 		onError: () => {
 			changeErrLoader(
@@ -148,18 +145,16 @@ const TailForm: React.FC<TailFormProps> = ({
 					description_en: editedCard.description_en || '',
 					photo: editedCard.photo,
 				});
-
-				console.log(formData);
 			}
 		}
-	}, [formType, cards, dogId, formData]);
+	}, [formType, cards, dogId]);
 
 	const handleChange = (
 		field: keyof FormData,
 		value: string | boolean | FileList | null | undefined,
 	) => {
-		const file = value?.[0];
-		// const file = value;
+		// const file = value?.[0];
+		const file = value instanceof FileList ? value[0] : null;
 		if (field === 'photo' && file) {
 			setFormData((prevData) => ({
 				...prevData,
@@ -204,7 +199,6 @@ const TailForm: React.FC<TailFormProps> = ({
 
 	const handleShowFormStatus = () => {
 		changeShowForm(false, '');
-		console.log('Закрити форму редагування');
 	};
 
 	const isSubmitDisabled = () => {

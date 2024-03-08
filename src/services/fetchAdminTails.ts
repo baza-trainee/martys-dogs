@@ -1,6 +1,5 @@
 export const TAILS = 'https://matys-dogs2.onrender.com/dog_card';
 
-
 export interface FormDogData {
 	id?: number;
 	name: string;
@@ -29,7 +28,6 @@ export const setFormData = (formDogData: FormDogData) => {
 		} else if (value !== undefined) {
 			newFormData.append(key, value.toString());
 		}
-		// newFormData.append(key, value.toString());
 	});
 
 	return newFormData;
@@ -48,10 +46,9 @@ export const fetchTails = async (token: string) => {
 		if (!response.ok) {
 			throw new Error('Data Tails loading error');
 		}
-		if (response.status === 200) {
-			console.log(response);
-
-		}
+		// if (response.status === 200) {
+		// 	console.log(response);
+		// }
 		const data = await response.json();
 		return data;
 	} catch (error) {

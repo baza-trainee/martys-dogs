@@ -8,7 +8,6 @@ export const getMessages = async (token: string) => {
 				Authorization: `Bearer ` + token,
 			},
 		});
-		// console.log('Notification:', data);
 		return data;
 	} catch (error) {
 		console.error(error);

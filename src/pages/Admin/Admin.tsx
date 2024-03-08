@@ -77,7 +77,6 @@ const Sidebar: FC<SidebarProps> = ({ isSidebarOpen, setSidebarOpen }) => {
 			if (token !== null) {
 				try {
 					const data = await getMessages(token);
-					console.log(data);
 					setMessageQuantity(
 						data?.filter((message: Message) => !message.status)
 							.length,
