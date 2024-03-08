@@ -1,0 +1,48 @@
+@import '../../scss/_variables.scss';
+
+.login {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: $color-main-bg;
+	padding: 3rem;
+
+	.form {
+		padding: 2.5rem;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+		width: 25rem;
+		background-color: #f9f9f9;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+		border-radius: 1.25rem;
+		text-align: center;
+
+		.span {
+			color: #3668b9;
+		}
+
+		.number {
+			text-decoration: underline;
+			text-underline-offset: 0.25rem;
+		}
+
+		.button {
+			text-transform: uppercase;
+			margin-top: 0;
+			transition: background-color 0.3s;
+			width: 100%;
+			padding: 0.7rem;
+			background-color: #4a90e2;
+			color: $color-gray-0;
+			border: none;
+			cursor: pointer;
+			border-radius: 0.25rem;
+
+			&:hover {
+				background-color: #3668b9;
+			}
+		}
+	}
+}

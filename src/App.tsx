@@ -4,23 +4,25 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import About from './pages/About/About';
 import AddEditNews from './pages/AdminsNews/AddEditNews';
 import AddPartner from './pages/AdminPartners/AddPartner';
-import AdminTails from './pages/AdminTails/AdminTails';
 import AdminForm from './pages/AdminForm/AdminForm';
 import AdminHomeLayout from './layout/AdminHomeLayout/AdminHomeLayout';
 import AdminNews from './pages/AdminsNews/AdminNews';
 import AdminPartners from './pages/AdminPartners/AdminPartners';
 import AdminPhotos from './pages/AdminPhotos/AdminPhotos';
 import AdminStatistics from './pages/AdminStatistics/AdminStatistics';
+import AdminTails from './pages/AdminTails/AdminTails';
 import Admins from './pages/Admins/Admins';
 import Contacts from './pages/Contacts/Contacts';
 import Error from './pages/Error/Error';
-import ForgottenPassword from './pages/ForgottenPassword/ForgottenPassword'
+import ForgottenPassword from './pages/ForgottenPassword/ForgottenPassword';
 import HomeLayout from './layout/HomeLayout/HomeLayout';
 import Landing from './pages/Landing/Landing';
 import Login from './pages/Login/Login';
+import Monobank from './pages/Monobank/Monobank'
 import OurTails from './pages/OurTails/OurTails';
+import Paypal from './pages/Paypal/Paypal'
 import Register from './pages/Register/Register';
-import ResetPassword from './pages/ResetPassword/ResetPassword'
+import ResetPassword from './pages/ResetPassword/ResetPassword';
 import { AuthProvider } from './context/AuthContext';
 import { ModalProvider } from './context/ModalContext';
 
@@ -71,6 +73,14 @@ const router = createBrowserRouter([
 	{
 		path: 'register',
 		element: <Register />,
+	},
+	{
+		path: 'monobank',
+		element: <Monobank />,
+	},
+	{
+		path: 'paypal',
+		element: <Paypal />,
 	},
 	{
 		path: 'admin',
