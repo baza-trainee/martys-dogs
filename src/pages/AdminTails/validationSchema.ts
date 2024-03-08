@@ -152,11 +152,9 @@ export const validateFile = (
 ) => {
 	const maxSize = 5 * 1024 * 1024; // 5MB
 	const supportedImageFormats = ['image/jpeg', 'image/png', 'image/webp'];
-	// const file = formData.photo;
-	const file = formData.photo?.[0];
+	const file = formData.photo instanceof FileList ? formData.photo[0] : null;
 	if (touched.photo) {
 		if (file && file.size > maxSize) {
-			// console.log(`file.size ${file.size}`);
 			setErrors((prevErrors) => ({
 				...prevErrors,
 				photo: `Максимальний розмір 5MB`,
