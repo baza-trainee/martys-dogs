@@ -89,7 +89,7 @@ const TailForm: FC<TailFormProps> = ({
 			changeErrLoader(false, '');
 			changeShowForm(false, '');
 			queryClient.invalidateQueries({
-				queryKey: ['tailslist'],
+				queryKey: ['tailsList'],
 				exact: true,
 			});
 			//to make rerender for showing updates
@@ -109,7 +109,7 @@ const TailForm: FC<TailFormProps> = ({
 			changeErrLoader(false, '');
 			changeShowForm(false, '');
 			queryClient.invalidateQueries({
-				queryKey: ['tailslist'],
+				queryKey: ['tailsList'],
 				exact: true,
 			});
 		},
@@ -129,7 +129,7 @@ const TailForm: FC<TailFormProps> = ({
 	useEffect(() => {
 		if (formType === 'edit' && cards.length > 0) {
 			const editedCard = cards.find((card) => card.id === dogId);
-			if (editedCard) {
+			if (editedCard && editedCard.photo instanceof File) {
 				setFormData({
 					id: editedCard.id,
 					name: editedCard.name || '',
