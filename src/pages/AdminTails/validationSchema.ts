@@ -1,11 +1,7 @@
 import { FormData } from './TailForm';
-import * as React from 'react';
-
 
 type TouchedState = Record<string, boolean>;
 type ErrorsState = Record<string, string>;
-
-
 const nameRegex = /^[А-Яа-яҐґЄєІіЇї\s'`’ʼ-]*$/;
 const nameEnRegex = /^[A-Za-z\s'`’ʼ-]*$/;
 const ageRegex = /^[0-9]+[\s,.]*[0-9]*[\s]*[А-Яа-яҐґЄєІіЇї]+$/;
@@ -13,11 +9,17 @@ const ageEnRegex = /^[0-9]+[\s,.]*[0-9]*[\s]*[A-za-z]+$/;
 const descriptionRegex = /^[^a-zA-Z]+$/;
 const descriptionEnRegex = /^[^\u0400-\u04FF]+$/;
 
-export const validateName = (formData: FormData, touched: TouchedState, setErrors: React.Dispatch<React.SetStateAction<ErrorsState>>) => {
-
+export const validateName = (
+	formData: FormData,
+	touched: TouchedState,
+	setErrors: React.Dispatch<React.SetStateAction<ErrorsState>>,
+) => {
 	if (touched.name) {
 		if (formData.name.trim().length < 2) {
-			setErrors((prevErrors) => ({ ...prevErrors, name: 'Введіть щонайменше 2 символи' }));
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				name: 'Введіть щонайменше 2 символи',
+			}));
 		} else if (!nameRegex.test(formData.name)) {
 			setErrors((prevErrors) => ({
 				...prevErrors,
@@ -29,7 +31,10 @@ export const validateName = (formData: FormData, touched: TouchedState, setError
 	}
 
 	if (touched.name_en) {
-		if (formData.name_en !== undefined && !nameEnRegex.test(formData.name_en)) {
+		if (
+			formData.name_en !== undefined &&
+			!nameEnRegex.test(formData.name_en)
+		) {
 			setErrors((prevErrors) => ({
 				...prevErrors,
 				name_en: 'Дозволена латиниця, пробіл, дефіс, апостроф',
@@ -38,14 +43,19 @@ export const validateName = (formData: FormData, touched: TouchedState, setError
 			setErrors((prevErrors) => ({ ...prevErrors, name_en: '' }));
 		}
 	}
-
 };
 
-
-export const validateDescription = (formData, touched, setErrors) => {
+export const validateDescription = (
+	formData: FormData,
+	touched: TouchedState,
+	setErrors: React.Dispatch<React.SetStateAction<ErrorsState>>,
+) => {
 	if (touched.description) {
 		if (formData.description.trim().length < 10) {
-			setErrors((prevErrors) => ({ ...prevErrors, description: 'Введіть щонайменше 10 символів' }));
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				description: 'Введіть щонайменше 10 символів',
+			}));
 		} else if (!descriptionRegex.test(formData.description)) {
 			setErrors((prevErrors) => ({
 				...prevErrors,
@@ -56,9 +66,11 @@ export const validateDescription = (formData, touched, setErrors) => {
 		}
 	}
 
-
 	if (touched.description_en) {
-		if (formData.description_en !== undefined && !descriptionEnRegex.test(formData.description_en)) {
+		if (
+			formData.description_en !== undefined &&
+			!descriptionEnRegex.test(formData.description_en)
+		) {
 			setErrors((prevErrors) => ({
 				...prevErrors,
 				description_en: 'Дозволена латиниця, цифри та будь-які символи',
@@ -67,13 +79,19 @@ export const validateDescription = (formData, touched, setErrors) => {
 			setErrors((prevErrors) => ({ ...prevErrors, description_en: '' }));
 		}
 	}
-
 };
 
-export const validateAge = (formData, touched, setErrors) => {
+export const validateAge = (
+	formData: FormData,
+	touched: TouchedState,
+	setErrors: React.Dispatch<React.SetStateAction<ErrorsState>>,
+) => {
 	if (touched.age) {
 		if (formData.age.trim().length < 5) {
-			setErrors((prevErrors) => ({ ...prevErrors, age: 'Введіть щонайменше 5 символів' }));
+			setErrors((prevErrors) => ({
+				...prevErrors,
+				age: 'Введіть щонайменше 5 символів',
+			}));
 		} else if (!ageRegex.test(formData.age.trim())) {
 			setErrors((prevErrors) => ({
 				...prevErrors,
@@ -84,9 +102,11 @@ export const validateAge = (formData, touched, setErrors) => {
 		}
 	}
 
-
 	if (touched.age_en) {
-		if (formData.age_en !== undefined && !ageEnRegex.test(formData.age_en.trim())) {
+		if (
+			formData.age_en !== undefined &&
+			!ageEnRegex.test(formData.age_en.trim())
+		) {
 			setErrors((prevErrors) => ({
 				...prevErrors,
 				age_en: 'Почніть з цифри, а далі можна ввести латиницю, крапку, кому',
@@ -95,11 +115,13 @@ export const validateAge = (formData, touched, setErrors) => {
 			setErrors((prevErrors) => ({ ...prevErrors, age_en: '' }));
 		}
 	}
-
 };
 
-
-export const validateSelects = (formData, touched, setErrors) => {
+export const validateSelects = (
+	formData: FormData,
+	touched: TouchedState,
+	setErrors: React.Dispatch<React.SetStateAction<ErrorsState>>,
+) => {
 	if (touched.gender) {
 		if (formData.gender === '') {
 			setErrors((prevErrors) => ({
@@ -121,14 +143,17 @@ export const validateSelects = (formData, touched, setErrors) => {
 			setErrors((prevErrors) => ({ ...prevErrors, size: '' }));
 		}
 	}
-
 };
 
-export const validateFile = (formData, touched, setErrors) => {
+export const validateFile = (
+	formData: FormData,
+	touched: TouchedState,
+	setErrors: React.Dispatch<React.SetStateAction<ErrorsState>>,
+) => {
 	const maxSize = 5 * 1024 * 1024; // 5MB
 	const supportedImageFormats = ['image/jpeg', 'image/png', 'image/webp'];
-	// const file = formData.photo;
-	const file = formData.photo?.[0];
+	const file = formData.photo;
+	// const file = formData.photo?.[0];
 	if (touched.photo) {
 		if (file && file.size > maxSize) {
 			console.log(`file.size ${file.size}`);
@@ -147,5 +172,3 @@ export const validateFile = (formData, touched, setErrors) => {
 		}
 	}
 };
-
-

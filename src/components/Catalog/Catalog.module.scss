@@ -132,6 +132,14 @@
 	gap: 20px;
 	place-items: center;
 
+	@media screen and (max-width: 1919px) {
+		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+	}
+
+	@media screen and (max-width: 1440px) {
+		grid-template-columns: repeat(auto-fit, minmax(346px, 1fr));
+	}
+
 	@media screen and (max-width: 767px) {
 		grid-template-columns: 1fr;
 	}

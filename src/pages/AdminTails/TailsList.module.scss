@@ -1,14 +1,34 @@
 @import '../../scss/variables';
 @import '../../scss/mixins';
 
-.catalog_list {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+// .catalog_list {
+//   display: flex;
+//   justify-content: start;
+//   flex-wrap: wrap;
+//   gap: 40px;
 
-  @media screen and (max-width: 723px) {
-    justify-content: center;
-  }
+//   @media screen and (max-width: 723px) {
+//     justify-content: center;
+//   }
+// }
+
+.catalog_list {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(415px, 1fr));
+	gap: 20px;
+	place-items: center;
+
+	@media screen and (max-width: 1919px) {
+		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+	}
+
+	@media screen and (max-width: 1440px) {
+		grid-template-columns: repeat(auto-fit, minmax(346px, 1fr));
+	}
+
+	@media screen and (max-width: 767px) {
+		grid-template-columns: 1fr;
+	}
 }
 
 .catalog_list_card {

@@ -1,12 +1,12 @@
 import { FaCakeCandles, FaCheck } from 'react-icons/fa6';
-
-import Button from '../../layout/Button/Button';
 import { GrExpand } from 'react-icons/gr';
-import { scrollToSection } from '../../services/scrollTo';
-import styles from './Tail.module.scss';
-import { useModalContext } from '../../context/useGlobalContext';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
+import Button from '../../layout/Button/Button';
+import styles from './Tail.module.scss';
+import { scrollToSection } from '../../services/scrollTo';
+import { useModalContext } from '../../context/useGlobalContext';
 
 interface TailDisabledProps {
 	disabled?: boolean;
@@ -18,8 +18,8 @@ export interface TailProps extends TailDisabledProps {
 	ready_for_adoption: boolean;
 	gender: string;
 	age: string;
-	sterilization: boolean;
-	vaccination_parasite_treatment: boolean;
+	sterilization?: boolean;
+	vaccination_parasite_treatment?: boolean;
 	size: string;
 	description: string;
 	photo: {
