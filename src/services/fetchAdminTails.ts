@@ -21,18 +21,20 @@ export interface FormDogData {
 export const setFormData = (formDogData: FormDogData) => {
 	const newFormData = new FormData();
 
-	Object.keys(formDogData).forEach(key => {
-		const value = formDogData[key as keyof FormDogData];
-		if (key === 'photo') {
-			newFormData.append(key, value);
-		} else if (value !== undefined) {
-			newFormData.append(key, value.toString());
-		}
+	Object.keys(formDogData).forEach((key) => {
+			const value = formDogData[key as keyof FormDogData];
+			if (value !== undefined) {
+					if (key === 'photo') {
+							newFormData.append(key, value as Blob);
+					} else {
+							newFormData.append(key, value.toString());
+					}
+			}
 	});
 
 	return newFormData;
-
 };
+
 
 export const fetchTails = async (token: string) => {
 	try {
@@ -57,19 +59,20 @@ export const fetchTails = async (token: string) => {
 	}
 };
 
-
-export const addTail = async (addTailsInfo: { formDogData: FormDogData, token: string }) => {
+export const addTail = async (addTailsInfo: {
+	formDogData: FormDogData;
+	token: string;
+}) => {
 	const { formDogData, token } = addTailsInfo;
 	try {
-		const response = await fetch(TAILS,
-			{
-				method: 'POST',
-				headers: {
-					'Content-Type': 'multipart/form-data; boundary=--',
-					Authorization: `Bearer ${token}`,
-				},
-				body: setFormData(formDogData) as FormData,
-			});
+		const response = await fetch(TAILS, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'multipart/form-data; boundary=--',
+				Authorization: `Bearer ${token}`,
+			},
+			body: setFormData(formDogData) as FormData,
+		});
 
 		if (!response.ok) {
 			throw new Error('addTail error');
@@ -77,14 +80,17 @@ export const addTail = async (addTailsInfo: { formDogData: FormDogData, token: s
 
 		const data = await response.json();
 		return data;
-
 	} catch (error) {
 		console.error(error);
 		throw error;
 	}
 };
 
-export const changeTail = async (changeTailsInfo: { formDogData: FormDogData, tailId: number, token: string }) => {
+export const changeTail = async (changeTailsInfo: {
+	formDogData: FormDogData;
+	tailId: number;
+	token: string;
+}) => {
 	const { formDogData, tailId, token } = changeTailsInfo;
 
 	try {
@@ -103,15 +109,16 @@ export const changeTail = async (changeTailsInfo: { formDogData: FormDogData, ta
 
 		const data = await response.json();
 		return data;
-
 	} catch (error) {
 		console.error(error);
 		throw error;
 	}
 };
 
-
-export const deleteTail = async (deleteTail: { tailId: number, token: string }) => {
+export const deleteTail = async (deleteTail: {
+	tailId: number;
+	token: string;
+}) => {
 	const { tailId, token } = deleteTail;
 
 	try {
