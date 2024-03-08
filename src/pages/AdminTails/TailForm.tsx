@@ -1,5 +1,5 @@
 import Select from 'react-select';
-import { FC, FormEvent, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { FaUpload } from 'react-icons/fa';
 import { useMutation } from '@tanstack/react-query';
 
@@ -54,6 +54,8 @@ const TailForm: FC<TailFormProps> = ({
 	updateCards,
 }) => {
 	const { token } = useAuthContext();
+	// console.log(cards);
+	// console.log(`dogId: ` + dogId + ` is ` + typeof dogId);
 
 	const initialFormData: FormData = {
 		name: '',
@@ -94,6 +96,7 @@ const TailForm: FC<TailFormProps> = ({
 			});
 			//to make rerender for showing updates
 			updateCards((prevState) => [...prevState, data]);
+			// console.log(formData.id);
 		},
 		onError: () => {
 			changeErrLoader(
@@ -129,7 +132,7 @@ const TailForm: FC<TailFormProps> = ({
 	useEffect(() => {
 		if (formType === 'edit' && cards.length > 0) {
 			const editedCard = cards.find((card) => card.id === dogId);
-			if (editedCard && editedCard.photo instanceof File) {
+			if (editedCard) {
 				setFormData({
 					id: editedCard.id,
 					name: editedCard.name || '',
@@ -145,6 +148,7 @@ const TailForm: FC<TailFormProps> = ({
 					description_en: editedCard.description_en || '',
 					photo: editedCard.photo,
 				});
+				// console.log(formData);
 			}
 		}
 	}, [formType, cards, dogId]);
@@ -170,7 +174,7 @@ const TailForm: FC<TailFormProps> = ({
 		setTouched((prevTouched) => ({ ...prevTouched, [field]: true }));
 	};
 
-	const handleSubmit = async (e: FormEvent) => {
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (token) {
 			changeErrLoader(true, '');
@@ -196,8 +200,10 @@ const TailForm: FC<TailFormProps> = ({
 			console.error('handleSubmit failed because of no Auth token ');
 		}
 	};
+
 	const handleShowFormStatus = () => {
 		changeShowForm(false, '');
+		console.log('Закрити форму редагування');
 	};
 
 	const isSubmitDisabled = () => {

@@ -25,15 +25,15 @@ export interface TailsListData {
 	size_en?: string;
 	description: string;
 	description_en?: string;
-	// photo?: File;
-	photo:
-		| {
-				id: string;
-				name: string;
-				url: string;
-				category: string;
-		}
-		| File;
+	photo?: File;
+	// photo:
+	// 	| {
+	// 			id: string;
+	// 			name: string;
+	// 			url: string;
+	// 			category: string;
+	// 	}
+	// 	| File;
 }
 
 export type AdminTailsData = TailsListData[];
@@ -53,7 +53,7 @@ const AdminTails = () => {
 		isPending,
 		isError,
 	} = useQuery<AdminTailsData>({
-		queryKey: ['tailslist'],
+		queryKey: ['tailsList'],
 		queryFn: () =>
 			typeof token === 'string' ? fetchTails(token) : Promise.resolve([]),
 		retry: 1,
@@ -69,7 +69,7 @@ const AdminTails = () => {
 			setShowLoader(false);
 			setShowError('');
 			queryClient.invalidateQueries({
-				queryKey: ['tailslist'],
+				queryKey: ['tailsList'],
 				exact: true,
 			});
 			setCards((prevCards) =>

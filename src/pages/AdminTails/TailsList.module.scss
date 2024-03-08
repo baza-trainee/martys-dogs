@@ -84,6 +84,11 @@
   &:disabled {
     background-color: $color-gray-10;
     color: $color-gray-40;
+    &:hover {
+      background-color: $color-gray-10;
+      color: $color-gray-40;
+      cursor: not-allowed;
+    }
   }
 
   &.active {

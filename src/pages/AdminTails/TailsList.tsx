@@ -1,5 +1,5 @@
+import { FC, useEffect, useState } from 'react';
 import { FaEdit, FaTrash } from 'react-icons/fa';
-import { useEffect, useState } from 'react';
 
 import Button from '../../layout/Button/Button';
 import Tail from '../../components/Tail/Tail';
@@ -22,7 +22,7 @@ interface TailsListProps {
 	formType: string;
 }
 
-const TailsList: React.FC<TailsListProps> = ({
+const TailsList: FC<TailsListProps> = ({
 	cards,
 	isPending,
 	isError,
@@ -78,7 +78,7 @@ const TailsList: React.FC<TailsListProps> = ({
 								cardsInPage * page - cardsInPage,
 								cardsInPage * page,
 							)
-							.map((tail) => (
+							.map((tail:any) => (
 								<div
 									key={tail.id}
 									className={styles.catalog_list_card}
