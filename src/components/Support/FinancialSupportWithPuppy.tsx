@@ -12,6 +12,7 @@ import { FaPaw } from 'react-icons/fa6';
 import style from './FinancialSupport.module.scss';
 
 const FinancialSupport = () => {
+
 	return (
 		<div className={style.container}>
 			<div className={style.information}>

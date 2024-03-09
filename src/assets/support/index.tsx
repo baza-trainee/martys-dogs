@@ -9,6 +9,9 @@ import ukrPost from '../support/ukr-post.svg';
 import mono from './mono.svg';
 import privat from './privat.svg';
 import paypal from './paypal.svg';
+import ukr_eng from './ukr_eng.svg';
+import nova_eng from './nova_eng.svg';
+import privat_eng from './privat_eng.svg'
 
 export {
 	whitePuppyMobile1x,
@@ -22,4 +25,8 @@ export {
 	mono,
 	privat,
 	paypal,
+	ukr_eng,
+	nova_eng,
+	privat_eng
+
 };

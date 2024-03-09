@@ -61,7 +61,7 @@ const Footer = () => {
 							className={styles.footer_nav_cat}
 						>
 							<a
-								href="src/assets/documents/policy.pdf"
+								href="/documents/policy.pdf"
 								// href="src/assets/card-1.webp"
 								target="_blank"
 								className={styles.footer_nav_link}
@@ -73,7 +73,7 @@ const Footer = () => {
 							className={styles.footer_nav_cat}
 						>
 							<a
-								href="src/assets/documents/rules.pdf"
+								href="/documents/rules.pdf"
 								target="_blank"
 								className={styles.footer_nav_link}
 							>
@@ -84,7 +84,7 @@ const Footer = () => {
 							className={styles.footer_nav_cat}
 						>
 							<a
-								href="src/assets/documents/report.pdf"
+								href="documents/report.pdf"
 								target="_blank"
 								className={`${styles.footer_nav_link} ${styles.footer_nav_link_reports}`}
 							>
