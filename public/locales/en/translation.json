@@ -167,5 +167,16 @@
 	"aboutVideo": {
 		"title": "Dive into our world and feel the boundless love of dogs!",
 		"error": "Unable to load the video. Please check your internet connection."
+	},
+	"monobank": {
+		"card": "The leader card",
+		"martha": "Martha Levchenko",
+		"copied": "Copied",
+		"copy": "Copy"
+	},
+	"paypal": {
+		"email": "E-mail address",
+		"copied": "Copied",
+		"copy": "Copy"
 	}
 }

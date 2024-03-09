@@ -39,8 +39,9 @@ export const setFormData = (formDogData: FormDogData) => {
 export const fetchTails = async (token: string) => {
 	try {
 		const response = await fetch(TAILS, {
-			headers: {
+			headers : {
 				'Content-Type': 'multipart/form-data; boundary=--',
+				'Accept-Language': 'uk-UA',
 				Authorization: `Bearer ${token}`,
 			},
 		});
@@ -67,8 +68,9 @@ export const addTail = async (addTailsInfo: {
 	try {
 		const response = await fetch(TAILS, {
 			method: 'POST',
-			headers: {
+			headers : {
 				'Content-Type': 'multipart/form-data; boundary=--',
+				'Accept-Language': 'uk-UA',
 				Authorization: `Bearer ${token}`,
 			},
 			body: setFormData(formDogData) as FormData,
@@ -96,8 +98,9 @@ export const changeTail = async (changeTailsInfo: {
 	try {
 		const response = await fetch(`${TAILS}/${tailId}`, {
 			method: 'PUT',
-			headers: {
+			headers : {
 				'Content-Type': 'multipart/form-data; boundary=--',
+				'Accept-Language': 'uk-UA',
 				Authorization: `Bearer ${token}`,
 			},
 			body: setFormData(formDogData) as FormData,

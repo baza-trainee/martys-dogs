@@ -1,9 +1,11 @@
 import { FC, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import styles from './Paypal.module.scss';
 
 const Paypal: FC = () => {
 	const [isCopied, setIsCopied] = useState(false);
+	const { t } = useTranslation();
 	const text = 'cityofgoodnessukr@gmail.com';
 
 	const handleCopyClick = () => {
@@ -19,12 +21,12 @@ const Paypal: FC = () => {
 			<div className={styles.form}>
 				<h2>PayPal</h2>
 				<h5>
-					Електронна адреса{' '}
-					<span className={styles.span}>PayPal</span>
+					{t('paypal.email')}{' '}
+					<span className={styles.span}>Good City</span>
 				</h5>
 				<h5 className={styles.number}>{text}</h5>
 				<button onClick={handleCopyClick} className={styles.button}>
-					{isCopied ? 'Скопійовано!' : 'Скопіювати'}
+					{isCopied ? t('paypal.copied') : t('paypal.copy')}
 				</button>
 			</div>
 		</main>
