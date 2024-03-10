@@ -7,12 +7,6 @@
 	gap: 32px;
 	padding: 50px;
 	width: 100%;
-	// display: flex;
-	// justify-content: center;
-	// align-items: center;
-	// min-height: 100vh;
-  // flex-direction: column;
-	// gap: 32px;
 }
 
 .title {
@@ -92,25 +86,17 @@
 }
 
 .logoContainer {
-	// display: flex;
-	// justify-content: space-around;
-	// gap: 30px;
-	// flex-wrap: wrap;
-	// width: 100%;
   display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(415px, 1fr));
 	gap: 30px;
   place-items: center;
 
 	.logo {
-		// margin: 10px;
-		// width: 30%;
 		background-color: $color-main-bg;
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
     align-self: flex-start;
-		// align-content: space-between;
 		transition: all 0.3s ease-in-out;
 		&:hover {
 			background-color: $color-main-blue-light;

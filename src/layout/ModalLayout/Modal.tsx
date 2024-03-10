@@ -1,12 +1,8 @@
 import { FaXmark } from 'react-icons/fa6';
 import { createPortal } from 'react-dom';
 import { useEffect } from 'react';
-import styles from './Modal.module.scss';
-// import { useNavigate } from 'react-router-dom';
-// import Button from '../../layout/Button/Button';
-// import ThankthModal from './ThankthModal';
 
-// const modalElement = document.getElementById('modal-root') as Element;
+import styles from './Modal.module.scss';
 
 interface ModalProps {
 	children: React.ReactNode;

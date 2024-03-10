@@ -1,7 +1,6 @@
-import {
-	UseFormRegisterReturn,
-} from 'react-hook-form';
 import { FaUpload } from 'react-icons/fa';
+import { UseFormRegisterReturn } from 'react-hook-form';
+
 import styles from './UploadImageInput.module.scss';
 
 type UploadImageInputProps = {
@@ -17,7 +16,7 @@ const UploadImageInput: React.FC<UploadImageInputProps> = ({
 	register,
 	watch,
 	errorMessage,
-	isAddMode
+	isAddMode,
 }) => {
 	return (
 		<div className={styles.wrapper}>
@@ -31,11 +30,11 @@ const UploadImageInput: React.FC<UploadImageInputProps> = ({
 				/>
 				<FaUpload className={styles.icon} />
 				<span className={styles.text}>
-					{/* {watch('photo') && watch('photo').length > 0
-						? watch('photo')[0].name
-						: 'Завантажте зображення'} */}
-
-{!isAddMode ? `Змініть зображення` : (watch('photo') && watch('photo').length > 0 ? watch('photo')[0].name  : `Завантажте зображення`)}
+					{!isAddMode
+						? `Змініть зображення`
+						: watch('photo') && watch('photo').length > 0
+							? watch('photo')[0].name
+							: `Завантажте зображення`}
 				</span>
 			</label>
 			<p className={styles.error}>{errorMessage}</p>

@@ -1,6 +1,7 @@
 import React from 'react'
-import styles from './NewsItem.module.scss';
 import { useTranslation } from 'react-i18next';
+
+import styles from './NewsItem.module.scss';
 
 export interface Photo {
 	id: string;
@@ -58,25 +59,6 @@ const NewsItem: React.FC<NewsItemProps> = ({title, post_at,  sub_text, photo, ne
 
 
 	return (
-		// <li className={!inAdmin ? styles.item : styles.item_admin} >
-		// 	<div className={styles.thumb}>
-		// 		{ <img
-		// 			src={photo.url}
-		// 			alt='news-photo'
-		// 			className={styles.photo}
-		// 		/> }
-		// 	</div>
-		// 		<div className={styles.info}>
-		// 		<h3 className={styles.title}>{title}</h3>
-		// 		<div>
-		// 			<p className={styles.date}>{getDateName(post_at)}</p>
-		// 			<p className={styles.text} data-testid='newsItem'>
-		// 				{sub_text}
-		// 			</p>
-		// 			</div>
-		// 	</div>
-		// 	{children}
-		// </li>
 		<li className={!inAdmin ? styles.item : styles.item_admin} >
 		<div className={styles.thumb}>
 			{ <img

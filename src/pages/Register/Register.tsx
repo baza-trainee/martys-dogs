@@ -49,7 +49,6 @@ const Register: FC = () => {
 		if (user.password !== user.confirmPassword) {
 			errors.confirmPassword = 'Паролі не співпадають';
 		} else if (
-			// !/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}/.test(
 			!/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!-_)(.,]).{8,12}$/.test(
 				user.password,
 			)

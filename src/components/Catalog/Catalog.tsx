@@ -28,14 +28,6 @@ type FilterParams = {
 	ready_for_adoption?: boolean;
 } & { [key: string]: string | boolean };
 
-// interface CustomStyles {
-// 	control?: (provided: any, state: any) => any;
-// 	dropdownIndicator?: (provided: any) => any;
-// 	indicatorSeparator?: () => any;
-// 	menu?: (provided: any) => any;
-// 	option?: (provided: any) => any;
-// }
-
 const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 	const [cards, setCards] = useState<DogCard[]>([]);
 	const [page, setPage] = useState<number>(1);

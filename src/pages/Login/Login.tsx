@@ -30,18 +30,9 @@ const Login: FC = () => {
 			if (result === 'User login') {
 				navigate('/admin');
 			}
-			// else {
-			// 	console.error('Login Error');
-			// }
 		} catch (error) {
 			setErrorMessage('Невірна пошта або пароль');
 		}
-		// if (error?.response.status === 400 || error?.response.status === 403) {
-		// 	setErrorMessage('Невірна пошта або пароль');
-		// } else {
-		// 	setErrorMessage('Помилка сервера. Спробуйте ще.');
-		// }
-		// }
 	};
 
 	const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {

@@ -52,10 +52,6 @@
 			width: 160px;
 			height: auto;
 
-			@include tablet {
-				//margin-bottom: 40px;
-			}
-
 			&:hover {
 				transform: scale(1.4);
 			}

@@ -35,7 +35,6 @@ export const setFormData = (formDogData: FormDogData) => {
 	return newFormData;
 };
 
-
 export const fetchTails = async (token: string) => {
 	try {
 		const response = await fetch(TAILS, {
@@ -49,9 +48,6 @@ export const fetchTails = async (token: string) => {
 		if (!response.ok) {
 			throw new Error('Data Tails loading error');
 		}
-		// if (response.status === 200) {
-		// 	console.log(response);
-		// }
 		const data = await response.json();
 		return data;
 	} catch (error) {

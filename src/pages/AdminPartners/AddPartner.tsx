@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
 import { FaUpload } from 'react-icons/fa';
-import {
-	Loader,
-	ErrorAlert,
-} from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+
+import styles from './AddPartners.module.scss';
+import {
+	ErrorAlert,
+	Loader,
+} from '../../components/CommonUI/LoaderAndError/LoaderAndError';
 import { requestAdminPage } from '../../services/adminPartners';
 import { useAuthContext } from '../../context/useGlobalContext';
-import styles from './AddPartners.module.scss';
 
 interface PartnersStateType {
 	name: string;
@@ -18,19 +19,18 @@ interface PartnersStateType {
 }
 
 const createFormData = (data: PartnersStateType): FormData => {
-	
 	const formData = new FormData();
 	formData.append('name', data.name);
-  
+
 	if (data.logo !== null && data.logo.length > 0) {
-	  const logoFile = data.logo[0];
-	  formData.append('logo', logoFile, logoFile.name);
+		const logoFile = data.logo[0];
+		formData.append('logo', logoFile, logoFile.name);
 	}
 	if (data.website !== null) {
 		formData.append('website', data.website);
-	  }
+	}
 	return formData;
-  };
+};
 
 const AddPartner: React.FC = () => {
 	const {
@@ -44,11 +44,17 @@ const AddPartner: React.FC = () => {
 		defaultValues: {},
 	});
 	const { token } = useAuthContext();
-	
+
 	const addPartnerMutation = useMutation({
 		mutationFn: async (data: PartnersStateType) => {
 			const formData = createFormData(data);
-			return requestAdminPage(token ?? '', 'POST', '/partners', formData, true);
+			return requestAdminPage(
+				token ?? '',
+				'POST',
+				'/partners',
+				formData,
+				true,
+			);
 		},
 	});
 
@@ -57,7 +63,6 @@ const AddPartner: React.FC = () => {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [errorAlert, setErrorAlert] = useState(false);
 
-	
 	const handleCancel = () => {
 		setValue('name', '');
 		setValue('logo', null);
@@ -103,7 +108,9 @@ const AddPartner: React.FC = () => {
 			>
 				<div className={styles.inputRow}>
 					<div className={styles.inputContainer}>
-						<label htmlFor='nameInput'><span className={styles.redAsterisk}>*</span>Назва:</label>
+						<label htmlFor='nameInput'>
+							<span className={styles.redAsterisk}>*</span>Назва:
+						</label>
 						<input
 							type='text'
 							id='nameInput'
@@ -126,9 +133,11 @@ const AddPartner: React.FC = () => {
 
 					<div className={styles.inputContainer}>
 						<label htmlFor='logoInput'>
-						<span className={styles.redAsterisk}>*</span>Логотип:
-							<p><FaUpload className={styles.icon} />
-							
+							<span className={styles.redAsterisk}>*</span>
+							Логотип:
+							<p>
+								<FaUpload className={styles.icon} />
+
 								<span className={styles.text}>
 									{watch('logo')?.[0]?.name ||
 										' Завантажте зображення'}
@@ -141,7 +150,9 @@ const AddPartner: React.FC = () => {
 							{...register('logo', {
 								required: 'Зображення не обране',
 								validate: {
-									validImageFormat: (value: FileList | null) => {
+									validImageFormat: (
+										value: FileList | null,
+									) => {
 										if (!value) return true;
 										const supportedImageFormats = [
 											'image/jpeg',
@@ -155,7 +166,9 @@ const AddPartner: React.FC = () => {
 											'Виберіть дійсний файл зображення (JPEG, PNG або WebP)'
 										);
 									},
-									validImageSize: (value: FileList | null) => {
+									validImageSize: (
+										value: FileList | null,
+									) => {
 										if (!value) return true;
 										const maxSize = 5 * 1024 * 1024; // 5MB
 										return (
@@ -167,7 +180,6 @@ const AddPartner: React.FC = () => {
 									},
 								},
 							})}
-						
 							accept='image/*'
 						/>
 						{errors.logo && (
@@ -188,7 +200,6 @@ const AddPartner: React.FC = () => {
 									value: /^(https?:\/\/)?([\w-]+\.)+[\w]{2,}(\/[\w-]*)*$/,
 									message: 'Введіть дійсний URL веб-сайту',
 								},
-								
 							})}
 							placeholder='Додайте посилання'
 						/>
@@ -197,9 +208,9 @@ const AddPartner: React.FC = () => {
 								{errors.website.message}
 							</div>
 						)}
-						</div>
+					</div>
 				</div>
-				
+
 				<div className={styles.buttonRow}>
 					<button type='submit'>Додати</button>
 					<button type='button' onClick={handleCancel}>
@@ -208,9 +219,7 @@ const AddPartner: React.FC = () => {
 				</div>
 				{isSubmitting && <Loader />}
 				{errorAlert && (
-					<ErrorAlert
-						errorMessage='Логотип не додано. Перезавантажте, будь ласка, сторінку.'
-					/>
+					<ErrorAlert errorMessage='Логотип не додано. Перезавантажте, будь ласка, сторінку.' />
 				)}
 			</form>
 		</div>

@@ -89,7 +89,6 @@ const ResetPassword: FC = () => {
 					type='password'
 					value={password}
 					onChange={handleChangePassword}
-					// errorMessage={errorMessage}
 				/>
 				<FormInput
 					label='Підтвердить пароль'
@@ -99,7 +98,6 @@ const ResetPassword: FC = () => {
 					type='password'
 					value={confirmPassword}
 					onChange={handleChangeConfirmPassword}
-					// errorMessage={errorMessage}
 				/>
 				{errorMessage && (
 					<div

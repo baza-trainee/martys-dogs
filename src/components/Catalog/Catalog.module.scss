@@ -115,17 +115,6 @@
 	transform: scale(1.8);
 }
 
-// .catalog_list {
-// 	display: flex;
-// 	justify-content: space-between;
-// 	flex-wrap: wrap;
-// 	gap: 20px;
-
-// 	@media screen and (max-width: 767px) {
-// 		justify-content: center;
-// 	}
-// }
-
 .catalog_list {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(415px, 1fr));

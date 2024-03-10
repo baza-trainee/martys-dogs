@@ -61,7 +61,6 @@ const ForgottenPassword: FC = () => {
 					type='email'
 					value={email}
 					onChange={handleChangeEmail}
-					// errorMessage={errorMessage}
 				/>
 				{errorMessage && <div className={styles.error}>{errorMessage}</div>}
 				{!errorMessage && <p className={styles.success}>{successMessage}</p>}
