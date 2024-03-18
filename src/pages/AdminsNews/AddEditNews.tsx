@@ -1,15 +1,25 @@
-import { useForm, SubmitHandler } from 'react-hook-form';
-import {useEffect} from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useEffect } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
-import styles from './AddEditNews.module.scss';
-import { IAddNews, changeNews ,addNews, fetchNews} from '../../services/adminNews';
-import UploadImageInput from '../../components/CommonUI/UploadImageInput/UploadImageInput';
+
 import HookFormInput from '../../components/CommonUI/HookFormInput/HookFormInput';
 import NewsTextarea from '../../components/NewsTextarea/NewsTextarea';
-import { ErrorAlert, Loader } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import UploadImageInput from '../../components/CommonUI/UploadImageInput/UploadImageInput';
+import styles from './AddEditNews.module.scss';
+import {
+	ErrorAlert,
+	Loader,
+} from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import {
+	IAddNews,
+	addNews,
+	changeNews,
+	fetchNews,
+} from '../../services/adminNews';
+import { NewsItemProps } from '../../components/News/NewsItem';
 import { useAuthContext } from '../../context/useGlobalContext';
-import { NewsItemProps} from '../../components/News/NewsItem';
+
 interface IFormInputs {
 	title: string;
 	sub_text: string;
@@ -22,7 +32,14 @@ interface IFormInputs {
 }
 
 const AddEditNews: React.FC = () => {
-	const { register, handleSubmit, reset, formState: { errors, isValid }, watch, setValue } = useForm<IFormInputs>({ mode: 'onChange' });
+	const {
+		register,
+		handleSubmit,
+		reset,
+		formState: { errors, isValid },
+		watch,
+		setValue,
+	} = useForm<IFormInputs>({ mode: 'onChange' });
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const { newsId } = useParams();
@@ -30,17 +47,18 @@ const AddEditNews: React.FC = () => {
 	const { token } = useAuthContext();
 
 	const { mutate, isError, isPending } = useMutation({
-			mutationFn: isAddMode ? addNews : changeNews,
-			onSuccess: () => {
-					queryClient.invalidateQueries({ queryKey: ['news'] });
-					reset();
-					navigate('/admin/news');
-			},
+		mutationFn: isAddMode ? addNews : changeNews,
+		onSuccess: () => {
+			queryClient.invalidateQueries({ queryKey: ['news'] });
+			reset();
+			navigate('/admin/news');
+		},
 	});
 
 	const { data: news } = useQuery<NewsItemProps[]>({
-			queryKey: ['news'],
-			queryFn: () => typeof token === 'string' ? fetchNews(token) : Promise.resolve([]),
+		queryKey: ['news'],
+		queryFn: () =>
+			typeof token === 'string' ? fetchNews(token) : Promise.resolve([]),
 		refetchInterval: 600000,
 		enabled: !!token,
 	});
@@ -48,147 +66,120 @@ const AddEditNews: React.FC = () => {
 	const newsToEdit = news?.find((item) => item.id === Number(newsId));
 	useEffect(() => {
 		// const newsToEdit = news?.find((item) => item.id === Number(newsId));
-		console.log(newsToEdit)
-		console.log(newsToEdit?.photo)
+		console.log(newsToEdit);
+		console.log(newsToEdit?.photo);
 		if (newsToEdit) {
-				const fields: (keyof IAddNews)[] = ['url', 'title', 'title_en', 'sub_text', 'sub_text_en', 'post_at'];
-				fields.forEach((field) => {
-					if (field !== 'id' && field in newsToEdit) {
-							setValue(field, newsToEdit[field as keyof typeof newsToEdit] as string);
-					}
+			const fields: (keyof IAddNews)[] = [
+				'url',
+				'title',
+				'title_en',
+				'sub_text',
+				'sub_text_en',
+				'post_at',
+			];
+			fields.forEach((field) => {
+				if (field !== 'id' && field in newsToEdit) {
+					setValue(
+						field,
+						newsToEdit[field as keyof typeof newsToEdit] as string,
+					);
+				}
 			});
 		}
-}, [news, newsId, setValue, newsToEdit]);
+	}, [news, newsId, setValue, newsToEdit]);
 
-const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
-	if(token){const uploadedImage = data?.photo?.[0];
+	const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
+		if (token) {
+			const uploadedImage = data?.photo?.[0];
 			const newsDate = new Date();
-			const addedNews =  {
+			const addedNews = {
 				...data,
 				photo: uploadedImage,
 				update_at: newsDate,
-		}
+			};
 
-		if (isAddMode) {
-			mutate({ newsItem: addedNews, id: '', token });
-		} else {
-			mutate({ newsItem: addedNews, id: newsId, token });
-		}
+			if (isAddMode) {
+				mutate({ newsItem: addedNews, id: '', token });
+			} else {
+				mutate({ newsItem: addedNews, id: newsId, token });
+			}
 		}
 	};
 
 	const onCancelHandler = () => {
-			reset();
-			navigate('/admin/news');
+		reset();
+		navigate('/admin/news');
 	};
 
 	if (isPending) {
-		return (
-			<Loader/>
-		);
+		return <Loader />;
 	}
 
 	if (isError) {
 		return (
-			<ErrorAlert errorMessage='На жаль сталася помилка, перезавантажте  сторінку і спробуйте ще раз'/>
+			<ErrorAlert errorMessage='На жаль сталася помилка, перезавантажте  сторінку і спробуйте ще раз' />
 		);
 	}
 
 	return (
 		<div className={styles.container}>
-			<h3 className={styles.title}>{isAddMode ? 'Для додавання новини необхідно заповнити всі поля' : 'Відредагуйте необхідні поля'}</h3>
-			{!isAddMode ? <img  className={styles.photo} src={newsToEdit?.photo.url}/> : null}
+			<h3 className={styles.title}>
+				{isAddMode
+					? 'Для додавання новини необхідно заповнити всі поля'
+					: 'Відредагуйте необхідні поля'}
+			</h3>
+			{!isAddMode ? (
+				<img className={styles.photo} src={newsToEdit?.photo.url} />
+			) : null}
 			<form
 				className={styles.form}
 				onSubmit={handleSubmit(onSubmitHandler)}
 			>
-				<UploadImageInput isAddMode={isAddMode}
-  register={{
-    ...register('photo', {
-      ...(isAddMode ?
-        {
-          required: 'Файл з фото не обрано',
-          validate: {
-            validImageFormat: (value: FileList | null) => {
-              if (!value) return true;
-              const supportedImageFormats = [
-                'image/jpeg',
-                'image/png',
-                'image/webp',
-              ];
-              return (
-                supportedImageFormats.includes(value?.[0].type) ||
-                'Виберіть дійсний файл зображення (JPEG, PNG або WebP)'
-              );
-            },
-            validImageSize: (value: FileList | null) => {
-              if (!value) return true;
-              const maxSize = 5 * 1024 * 1024; // 5MB
-              return (
-                value?.[0].size <= maxSize ||
-                `Розмір файлу повинен бути менше або рівний ${
-                  maxSize / (1024 * 1024)
-                } MB`
-              );
-            },
-          }
-        }
-        :
-        {}
-      ),
-    }),
-  }}
-  watch={watch}
-  errorMessage={errors['photo']?.message}
-/>
-				{/* <UploadImageInput
+				<UploadImageInput
+					isAddMode={isAddMode}
 					register={{
 						...register('photo', {
-							// ...(isAddMode ? { required: 'Файл з фото не обрано' } : {}),
-							required: 'Файл з фото не обрано',
-							validate: {
-								validImageFormat: (value: FileList | null) => {
-									if (!value) return true;
-									const supportedImageFormats = [
-										'image/jpeg',
-										'image/png',
-										'image/webp',
-									];
-									return (
-										supportedImageFormats.includes(
-											value?.[0].type,
-										) ||
-										'Виберіть дійсний файл зображення (JPEG, PNG або WebP)'
-									);
-								},
-								validImageSize: (value: FileList | null) => {
-									if (!value) return true;
-									const maxSize = 5 * 1024 * 1024; // 5MB
-									return (
-										value?.[0].size <= maxSize ||
-										`Розмір файлу повинен бути менше або рівний ${
-											maxSize / (1024 * 1024)
-										} MB`
-									);
-								},
-							}
+							...(isAddMode
+								? {
+										required: 'Файл з фото не обрано',
+										validate: {
+											validImageFormat: (
+												value: FileList | null,
+											) => {
+												if (!value) return true;
+												const supportedImageFormats = [
+													'image/jpeg',
+													'image/png',
+													'image/webp',
+												];
+												return (
+													supportedImageFormats.includes(
+														value?.[0].type,
+													) ||
+													'Виберіть дійсний файл зображення (JPEG, PNG або WebP)'
+												);
+											},
+											validImageSize: (
+												value: FileList | null,
+											) => {
+												if (!value) return true;
+												const maxSize = 5 * 1024 * 1024; // 5MB
+												return (
+													value?.[0].size <=
+														maxSize ||
+													`Розмір файлу повинен бути менше або рівний ${
+														maxSize / (1024 * 1024)
+													} MB`
+												);
+											},
+										},
+									}
+								: {}),
 						}),
 					}}
 					watch={watch}
 					errorMessage={errors['photo']?.message}
-				/> */}
-	{/* <HookFormInput
-					label={'Дата новини'}
-					register={{
-						...register('post_at', {
-							required: 'Оберіть дату',
-						}),
-					}}
-					errorMessage={errors['post_at']?.message}
-					type={'date'}
-					id={'post_at'}
-					placeholder={'Choose  news date'}
-				/> */}
+				/>
 
 				<HookFormInput
 					label={'Посилання на новину в facebook'}
@@ -214,8 +205,6 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 								required: 'Вкажіть заголовок новини',
 								pattern: {
 									value: /^[\p{Script=Cyrillic}a-zA-Z\d\s!"#№₴$%&'()*+,-./:;<=>?@[\\\]'^_`{|}~ґєіїҐЄІЇ](?=.*\S).*$/u,
-									// value: /^[a-zA-ZА-ЩЬЮЯҐЄІЇа-щьюяґєії0-9\s!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]*$/u,
-									// value: /^a-zA-Z0-9 !`@#$%^&*()_+{}[\]:;<>,.?~-]*$/i,
 									message:
 										'можуть бути  цифри, літери, розділові знаки',
 								},
@@ -285,11 +274,11 @@ const onSubmitHandler: SubmitHandler<IFormInputs> = async (data) => {
 				</div>
 				<div className={styles.button_wrapper}>
 					<button
-						className={isValid ?  styles.addButton : styles.disable}
+						className={isValid ? styles.addButton : styles.disable}
 						type='submit'
 						disabled={!isValid}
 					>
-						{isAddMode ?  'Додати' : 'Оновити'}
+						{isAddMode ? 'Додати' : 'Оновити'}
 					</button>
 					<button
 						className={styles.addButton}

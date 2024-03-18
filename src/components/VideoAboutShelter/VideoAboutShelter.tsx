@@ -53,6 +53,7 @@ const VideoAboutShelter = () => {
 							]}
 							onReady={onHandleClick}
 							onError={onHandleError}
+							controls={true}
 							light={
 								!error && !isLoading && <div className={style.image}></div>
 							}
