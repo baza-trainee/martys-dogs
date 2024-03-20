@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getMessages = async (token: string) => {
-	const url = 'https://matys-dogs2.onrender.com/notification-admin';
+	const url = `${import.meta.env.VITE_API_URL}/notification-admin`;
 	try {
 		const { data } = await axios.get(url, {
 			headers: {
@@ -19,7 +19,7 @@ export const updateMessageStatus = async (
 	messageId: number,
 	newStatus: boolean,
 ) => {
-	const url = `https://matys-dogs2.onrender.com/notification-admin/${messageId}`;
+	const url = `${import.meta.env.VITE_API_URL}/notification-admin/${messageId}`;
 	try {
 		const { data } = await axios.put(
 			url,
@@ -40,7 +40,7 @@ export const deleteMessage = async (
 	token: string,
 	messageId: number,
 ) => {
-	const url = `https://matys-dogs2.onrender.com/notification-admin/${messageId}`;
+	const url = `${import.meta.env.VITE_API_URL}/notification-admin/${messageId}`;
 	try {
 		const { data } = await axios.delete(
 			url,

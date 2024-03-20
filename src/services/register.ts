@@ -7,7 +7,9 @@ export interface IUser {
 	password: string;
 	confirmPassword: string;
 }
-const REGISTER = 'https://matys-dogs2.onrender.com/register';
+
+const REGISTER = `${import.meta.env.VITE_API_URL}/register`;
+
 export const registerUser = async (userData: IUser) => {
 	try {
 		const response = await axios.post(REGISTER, userData);

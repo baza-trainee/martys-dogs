@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const STATISTICS = 'https://matys-dogs2.onrender.com/about/employment';
+const STATISTICS = `${import.meta.env.VITE_API_URL}/about/employment`;
 
 export const getStatistics = async (token: string) => {
 	try {

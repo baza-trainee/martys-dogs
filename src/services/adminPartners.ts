@@ -1,5 +1,6 @@
 import axios from 'axios';
-export const BASE_URL = 'https://matys-dogs2.onrender.com';
+
+export const BASE_URL = import.meta.env.VITE_API_URL;
 
 export const requestAdminPage = async (
 	token: string,

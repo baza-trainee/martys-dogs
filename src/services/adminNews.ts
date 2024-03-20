@@ -1,4 +1,5 @@
-export const NEWS = 'https://matys-dogs2.onrender.com/news';
+export const NEWS = `${import.meta.env.VITE_API_URL}/news`;
+
 export interface IAddNews {
 	title: string;
 	sub_text: string;

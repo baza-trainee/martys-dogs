@@ -1,4 +1,4 @@
-export const TAILS = 'https://matys-dogs2.onrender.com/dog_card';
+export const TAILS = `${import.meta.env.VITE_API_URL}/dog_card`;
 
 export interface FormDogData {
 	id?: number;

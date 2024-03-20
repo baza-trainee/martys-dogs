@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getAdmins = async (token: string) => {
-	const url = 'https://matys-dogs2.onrender.com/admins';
+	const url = `${import.meta.env.VITE_API_URL}/admins`;
 
 	try {
 		const { data } = await axios.get(url, {
@@ -21,7 +21,7 @@ export const updateAdminStatus = async (
 	adminId: number,
 	newStatus: boolean,
 ) => {
-	const url = `https://matys-dogs2.onrender.com/admins/${adminId}`;
+	const url = `${import.meta.env.VITE_API_URL}/admins/${adminId}`;
 	try {
 		const { data } = await axios.put(
 			url,

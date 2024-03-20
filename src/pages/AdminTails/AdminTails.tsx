@@ -26,14 +26,6 @@ export interface TailsListData {
 	description: string;
 	description_en?: string;
 	photo?: File;
-	// photo:
-	// 	| {
-	// 			id: string;
-	// 			name: string;
-	// 			url: string;
-	// 			category: string;
-	// 	}
-	// 	| File;
 }
 
 export type AdminTailsData = TailsListData[];
@@ -64,7 +56,6 @@ const AdminTails = () => {
 	const { mutate: deleteMutate } = useMutation({
 		mutationFn: deleteTail,
 		// variables are arguments that were passed to mutation
-		// onSuccess: (data, variables) => {
 		onSuccess: (variables) => {
 			setShowLoader(false);
 			setShowError('');
@@ -114,9 +105,9 @@ const AdminTails = () => {
 			setShowLoader(true);
 			await deleteMutate({ tailId: id, token });
 		}
-		console.log('Delete ' + id);
+		// console.log('Delete ' + id);
 		setFormType('delete');
-		console.log(formType);
+		// console.log(formType);
 	};
 
 	return (

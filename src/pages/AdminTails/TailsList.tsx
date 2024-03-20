@@ -4,11 +4,12 @@ import { FaEdit, FaTrash } from 'react-icons/fa';
 import Button from '../../layout/Button/Button';
 import Tail from '../../components/Tail/Tail';
 import styles from '../../pages/AdminTails/TailsList.module.scss';
-import { AdminTailsData } from './AdminTails';
-import {
+import Loader, {
+	ErrorAlert,
 	MiniErrorAlert,
 	MiniLoader,
 } from '../../components/CommonUI/LoaderAndError/LoaderAndError';
+import { AdminTailsData } from './AdminTails';
 
 interface TailsListProps {
 	cards: AdminTailsData;
@@ -59,18 +60,14 @@ const TailsList: FC<TailsListProps> = ({
 
 	return (
 		<section>
-			{isPending ? (
-				<div className={styles.container}>
-					<div className={styles.loading}></div>
-				</div>
-			) : isError ? (
-				<div className={styles.container}>
-					<div className={styles.alert}>
-						Щось пішло не так. Дані не завантажено. Спробуйте
-						пізніше.
-					</div>
-				</div>
-			) : (
+				{isPending ? (
+					<Loader backgroundColor={'#fff'} />
+				) : isError ? (
+					<ErrorAlert
+						errorMessage={'Помилка під час завантаження даних'}
+						backgroundColor={'#fff'}
+					/>
+				) : (
 				<>
 					<div className={styles.catalog_list}>
 						{cards

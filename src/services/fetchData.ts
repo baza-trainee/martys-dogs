@@ -1,11 +1,11 @@
 import { DogCard, LandingData } from '../pages/Landing/Landing';
 
-const HOME = 'https://matys-dogs2.onrender.com';
-const ABOUT = 'https://matys-dogs2.onrender.com/about-us';
-const LOGIN = 'https://matys-dogs2.onrender.com/login';
-const CATALOG = 'https://matys-dogs2.onrender.com/catalog';
-const IS_AUTH = 'https://matys-dogs2.onrender.com/is_auth';
-const FORM_CALLBACK = 'https://matys-dogs2.onrender.com/form-callback';
+const HOME = `${import.meta.env.VITE_API_URL}`;
+const ABOUT = `${import.meta.env.VITE_API_URL}/about-us`;
+const LOGIN = `${import.meta.env.VITE_API_URL}/login`;
+const CATALOG = `${import.meta.env.VITE_API_URL}/catalog`;
+const IS_AUTH = `${import.meta.env.VITE_API_URL}/is_auth`;
+const FORM_CALLBACK = `${import.meta.env.VITE_API_URL}/form-callback`;
 
 export const fetchHome = async (language: string): Promise<LandingData> => {
 	try {

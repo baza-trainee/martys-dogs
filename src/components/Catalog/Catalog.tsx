@@ -9,6 +9,7 @@ import ArrowIconUp from '../../assets/dropdown_arrow_up.svg';
 import Button from '../../layout/Button/Button';
 import Tail from '../Tail/Tail';
 import styles from './Catalog.module.scss';
+import Loader, { ErrorAlert } from '../CommonUI/LoaderAndError/LoaderAndError';
 import { DogCard } from '../../pages/Landing/Landing';
 
 interface CatalogProps {
@@ -304,15 +305,12 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 					/>
 				</div>
 				{isPending ? (
-					<div className={styles.container}>
-						<div className={styles.loading}></div>
-					</div>
+					<Loader backgroundColor={'#ebf5fb'} />
 				) : isError ? (
-					<div className={styles.container}>
-						<div className={styles.alert}>
-							{t('catalog.filter_error')}
-						</div>
-					</div>
+					<ErrorAlert
+						errorMessage={'Error while loading data'}
+						backgroundColor={'#ebf5fb'}
+					/>
 				) : (
 					<>
 						<div className={styles.catalog_list}>
