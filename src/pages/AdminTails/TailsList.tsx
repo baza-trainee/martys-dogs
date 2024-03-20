@@ -60,14 +60,16 @@ const TailsList: FC<TailsListProps> = ({
 
 	return (
 		<section>
-				{isPending ? (
-					<Loader backgroundColor={'#fff'} />
-				) : isError ? (
-					<ErrorAlert
-						errorMessage={'Помилка під час завантаження даних'}
-						backgroundColor={'#fff'}
-					/>
-				) : (
+			{isPending ? (
+				<Loader backgroundColor={'#fff'} />
+			) : isError ? (
+				<ErrorAlert
+					errorMessage={
+						'Щось пішло не так. Дані не завантажено. Спробуйте пізніше.'
+					}
+					backgroundColor={'#fff'}
+				/>
+			) : (
 				<>
 					<div className={styles.catalog_list}>
 						{cards
@@ -75,7 +77,7 @@ const TailsList: FC<TailsListProps> = ({
 								cardsInPage * page - cardsInPage,
 								cardsInPage * page,
 							)
-							.map((tail:any) => (
+							.map((tail: any) => (
 								<div
 									key={tail.id}
 									className={styles.catalog_list_card}

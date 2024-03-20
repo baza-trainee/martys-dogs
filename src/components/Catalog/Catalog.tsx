@@ -308,7 +308,7 @@ const Catalog: React.FC<CatalogProps> = ({ data, changeTerms }) => {
 					<Loader backgroundColor={'#ebf5fb'} />
 				) : isError ? (
 					<ErrorAlert
-						errorMessage={'Error while loading data'}
+						errorMessage={t('catalog.filter_error')}
 						backgroundColor={'#ebf5fb'}
 					/>
 				) : (
